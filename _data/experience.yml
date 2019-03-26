@@ -26,18 +26,25 @@
            <li>Designed and Developed dynamic master-election algorithm, stack split-merge, data-path programming, process manager changes for role based process launch.</li>
 
 # Software Engineer
+- company: Juniper Networks
+  position: Staff Engineer
+  duration: Jan, 2009  &mdash; April, 2012
+  summary: <li>Supporting the virtual-chassis software for all the switch platforms..</li>
+           <li>Work closely with QA, customer support to resolve customer problems.</li>
+
+# Software Engineer
 - company: Tropos Networks
   position: Software Engineer
   duration: January, 2007 &mdash; December, 2008
-  summary: Worked on routing, mobility and platform services for the Metro-mesh routers. Developed interface manager, health check and BGP based cross-subnet roaming.
+  summary: <li>Worked on routing, mobility and platform services for the Metro-mesh routers. Developed interface manager, health check and BGP based cross-subnet roaming.</li>
 
 # Software Engineer
 - company: Symbol Technologies
   position: Software Engineer
   duration: January, 2004 &mdash; July, 2006
-  summary: Worked on Mobility, Rate scaling, Access Point adoption, management for 802.11 protocols.
+  summary: <li>Worked on Mobility, Rate scaling, Access Point adoption, management for 802.11 protocols.</li>
 
 # Software Engineer
 - company: Cisco System/Allegro Networks/Future Software
   position: Software Engineer
-  summary: Developed networking protocol software, BGP/PPP/RADIUS and other networking protocols.
+  summary: <li>Developed networking protocol software, BGP/PPP/RADIUS and other networking protocols.</li>
