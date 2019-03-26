@@ -1,0 +1,10 @@
+# Projects
+# uncomment the urls if you wish to display them, and add your own URL
+
+- project: Mesos-manager & CNI
+  #role: Developer
+  #duration: 2014 &mdash; Present
+  url: "https://github.com/Juniper/contrail-controller/tree/master/src/container/mesos-manager"
+  description: >
+    <ul class="resume-item-list">
+    <li>Architected mesos manager which will handle operations of a container add and delete. Mesos manager is micro service docker within its architecture with all features builtin such as local DB, event based, pythonic, logger, config and introspect(shows local state).</li></ul>
