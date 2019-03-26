@@ -1,0 +1,12 @@
+# Skills
+# Organizational leadership
+- skill: Languages
+  description: C, Python, GoLang
+
+# Communications strategy
+- skill: Cloud Technologies
+  description: Kubernetes, Docker, RestAPI, Distributed Systems, Kafka, Zookeeper
+
+# Digital content development and creation
+- skill: Tools
+  description: Ansible, Chef, Vagrant
