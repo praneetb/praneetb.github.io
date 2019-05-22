@@ -23,7 +23,7 @@ resume_contact_address:         "San Francisco Bay Area"
 resume_header_contact_info:     "praneetb@gmail.com • 408-916-8207 • San Francisco Bay Area"
 display_header_contact_info:    "true"
 
-resume_header_intro: "<p><li>Software Engineer with 20+ years’ experience in Kubernetes, SDN, distributed systems,networking/platform infrastructure, cloud native architecture, machine learning, and automation.</li> <li>Ability to lead complex projects from concept to delivery. Goal-oriented self-
+resume_header_intro: "<p><li>Software Engineer experienced in Kubernetes, SDN, distributed systems,networking/platform infrastructure, cloud native architecture, machine learning, and automation.</li> <li>Ability to lead complex projects from concept to delivery. Goal-oriented self-
 motivated individual with strong problem solving skills.</li> <li>Proficient in Developing new systems, solutions, design and implementations.</li></p>"
 
 # use "yes" to display the email contact button,
