@@ -6,7 +6,7 @@
 
 ## Docs
 
-### Running locally
+### Running it locally
 
 To test locally, run the following in your terminal:
 
