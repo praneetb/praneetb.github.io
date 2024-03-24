@@ -1,12 +1,23 @@
 # Skills
 # Organizational leadership
+- skill: Leadership/Planning
+  description: Demonstrated ability to lead and motivate cross-functional teams towards achieving project milestones and objectives. Proficient in developing and executing strategic plans to drive software development initiatives in alignment with organizational goals.
+
+- skill: Decision Making/Problem Solving
+  description: Strong decision-making skills, adept at evaluating complex situations, analyzing data, and making informed decisions to mitigate risks and drive project success. Proven track record of effectively identifying, troubleshooting, and resolving software development challenges to ensure project delivery on time and within budget.
+
+- skill: Mentorship and Coaching
+  description: Experienced in mentoring and coaching team members to enhance their technical skills, foster professional growth, and promote a culture of continuous learning.
+
+- skill: Adaptability/Resource Management
+  description: Demonstrated ability to adapt to changing project requirements, technologies, and priorities, while maintaining focus on delivering high-quality software solutions. Proficient in resource allocation and management, optimizing team resources, budgets, and timelines to maximize project efficiency and productivity.
+
+- skill: Communication
+  description: Exceptional communication skills, facilitating effective collaboration with stakeholders, team members, and management to ensure project alignment and success.
+
 - skill: Languages
-  description: C, Python, Golang
+  description: Python, Golang, C
 
-# Communications strategy
 - skill: Cloud Technologies
-  description: Kubernetes, Docker, RestAPI, Distributed Systems, Kafka, etcd, MySQL, Zookeeper
+  description: Distributed Systems, Kubernetes, Docker, RestAPI, Kafka, etcd, MySQL, MongoDB, Prometheus, Grafana
 
-# Digital content development and creation
-- skill: Tools
-  description: Ansible, Chef, Vagrant
