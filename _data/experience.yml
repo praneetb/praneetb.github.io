@@ -2,7 +2,7 @@
 # Lead Engineer
 - company: Selector Software AI
   position: Engineering Lead
-  duration: January, 2021 &mdash; Present
+  duration: April, 2021 &mdash; Present
   summary:
            <li> Designed and Developed a scalable ETL data pipeline to ingest hundreds of millions of data points per minute. It includes collectors, Kafka broker, import/export connectors to write to different databases.</li>
            <li> Created and implemented a pingmesh solution, in which remotely deployed agents communicate with a central controller, exchanging reports on packet loss and latency among themselves. </li>
