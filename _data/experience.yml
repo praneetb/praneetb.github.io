@@ -6,11 +6,14 @@
   summary:
            <li> Designed and Developed a scalable ETL data pipeline to ingest hundreds of millions of data points per minute. It includes collectors, Kafka broker, import/export connectors to write to different databases.</li>
            <li> Created and implemented a pingmesh solution, in which remotely deployed agents communicate with a central controller, exchanging reports on packet loss and latency among themselves. </li>
+           <li> Designed and implemented an apiserver which works with openapi specifications, the RestAPI code is auto-generated which interacts with the backend system, saved a lot of man-hours by generating code</li>
+           <li> Being a Network monitoring company, we need lots of data to analyse, developed an automated mock-data service where data is generated in json format for scale testing of the controller.</li>
+
 
 - company: Fungible Inc
   position: Lead Engineer
   duration: January, 2019 &mdash; April, 2021
-  summary: <li> Designed and Developed a Network Controller which interacts with network switch using the openConfig YANG data models</li>
+  summary: <li> <li> Designed and Developed a golang based Network Controller which interacts with network switch using the openConfig YANG data models, using GNMI protocol</li>
 
 # Lead Engineer
 - company: Juniper Networks(Contrail Systems)
