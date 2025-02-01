@@ -20,7 +20,7 @@
 - company: Fungible Inc
   position: Lead Engineer
   duration: January, 2019 &mdash; April, 2021
-  summary: <li> Designed and Developed a golang based Network Controller which interacts with network switch using the openConfig YANG data models, using GNMI protocol</li>
+  summary: <li> Designed and Developed golang based Network Controller which interacts with network switch using the openConfig YANG data models, using GNMI protocol</li>
 
 # Lead Engineer
 - company: Juniper Networks(Contrail Systems)
