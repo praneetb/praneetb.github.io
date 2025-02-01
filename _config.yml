@@ -24,7 +24,6 @@ resume_header_contact_info:     "praneetb@gmail.com • 408-916-8207 • San Fra
 display_header_contact_info:    "true"
 
 resume_header_intro: "<p>
-        <b>Engineering Lead</b>
         <li>Leading the development of our cloud-native observability data platform, tailored to manage vast amounts of data and handle hundreds of millions of datapoints every minute across diverse global cloud regions. </li>
         <li> Collaborating closely with Engineering and Product teams, my focus is on aligning our technological initiatives with strategic business goals. I take great pride in steering our platform towards impressive scalability in data ingestion for visualization purposes.</li>
         <li> Our comprehensive technology stack includes Kafka, Elasticsearch, Prometheus, Telegraf, and various other tools, enabling us to efficiently monitor and optimize our cloud services. My commitment lies in fostering innovation and ensuring the scalability of our solutions. </li>
