@@ -1,8 +1,15 @@
 # Jobs
 # Lead Engineer
+
+- company: Pala Alto Networks
+  position: Senior Principal Engineer
+  duration: August, 2024 &mdash; Present
+  summary:
+           <li> Working on the cloud-native observability platform, ADEM, which provides real-time insights into user journeys, app performance, and infrastructure health, helping IT teams resolve issues quickly. Developing an scalable ETL pipeline in GCP to ingest RUM/Synthetic metrics.</li>
+
 - company: Selector Software AI
   position: Engineering Lead
-  duration: April, 2021 &mdash; Present
+  duration: April, 2021 &mdash; August, 2024
   summary:
            <li> Designed and Developed a scalable ETL data pipeline to ingest millions of data points per minute. It includes collectors, Kafka broker, import/export connectors to write to different databases.</li>
            <li> Created and implemented a pingmesh solution, in which remotely deployed agents communicate with a central controller, exchanging reports on packet loss and latency among themselves. </li>
