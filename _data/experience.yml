@@ -1,10 +1,19 @@
 # Jobs
-# CTO
-- company: Novuz Inc
-  position: Founder and Lead Engineer
-  duration: January, 2019 &mdash; Present
-  summary: <li> Designed and Developed a golang RestAPI Server which interacts with kubernetes server and spawn deployments, pods, jobs, services</li>
-           <li> Designed and Developed a Form learning system using tensor flow API. The system would identify a user uploaded form correctly</li>
+# Lead Engineer
+- company: Selector Software AI
+  position: Engineering Lead
+  duration: April, 2021 &mdash; Present
+  summary:
+           <li> Designed and Developed a scalable ETL data pipeline to ingest millions of data points per minute. It includes collectors, Kafka broker, import/export connectors to write to different databases.</li>
+           <li> Created and implemented a pingmesh solution, in which remotely deployed agents communicate with a central controller, exchanging reports on packet loss and latency among themselves. </li>
+           <li> Designed and implemented an apiserver which works with openapi specifications, the RestAPI code is auto-generated which interacts with the backend system, saved a lot of man-hours by generating code</li>
+           <li> Being a Network monitoring company, we need lots of data to analyse, developed an automated mock-data service where data is generated in json format for scale testing of the controller.</li>
+
+
+- company: Fungible Inc
+  position: Lead Engineer
+  duration: January, 2019 &mdash; April, 2021
+  summary: <li> Designed and Developed a golang based Network Controller which interacts with network switch using the openConfig YANG data models, using GNMI protocol</li>
 
 # Lead Engineer
 - company: Juniper Networks(Contrail Systems)
@@ -19,25 +28,28 @@
            <li>Worked with customers to integrate contrail SDN controller into their eco-systems.</li>
   
 # Software Engineer
-- company: Aruba Networks
+- company: Aruba Networks/Juniper Networks
   position: Staff Engineer
-  duration: May, 2010  &mdash; July, 2012
+  duration: Jan, 2009  &mdash; July, 2012
   summary: <li>Designed and Developed of Stacking/Virtualization software for a collection of switches with single unified management access.</li>
            <li>Designed and Developed dynamic master-election algorithm, stack split-merge, data-path programming, process manager changes for role based process launch.</li>
+           <li>Work closely with QA, customer support to resolve customer problems.</li>
 
 # Software Engineer
-- company: Tropos Networks
+- company: Symbol Technologies/Tropos Networks
   position: Software Engineer
-  duration: January, 2007 &mdash; December, 2008
-  summary: Worked on routing, mobility and platform services for the Metro-mesh routers. Developed interface manager, health check and BGP based cross-subnet roaming.
+  duration: Jan, 2004  &mdash; Dec, 2008
+  summary: <li>Worked on routing, mobility and platform services for the Metro-mesh routers. Developed interface manager, health check and BGP based cross-subnet roaming.</li>
+           <li>Worked on Mobility, Rate scaling, Access Point adoption, management for 802.11 protocols.</li>
 
 # Software Engineer
-- company: Symbol Technologies
+- company: Allegro Networks
   position: Software Engineer
-  duration: January, 2004 &mdash; July, 2006
-  summary: Worked on Mobility, Rate scaling, Access Point adoption, management for 802.11 protocols.
+  duration: Oct, 2002  &mdash; Oct, 2004
+  summary: <li>Developed networking protocol software, BGP and other networking protocols.</li>
 
 # Software Engineer
-- company: Cisco System/Allegro Networks/Future Software
+- company: Future Software/Cisco System
   position: Software Engineer
-  summary: Developed networking protocol software, BGP/PPP/RADIUS and other networking protocols.
+  duration: Jul 1997  &mdash; Sep, 2002
+  summary: <li>Developed networking protocol software, PPP/RADIUS/TACACS and other networking protocols.</li>

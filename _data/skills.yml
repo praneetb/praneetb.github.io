@@ -1,12 +1,21 @@
 # Skills
 # Organizational leadership
-- skill: Languages
-  description: C, Python, GoLang
 
-# Communications strategy
-- skill: Cloud Technologies
-  description: Kubernetes, Docker, RestAPI, Distributed Systems, Kafka, Zookeeper
+- skill: Languages/OS
+  description: Python, Golang, C, Linux
 
-# Digital content development and creation
 - skill: Tools
-  description: Ansible, Chef, Vagrant
+  description: Kubernetes, Docker, Ansible, Chef
+
+- skill: Technology
+  description: Distributed-systems, Micro-services, Time Series database, SQL/no-SQL, Kafka, Prometheus, Telegraf, Grafana, Fluentd, MongoDB, Elasticsearch, Etcd, Openapi/swagger
+
+- skill: Leadership/Planning
+  description: Demonstrated ability to lead and motivate cross-functional teams towards achieving project milestones and objectives.
+
+- skill: Decision Making/Problem Solving
+  description: Strong decision-making skills, adept at evaluating complex situations, analyzing data, and making informed decisions to mitigate risks and drive project success.
+
+- skill: Adaptability/Resource Management
+  description: Demonstrated ability to adapt to changing project requirements, technologies, and priorities, while maintaining focus on delivering high-quality software solutions.
+

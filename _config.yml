@@ -11,7 +11,7 @@ sass:
 # Resume settings
 resume_avatar:                  "false"
 resume_name:                    "Praneet Bachheti"
-resume_title:                   "Software Engineer"
+resume_title:                   "Lead Software Engineer"
 
 # used for the contact button in _layouts/resume.html
 resume_contact_email:           "praneetb@gmail.com"
@@ -23,7 +23,13 @@ resume_contact_address:         "San Francisco Bay Area"
 resume_header_contact_info:     "praneetb@gmail.com • 408-916-8207 • San Francisco Bay Area"
 display_header_contact_info:    "true"
 
-resume_header_intro: "<p>Software Engineer with 20+ years’ experience in Kubernetes, SDN, distributed systems,networking/platform infrastructure, cloud native architecture, machine learning, optimization, and automation. Developing new systems, solutions, design and implementations. Fan of open-source and linux.</p>"
+resume_header_intro: "<p>
+        <b>As an Engineering Lead at Selector AI</b>
+        <li>I lead the development of our cloud-native observability data platform, tailored to manage vast amounts of data and handle hundreds of millions of datapoints every minute across diverse global cloud regions. </li>
+        <li> Collaborating closely with Engineering and Product teams, my focus is on aligning our technological initiatives with strategic business goals. I take great pride in steering our platform towards impressive scalability in data ingestion for visualization purposes.</li>
+        <li> Our comprehensive technology stack includes Kafka, Elasticsearch, Prometheus, Telegraf, and various other tools, enabling us to efficiently monitor and optimize our cloud services. My commitment lies in fostering innovation and ensuring the scalability of our solutions. </li>
+  </p>"
+
 
 # use "yes" to display the email contact button,
 # "no" to display an "I'm not looking for work" message,
@@ -40,7 +46,7 @@ resume_section_skills:          true
 resume_section_recognition:     false
 resume_section_links:           true
 resume_section_associations:    false
-resume_section_interests:       true
+resume_section_interests:       false
 
 # Resume social links
 # uncomment the options you wish to display, and add your own URL
