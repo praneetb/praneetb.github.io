@@ -5,7 +5,8 @@
   position: Senior Principal Engineer
   duration: August, 2024 &mdash; Present
   summary:
-           <li> Working on the cloud-native observability platform, ADEM, which provides real-time insights into user journeys, app performance, and infrastructure health, helping IT teams resolve issues quickly. Developing an scalable ETL pipeline in GCP to ingest RUM/Synthetic metrics.</li>
+           <li> Leading the development of ADEM, a cloud-native observability platform providing real-time insights into user journeys, app performance, and infrastructure health. </li>
+           <li> Developed a scalable ETL pipeline in GCP to ingest RUM/Synthetic metrics, enhancing data processing efficiency. </li>
 
 - company: Selector Software AI
   position: Engineering Lead
@@ -48,15 +49,3 @@
   duration: Jan, 2004  &mdash; Dec, 2008
   summary: <li>Worked on routing, mobility and platform services for the Metro-mesh routers. Developed interface manager, health check and BGP based cross-subnet roaming.</li>
            <li>Worked on Mobility, Rate scaling, Access Point adoption, management for 802.11 protocols.</li>
-
-# Software Engineer
-- company: Allegro Networks
-  position: Software Engineer
-  duration: Oct, 2002  &mdash; Oct, 2004
-  summary: <li>Developed networking protocol software, BGP and other networking protocols.</li>
-
-# Software Engineer
-- company: Future Software/Cisco System
-  position: Software Engineer
-  duration: Jul 1997  &mdash; Sep, 2002
-  summary: <li>Developed networking protocol software, PPP/RADIUS/TACACS and other networking protocols.</li>

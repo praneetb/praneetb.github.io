@@ -11,7 +11,7 @@ sass:
 # Resume settings
 resume_avatar:                  "false"
 resume_name:                    "Praneet Bachheti"
-resume_title:                   "Lead Software Engineer"
+resume_title:                   "Summary"
 
 # used for the contact button in _layouts/resume.html
 resume_contact_email:           "praneetb@gmail.com"
@@ -24,9 +24,7 @@ resume_header_contact_info:     "praneetb@gmail.com • 408-916-8207 • San Fra
 display_header_contact_info:    "true"
 
 resume_header_intro: "<p>
-        <li>Leading the development of our cloud-native observability data platform, tailored to manage vast amounts of data and handle hundreds of millions of datapoints every minute across diverse global cloud regions. </li>
-        <li> Collaborating closely with Engineering and Product teams, my focus is on aligning our technological initiatives with strategic business goals. I take great pride in steering our platform towards impressive scalability in data ingestion for visualization purposes.</li>
-        <li> Our comprehensive technology stack includes Kafka, Elasticsearch, Prometheus, Telegraf, and various other tools, enabling us to efficiently monitor and optimize our cloud services. My commitment lies in fostering innovation and ensuring the scalability of our solutions. </li>
+  Senior Principal Engineer with extensive experience in designing and developing scalable cloud-native observability platforms. Expertise in distributed systems, network monitoring, and data pipeline engineering. Proven leadership in aligning technological initiatives with strategic business goals, optimizing large-scale infrastructure, and fostering innovation.
   </p>"
 
 
@@ -56,7 +54,7 @@ resume_social_links:
   # resume_facebook_url:          "insert Facebook URL here"
   resume_linkedin_url:          "https://www.linkedin.com/in/praneetb/"
   # resume_instagram_url:         "insert your Instagram URL here"
-  #resume_website_url:           "http://praneetb.github.io"
+  resume_website_url:           "http://praneetb.github.io"
   #resume_medium_url:            "insert your Instagram URL here"
 resume_print_social_links:      true
 
