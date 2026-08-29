@@ -1,0 +1,14 @@
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="wordmark" href="{{ '/' | relative_url }}"{% if page.nav == 'home' %} aria-current="page"{% endif %}>
+      <span class="mark" aria-hidden="true">P</span>
+      <span class="wordmark-text">Praneet Bachheti</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="{{ '/' | relative_url }}"{% if page.nav == 'home' %} aria-current="page"{% endif %}>Home</a>
+      <a href="{{ '/resume/' | relative_url }}"{% if page.nav == 'resume' %} aria-current="page"{% endif %}>Resume</a>
+      <a href="{{ '/travel/' | relative_url }}"{% if page.nav == 'travel' %} aria-current="page"{% endif %}>Travel</a>
+      <a href="{{ '/bucket-list/' | relative_url }}"{% if page.nav == 'bucket' %} aria-current="page"{% endif %}>Bucket list</a>
+    </nav>
+  </div>
+</header>

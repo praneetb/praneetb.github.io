@@ -1,0 +1,67 @@
+---
+layout: default
+title: Resume
+nav: resume
+description: Resume for Praneet Bachheti, Senior Principal Engineer — cloud-native observability, distributed systems, and network monitoring.
+---
+
+<p class="kicker">Resume</p>
+<h1>Praneet Bachheti</h1>
+<p class="lede">Senior Principal Engineer with experience in cloud-native observability, distributed systems, network monitoring, and data pipelines.</p>
+
+<section class="section" aria-labelledby="skills-heading">
+  <h2 id="skills-heading">Skills</h2>
+  {% for skill in site.data.skills %}
+  <div class="skill-group">
+    <h3>{{ skill.group }}</h3>
+    <ul class="chips">
+      {% for item in skill.items %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="section" aria-labelledby="experience-heading">
+  <h2 id="experience-heading">Experience</h2>
+  {% for job in site.data.experience %}
+  <article class="job">
+    <div class="job-head">
+      <h3>{{ job.company }}</h3>
+      <p class="when">{{ job.duration }}</p>
+    </div>
+    <p class="job-role">{{ job.position }}</p>
+    <ul>
+      {% for item in job.highlights %}
+      <li>
+        {% if item.text %}
+          {{ item.text }}{% if item.link %} <a href="{{ item.link.href }}">{{ item.link.label }}</a>{% endif %}
+        {% else %}
+          {{ item }}
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </article>
+  {% endfor %}
+</section>
+
+<section class="section" aria-labelledby="education-heading">
+  <h2 id="education-heading">Education</h2>
+  {% for school in site.data.education %}
+  <div class="job">
+    <h3 class="school-name">{{ school.school }}</h3>
+    <p class="job-role">{{ school.degree }}</p>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="section" aria-labelledby="patents-heading">
+  <h2 id="patents-heading">Patents</h2>
+  <ul class="patent-list">
+    {% for patent in site.data.patents %}
+    <li><a href="{{ patent.url }}">{{ patent.title }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
