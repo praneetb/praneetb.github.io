@@ -1,9 +1,8 @@
 (function () {
   "use strict";
 
-  // One-line change: replace UNSET with a 64-char SHA-256 hex digest.
-  // Never store a plaintext password in this repository.
-  const ROSE_PASSWORD_SHA256_HEX = "UNSET";
+  // SHA-256 hex digest only. Never store a plaintext password in this repository.
+  const ROSE_PASSWORD_SHA256_HEX = "8008acfa5ceb750f4415ada831575bbfa9d989fefaffe17bc9cbc6da564f8d69";
 
   const SESSION_KEY = "rose.gate.unlocked";
   const PLACEHOLDERS = new Set([
