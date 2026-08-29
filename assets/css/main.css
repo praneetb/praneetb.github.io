@@ -132,7 +132,8 @@ a:focus-visible,
 }
 
 .page-resume,
-.page-travel {
+.page-travel,
+.page-admin {
   max-width: calc(var(--wide) + 3rem);
 }
 
@@ -270,12 +271,202 @@ a:focus-visible,
   background: linear-gradient(180deg, #f7f3ea, #efe7d8);
 }
 
+.map-plot {
+  position: relative;
+}
+
 .map-frame img,
 .map-frame svg {
   display: block;
   width: 100%;
   height: auto;
   color: var(--map);
+}
+
+.travel-pins {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.travel-pin {
+  position: absolute;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin: -0.28rem 0 0 -0.28rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px rgba(243, 239, 230, 0.92);
+  pointer-events: auto;
+}
+
+.site-gate {
+  max-width: 28rem;
+  margin-top: 1.25rem;
+}
+
+.site-gate-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.site-gate-form[hidden],
+.site-gate[hidden],
+#travel-admin-root[hidden],
+#travel-public-empty[hidden],
+#admin-panel[hidden] {
+  display: none;
+}
+
+.site-gate label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--ink-soft);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.88rem;
+}
+
+.site-gate input[type="password"],
+.travel-form input,
+.travel-json {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--rule);
+  background: #faf6ee;
+  color: var(--ink);
+  font: inherit;
+}
+
+.site-gate button,
+.travel-btn {
+  justify-self: start;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--paper);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.site-gate button:hover,
+.travel-btn:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.travel-btn-quiet {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--rule);
+}
+
+.travel-btn-quiet:hover {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink-soft);
+}
+
+.site-gate-error,
+.travel-status-error {
+  margin: 0;
+  color: var(--accent);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+}
+
+.travel-status {
+  margin: 0 0 1rem;
+  color: var(--ink-soft);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.92rem;
+}
+
+.travel-form,
+.travel-backup {
+  margin-top: 1.6rem;
+}
+
+.travel-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 8rem;
+  gap: 0.75rem;
+}
+
+.travel-form-grid label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--ink-soft);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.88rem;
+}
+
+.travel-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+  margin-top: 0.9rem;
+}
+
+.travel-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.45rem 0 0;
+}
+
+.travel-backup h2 {
+  margin: 0 0 0.45rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.travel-export-label,
+.travel-file-label {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+  color: var(--ink-soft);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.86rem;
+}
+
+.travel-json {
+  min-height: 8rem;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.travel-file-label input[type="file"] {
+  font: inherit;
+}
+
+.travel-mode-controls {
+  margin: 1.5rem 0 0;
+}
+
+.travel-quiet-unlock {
+  padding: 0.15rem 0.4rem;
+  border: 0;
+  background: transparent;
+  color: var(--rule);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.travel-quiet-unlock:hover,
+.travel-quiet-unlock:focus-visible {
+  color: var(--ink-soft);
 }
 
 .empty {
@@ -371,6 +562,10 @@ a:focus-visible,
 
   .job-head {
     flex-direction: column;
+  }
+
+  .travel-form-grid {
+    grid-template-columns: 1fr;
   }
 }
 

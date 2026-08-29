@@ -2,33 +2,98 @@
 layout: default
 title: Travel
 nav: travel
-description: Countries Praneet Bachheti has visited. The list is empty until real places are added.
+description: A public world map. The committed country list stays empty.
+extra_js:
+  - /assets/js/site-admin.js
+  - /assets/js/iso-centroids.js
+  - /assets/js/travel.js
 ---
 
 <p class="kicker">Travel</p>
 <h1>Countries visited</h1>
 
-{% assign places = site.data.travel.countries %}
-{% if places and places.size > 0 %}
-<p class="count">{{ places.size }} {% if places.size == 1 %}country{% else %}countries{% endif %} recorded</p>
+<p id="travel-public-lede" class="lede">Nothing recorded on the public map. This page stays empty — no placeholders, no invented countries.</p>
+<p id="travel-admin-lede" class="lede" hidden>Private list for this browser only. Public visitors do not see these countries.</p>
+<p id="travel-count" class="count" hidden></p>
+
 <div class="map-frame">
-  <img src="{{ '/assets/images/world-map.svg' | relative_url }}" alt="Outline map of the world">
+  <div class="map-plot">
+    <img id="travel-map-img" src="{{ '/assets/images/world-map.svg' | relative_url }}" alt="Blank outline map of the world">
+    <div id="travel-pins" class="travel-pins" hidden></div>
+  </div>
 </div>
-<ul class="place-list">
-  {% for place in places %}
-  <li>
-    <p class="place-name">{{ place.name }}</p>
-    {% if place.year or place.notes %}
-    <p class="place-meta">{% if place.year %}{{ place.year }}{% endif %}{% if place.year and place.notes %} · {% endif %}{% if place.notes %}{{ place.notes }}{% endif %}</p>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p class="lede">Nothing recorded yet. This page stays empty until a real list exists — no placeholders, no invented countries.</p>
-<div class="map-frame">
-  <img src="{{ '/assets/images/world-map.svg' | relative_url }}" alt="Blank outline map of the world">
+
+<div id="travel-public-empty">
+  <p class="empty">Zero countries on the list.</p>
 </div>
-<p class="empty">Zero countries on the list.</p>
-<p class="empty-note">To add places later, edit <code>_data/travel.yml</code>. Each entry needs a name; year and notes are optional.</p>
-{% endif %}
+
+<div id="travel-admin-root" hidden></div>
+
+<template id="travel-admin-template">
+  <div id="travel-admin-panel">
+    <p id="travel-status" class="travel-status" hidden></p>
+
+    <form id="travel-editor" class="travel-form">
+      <div class="travel-form-grid">
+        <label>
+          Country
+          <input id="travel-name" name="name" type="text" autocomplete="off" required>
+        </label>
+        <label>
+          Year
+          <input id="travel-year" name="year" type="text" inputmode="numeric" maxlength="4" autocomplete="off">
+        </label>
+        <label>
+          Notes
+          <input id="travel-notes" name="notes" type="text" autocomplete="off">
+        </label>
+        <label>
+          ISO code
+          <input id="travel-code" name="code" type="text" maxlength="2" autocapitalize="characters" autocomplete="off" spellcheck="false">
+        </label>
+      </div>
+      <p class="empty-note">ISO is optional and only used to place a pin on the map.</p>
+      <div class="travel-form-actions">
+        <button id="travel-save" type="submit" class="travel-btn">Add country</button>
+        <button id="travel-cancel-edit" type="button" class="travel-btn travel-btn-quiet" hidden>Cancel</button>
+      </div>
+    </form>
+
+    <div id="travel-admin-list"></div>
+
+    <section class="travel-backup" aria-labelledby="travel-backup-heading">
+      <h2 id="travel-backup-heading">Backup</h2>
+      <p class="empty-note">Export or import JSON for this browser. Nothing here is published to the site.</p>
+      <label class="travel-export-label" for="travel-export">Current JSON</label>
+      <textarea id="travel-export" class="travel-json" readonly rows="8" spellcheck="false"></textarea>
+      <div class="travel-form-actions">
+        <button id="travel-download" type="button" class="travel-btn travel-btn-quiet">Download JSON</button>
+      </div>
+      <label class="travel-export-label" for="travel-import">Import JSON</label>
+      <textarea id="travel-import" class="travel-json" rows="6" spellcheck="false"></textarea>
+      <div class="travel-form-actions">
+        <button id="travel-import-btn" type="button" class="travel-btn travel-btn-quiet">Import pasted JSON</button>
+        <label class="travel-file-label">
+          Import file
+          <input id="travel-import-file" type="file" accept="application/json,.json">
+        </label>
+      </div>
+    </section>
+  </div>
+</template>
+
+<div id="travel-gate" class="site-gate" hidden>
+  <form id="travel-gate-form" class="site-gate-form">
+    <label>
+      Password
+      <input id="travel-password" name="password" type="password" autocomplete="current-password" required>
+    </label>
+    <p id="travel-gate-error" class="site-gate-error" hidden></p>
+    <button type="submit">Unlock</button>
+  </form>
+</div>
+
+<p class="travel-mode-controls">
+  <button type="button" id="travel-unlock" class="travel-quiet-unlock" aria-label="Unlock">·</button>
+  <button type="button" id="travel-lock" class="travel-btn travel-btn-quiet" hidden>Lock</button>
+</p>

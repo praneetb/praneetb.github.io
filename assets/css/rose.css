@@ -60,6 +60,25 @@
   font-size: 0.9rem;
 }
 
+.rose-toolbar {
+  margin: 2rem 0 0;
+}
+
+.rose-lock-btn {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.rose-lock-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-soft);
+}
+
 .rose-dashboard h1 {
   margin-bottom: 0.35rem;
 }
