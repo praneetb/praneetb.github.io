@@ -2,7 +2,7 @@
   "use strict";
 
   // SHA-256 hex digest only. Never store a plaintext password in this repository.
-  const ROSE_PASSWORD_SHA256_HEX = "8008acfa5ceb750f4415ada831575bbfa9d989fefaffe17bc9cbc6da564f8d69";
+  const ROSE_PASSWORD_SHA256_HEX = "87968969ff9ab03ad208bc716a6aa54b938f6aed679a380916f167fe29ae0cca";
 
   const SESSION_KEY = "rose.gate.unlocked";
   const PLACEHOLDERS = new Set([
