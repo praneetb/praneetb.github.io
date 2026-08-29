@@ -1,0 +1,34 @@
+---
+layout: default
+title: Travel
+nav: travel
+description: Countries Praneet Bachheti has visited. The list is empty until real places are added.
+---
+
+<p class="kicker">Travel</p>
+<h1>Countries visited</h1>
+
+{% assign places = site.data.travel.countries %}
+{% if places and places.size > 0 %}
+<p class="count">{{ places.size }} {% if places.size == 1 %}country{% else %}countries{% endif %} recorded</p>
+<div class="map-frame">
+  <img src="{{ '/assets/images/world-map.svg' | relative_url }}" alt="Outline map of the world">
+</div>
+<ul class="place-list">
+  {% for place in places %}
+  <li>
+    <p class="place-name">{{ place.name }}</p>
+    {% if place.year or place.notes %}
+    <p class="place-meta">{% if place.year %}{{ place.year }}{% endif %}{% if place.year and place.notes %} · {% endif %}{% if place.notes %}{{ place.notes }}{% endif %}</p>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="lede">Nothing recorded yet. This page stays empty until a real list exists — no placeholders, no invented countries.</p>
+<div class="map-frame">
+  <img src="{{ '/assets/images/world-map.svg' | relative_url }}" alt="Blank outline map of the world">
+</div>
+<p class="empty">Zero countries on the list.</p>
+<p class="empty-note">To add places later, edit <code>_data/travel.yml</code>. Each entry needs a name; year and notes are optional.</p>
+{% endif %}
