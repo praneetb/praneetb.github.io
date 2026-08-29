@@ -1,0 +1,126 @@
+# Household hours ledger. Update this file; the /rose/ page reads it.
+# Do not put a password or password hash here.
+
+rate_usd_per_hour: 18
+tracking_starts: "August 2026"
+weekly_hours: 9
+weekly_amount_usd: 162
+
+schedule:
+  - day: Tue
+    hours: 2
+  - day: Thu
+    hours: 2
+  - day: Fri
+    hours: 3
+  - day: Sun
+    hours: 2
+
+current:
+  as_of: "2026-08-29"
+  hours: 35
+  amount_usd: 630
+  note: unpaid · current balance owed
+
+this_week:
+  label: "Aug 24–29"
+  hours: 6
+  amount_usd: 108
+  note: Sunday is still scheduled.
+
+full_month_if_scheduled:
+  month: August
+  hours: 37
+  amount_usd: 666
+  note: If August 30 is worked.
+
+payments: []
+
+sessions:
+  - date: "2026-08-02"
+    weekday: Sun
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-04"
+    weekday: Tue
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-06"
+    weekday: Thu
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-07"
+    weekday: Fri
+    hours: 3
+    amount_usd: 54
+    status: worked
+  - date: "2026-08-09"
+    weekday: Sun
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-11"
+    weekday: Tue
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-13"
+    weekday: Thu
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-14"
+    weekday: Fri
+    hours: 3
+    amount_usd: 54
+    status: worked
+  - date: "2026-08-16"
+    weekday: Sun
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-18"
+    weekday: Tue
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-20"
+    weekday: Thu
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-21"
+    weekday: Fri
+    hours: 3
+    amount_usd: 54
+    status: worked
+  - date: "2026-08-23"
+    weekday: Sun
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-25"
+    weekday: Tue
+    hours: 1
+    amount_usd: 18
+    status: worked
+    note: short — 1 hour instead of 2
+  - date: "2026-08-27"
+    weekday: Thu
+    hours: 2
+    amount_usd: 36
+    status: worked
+  - date: "2026-08-28"
+    weekday: Fri
+    hours: 3
+    amount_usd: 54
+    status: worked
+  - date: "2026-08-30"
+    weekday: Sun
+    hours: 2
+    amount_usd: 36
+    status: scheduled
+    note: not yet owed
