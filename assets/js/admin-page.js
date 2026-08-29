@@ -68,7 +68,16 @@
         event.preventDefault();
         var input = el("admin-password");
         var error = el("admin-gate-error");
+        var button = form.querySelector("button[type='submit']");
+        if (button) {
+          button.disabled = true;
+          button.textContent = "Unlocking…";
+        }
         api.tryUnlock(input ? input.value : "").then(function (result) {
+          if (button) {
+            button.disabled = false;
+            button.textContent = "Unlock";
+          }
           if (result.unconfigured) {
             showLocked(true);
             return;

@@ -402,7 +402,17 @@
       }
       return;
     }
+    var form = el("travel-gate-form");
+    var button = form ? form.querySelector("button[type='submit']") : null;
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Unlocking…";
+    }
     api.tryUnlock(input ? input.value : "").then(function (result) {
+      if (button) {
+        button.disabled = false;
+        button.textContent = "Unlock";
+      }
       if (result.unconfigured) {
         if (error) {
           error.hidden = false;
