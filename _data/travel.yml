@@ -1,10 +1,5 @@
-# Countries visited. Leave this list empty until you have a real list.
-# Do not invent entries. When you add a place, it will appear on /travel/.
-#
-# Example:
-# - name: Japan
-#   code: JP          # optional ISO 3166-1 alpha-2
-#   year: 2019        # optional
-#   notes: Kyoto      # optional
+# Public travel data. Keep this list empty.
+# Do not invent entries. Do not commit a private visited-country list here.
+# The public /travel/ page reads this file only, so it stays a blank map.
 
 countries: []
