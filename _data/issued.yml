@@ -1,0 +1,25 @@
+# Issued U.S. patents only. Inventor on the grants: Praneet Bachheti.
+# Do not add applications. US20140204763 was abandoned and must not appear here.
+- number: US 7,107,360
+  url: https://patents.google.com/patent/US7107360B1
+  title: Network address translation in a gateway
+  issued: 12 September 2006
+  assignee: Cisco Technology, Inc.
+
+- number: US 7,586,940
+  url: https://patents.google.com/patent/US7586940B1
+  title: Forwarding packets in a gateway performing network address translation (NAT)
+  issued: 8 September 2009
+  assignee: Cisco Technology, Inc.
+
+- number: US 7,068,645
+  url: https://patents.google.com/patent/US7068645B1
+  title: Providing different QOS to layer-3 datagrams when transported on tunnels
+  issued: 27 June 2006
+  assignee: Cisco Technology, Inc.
+
+- number: US 6,901,079
+  url: https://patents.google.com/patent/US6901079B1
+  title: Providing different quality of services (QOS) to different point-to-point sessions
+  issued: 31 May 2005
+  assignee: Cisco Technology, Inc.

@@ -1,5 +1,5 @@
 title: Praneet Bachheti
-description: Senior Principal Engineer in the Bay Area. Cloud-native observability, distributed systems, and network software.
+description: A personal magazine — Yosemite, music, Tuesdays in the water, and the rest of the page.
 url: https://praneetb.github.io
 baseurl: ""
 
@@ -18,3 +18,4 @@ exclude:
   - vendor
   - config
   - CNAME
+  - cover
