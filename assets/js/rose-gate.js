@@ -306,6 +306,15 @@
     if (form) {
       form.addEventListener("submit", onSubmit);
     }
+    if (api && typeof api.onChange === "function") {
+      api.onChange(function (unlocked) {
+        if (unlocked && api.getLedger()) {
+          showDashboard(api.getLedger());
+        } else {
+          showLock(false);
+        }
+      });
+    }
   }
 
   if (document.readyState === "loading") {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"{% if page.nav == 'travel' %} class="theme-travel"{% endif %}>
+<html lang="en" data-baseurl="{{ site.baseurl }}"{% if page.nav == 'travel' %} class="theme-travel"{% endif %}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +25,8 @@
     {{ content }}
   </main>
   {% include footer.html %}
+  <script src="{{ '/assets/js/site-admin.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/header-gate.js' | relative_url }}"></script>
   {% if page.extra_js %}
     {% for src in page.extra_js %}
   <script src="{{ src | relative_url }}"></script>

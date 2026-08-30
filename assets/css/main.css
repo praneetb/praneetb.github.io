@@ -70,12 +70,19 @@ a:focus-visible,
 .site-header-inner {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 0.85rem 1.75rem;
   max-width: calc(var(--wide) + 3rem);
   margin: 0 auto;
   padding: 1.15rem 1.25rem 1rem;
+}
+
+.site-header-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
 }
 
 .wordmark {
@@ -133,8 +140,101 @@ a:focus-visible,
 
 .page-resume,
 .page-travel,
-.page-admin {
+.page-admin,
+.page-song {
   max-width: calc(var(--wide) + 3rem);
+}
+
+.site-lock {
+  display: grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--rule);
+  cursor: pointer;
+}
+
+.site-lock svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.site-lock:hover,
+.site-lock:focus-visible {
+  color: var(--ink-soft);
+}
+
+.site-lock.is-unlocked {
+  color: var(--accent);
+}
+
+.site-admin-dialog {
+  width: min(22rem, calc(100vw - 2rem));
+  padding: 1.15rem 1.2rem 1.2rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.85rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.site-admin-dialog::backdrop {
+  background: rgba(29, 25, 21, 0.32);
+}
+
+.site-admin-dialog h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+}
+
+.site-admin-dialog label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--ink-soft);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.88rem;
+}
+
+.site-admin-dialog input[type="password"] {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  background: #faf6ee;
+  color: var(--ink);
+  font: inherit;
+}
+
+.site-admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.9rem;
+}
+
+.site-admin-dialog button {
+  padding: 0.48rem 0.85rem;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--paper);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.site-admin-dialog button[type="button"] {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--rule);
+}
+
+#site-nav-private[hidden] {
+  display: none;
+}
+
+#site-nav-private:not([hidden]) {
+  display: contents;
 }
 
 .kicker {

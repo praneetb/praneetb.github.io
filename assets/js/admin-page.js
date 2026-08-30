@@ -108,6 +108,15 @@
         showLocked(false);
       });
     }
+    if (typeof api.onChange === "function") {
+      api.onChange(function (unlocked) {
+        if (unlocked) {
+          showUnlocked();
+        } else {
+          showLocked(false);
+        }
+      });
+    }
   }
 
   if (document.readyState === "loading") {

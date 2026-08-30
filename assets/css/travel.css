@@ -71,6 +71,46 @@ body.theme-travel .nav a[aria-current="page"] {
   box-shadow: inset 0 -2px 0 #c9a46c;
 }
 
+body.theme-travel .site-lock {
+  color: #2b2f38;
+}
+
+body.theme-travel .site-lock:hover,
+body.theme-travel .site-lock:focus-visible {
+  color: #6d675e;
+}
+
+body.theme-travel .site-lock.is-unlocked {
+  color: #c9a46c;
+}
+
+body.theme-travel .site-admin-dialog {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #121722;
+  color: #ece8df;
+}
+
+body.theme-travel .site-admin-dialog::backdrop {
+  background: rgba(4, 6, 10, 0.68);
+}
+
+body.theme-travel .site-admin-dialog label,
+body.theme-travel .site-admin-dialog button[type="button"] {
+  color: #b7b1a6;
+}
+
+body.theme-travel .site-admin-dialog input[type="password"] {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #0c1018;
+  color: #f3eee4;
+}
+
+body.theme-travel .site-admin-dialog button[type="submit"] {
+  border-color: #c9a46c;
+  background: #c9a46c;
+  color: #1a1408;
+}
+
 body.theme-travel .page-travel {
   max-width: 74rem;
   padding-top: 1.8rem;
