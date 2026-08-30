@@ -1,0 +1,34 @@
+---
+layout: default
+title: Song
+nav: song
+description: Today's song, with a private favorites list that stays in this browser.
+extra_css:
+  - /assets/css/song.css
+extra_js:
+  - /assets/js/song.js
+---
+
+<script type="application/json" id="song-today-data">{{ site.data.today_song | jsonify }}</script>
+
+<p class="kicker">Song</p>
+<h1>Today’s pick</h1>
+
+<div id="song-today" class="song-today"></div>
+
+<section class="song-favorites" aria-labelledby="song-favorites-heading">
+  <h2 id="song-favorites-heading">Favorites</h2>
+  <p class="song-note">Saved in this browser only. Public visitors do not see another person’s list.</p>
+  <div id="song-favorites"></div>
+</section>
+
+<dialog id="song-mood-dialog" class="song-dialog">
+  <form id="song-mood-form">
+    <h3 id="song-mood-title">Choose a mood</h3>
+    <p class="song-note">Favorites are grouped by mood.</p>
+    <div id="song-mood-options" class="song-moods"></div>
+    <div class="song-actions">
+      <button id="song-mood-cancel" type="button" class="song-btn song-btn-quiet">Cancel</button>
+    </div>
+  </form>
+</dialog>

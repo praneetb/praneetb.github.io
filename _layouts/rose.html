@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-baseurl="{{ site.baseurl }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +19,7 @@
   </main>
   {% include footer.html %}
   <script src="{{ '/assets/js/site-admin.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/header-gate.js' | relative_url }}"></script>
   <script src="{{ '/assets/js/rose-gate.js' | relative_url }}"></script>
 </body>
 </html>

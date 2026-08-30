@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-baseurl="{{ site.baseurl }}"{% if page.nav == 'travel' %} class="theme-travel"{% endif %}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,7 @@
   <meta name="robots" content="{{ page.robots }}">
   {% endif %}
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
-  <meta name="theme-color" content="#f3efe6">
+  <meta name="theme-color" content="{% if page.nav == 'travel' %}#07090e{% else %}#f3efe6{% endif %}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   {% if page.extra_css %}
@@ -18,13 +18,15 @@
     {% endfor %}
   {% endif %}
 </head>
-<body>
+<body{% if page.nav == 'travel' %} class="theme-travel"{% endif %}>
   <a class="skip-link" href="#content">Skip to content</a>
   {% include nav.html %}
   <main id="content" class="page page-{{ page.nav }}">
     {{ content }}
   </main>
   {% include footer.html %}
+  <script src="{{ '/assets/js/site-admin.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/header-gate.js' | relative_url }}"></script>
   {% if page.extra_js %}
     {% for src in page.extra_js %}
   <script src="{{ src | relative_url }}"></script>
