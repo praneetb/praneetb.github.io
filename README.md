@@ -4,7 +4,7 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 ## Pages
 
-- Home — short profile and links
+- Home — travel-magazine cover (Half Dome) and editorial spreads
 - [Resume](/resume/) — experience, skills, education, patents
 - [Travel](/travel/) — interactive 3D globe and the New7Wonders catalog (`_data/travel.yml` stays empty)
 - [Bucket list](/bucket-list/) — things to do (`_data/bucket.yml`)
