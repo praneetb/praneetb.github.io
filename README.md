@@ -6,7 +6,7 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 - Home — short profile and links
 - [Resume](/resume/) — experience, skills, education, patents
-- [Travel](/travel/) — public world map (`_data/travel.yml` stays empty)
+- [Travel](/travel/) — interactive 3D globe and the New7Wonders catalog (`_data/travel.yml` stays empty)
 - [Bucket list](/bucket-list/) — things to do (`_data/bucket.yml`)
 
 Travel and the bucket list ship empty. Do not invent countries or items, and do not commit a private travel list.

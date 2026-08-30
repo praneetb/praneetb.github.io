@@ -1,5 +1,6 @@
 # Public travel data. Keep this list empty.
 # Do not invent entries. Do not commit a private visited-country list here.
-# The public /travel/ page reads this file only, so it stays a blank map.
+# Do not commit wonder-visited flags. Those stay in localStorage on the admin browser.
+# Public /travel/ reads this file only, so the globe stays empty until a real public list exists.
 
 countries: []

@@ -2,98 +2,138 @@
 layout: default
 title: Travel
 nav: travel
-description: A public world map. The committed country list stays empty.
+description: A public 3D globe and the New7Wonders catalog. The committed country list stays empty.
+extra_css:
+  - /assets/css/travel.css
 extra_js:
   - /assets/js/site-admin.js
   - /assets/js/iso-centroids.js
+  - /assets/js/travel-data.js
   - /assets/js/travel.js
 ---
 
-<p class="kicker">Travel</p>
-<h1>Countries visited</h1>
+<script type="application/json" id="travel-public-data">
+{
+  "countries": {{ site.data.travel.countries | jsonify }},
+  "wonders": {% if site.data.travel.wonders %}{{ site.data.travel.wonders | jsonify }}{% else %}[]{% endif %}
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2.41.4/dist/globe.gl.min.js"></script>
 
-<p id="travel-public-lede" class="lede">Nothing recorded on the public map. This page stays empty — no placeholders, no invented countries.</p>
-<p id="travel-admin-lede" class="lede" hidden>Private list for this browser only. Public visitors do not see these countries.</p>
-<p id="travel-count" class="count" hidden></p>
+<div class="travel-dash">
+  <header class="travel-hero">
+    <div>
+      <p class="travel-kicker">Personal · My travel</p>
+      <h1>The places that shape my story.</h1>
+      <p class="travel-sub">Drag to explore, scroll to zoom, or choose a country or wonder to bring it into view.</p>
+    </div>
+    <div class="travel-stat" aria-live="polite">
+      <span class="travel-stat-num" id="travel-stat-num">0</span>
+      <span class="travel-stat-label" id="travel-stat-label">countries visited.</span>
+    </div>
+  </header>
 
-<div class="map-frame">
-  <div class="map-plot">
-    <img id="travel-map-img" src="{{ '/assets/images/world-map.svg' | relative_url }}" alt="Blank outline map of the world">
-    <div id="travel-pins" class="travel-pins" hidden></div>
-  </div>
-</div>
+  <section class="travel-globe-card" aria-label="Interactive globe">
+    <div id="travel-globe" class="travel-globe" role="img" aria-label="Earth. Drag to rotate, scroll to zoom."></div>
+    <p class="travel-globe-caption">
+      <span class="travel-globe-live" id="travel-globe-live"><i aria-hidden="true"></i> <span data-globe-state>Slowly rotating</span></span>
+      <span>Drag to spin · Scroll to zoom · Select a place to locate it</span>
+    </p>
+  </section>
 
-<div id="travel-public-empty">
-  <p class="empty">Zero countries on the list.</p>
-</div>
+  <div class="travel-panels">
+    <section class="travel-panel" aria-labelledby="travel-countries-heading">
+      <header class="travel-panel-head">
+        <h2 id="travel-countries-heading">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path>
+          </svg>
+          Countries visited
+        </h2>
+        <button type="button" id="travel-add-open" class="travel-add-btn" hidden>+ Add country</button>
+      </header>
+      <p id="travel-status" class="travel-status" hidden></p>
+      <div id="travel-country-grid" class="travel-country-grid"></div>
+      <p id="travel-country-empty" class="travel-empty">Nothing recorded yet.</p>
+    </section>
 
-<div id="travel-admin-root" hidden></div>
-
-<template id="travel-admin-template">
-  <div id="travel-admin-panel">
-    <p id="travel-status" class="travel-status" hidden></p>
-
-    <form id="travel-editor" class="travel-form">
-      <div class="travel-form-grid">
-        <label>
-          Country
-          <input id="travel-name" name="name" type="text" autocomplete="off" required>
-        </label>
-        <label>
-          Year
-          <input id="travel-year" name="year" type="text" inputmode="numeric" maxlength="4" autocomplete="off">
-        </label>
-        <label>
-          Notes
-          <input id="travel-notes" name="notes" type="text" autocomplete="off">
-        </label>
-        <label>
-          ISO code
-          <input id="travel-code" name="code" type="text" maxlength="2" autocapitalize="characters" autocomplete="off" spellcheck="false">
-        </label>
-      </div>
-      <p class="empty-note">ISO is optional and only used to place a pin on the map.</p>
-      <div class="travel-form-actions">
-        <button id="travel-save" type="submit" class="travel-btn">Add country</button>
-        <button id="travel-cancel-edit" type="button" class="travel-btn travel-btn-quiet" hidden>Cancel</button>
-      </div>
-    </form>
-
-    <div id="travel-admin-list"></div>
-
-    <section class="travel-backup" aria-labelledby="travel-backup-heading">
-      <h2 id="travel-backup-heading">Backup</h2>
-      <p class="empty-note">Export or import JSON for this browser. Nothing here is published to the site.</p>
-      <label class="travel-export-label" for="travel-export">Current JSON</label>
-      <textarea id="travel-export" class="travel-json" readonly rows="8" spellcheck="false"></textarea>
-      <div class="travel-form-actions">
-        <button id="travel-download" type="button" class="travel-btn travel-btn-quiet">Download JSON</button>
-      </div>
-      <label class="travel-export-label" for="travel-import">Import JSON</label>
-      <textarea id="travel-import" class="travel-json" rows="6" spellcheck="false"></textarea>
-      <div class="travel-form-actions">
-        <button id="travel-import-btn" type="button" class="travel-btn travel-btn-quiet">Import pasted JSON</button>
-        <label class="travel-file-label">
-          Import file
-          <input id="travel-import-file" type="file" accept="application/json,.json">
-        </label>
-      </div>
+    <section class="travel-panel" aria-labelledby="travel-wonders-heading">
+      <header class="travel-panel-head travel-panel-head-stack">
+        <h2 id="travel-wonders-heading">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.4l1.55 5.1h5.35l-4.33 3.15 1.66 5.1L12 12.7 7.77 15.75l1.66-5.1L5.1 7.5h5.35L12 2.4z"></path>
+          </svg>
+          Wonders of the World
+        </h2>
+        <p id="travel-wonder-count" class="travel-panel-meta">0 of 7 visited.</p>
+      </header>
+      <div id="travel-wonder-list" class="travel-wonder-list"></div>
     </section>
   </div>
-</template>
 
-<div id="travel-gate" class="site-gate" hidden>
-  <form id="travel-gate-form" class="site-gate-form">
-    <label>
-      Password
-      <input id="travel-password" name="password" type="password" autocomplete="current-password" required>
-    </label>
-    <p id="travel-gate-error" class="site-gate-error" hidden></p>
-    <button type="submit">Unlock</button>
-  </form>
+  <details id="travel-backup" class="travel-backup" hidden>
+    <summary>Backup this browser list</summary>
+    <h2>Backup</h2>
+    <p class="empty-note">Export or import JSON for this browser. Nothing here is published to the site.</p>
+    <label class="travel-export-label" for="travel-export">Current JSON</label>
+    <textarea id="travel-export" class="travel-json" readonly rows="8" spellcheck="false"></textarea>
+    <div class="travel-form-actions">
+      <button id="travel-download" type="button" class="travel-btn travel-btn-quiet">Download JSON</button>
+    </div>
+    <label class="travel-export-label" for="travel-import">Import JSON</label>
+    <textarea id="travel-import" class="travel-json" rows="6" spellcheck="false"></textarea>
+    <div class="travel-form-actions">
+      <button id="travel-import-btn" type="button" class="travel-btn travel-btn-quiet">Import pasted JSON</button>
+      <label class="travel-file-label">
+        Import file
+        <input id="travel-import-file" type="file" accept="application/json,.json">
+      </label>
+    </div>
+  </details>
+
+  <p class="travel-mode-controls">
+    <button type="button" id="travel-unlock" class="travel-quiet-unlock" aria-label="Unlock">·</button>
+    <button type="button" id="travel-lock" class="travel-btn travel-btn-quiet" hidden>Lock</button>
+  </p>
+
+  <div id="travel-gate" class="site-gate" hidden>
+    <form id="travel-gate-form" class="site-gate-form">
+      <label>
+        Password
+        <input id="travel-password" name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <p id="travel-gate-error" class="site-gate-error" hidden></p>
+      <button type="submit">Unlock</button>
+    </form>
+  </div>
 </div>
 
-<p class="travel-mode-controls">
-  <button type="button" id="travel-unlock" class="travel-quiet-unlock" aria-label="Unlock">·</button>
-  <button type="button" id="travel-lock" class="travel-btn travel-btn-quiet" hidden>Lock</button>
-</p>
+<dialog id="travel-editor" class="travel-dialog">
+  <form id="travel-editor-form">
+    <h3 id="travel-editor-title">Add a country</h3>
+    <input id="travel-edit-id" type="hidden">
+    <label>
+      Country
+      <input id="travel-name" name="name" type="text" autocomplete="off" required>
+    </label>
+    <div id="travel-add-results" class="travel-add-results"></div>
+    <label>
+      Year
+      <input id="travel-year" name="year" type="text" inputmode="numeric" maxlength="4" autocomplete="off">
+    </label>
+    <label>
+      Notes
+      <input id="travel-notes" name="notes" type="text" autocomplete="off">
+    </label>
+    <label>
+      ISO code
+      <input id="travel-code" name="code" type="text" maxlength="2" autocapitalize="characters" autocomplete="off" spellcheck="false">
+    </label>
+    <p id="travel-editor-status" class="travel-status" hidden></p>
+    <div class="travel-form-actions">
+      <button id="travel-save" type="submit" class="travel-btn">Add country</button>
+      <button id="travel-cancel-edit" type="button" class="travel-btn travel-btn-quiet">Cancel</button>
+    </div>
+  </form>
+</dialog>
