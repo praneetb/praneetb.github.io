@@ -12,6 +12,7 @@ extra_js:
   - /assets/js/travel.js
 ---
 
+<script>window.TRAVEL_BASE = "{{ site.baseurl }}";</script>
 <script type="application/json" id="travel-public-data">
 {
   "countries": {{ site.data.travel.countries | jsonify }},

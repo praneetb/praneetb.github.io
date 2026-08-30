@@ -2,6 +2,7 @@
   "use strict";
 
   // Catalog only. Visited state is never stored here.
+  // Thumbnails are local copies of Wikimedia Commons photos (not a visit list).
   global.TRAVEL_WONDERS = [
     {
       id: "great-wall",
@@ -10,7 +11,7 @@
       code: "CN",
       lat: 40.4319,
       lng: 116.5704,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/320px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+      photo: "/assets/images/wonders/great-wall.jpg",
       icon: "wall"
     },
     {
@@ -20,7 +21,7 @@
       code: "JO",
       lat: 30.3285,
       lng: 35.4444,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Al_Khazneh_Petra_edit_2.jpg/320px-Al_Khazneh_Petra_edit_2.jpg",
+      photo: "/assets/images/wonders/petra.jpg",
       icon: "facade"
     },
     {
@@ -30,7 +31,7 @@
       code: "IT",
       lat: 41.8902,
       lng: 12.4922,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/320px-Colosseo_2020.jpg",
+      photo: "/assets/images/wonders/colosseum.jpg",
       icon: "arena"
     },
     {
@@ -40,7 +41,7 @@
       code: "MX",
       lat: 20.6843,
       lng: -88.5678,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Chichen_Itza_3.jpg/320px-Chichen_Itza_3.jpg",
+      photo: "/assets/images/wonders/chichen-itza.jpg",
       icon: "pyramid"
     },
     {
@@ -50,7 +51,7 @@
       code: "PE",
       lat: -13.1631,
       lng: -72.545,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Machu_Picchu%2C_Peru.jpg/320px-Machu_Picchu%2C_Peru.jpg",
+      photo: "/assets/images/wonders/machu-picchu.jpg",
       icon: "mountain"
     },
     {
@@ -60,7 +61,7 @@
       code: "IN",
       lat: 27.1751,
       lng: 78.0421,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/320px-Taj_Mahal_%28Edited%29.jpeg",
+      photo: "/assets/images/wonders/taj-mahal.jpg",
       icon: "dome"
     },
     {
@@ -70,7 +71,7 @@
       code: "BR",
       lat: -22.9519,
       lng: -43.2105,
-      photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Christ_the_Redeemer_-_Rio_de_Janeiro%2C_Brazil_May_2014.jpg/320px-Christ_the_Redeemer_-_Rio_de_Janeiro%2C_Brazil_May_2014.jpg",
+      photo: "/assets/images/wonders/christ-redeemer.jpg",
       icon: "statue"
     }
   ];

@@ -181,6 +181,17 @@
     return window.ISO_CENTROIDS || {};
   }
 
+  function assetUrl(path) {
+    var base = String(window.TRAVEL_BASE || "").replace(/\/$/, "");
+    if (!path) {
+      return path;
+    }
+    if (/^https?:\/\//i.test(path)) {
+      return path;
+    }
+    return base + path;
+  }
+
   function flagUrl(code) {
     return FLAG_CDN + String(code).toLowerCase() + ".png";
   }
@@ -522,7 +533,7 @@
         card.classList.add("is-selected");
       }
       var img = document.createElement("img");
-      img.src = wonder.photo;
+      img.src = assetUrl(wonder.photo);
       img.alt = "";
       img.addEventListener("error", function () {
         var fallback = document.createElement("span");
