@@ -43,12 +43,8 @@ extra_css:
         {% if item.year %}{{ item.year }}{% endif %}
         {% if item.note %} · {{ item.note }}{% endif %}
       </p>
-      {% if item.highlights %}
-      <ul class="manya-report-highlights">
-        {% for line in item.highlights %}
-        <li>{{ line }}</li>
-        {% endfor %}
-      </ul>
+      {% if item.summary %}
+      <p class="manya-report-summary">{{ item.summary }}</p>
       {% endif %}
       <a
         class="manya-report-open"
