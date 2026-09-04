@@ -7,9 +7,11 @@ private: true
 sitemap: false
 robots: noindex, nofollow
 hide_footer: true
-description: Private list of Manya’s school report cards. Files stay in Google Drive.
+description: Private list of Manya’s school report cards. PDFs open on this page after sign-in.
 extra_css:
   - /assets/css/manya.css
+extra_js:
+  - /assets/js/manya-reports.js
 ---
 
 <nav class="manya-trail" aria-label="Section">
@@ -22,11 +24,15 @@ extra_css:
 
 <p class="kicker">Reports</p>
 <h1 class="manya-title">Report cards · Manya</h1>
-<p class="lede">Each card opens in Google Drive. This site does not keep the files.</p>
+<p class="lede">Each card opens the report on this page. Files are encrypted on the site; Drive stays the archive.</p>
 
 <ol class="manya-report-stage">
   {% for item in site.data.manya_reports.items %}
-  <li class="manya-report" style="--i: {{ forloop.index0 }};">
+  <li
+    class="manya-report"
+    style="--i: {{ forloop.index0 }};"
+    data-report-id="{{ item.file_id }}"
+    data-report-title="{{ item.title | escape }}{% if item.note %} · {{ item.note | escape }}{% endif %}">
     <img
       class="manya-report-avatar"
       src="{{ '/assets/manya/' | append: item.avatar | append: '.png' | relative_url }}"
@@ -46,12 +52,28 @@ extra_css:
       {% if item.summary %}
       <p class="manya-report-summary">{{ item.summary }}</p>
       {% endif %}
-      <a
-        class="manya-report-open"
-        href="https://drive.google.com/file/d/{{ item.file_id }}/view"
-        target="_blank"
-        rel="noopener">Open in Drive</a>
+      <div class="manya-report-actions">
+        <button type="button" class="manya-report-open" data-view-report>View report</button>
+        <a
+          class="manya-report-drive"
+          href="https://drive.google.com/file/d/{{ item.file_id }}/view"
+          target="_blank"
+          rel="noopener">Open in Drive</a>
+      </div>
     </div>
   </li>
   {% endfor %}
 </ol>
+
+<dialog id="manya-report-dialog" class="manya-report-dialog" aria-labelledby="manya-report-dialog-title">
+  <div class="manya-report-dialog-bar">
+    <h2 id="manya-report-dialog-title">Report</h2>
+    <div class="manya-report-dialog-tools">
+      <a id="manya-report-download" class="manya-report-download" hidden>Download</a>
+      <button id="manya-report-close" type="button">Close</button>
+    </div>
+  </div>
+  <p id="manya-report-status" class="manya-report-status" hidden></p>
+  <button id="manya-report-signin" type="button" class="manya-report-signin" hidden>Sign in again</button>
+  <iframe id="manya-report-frame" class="manya-report-frame" title="Report PDF" hidden></iframe>
+</dialog>

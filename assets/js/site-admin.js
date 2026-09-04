@@ -3,12 +3,21 @@
 
   const ADMIN_KEY = "site.admin";
   const NOTES_KEY = "site.notes";
+  const REPORTS_READY_KEY = "site.manyaReports";
+  const REPORTS_DB_NAME = "site.manyaReports";
+  const REPORTS_STORE = "pdfs";
+  const REPORTS_DB_VERSION = 1;
   const LEGACY_ROSE_KEY = "rose.gate.unlocked";
   const LEGACY_LEDGER_KEY = "rose.ledger";
 
   var listeners = [];
   var notesEnvelopePromise = null;
+  var reportsEnvelopePromise = null;
   var signInHandler = null;
+  var reportsIndex = {};
+  var reportsBlobs = {};
+  var reportsUrls = {};
+  var reportsHydratePromise = null;
 
   function notify(unlocked) {
     listeners.slice().forEach(function (fn) {
@@ -42,6 +51,11 @@
     return bytes;
   }
 
+  function b64ToBlob(value, mime) {
+    var bytes = b64ToBytes(value);
+    return new Blob([bytes], { type: mime || "application/pdf" });
+  }
+
   function timingSafeEqual(a, b) {
     if (!a || !b || a.length !== b.length) {
       return false;
@@ -72,6 +86,13 @@
       notesEnvelopePromise = loadJson(assetUrl("notes.enc.json"));
     }
     return notesEnvelopePromise;
+  }
+
+  function loadReportsEnvelope() {
+    if (!reportsEnvelopePromise) {
+      reportsEnvelopePromise = loadJson(assetUrl("manya/reports.enc.json"));
+    }
+    return reportsEnvelopePromise;
   }
 
   async function deriveAesKey(password, envelope) {
@@ -153,6 +174,15 @@
     return pack;
   }
 
+  async function decryptReports(password) {
+    var envelope = await loadReportsEnvelope();
+    var pack = await decryptEnvelope(password, envelope);
+    if (!pack || pack.kind !== "manya-reports" || !Array.isArray(pack.reports)) {
+      return null;
+    }
+    return pack;
+  }
+
   function storageGet(key) {
     try {
       return sessionStorage.getItem(key) || localStorage.getItem(key);
@@ -198,6 +228,290 @@
     }
   }
 
+  function revokeReportUrls() {
+    Object.keys(reportsUrls).forEach(function (id) {
+      try {
+        URL.revokeObjectURL(reportsUrls[id]);
+      } catch (err) {
+        // Revoke is best-effort.
+      }
+    });
+    reportsUrls = {};
+  }
+
+  function resetReportsMemory() {
+    revokeReportUrls();
+    reportsIndex = {};
+    reportsBlobs = {};
+  }
+
+  function rememberReport(row) {
+    if (!row || !row.id) {
+      return;
+    }
+    reportsIndex[row.id] = {
+      id: row.id,
+      filename: row.filename || row.id + ".pdf",
+      title: row.title || row.filename || "Report",
+      mime: row.mime || "application/pdf"
+    };
+    if (row.blob) {
+      reportsBlobs[row.id] = row.blob;
+    }
+  }
+
+  function indexFromPack(pack) {
+    resetReportsMemory();
+    ((pack && pack.reports) || []).forEach(function (report) {
+      if (!report || !report.id || !report.pdf_b64) {
+        return;
+      }
+      rememberReport({
+        id: String(report.id),
+        filename: report.filename,
+        title: report.title,
+        mime: report.mime,
+        blob: b64ToBlob(report.pdf_b64, report.mime || "application/pdf")
+      });
+    });
+  }
+
+  function openReportsDb() {
+    if (!global.indexedDB) {
+      return Promise.reject(new Error("no-idb"));
+    }
+    return new Promise(function (resolve, reject) {
+      var req = indexedDB.open(REPORTS_DB_NAME, REPORTS_DB_VERSION);
+      req.onupgradeneeded = function () {
+        var db = req.result;
+        if (!db.objectStoreNames.contains(REPORTS_STORE)) {
+          db.createObjectStore(REPORTS_STORE, { keyPath: "id" });
+        }
+      };
+      req.onsuccess = function () {
+        resolve(req.result);
+      };
+      req.onerror = function () {
+        reject(req.error || new Error("idb"));
+      };
+    });
+  }
+
+  function idbRequest(req) {
+    return new Promise(function (resolve, reject) {
+      req.onsuccess = function () {
+        resolve(req.result);
+      };
+      req.onerror = function () {
+        reject(req.error);
+      };
+    });
+  }
+
+  async function writeReportsToIdb() {
+    var db = await openReportsDb();
+    try {
+      var tx = db.transaction(REPORTS_STORE, "readwrite");
+      var store = tx.objectStore(REPORTS_STORE);
+      store.clear();
+      Object.keys(reportsIndex).forEach(function (id) {
+        var meta = reportsIndex[id];
+        var blob = reportsBlobs[id];
+        if (!blob) {
+          return;
+        }
+        store.put({
+          id: id,
+          filename: meta.filename,
+          title: meta.title,
+          mime: meta.mime,
+          blob: blob
+        });
+      });
+      await new Promise(function (resolve, reject) {
+        tx.oncomplete = resolve;
+        tx.onerror = function () {
+          reject(tx.error);
+        };
+        tx.onabort = function () {
+          reject(tx.error || new Error("abort"));
+        };
+      });
+    } finally {
+      try {
+        db.close();
+      } catch (err) {
+        // Ignore close errors.
+      }
+    }
+  }
+
+  async function clearReportsIdb() {
+    if (!global.indexedDB) {
+      return;
+    }
+    try {
+      var db = await openReportsDb();
+      try {
+        var tx = db.transaction(REPORTS_STORE, "readwrite");
+        tx.objectStore(REPORTS_STORE).clear();
+        await new Promise(function (resolve, reject) {
+          tx.oncomplete = resolve;
+          tx.onerror = function () {
+            reject(tx.error);
+          };
+        });
+      } finally {
+        db.close();
+      }
+    } catch (err) {
+      // Private mode or missing IDB should not break sign-out.
+    }
+  }
+
+  async function hydrateReportsFromIdb() {
+    var db = await openReportsDb();
+    try {
+      var tx = db.transaction(REPORTS_STORE, "readonly");
+      var rows = await idbRequest(tx.objectStore(REPORTS_STORE).getAll());
+      resetReportsMemory();
+      (rows || []).forEach(function (row) {
+        rememberReport(row);
+      });
+    } finally {
+      db.close();
+    }
+  }
+
+  function persistReportsReady(persist) {
+    try {
+      storageSet(sessionStorage, REPORTS_READY_KEY, "1");
+    } catch (err) {
+      // Session flag is optional; IDB is the cache.
+    }
+    if (persist) {
+      try {
+        storageSet(localStorage, REPORTS_READY_KEY, "1");
+      } catch (err) {
+        // Persistent flag is optional.
+      }
+    } else {
+      storageRemove(localStorage, REPORTS_READY_KEY);
+    }
+  }
+
+  function clearReportsReady() {
+    storageRemove(sessionStorage, REPORTS_READY_KEY);
+    storageRemove(localStorage, REPORTS_READY_KEY);
+  }
+
+  async function clearReportsCache() {
+    resetReportsMemory();
+    clearReportsReady();
+    reportsHydratePromise = null;
+    await clearReportsIdb();
+  }
+
+  async function cacheManyaReports(password) {
+    try {
+      var pack = await decryptReports(password);
+      if (!pack) {
+        await clearReportsCache();
+        return false;
+      }
+      indexFromPack(pack);
+      try {
+        await writeReportsToIdb();
+        // Drop in-memory blobs after a successful IDB write so PDFs are not
+        // kept twice. The small index stays in memory.
+        reportsBlobs = {};
+      } catch (err) {
+        // Memory-only fallback for this visit; never write PDFs to localStorage.
+      }
+      return Object.keys(reportsIndex).length > 0;
+    } catch (err) {
+      if (err && err.message === "missing") {
+        reportsEnvelopePromise = null;
+      }
+      resetReportsMemory();
+      return false;
+    }
+  }
+
+  function ensureReportsHydrated() {
+    if (reportsHydratePromise) {
+      return reportsHydratePromise;
+    }
+    reportsHydratePromise = (async function () {
+      if (!isUnlocked()) {
+        await clearReportsCache();
+        return;
+      }
+      if (Object.keys(reportsIndex).length) {
+        return;
+      }
+      try {
+        await hydrateReportsFromIdb();
+      } catch (err) {
+        reportsIndex = {};
+      }
+    })();
+    return reportsHydratePromise;
+  }
+
+  function hasManyaReports() {
+    return isUnlocked() && Object.keys(reportsIndex).length > 0;
+  }
+
+  function needsManyaReportsUnlock() {
+    return isUnlocked() && Object.keys(reportsIndex).length === 0;
+  }
+
+  function getManyaReportMeta(id) {
+    var key = String(id || "");
+    return reportsIndex[key] || null;
+  }
+
+  async function getManyaReportBlob(id) {
+    var key = String(id || "");
+    await ensureReportsHydrated();
+    if (!isUnlocked() || !key) {
+      return null;
+    }
+    if (reportsBlobs[key]) {
+      return reportsBlobs[key];
+    }
+    try {
+      var db = await openReportsDb();
+      try {
+        var tx = db.transaction(REPORTS_STORE, "readonly");
+        var row = await idbRequest(tx.objectStore(REPORTS_STORE).get(key));
+        if (row && row.blob) {
+          rememberReport(row);
+          return row.blob;
+        }
+      } finally {
+        db.close();
+      }
+    } catch (err) {
+      return reportsBlobs[key] || null;
+    }
+    return null;
+  }
+
+  async function getManyaReportUrl(id) {
+    var key = String(id || "");
+    if (reportsUrls[key]) {
+      return reportsUrls[key];
+    }
+    var blob = await getManyaReportBlob(key);
+    if (!blob) {
+      return null;
+    }
+    reportsUrls[key] = URL.createObjectURL(blob);
+    return reportsUrls[key];
+  }
+
   function persistUnlock(notes, persist) {
     var notesPayload = JSON.stringify(notes || emptyNotes());
     try {
@@ -224,6 +538,7 @@
       storageRemove(localStorage, NOTES_KEY);
       clearLegacyRose(localStorage);
     }
+    persistReportsReady(persist);
     try {
       document.documentElement.classList.add("is-signed-in");
     } catch (err) {
@@ -239,6 +554,10 @@
     storageRemove(localStorage, ADMIN_KEY);
     storageRemove(localStorage, NOTES_KEY);
     clearLegacyRose(localStorage);
+    clearReportsReady();
+    resetReportsMemory();
+    reportsHydratePromise = null;
+    clearReportsIdb();
     try {
       document.documentElement.classList.remove("is-signed-in");
     } catch (err) {
@@ -249,6 +568,7 @@
 
   function forgetNotesEnvelope() {
     notesEnvelopePromise = null;
+    reportsEnvelopePromise = null;
   }
 
   function isUnconfiguredError(err) {
@@ -283,6 +603,8 @@
       if (!userOk || !decryptOk) {
         return { ok: false };
       }
+      await cacheManyaReports(password);
+      reportsHydratePromise = Promise.resolve();
       persistUnlock(notes, persist);
       return { ok: true, notes: notes };
     } catch (err) {
@@ -312,6 +634,8 @@
     signInHandler = typeof fn === "function" ? fn : null;
   }
 
+  ensureReportsHydrated();
+
   global.SiteAdmin = {
     ADMIN_KEY: ADMIN_KEY,
     isConfigured: function () {
@@ -323,6 +647,12 @@
     tryUnlock: tryUnlock,
     onChange: onChange,
     requestSignIn: requestSignIn,
-    setSignInHandler: setSignInHandler
+    setSignInHandler: setSignInHandler,
+    getManyaReportBlob: getManyaReportBlob,
+    getManyaReportUrl: getManyaReportUrl,
+    getManyaReportMeta: getManyaReportMeta,
+    hasManyaReports: hasManyaReports,
+    needsManyaReportsUnlock: needsManyaReportsUnlock,
+    awaitReportsReady: ensureReportsHydrated
   };
 })(window);

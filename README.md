@@ -14,7 +14,7 @@ Sign in (username + password) unlocks a site-wide session. After a successful lo
 - [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)
 - [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
-- [Manya](/manya/) — private family hub; [School](/manya/school/), [report cards](/manya/school/reports/) (age-cartoon cards, Drive links, PDF extracts in `_data/manya_reports.yml`), and [SAT / PSAT](/manya/school/sat-psat/) (titles and dates only; no scores)
+- [Manya](/manya/) — private family hub; [School](/manya/school/), [report cards](/manya/school/reports/) (age-cartoon cards; PDFs open in a page viewer from an encrypted pack keyed by Drive file ids in `_data/manya_reports.yml`), and [SAT / PSAT](/manya/school/sat-psat/) (titles and dates only; no scores)
 
 Direct URLs to those private pages show a sign-in prompt when locked. Public visitors never see another browser’s local travel data.
 
@@ -22,7 +22,7 @@ Resume stays public.
 
 ## Auth
 
-The gate is client-side for static GitHub Pages. `assets/js/site-admin.js` verifies a salted PBKDF2-SHA256 username digest and decrypts `assets/notes.enc.json` with PBKDF2-SHA256 / AES-GCM. The repo stores only the salted verifier and ciphertext — not a username, password, or plaintext notes. One successful login unlocks admin, private nav, and Notes. Session state lives in `sessionStorage`, or `localStorage` if “Stay signed in on this device” is checked. Sign out clears both.
+The gate is client-side for static GitHub Pages. `assets/js/site-admin.js` verifies a salted PBKDF2-SHA256 username digest and decrypts `assets/notes.enc.json` with PBKDF2-SHA256 / AES-GCM. The same password also decrypts `assets/manya/reports.enc.json` (no `user` verifier on that envelope). Notes stay in `sessionStorage` / `localStorage`; report PDFs are stored only in IndexedDB and are cleared on sign-out. The repo stores ciphertext — not a username, password, plaintext notes, or raw PDFs. One successful login unlocks admin, private nav, Notes, and the report viewer.
 
 Travel ships an empty visited-country list; visit flags stay in the browser. Bucket-list items carry a `category` (`wonders` or `heights`) and a `completed` flag in `_data/bucket.yml`. The page splits those into Collected / Still ahead bands and renders Done/Open seals as non-interactive marks — do not toggle them on the site. Do not commit a private travel list or a plaintext vault.
 
@@ -36,6 +36,18 @@ NOTES_PASSWORD='…' node scripts/encrypt-notes.mjs /path/to/vault
 ```
 
 That writes `assets/notes.enc.json`. The publisher skips finance paths (`20-Personal/Finance` and any folder named `Finance` / `finance`), `Private/`, `_staging/`, `.obsidian/`, `.trash/`, `prompts/` (agent-prompt packs) and `*.prompt.md`, `*.secret.md`, `*.base`, workspace/cache junk, and binary/canvas files. Site policy: no finance content on this site, even behind login. The first ship uses a small demo corpus in that encrypted pack; a real vault sync can come later.
+
+## Publishing Manya report cards
+
+Do not commit plaintext PDFs. Keep Drive as the source of truth, then encrypt a local folder of the same files. Ids must match `file_id` in `_data/manya_reports.yml`.
+
+```bash
+NOTES_PASSWORD='…' node scripts/encrypt-manya-reports.mjs /path/to/pdf-folder
+NOTES_PASSWORD='…' node scripts/encrypt-manya-reports.mjs /path/to/pdf-folder --map map.json
+node scripts/encrypt-manya-reports.mjs --list /path/to/pdf-folder --map map.json
+```
+
+`map.json` is `filename → Drive file id`, or `{ "reports": [ { "id", "filename", "title" } ] }`. A `map.json` / `manifest.json` in the folder is picked up automatically. That writes `assets/manya/reports.enc.json` (ciphertext only, no login `user` field).
 
 ## Local preview
 

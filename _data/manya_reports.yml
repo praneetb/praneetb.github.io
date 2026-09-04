@@ -1,6 +1,7 @@
 # Drive file ids, card labels, and short PDF extracts.
-# Report-card PDFs stay in Google Drive. Do not commit PDF bytes.
-# Summaries are text-only (school, year, extract) and are easy to replace.
+# file_id is the stable key into the encrypted on-site pack
+# (assets/manya/reports.enc.json). Drive remains the archive / source of truth.
+# Do not commit plaintext PDF bytes. Summaries are text-only and easy to replace.
 
 items:
   - title: Kindergarten
