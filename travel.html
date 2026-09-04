@@ -22,9 +22,22 @@ extra_js:
 <script src="https://cdn.jsdelivr.net/npm/globe.gl@2.41.4/dist/globe.gl.min.js"></script>
 
 <div class="travel-cockpit">
+  <aside class="travel-inspect" aria-label="Selected country">
+    <p class="travel-stats" id="travel-stats">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M3 12h18M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9z"></path>
+      </svg>
+      <span id="travel-stats-text">0 countries</span>
+    </p>
+    <article class="travel-selected is-empty" id="travel-selected">
+      <p class="travel-selected-empty">Pick a country.</p>
+    </article>
+  </aside>
+
   <section class="travel-globe-stage" aria-label="Interactive globe">
     <div id="travel-globe" class="travel-globe" role="img" aria-label="Earth. Drag to rotate, scroll to zoom."></div>
-    <p class="travel-globe-caption">☝️ Drag to spin • click a country to fly</p>
+    <p class="travel-globe-caption">☝️ Drag to spin · click to fly</p>
   </section>
 
   <aside class="travel-rail" aria-labelledby="travel-visited-heading">
