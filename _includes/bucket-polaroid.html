@@ -1,0 +1,42 @@
+{% assign polaroid = include.item %}
+{% assign polaroid_caption = polaroid.caption | default: polaroid.title %}
+{% assign polaroid_tilt = polaroid.tilt | default: 0 %}
+<li
+  class="bucket-polaroid{% if polaroid.completed %} is-done{% endif %}{% if include.taped %} is-taped{% endif %}"
+  data-bucket-id="{{ polaroid.id }}"
+  data-category="{{ polaroid.category }}"
+  style="--tilt: {{ polaroid_tilt }}deg">
+  <figure class="bucket-polaroid-frame">
+    {% if include.taped %}
+    <span class="bucket-tape" aria-hidden="true"></span>
+    {% endif %}
+    <span class="bucket-polaroid-photo">
+      <img
+        src="{{ polaroid.photo | relative_url }}"
+        alt="{{ polaroid.title }}{% if polaroid.place %}, {{ polaroid.place }}{% endif %}"
+        width="640"
+        height="640"
+        loading="lazy">
+      <span
+        class="bucket-seal{% if polaroid.completed %} is-done{% else %} is-open{% endif %}"
+        role="img"
+        aria-label="{% if polaroid.completed %}Completed{% else %}Not completed{% endif %}">
+        {% if polaroid.completed %}
+        <span class="bucket-seal-check" aria-hidden="true"></span>
+        <span class="bucket-seal-text">Done</span>
+        {% else %}
+        <span class="bucket-seal-text">Open</span>
+        {% endif %}
+      </span>
+    </span>
+    <figcaption class="bucket-polaroid-caption">
+      <span class="bucket-polaroid-title">{{ polaroid_caption }}</span>
+      {% if polaroid.note %}
+      <span class="bucket-polaroid-note">{{ polaroid.note }}</span>
+      {% endif %}
+    </figcaption>
+    {% if polaroid.credit %}
+    <span class="visually-hidden">Photo: {{ polaroid.credit }}</span>
+    {% endif %}
+  </figure>
+</li>

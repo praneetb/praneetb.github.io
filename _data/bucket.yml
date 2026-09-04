@@ -1,60 +1,89 @@
 # Bucket list catalog and completion.
 # Completion is committed here and rendered read-only on the page.
 # Do not toggle checks in the browser — update this file when asked.
+#
+# category: wonders | heights
+# completed: true items render in the Collected band; false in Still ahead.
+# The same category title can appear in both bands.
 
 items:
   - id: great-wall
     title: Great Wall of China
+    category: wonders
     place: China
+    caption: Great Wall of China
     photo: /assets/images/bucket/great-wall.jpg
     credit: Severin.stalder / Wikimedia Commons, CC BY-SA 3.0
+    tilt: 2.2
     completed: false
 
   - id: petra
     title: Petra
+    category: wonders
     place: Jordan
+    caption: Petra
     photo: /assets/images/bucket/petra.jpg
     credit: Graham Racher / Wikimedia Commons, CC BY-SA 2.0
+    tilt: -2.8
     completed: false
 
   - id: christ-redeemer
     title: Christ the Redeemer
+    category: wonders
     place: Rio de Janeiro, Brazil
+    caption: Christ the Redeemer
     photo: /assets/images/bucket/christ-redeemer.jpg
     credit: Nico Kaiser / Wikimedia Commons, CC BY 2.0
+    tilt: 1.6
     completed: false
 
   - id: machu-picchu
     title: Machu Picchu
-    place: Peru · hike still ahead
+    category: wonders
+    place: Peru
+    caption: Machu Picchu
+    note: hike still ahead
     photo: /assets/images/bucket/machu-picchu.jpg
     credit: Martin St-Amant / Wikimedia Commons, CC BY-SA 3.0
+    tilt: -1.4
     completed: false
 
   - id: chichen-itza
     title: Chichén Itzá
+    category: wonders
     place: Mexico
+    caption: Chichen Itza
     photo: /assets/images/bucket/chichen-itza.jpg
     credit: Daniel Schwen / Wikimedia Commons, CC BY-SA 4.0
+    tilt: 3.1
     completed: false
 
   - id: colosseum
     title: Roman Colosseum
+    category: wonders
     place: Italy
+    caption: Colosseum
     photo: /assets/images/bucket/colosseum.jpg
     credit: FeaturedPics / Wikimedia Commons, CC BY-SA 4.0
+    tilt: -2.2
     completed: false
 
   - id: taj-mahal
     title: Taj Mahal
+    category: wonders
     place: India
+    caption: Taj Mahal
     photo: /assets/images/bucket/taj-mahal.jpg
     credit: Yann / Wikimedia Commons, CC BY-SA 3.0
+    tilt: 1.8
     completed: false
 
   - id: half-dome
     title: Half Dome
+    category: heights
     place: Yosemite Valley, California
+    caption: Half Dome · Yosemite
     photo: /assets/images/bucket/half-dome.jpg
     credit: Av9 / Wikimedia Commons, public domain
+    tilt: -3.2
     completed: true
