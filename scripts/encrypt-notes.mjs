@@ -8,8 +8,8 @@
  * Writes assets/notes.enc.json (ciphertext only). Never pass a password as a
  * committed flag or check the vault into this repo.
  *
- * Site policy: no finance content on this site except the existing Rose
- * ledger. The publisher must skip finance paths even for a private pack.
+ * Site policy: no finance content on this site. The publisher must skip
+ * finance paths even for a private pack.
  *
  * Skipped:
  *   - any folder named Finance / finance, including 20-Personal/Finance
@@ -277,6 +277,14 @@ async function main() {
     usage();
   }
   const envelope = encryptJson(password, payload);
+  try {
+    const existing = JSON.parse(await fs.readFile(outfile, "utf8"));
+    if (existing && existing.user) {
+      envelope.user = existing.user;
+    }
+  } catch (err) {
+    // First publish can omit the username verifier; site-admin.js treats that as unconfigured.
+  }
   await fs.mkdir(path.dirname(outfile), { recursive: true });
   await fs.writeFile(outfile, JSON.stringify(envelope));
   console.log(
