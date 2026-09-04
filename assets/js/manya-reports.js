@@ -170,12 +170,23 @@
       return;
     }
     if (!blob) {
-      if (gate.needsManyaReportsUnlock && gate.needsManyaReportsUnlock()) {
-        setStatus("Sign in again to decrypt this report on this device.", "reauth");
+      var unlocked = typeof gate.isUnlocked === "function" && gate.isUnlocked();
+      var missingForId = false;
+      if (typeof gate.needsManyaReport === "function") {
+        missingForId = await gate.needsManyaReport(id);
+      }
+      if (pendingId !== id) {
         return;
       }
-      if (gate.hasManyaReports && gate.hasManyaReports()) {
-        setStatus("This report is not in the encrypted pack.", "error");
+      // Stale sessions can have other report blobs (school cards) while a
+      // later pack id (SAT/PSAT) is missing. Always ask to sign in again —
+      // do not claim the id was never published.
+      if (
+        unlocked ||
+        missingForId ||
+        (typeof gate.needsManyaReportsUnlock === "function" && gate.needsManyaReportsUnlock())
+      ) {
+        setStatus("Sign in again to decrypt this report on this device.", "reauth");
         return;
       }
       setStatus("Reports are not available on this site yet.", "error");
