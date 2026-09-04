@@ -6,7 +6,8 @@
     { path: "/travel/", label: "Travel", match: /\/travel\/?$/ },
     { path: "/media/", label: "Media", match: /\/media\/?$/ },
     { path: "/bucket-list/", label: "Bucket list", match: /\/bucket(-list)?\/?$/ },
-    { path: "/notes/", label: "Notes", match: /\/notes\/?$/ }
+    { path: "/notes/", label: "Notes", match: /\/notes\/?$/ },
+    { path: "/manya/", label: "Manya", match: /\/manya(\/|$)/ }
   ];
 
   function el(id) {
