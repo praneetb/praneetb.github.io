@@ -371,7 +371,7 @@ body:has(.page-bar) .welcome-strip {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 1.4rem 0.6rem 1.6rem;
 }
 
@@ -379,8 +379,21 @@ body:has(.page-bar) .welcome-strip {
   position: relative;
   display: grid;
   place-items: end center;
-  width: 7.4rem;
-  height: 14rem;
+  width: 8.2rem;
+  height: 15rem;
+}
+
+.bar-glass-stage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--whiskey-gold) 28%, transparent), transparent 70%);
+  transform: translateX(-50%);
+  pointer-events: none;
 }
 
 .bar-glass {
@@ -399,30 +412,32 @@ body:has(.page-bar) .welcome-strip {
 }
 
 .bar-glass-tumbler {
-  width: 3.1rem;
-  height: 3.6rem;
+  width: 3.85rem;
+  height: 4.35rem;
 }
 
 .bar-glass-wine {
   width: 3.4rem;
-  height: 7.4rem;
+  height: 8.2rem;
 }
 
 .bar-glass-pint {
-  width: 3.3rem;
-  height: 5.4rem;
+  width: 3.65rem;
+  height: 6.1rem;
 }
 
 .bar-glass::before {
   content: "";
   position: absolute;
   inset: 0;
-  border: 1.6px solid rgba(240, 230, 210, 0.78);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  border: 2px solid rgba(247, 236, 214, 0.92);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03));
+  box-shadow: 0 0 16px rgba(232, 168, 72, 0.18), inset 0 0 14px rgba(255, 255, 255, 0.08);
 }
 
 .bar-glass-tumbler::before {
-  border-radius: 0.18rem 0.18rem 0.35rem 0.35rem;
+  border-radius: 0.22rem 0.22rem 0.48rem 0.48rem;
+  border-bottom-width: 5px;
 }
 
 .bar-glass-wine::before {
@@ -529,10 +544,10 @@ body:has(.page-bar) .welcome-strip {
 
 .bar-glass-caption {
   margin: 0.7rem 0 0;
-  max-width: 8.6rem;
-  color: color-mix(in srgb, var(--whiskey-ink) 68%, transparent);
+  max-width: 9.2rem;
+  color: color-mix(in srgb, var(--whiskey-ink) 82%, transparent);
   font-family: var(--font-display);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   line-height: 1.35;
   text-align: center;
 }
