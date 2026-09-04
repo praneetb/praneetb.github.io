@@ -22,10 +22,19 @@ extra_css:
 <h1 class="manya-title">School</h1>
 <p class="lede">The record of each year, kept in Google Drive.</p>
 
-<a class="manya-door" href="{{ '/manya/school/reports/' | relative_url }}">
-  <span class="manya-door-copy">
-    <span class="manya-door-name">Reports</span>
-    <span class="manya-door-sub">Open each report card in Drive</span>
-  </span>
-  <span class="manya-door-arrow" aria-hidden="true">→</span>
-</a>
+<div class="manya-doors">
+  <a class="manya-door" href="{{ '/manya/school/reports/' | relative_url }}">
+    <span class="manya-door-copy">
+      <span class="manya-door-name">Reports</span>
+      <span class="manya-door-sub">Report cards, from kindergarten forward</span>
+    </span>
+    <span class="manya-door-arrow" aria-hidden="true">→</span>
+  </a>
+  <a class="manya-door" href="{{ '/manya/school/sat-psat/' | relative_url }}">
+    <span class="manya-door-copy">
+      <span class="manya-door-name">SAT / PSAT</span>
+      <span class="manya-door-sub">Score reports, opened in Drive</span>
+    </span>
+    <span class="manya-door-arrow" aria-hidden="true">→</span>
+  </a>
+</div>

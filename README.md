@@ -13,7 +13,7 @@ Sign in (username + password) unlocks a site-wide session. After a successful lo
 - [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
 - [Bucket list](/bucket-list/) — New7Wonders plus Half Dome; checks are read-only and come from `_data/bucket.yml`
 - [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
-- [Manya](/manya/) — private family hub; [School](/manya/school/) and [report cards](/manya/school/reports/) link out to Google Drive (ids only in the repo)
+- [Manya](/manya/) — private family hub; [School](/manya/school/), [report cards](/manya/school/reports/), and [SAT / PSAT](/manya/school/sat-psat/) link out to Google Drive (ids and labels only; no scores)
 
 Direct URLs to those private pages show a sign-in prompt when locked. Public visitors never see another browser’s local travel data.
 

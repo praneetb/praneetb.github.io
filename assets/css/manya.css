@@ -36,12 +36,18 @@
   background: var(--accent);
 }
 
+.manya-doors {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.8rem;
+}
+
 .manya-door {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 1rem;
-  margin-top: 1.8rem;
+  margin-top: 0;
   padding: 1.25rem 1.3rem;
   border: 1px solid var(--rule);
   border-radius: 0.85rem;

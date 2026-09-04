@@ -1,0 +1,17 @@
+# Drive file ids and display labels only.
+# SAT/PSAT PDFs stay in Google Drive. Do not commit PDF bytes or scores.
+# Folder id: 1-wS0Z-1QVJ1vBAMZ7tCpUKvIgUw9_CoH
+
+items:
+  - title: PSAT
+    note: October 2021 · 9th Grade
+    file_id: 13dqAewc10nZca9ZQSehfrrbPoupPlJCN
+  - title: PSAT
+    note: October 2022 · 10th Grade
+    file_id: 1-zkOgTeI4ua_kxMSaZkCYah-5kZZrt7T
+  - title: Digital PSAT/NMSQT
+    note: Fall 2023 · 11th Grade
+    file_id: 13uZQTIgXC2DF6GPvaZD_ddRSRrH_KZ9p
+  - title: SAT
+    note: November 2023
+    file_id: 14d0FmC6aNjHQUUXna2qxzaBrXP7PGUEt
