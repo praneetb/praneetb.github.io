@@ -1,0 +1,54 @@
+---
+layout: default
+title: Notes
+nav: notes
+permalink: /notes/
+private: true
+sitemap: false
+robots: noindex, nofollow
+hide_footer: true
+description: Private read-only vault published from Obsidian.
+extra_css:
+  - /assets/css/notes.css
+extra_js:
+  - /assets/js/notes.js
+---
+
+<div class="notes-app" id="notes-app">
+  <aside class="notes-vault" aria-label="Vault">
+    <p class="notes-readonly">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 11V8a4 4 0 0 1 8 0v3"/><rect x="6" y="11" width="12" height="9" rx="1.6"/></svg>
+      Read-only · published from Obsidian
+    </p>
+    <label class="notes-search">
+      <span class="visually-hidden">Search notes</span>
+      <input id="notes-search" type="search" placeholder="Search notes…" autocomplete="off">
+    </label>
+    <p class="notes-kicker">Vault</p>
+    <div id="notes-tree" class="notes-tree"></div>
+    <p id="notes-count" class="notes-count"></p>
+  </aside>
+
+  <article class="notes-stage" aria-label="Note preview">
+    <div class="notes-mode" aria-hidden="true">
+      <span class="is-active">Preview</span>
+    </div>
+    <div id="notes-empty" class="notes-empty" hidden>
+      <h1>No note selected</h1>
+      <p>Choose a note from the vault.</p>
+    </div>
+    <div id="notes-doc" hidden>
+      <h1 id="notes-title"></h1>
+      <p id="notes-meta" class="notes-meta"></p>
+      <div id="notes-body" class="notes-body"></div>
+      <p class="notes-end">End of note</p>
+    </div>
+  </article>
+
+  <aside class="notes-links" aria-label="Links">
+    <p class="notes-kicker">Outgoing</p>
+    <div id="notes-outgoing"></div>
+    <p class="notes-kicker">Backlinks</p>
+    <div id="notes-backlinks"></div>
+  </aside>
+</div>

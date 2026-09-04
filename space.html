@@ -7,7 +7,7 @@ private: true
 sitemap: false
 robots: noindex, nofollow
 hide_footer: true
-description: Private hub for travel, song, the bucket list, and Rose.
+description: Private hub for travel, song, the bucket list, Rose, and notes.
 extra_css:
   - /assets/css/space.css
 ---
@@ -69,6 +69,21 @@ extra_css:
     <span class="space-copy">
       <span class="space-name">Rose</span>
       <span class="space-sub">Private ledger</span>
+    </span>
+    <span class="space-arrow" aria-hidden="true">→</span>
+  </a>
+
+  <a class="space-tile" href="{{ '/notes/' | relative_url }}">
+    <span class="space-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M7 3.8h8.2L19 7.6V20.2H7z"/>
+        <path d="M15.2 3.8V7.6H19"/>
+        <path d="M9.4 11.2h7.2M9.4 14.4h7.2M9.4 17.6h4.6"/>
+      </svg>
+    </span>
+    <span class="space-copy">
+      <span class="space-name">Notes</span>
+      <span class="space-sub">Private reading room</span>
     </span>
     <span class="space-arrow" aria-hidden="true">→</span>
   </a>

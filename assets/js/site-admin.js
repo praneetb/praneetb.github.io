@@ -4,9 +4,11 @@
   const ADMIN_KEY = "site.admin";
   const ROSE_KEY = "rose.gate.unlocked";
   const LEDGER_KEY = "rose.ledger";
+  const NOTES_KEY = "site.notes";
 
   var listeners = [];
   var envelopePromise = null;
+  var notesEnvelopePromise = null;
   var signInHandler = null;
 
   function notify(unlocked) {
@@ -19,16 +21,16 @@
     });
   }
 
-  function envelopeUrl() {
+  function assetUrl(name) {
     var scripts = document.getElementsByTagName("script");
     var i;
     for (i = scripts.length - 1; i >= 0; i -= 1) {
       var src = scripts[i].src || "";
       if (src.indexOf("site-admin.js") !== -1) {
-        return new URL("../rose.enc.json", src).href;
+        return new URL("../" + name, src).href;
       }
     }
-    return "/assets/rose.enc.json";
+    return "/assets/" + name;
   }
 
   function b64ToBytes(value) {
@@ -57,16 +59,29 @@
     return String(value || "").normalize("NFKC").trim().toLowerCase();
   }
 
+  function loadJson(url) {
+    return fetch(url, { credentials: "same-origin" }).then(function (response) {
+      if (!response.ok) {
+        throw new Error("missing");
+      }
+      return response.json();
+    });
+  }
+
   function loadEnvelope() {
     if (!envelopePromise) {
-      envelopePromise = fetch(envelopeUrl(), { credentials: "same-origin" }).then(function (response) {
-        if (!response.ok) {
-          throw new Error("missing");
-        }
-        return response.json();
-      });
+      envelopePromise = loadJson(assetUrl("rose.enc.json"));
     }
     return envelopePromise;
+  }
+
+  function loadNotesEnvelope() {
+    if (!notesEnvelopePromise) {
+      notesEnvelopePromise = loadJson(assetUrl("notes.enc.json")).catch(function () {
+        return null;
+      });
+    }
+    return notesEnvelopePromise;
   }
 
   async function deriveAesKey(password, envelope) {
@@ -119,8 +134,7 @@
     return timingSafeEqual(new Uint8Array(bits), expected);
   }
 
-  async function decryptEnvelope(password) {
-    var envelope = await loadEnvelope();
+  async function decryptEnvelope(password, envelope) {
     if (!envelope || envelope.kdf !== "PBKDF2-SHA256" || !envelope.iter || !envelope.salt || !envelope.iv || !envelope.ct) {
       var err = new Error("unconfigured");
       err.name = "UnconfiguredError";
@@ -131,6 +145,26 @@
     var ct = b64ToBytes(envelope.ct);
     var plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, ct);
     return JSON.parse(new TextDecoder().decode(plain));
+  }
+
+  async function decryptRose(password) {
+    return decryptEnvelope(password, await loadEnvelope());
+  }
+
+  function emptyNotes() {
+    return { v: 1, source: "obsidian", readonly: true, folders: [], collapsed: [], notes: [] };
+  }
+
+  async function decryptNotes(password) {
+    var envelope = await loadNotesEnvelope();
+    if (!envelope) {
+      return emptyNotes();
+    }
+    var pack = await decryptEnvelope(password, envelope);
+    if (!pack || !Array.isArray(pack.notes)) {
+      return emptyNotes();
+    }
+    return pack;
   }
 
   function storageGet(key) {
@@ -169,12 +203,30 @@
     }
   }
 
-  function persistUnlock(ledger, persist) {
+  function getNotes() {
+    var raw = storageGet(NOTES_KEY);
+    if (!raw) {
+      return emptyNotes();
+    }
+    try {
+      var pack = JSON.parse(raw);
+      if (!pack || !Array.isArray(pack.notes)) {
+        return emptyNotes();
+      }
+      return pack;
+    } catch (err) {
+      return emptyNotes();
+    }
+  }
+
+  function persistUnlock(ledger, notes, persist) {
     var payload = JSON.stringify(ledger);
+    var notesPayload = JSON.stringify(notes || emptyNotes());
     try {
       storageSet(sessionStorage, ADMIN_KEY, ADMIN_KEY);
       storageSet(sessionStorage, ROSE_KEY, ROSE_KEY);
       storageSet(sessionStorage, LEDGER_KEY, payload);
+      storageSet(sessionStorage, NOTES_KEY, notesPayload);
     } catch (err) {
       try {
         storageSet(sessionStorage, ADMIN_KEY, ADMIN_KEY);
@@ -188,6 +240,7 @@
         storageSet(localStorage, ADMIN_KEY, ADMIN_KEY);
         storageSet(localStorage, ROSE_KEY, ROSE_KEY);
         storageSet(localStorage, LEDGER_KEY, payload);
+        storageSet(localStorage, NOTES_KEY, notesPayload);
       } catch (err) {
         // Session still works if persistent storage is blocked.
       }
@@ -195,6 +248,7 @@
       storageRemove(localStorage, ADMIN_KEY);
       storageRemove(localStorage, ROSE_KEY);
       storageRemove(localStorage, LEDGER_KEY);
+      storageRemove(localStorage, NOTES_KEY);
     }
     try {
       document.documentElement.classList.add("is-signed-in");
@@ -208,9 +262,11 @@
     storageRemove(sessionStorage, ADMIN_KEY);
     storageRemove(sessionStorage, ROSE_KEY);
     storageRemove(sessionStorage, LEDGER_KEY);
+    storageRemove(sessionStorage, NOTES_KEY);
     storageRemove(localStorage, ADMIN_KEY);
     storageRemove(localStorage, ROSE_KEY);
     storageRemove(localStorage, LEDGER_KEY);
+    storageRemove(localStorage, NOTES_KEY);
     try {
       document.documentElement.classList.remove("is-signed-in");
     } catch (err) {
@@ -232,9 +288,10 @@
       }
       var userOk = await verifyUsername(username, envelope);
       var ledger = null;
+      var notes = emptyNotes();
       var decryptOk = false;
       try {
-        ledger = await decryptEnvelope(password);
+        ledger = await decryptRose(password);
         decryptOk = !!(ledger && typeof ledger === "object");
       } catch (err) {
         if (err && (err.name === "UnconfiguredError" || err.message === "missing")) {
@@ -245,8 +302,13 @@
       if (!userOk || !decryptOk) {
         return { ok: false };
       }
-      persistUnlock(ledger, persist);
-      return { ok: true, ledger: ledger };
+      try {
+        notes = await decryptNotes(password);
+      } catch (err) {
+        notes = emptyNotes();
+      }
+      persistUnlock(ledger, notes, persist);
+      return { ok: true, ledger: ledger, notes: notes };
     } catch (err) {
       if (err && (err.name === "UnconfiguredError" || err.message === "missing")) {
         return { ok: false, unconfigured: true };
@@ -280,6 +342,7 @@
     },
     isUnlocked: isUnlocked,
     getLedger: getLedger,
+    getNotes: getNotes,
     lock: lock,
     tryUnlock: tryUnlock,
     onChange: onChange,

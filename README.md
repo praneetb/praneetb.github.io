@@ -13,6 +13,7 @@ Sign in (username + password) unlocks a site-wide session. After a successful lo
 - [Song](/song/) — today’s pick; favorites stay in this browser
 - [Bucket list](/bucket-list/) — things to do (`_data/bucket.yml`)
 - [Rose](/rose/) — private hours ledger (ciphertext only in the repo)
+- [Notes](/notes/) — read-only vault reader (ciphertext only in the repo)
 
 Direct URLs to those private pages show a sign-in prompt when locked. Public visitors never see another browser’s local travel or song data.
 
@@ -20,9 +21,19 @@ Resume stays public.
 
 ## Auth
 
-The gate is client-side for static GitHub Pages. `assets/js/site-admin.js` verifies a salted PBKDF2-SHA256 username digest and decrypts `assets/rose.enc.json` with PBKDF2-SHA256 / AES-GCM. The repo stores only the salted verifier and ciphertext — not a username or password. One successful login unlocks admin, private nav, and Rose. Session state lives in `sessionStorage`, or `localStorage` if “Stay signed in on this device” is checked. Sign out clears both.
+The gate is client-side for static GitHub Pages. `assets/js/site-admin.js` verifies a salted PBKDF2-SHA256 username digest and decrypts `assets/rose.enc.json` and `assets/notes.enc.json` with PBKDF2-SHA256 / AES-GCM. The repo stores only the salted verifier and ciphertext — not a username, password, or plaintext notes. One successful login unlocks admin, private nav, Rose, and Notes. Session state lives in `sessionStorage`, or `localStorage` if “Stay signed in on this device” is checked. Sign out clears both.
 
-Travel and the bucket list ship empty. Do not invent countries or items, and do not commit a private travel list or song favorites.
+Travel and the bucket list ship empty. Do not invent countries or items, and do not commit a private travel list, song favorites, or a plaintext vault.
+
+## Publishing notes
+
+Do not commit Markdown from a personal vault. Export from Obsidian, then encrypt:
+
+```bash
+NOTES_PASSWORD='…' node scripts/encrypt-notes.mjs /path/to/vault
+```
+
+That writes `assets/notes.enc.json`. The script skips any `Private/` folder segment, `*.secret.md`, `.obsidian/`, `.trash/`, `*.base`, and workspace/cache junk. The first ship uses a small demo corpus in that encrypted pack so `/notes/` is usable after login.
 
 ## Local preview
 

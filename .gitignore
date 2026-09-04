@@ -6,3 +6,5 @@ _site
 _vendor
 vendor/bundle
 .bundle
+/vault
+*.secret.md
