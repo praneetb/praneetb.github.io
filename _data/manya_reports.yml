@@ -1,50 +1,150 @@
-# Drive file ids and display labels only.
-# Report-card PDFs stay in Google Drive. Do not commit PDF bytes or report text.
+# Drive file ids, card labels, and short PDF extracts.
+# Report-card PDFs stay in Google Drive. Do not commit PDF bytes.
+# Summaries are text-only (school, year, extract) and are easy to replace.
 
 items:
   - title: Kindergarten
     file_id: 12yz19PLHuu1dUKo9swM6smvPBpdCswXM
+    avatar: kg
+    school: Stratford Schools (Fremont Boulevard)
+    year: 2012–2013
+    summary: "Mastered letter/sound recognition and early reading levels; math counting and money skills largely Mastered by year end. Science Excellent; strong citizenship and focus. Teachers: wonderful year, great progress."
+
   - title: 1st Grade
     file_id: 13dD7xkHwqMUoeoClEuEeyo3OCAwR1DlI
+    avatar: "1"
+    school: Stratford Schools
+    year: 2013–2014
+    summary: "Consistently mid–high 90s across Grammar, Reading, Math, Science, History. Computer Science / PE / Spanish Excellent. Strong citizenship and work habits."
+
   - title: 2nd Grade
     file_id: 134kjCuZDPV-HQ8UwZb9r1Gtzp9hCBeqX
+    avatar: "2"
+    school: Stratford Schools
+    year: 2014–2015
+    summary: "High 90s in Grammar, Reading, Spelling, Math; Recitation improved sharply by third term."
+
   - title: 2nd Grade
     note: Report 2
     file_id: 13Nkij0rhzu6bIGJZfACM7StPME7D_1Zj
+    avatar: "2"
+    school: Stratford Schools
+    year: 2014–2015
+    summary: "Companion report. Excellent study skills; strong organization and cooperation."
+
   - title: 3rd Grade
     file_id: 13SzSuQb73f8TAyAjC4w43B02DyiAnEZM
+    avatar: "3"
+    school: Stratford Schools
+    year: 2015–2016
+    summary: "Continue Stratford pattern of high academic marks with Excellent/Satisfactory citizenship."
+
   - title: 3rd Grade
     note: Report 2
     file_id: 13035xyWDJyIL-Np7ahtoMIaCMWWlOpPg
+    avatar: "3"
+    school: Stratford Schools
+    year: 2015–2016
+    summary: "Companion qualitative report for the same Stratford year."
+
   - title: 4th Grade
     file_id: 12h6DDGYincI7Wu7ZXXDkDmL9l7QfZtSP
+    avatar: "4"
+    school: Stratford Schools
+    year: 2016–2017
+    summary: "Strong year-long academics at Stratford."
+
   - title: 4th Grade
     note: Report 2
     file_id: 13BWsDY7J3fUODnnGqC_NS_hVyZRvt6L_
+    avatar: "4"
+    school: Stratford Schools
+    year: 2016–2017
+    summary: "Companion qualitative report available as Report 2."
+
   - title: 5th Grade
     file_id: 13P5kw_ChNY7fGbL44MI0IgQzRVc70Nh_
+    avatar: "5"
+    school: Stratford Schools
+    year: 2017–2018
+    summary: "Grammar/Reading/Math/Writing mid–high 90s; Spelling ~98; History/Geography and Science strong. Computer Science Excellent; citizenship Excellent."
+
   - title: 5th Grade
     note: Report 2
     file_id: 13-IukhBGwIjVmaOtkfaOikq-Yp4xB7ED
+    avatar: "5"
+    school: Stratford Schools
+    year: 2017–2018
+    summary: "Companion qualitative report for the same Stratford year."
+
   - title: 6th Grade
     file_id: 13Pd-fDAjRiWk87dP5hw_AjW3tRyBE0q8
+    avatar: "6"
+    school: Stratford Schools (FRMS)
+    year: 2018–2019
+    summary: "Term GPAs ~4.0 / 3.96 / 4.0. A/A+ in Grammar, Literature, Pre-Algebra, History, Science, Spanish. Excellent citizenship and work habits in core classes."
+
   - title: 6th Grade
     note: Report card
     file_id: 12nWO7OWtPEWeH4IzOJYuiMx0hEu_RLRN
+    avatar: "6"
+    school: Stratford Schools (FRMS)
+    year: 2018–2019
+    summary: "Term GPAs ~4.0 / 3.96 / 4.0. A/A+ in Grammar, Literature, Pre-Algebra, History, Science, Spanish. Excellent citizenship and work habits in core classes."
+
   - title: 7th Grade
     file_id: 13dizjBHPTdsoSI0f3vN9VbPlAAo3RjhK
+    avatar: "7"
+    school: BASIS Independent Fremont Upper
+    year: 2019–2020
+    summary: "A’s across Algebra & Geometry II, Biology, Chemistry, English, Intro CS, Logic, Physics, Spanish I, U.S. History (finals mostly A/S)."
+
   - title: 8th Grade
     file_id: 13eoKj5HgBYZsLvS6WeDOlFlQJmXtyj8b
+    avatar: "8"
+    school: BASIS Independent Online
+    year: "2020–2021 (mid progress)"
+    summary: "Strong mid-year marks: Pre-Calculus AB A, Creative Writing A, Chemistry A, World History A, English A; Biology A-/B; Physics climbing to A."
+
   - title: 9th Grade
     file_id: 13gnLHMiimOudFPVQFzmIkWgavV6TGXPg
+    avatar: "9"
+    school: BASIS Independent Fremont Upper
+    year: 2021–2022
+    summary: "Student final average 97. AP Calculus AB A/100; AP Physics 1 A-; AP Gov A; Honors English A; Intro Programming A; Spanish II A."
+
   - title: 10th Grade
     note: BASIS
     file_id: 1-fIL53x1wCnqiRdpRtycxKN-Veatx57Y
+    avatar: "10"
+    school: BASIS Independent Fremont Upper
+    year: 2022–2023
+    summary: "Student final average 97. AP Calc BC A/99, AP CSA A/96, AP Physics 2 A/95, APUSH A/98, Honors Bio A/97, Honors English A-/92. Geometry Challenge Test passed."
+
   - title: 10th Grade
     file_id: 16QHZgRfjqacgXG_7-FcmWFiF-7jPpw5Z
+    avatar: "10"
+    school: BASIS Independent Fremont Upper
+    year: 2022–2023
+    summary: "Same year report as BASIS 10th — final average 97; AP-heavy schedule with Geometry Challenge Test passed."
+
   - title: 11th Grade
     file_id: 16PY5YjhaqvW-jXsJ6gu6wd4-QqJKdNaK
+    avatar: "11"
+    school: BASIS Independent Fremont Upper
+    year: 2023–2024
+    summary: "Student final average 95. AP Lang A/95, AP Physics C A-/91, AP World A-/91, Honors Chem A/95, Post-AP Linear Algebra A/100, Spanish IV A/100. Geometry proficiency passed."
+
   - title: 12th Grade
     file_id: 1loQQzGwKgpZqAcfyeUbvRS9LeWG5Jen9
+    avatar: "12"
+    school: BASIS Independent Fremont Upper
+    year: "2024–2025 (Mar report)"
+    summary: "Student final average 98. Capstones: Author Study A/96, Data Structures A/96, Modern Cosmology A/100, Multivariable/Vector Calculus A/100."
+
   - title: Transcript 2022–2023
     file_id: 11DRc0PLIbSj6qi6HddbbGYS6iK_JiO_W
+    avatar: "10"
+    school: BASIS Independent Fremont Upper
+    year: Printed 2023-09-28
+    summary: "Official transcript through Grade 10: cumulative GPA 3.98, weighted 4.67, 20.50 credits. AP/Honors path; Geometry Proficiency Exam passed."
