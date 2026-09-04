@@ -18,6 +18,7 @@
  *
  * Skipped:
  *   - any folder named Finance / finance, including 20-Personal/Finance
+ *   - any folder named Archive / archive, including 90-Archive and N-Archive
  *   - Private/, _staging/, .obsidian/, .trash/
  *   - prompts/ (treated as agent-prompt packs) and *.prompt.md
  *   - _system/, _templates/, .claude/ (not shown on the web reader)
@@ -49,6 +50,8 @@ const SKIP_DIRS = new Set([
   "_templates",
   "private",
   "finance",
+  "archive",
+  "90-archive",
   "prompts"
 ]);
 
@@ -107,6 +110,9 @@ function blockedSegment(rel) {
   }
   for (i = 0; i < lower.length; i += 1) {
     if (SKIP_DIRS.has(lower[i])) {
+      return true;
+    }
+    if (/^\d+-archive$/.test(lower[i])) {
       return true;
     }
   }
@@ -243,7 +249,7 @@ async function collect(vault) {
       body: body.replace(/^\uFEFF/, "")
     });
   }
-  ["People", "Archive"].forEach(function (name) {
+  ["People"].forEach(function (name) {
     if (topNames.has(name) && !blockedSegment(name)) {
       folders.add(name);
     }
@@ -256,7 +262,7 @@ async function collect(vault) {
     folders: folderList,
     collapsed: folderList.filter(function (name) {
       var base = name.split("/").pop();
-      return base === "People" || base === "Archive";
+      return base === "People";
     }),
     notes: notes
   };
