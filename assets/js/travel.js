@@ -3,7 +3,7 @@
 
   var COUNTRY_KEY = "travel.countries.v1";
   var FLAG_CDN = "https://flagcdn.com/w80/";
-  var FLAG_CDN_LARGE = "https://flagcdn.com/w640/";
+  var FLAG_CDN_BADGE = "https://flagcdn.com/w40/";
   var CONTINENT_GROUPS = {
     Africa: "AO BF BI BJ BW CD CF CG CI CM CV DJ DZ EG EH ER ET GA GH GM GN GQ GW KE KM LR LS LY MA MG ML MR MU MW MZ NA NE NG RW SC SD SL SN SO SS ST SZ TD TG TN TZ UG ZA ZM ZW",
     Asia: "AE AF AM AZ BD BH BN BT CN CY GE ID IL IN IQ IR JO JP KG KH KP KR KW KZ LA LB LK MM MN MV MY NP OM PH PK QA SA SG SY TH TJ TL TM TR TW UZ VN YE",
@@ -163,8 +163,13 @@
     return FLAG_CDN + String(code).toLowerCase() + ".png";
   }
 
-  function flagUrlLarge(code) {
-    return FLAG_CDN_LARGE + String(code).toLowerCase() + ".png";
+  function flagBadgeUrl(code) {
+    return FLAG_CDN_BADGE + String(code).toLowerCase() + ".png";
+  }
+
+  function triviaFor(code) {
+    var table = window.COUNTRY_TRIVIA || {};
+    return table[String(code || "").toUpperCase()] || null;
   }
 
   var continentByCode = null;
@@ -190,6 +195,44 @@
   function iconSvg(paths) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' + paths + "</svg>";
   }
+
+  var TRIVIA_FIELDS = [
+    {
+      key: "capital",
+      label: "Capital",
+      icon: '<path d="M4.5 20.5h15"></path><path d="M6.5 20.5V9.5L12 5l5.5 4.5v11"></path><path d="M10 20.5v-5h4v5"></path><path d="M9.5 11.5h1M13.5 11.5h1M9.5 14.5h1M13.5 14.5h1"></path>'
+    },
+    {
+      key: "languages",
+      label: "Language",
+      icon: '<path d="M5.5 15.5l-2 4 4.2-1.4A7.2 7.2 0 1 0 5.5 15.5z"></path><path d="M8.8 12.2h6.4M12 9.4v6.2"></path>'
+    },
+    {
+      key: "currency",
+      label: "Currency",
+      icon: '<circle cx="12" cy="12" r="8"></circle><path d="M14.6 8.6c-.6-.5-1.4-.8-2.5-.8-2 0-3.3 1.1-3.3 2.6 0 3.6 6.4 1.4 6.4 4.2 0 1.5-1.4 2.6-3.4 2.6-1.2 0-2.2-.3-2.9-.9M12 6.8v1.4M12 16.8v1.4"></path>'
+    },
+    {
+      key: "population",
+      label: "Population",
+      icon: '<circle cx="9" cy="8.5" r="2.2"></circle><circle cx="15.2" cy="9.2" r="1.8"></circle><path d="M4.8 18.2c.4-2.8 2.2-4.4 4.4-4.4s4 1.6 4.4 4.4"></path><path d="M13.2 15.2c.7-1.4 1.8-2.2 3.2-2.2 2 0 3.4 1.3 3.8 3.4"></path>'
+    },
+    {
+      key: "area",
+      label: "Area",
+      icon: '<path d="M5 8.5l4.2-3 5.3 2.2L19 5.5v12.2l-4.5 2.3-5.3-2.2L5 19.8V8.5z"></path><path d="M9.2 5.5v12.2M14.5 7.7v12.3"></path>'
+    },
+    {
+      key: "funFact",
+      label: "Fun fact",
+      icon: '<path d="M9 18h6M10 21h4"></path><path d="M12 3.5a5.5 5.5 0 0 1 3.2 9.9c-.7.6-1.2 1.4-1.2 2.3h-4c0-.9-.5-1.7-1.2-2.3A5.5 5.5 0 0 1 12 3.5z"></path>'
+    },
+    {
+      key: "continent",
+      label: "Continent",
+      icon: '<circle cx="12" cy="12" r="8.2"></circle><path d="M3.8 12h16.4M12 3.8c2.4 2.3 3.6 5.2 3.6 8.2s-1.2 5.9-3.6 8.2c-2.4-2.3-3.6-5.2-3.6-8.2s1.2-5.9 3.6-8.2z"></path>'
+    }
+  ];
 
   function resolveCountry(name, code) {
     var iso = String(code || "").trim().toUpperCase();
@@ -480,6 +523,22 @@
     text.textContent = parts.join(" · ");
   }
 
+  function selectedOrdinal(entry) {
+    var list = visibleCountries().slice().sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    });
+    var index = -1;
+    list.forEach(function (item, i) {
+      if (item.id === entry.id) {
+        index = i;
+      }
+    });
+    return {
+      index: index + 1,
+      total: list.length
+    };
+  }
+
   function renderSelected() {
     var root = el("travel-selected");
     if (!root) {
@@ -497,51 +556,114 @@
     }
     root.classList.remove("is-empty");
 
-    var visual = document.createElement("div");
-    visual.className = "travel-selected-visual";
-    if (entry.code) {
-      var img = document.createElement("img");
-      img.src = flagUrlLarge(entry.code);
-      img.alt = "";
-      visual.appendChild(img);
-    } else {
-      visual.classList.add("is-plain");
-    }
-    root.appendChild(visual);
+    var ordinal = selectedOrdinal(entry);
+    var head = document.createElement("header");
+    head.className = "travel-selected-head";
+    var kicker = document.createElement("p");
+    kicker.className = "travel-selected-kicker";
+    kicker.textContent = "Destination overview";
+    var counter = document.createElement("p");
+    counter.className = "travel-selected-index";
+    counter.textContent = ordinal.index + " of " + ordinal.total;
+    head.appendChild(kicker);
+    head.appendChild(counter);
+    root.appendChild(head);
 
+    var identity = document.createElement("div");
+    identity.className = "travel-selected-identity";
+    if (entry.code) {
+      var flag = document.createElement("img");
+      flag.className = "travel-selected-flag";
+      var lower = String(entry.code).toLowerCase();
+      flag.src = flagBadgeUrl(entry.code);
+      flag.srcset = FLAG_CDN_BADGE + lower + ".png 1x, " + FLAG_CDN + lower + ".png 2x";
+      flag.alt = "";
+      identity.appendChild(flag);
+    }
     var copy = document.createElement("div");
     copy.className = "travel-selected-copy";
     var title = document.createElement("h2");
     title.textContent = entry.name;
     copy.appendChild(title);
-
     var visit = formatVisit(entry);
     if (visit) {
       var when = document.createElement("p");
-      when.className = "travel-selected-meta";
+      when.className = "travel-selected-visit";
       when.innerHTML = iconSvg('<rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M8 3.5v3.5M16 3.5v3.5M3.5 10h17"></path>') + "<span></span>";
-      when.querySelector("span").textContent = visit;
+      when.querySelector("span").textContent = "Visited " + visit;
       copy.appendChild(when);
     }
     if (entry.notes) {
       var notes = document.createElement("p");
-      notes.className = "travel-selected-meta";
-      notes.innerHTML = iconSvg('<path d="M12 21s7-6.2 7-11.2A7 7 0 0 0 5 9.8C5 14.8 12 21 12 21z"></path><circle cx="12" cy="10" r="2.2"></circle>') + "<span></span>";
-      notes.querySelector("span").textContent = entry.notes;
+      notes.className = "travel-selected-notes";
+      notes.textContent = entry.notes;
       copy.appendChild(notes);
     }
-    root.appendChild(copy);
+    identity.appendChild(copy);
+    root.appendChild(identity);
 
-    var loc = locationForCountry(entry);
-    if (loc) {
-      var fly = document.createElement("button");
-      fly.type = "button";
-      fly.className = "travel-fly-again";
-      fly.innerHTML = iconSvg('<path d="M3 12.2l18-8.2-5.4 16.2-4.2-6.2L3 12.2z"></path><path d="M10.8 13.8L21 4"></path>') + "<span>Fly again</span>";
-      fly.addEventListener("click", function () {
-        flyTo(loc.lat, loc.lng);
+    var trivia = triviaFor(entry.code);
+    var rows = [];
+    if (trivia) {
+      TRIVIA_FIELDS.forEach(function (field) {
+        var value = trivia[field.key];
+        if (value) {
+          rows.push({ field: field, value: String(value) });
+        }
       });
-      root.appendChild(fly);
+    }
+    if (rows.length) {
+      var rule = document.createElement("div");
+      rule.className = "travel-selected-rule";
+      rule.setAttribute("aria-hidden", "true");
+      root.appendChild(rule);
+
+      var section = document.createElement("section");
+      section.className = "travel-trivia";
+      var heading = document.createElement("h3");
+      heading.className = "travel-trivia-heading";
+      heading.textContent = "Did you know";
+      section.appendChild(heading);
+      var list = document.createElement("ol");
+      list.className = "travel-trivia-list";
+      rows.forEach(function (row, i) {
+        var item = document.createElement("li");
+        item.className = "travel-trivia-row";
+        var icon = document.createElement("span");
+        icon.className = "travel-trivia-icon";
+        icon.innerHTML = iconSvg(row.field.icon);
+        var label = document.createElement("span");
+        label.className = "travel-trivia-label";
+        label.textContent = i + 1 + ". " + row.field.label;
+        var value = document.createElement("span");
+        value.className = "travel-trivia-value";
+        value.textContent = row.value;
+        item.appendChild(icon);
+        item.appendChild(label);
+        item.appendChild(value);
+        list.appendChild(item);
+      });
+      section.appendChild(list);
+      root.appendChild(section);
+    }
+
+    var tags = trivia && Array.isArray(trivia.alsoKnownFor) ? trivia.alsoKnownFor.filter(Boolean) : [];
+    if (tags.length) {
+      var known = document.createElement("p");
+      known.className = "travel-known-for";
+      var spark = document.createElement("span");
+      spark.className = "travel-known-for-icon";
+      spark.innerHTML = iconSvg('<path d="M12 3.5l1.15 3.55h3.73l-3.02 2.2 1.15 3.55L12 10.6 8.99 12.8l1.15-3.55-3.02-2.2h3.73z"></path>');
+      var knownLabel = document.createElement("span");
+      knownLabel.className = "travel-known-for-label";
+      knownLabel.textContent = "Also known for —";
+      var knownTags = document.createElement("span");
+      knownTags.className = "travel-known-for-tags";
+      knownTags.textContent = tags.join(" · ");
+      known.appendChild(spark);
+      known.appendChild(knownLabel);
+      known.appendChild(knownTags);
+      root.appendChild(known);
     }
   }
 
