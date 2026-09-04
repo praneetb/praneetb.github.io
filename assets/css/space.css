@@ -62,9 +62,12 @@
   color: var(--tile-media-ink);
 }
 
+.space-tile[data-tile="patents"] {
+  background: var(--tile-patents-bg);
+  color: var(--tile-patents-ink);
+}
+
 .space-tile[data-tile="bucket"] {
-  grid-column: 1 / -1;
-  min-height: 8.4rem;
   background: var(--tile-bucket-bg);
   color: var(--tile-bucket-ink);
 }
@@ -150,9 +153,5 @@ html[data-theme="cadence"] .space-title::after {
 @media (max-width: 700px) {
   .space-grid {
     grid-template-columns: 1fr;
-  }
-
-  .space-tile[data-tile="bucket"] {
-    grid-column: auto;
   }
 }

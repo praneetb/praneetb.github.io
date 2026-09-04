@@ -1,0 +1,37 @@
+---
+layout: default
+title: Patents
+nav: patents
+permalink: /patents/
+private: true
+sitemap: false
+robots: noindex, nofollow
+hide_footer: true
+description: Private gallery of issued patents and one abandoned application.
+extra_css:
+  - /assets/css/patents.css
+---
+
+<header class="patents-hero">
+  <p class="patents-kicker">
+    <span data-theme-line="summit">Praneet Bachheti · Inventor</span>
+    <span data-theme-line="atlas">Issued patents and pending application</span>
+    <span data-theme-line="cadence">Innovation. Engineered. Recognized.</span>
+  </p>
+  <h1>
+    <span data-theme-line="summit">Patents</span>
+    <span data-theme-line="atlas">Patents</span>
+    <span data-theme-line="cadence">Patents</span>
+  </h1>
+  <p class="patents-lede">
+    <span data-theme-line="summit">Five grants and one application, hung as plaques.</span>
+    <span data-theme-line="atlas">Cisco and Aruba work, mounted on a steel wall.</span>
+    <span data-theme-line="cadence">The record, in metal.</span>
+  </p>
+</header>
+
+<ul class="plaque-wall">
+  {% for plaque in site.data.plaques.items %}
+    {% include plaque.html plaque=plaque %}
+  {% endfor %}
+</ul>

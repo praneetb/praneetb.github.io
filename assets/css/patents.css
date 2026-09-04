@@ -1,0 +1,345 @@
+.page-patents {
+  max-width: min(78rem, calc(100vw - 1.4rem));
+  padding-top: 1.7rem;
+  padding-bottom: 5rem;
+}
+
+body:has(.page-patents) {
+  background-color: var(--plaque-wall);
+  background-image:
+    radial-gradient(ellipse 38% 26% at 16% 0%, var(--plaque-wall-spot), transparent 72%),
+    radial-gradient(ellipse 42% 28% at 50% 0%, var(--plaque-wall-spot), transparent 74%),
+    radial-gradient(ellipse 38% 26% at 84% 0%, var(--plaque-wall-spot), transparent 72%),
+    var(--plaque-wall-texture);
+}
+
+body:has(.page-patents) .site-header {
+  background: transparent;
+}
+
+.patents-hero {
+  margin: 0 0 2rem;
+}
+
+.patents-kicker {
+  margin: 0 0 0.45rem;
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-patents h1 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.96;
+}
+
+.patents-lede {
+  margin: 0.7rem 0 0;
+  max-width: 34rem;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 1.02rem;
+}
+
+.plaque-wall {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.1rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plaque-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.plaque-hit {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+.plaque-hit:hover {
+  color: inherit;
+}
+
+.plaque-face {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 22.5rem;
+  padding: 0.72rem;
+  border-radius: 0.55rem;
+  background: var(--plaque-face);
+  box-shadow:
+    0 18px 34px var(--plaque-shadow),
+    0 2px 0 color-mix(in srgb, var(--plaque-frame-hi) 70%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #ffffff 22%, transparent);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.plaque-rivet {
+  position: absolute;
+  z-index: 2;
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, #fff6d8 0 18%, transparent 42%),
+    radial-gradient(circle at 50% 50%, var(--plaque-rivet-hi), var(--plaque-rivet));
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.35),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.28);
+}
+
+.plaque-rivet:nth-child(1) { top: 0.42rem; left: 0.42rem; }
+.plaque-rivet:nth-child(2) { top: 0.42rem; right: 0.42rem; }
+.plaque-rivet:nth-child(3) { bottom: 0.42rem; left: 0.42rem; }
+.plaque-rivet:nth-child(4) { bottom: 0.42rem; right: 0.42rem; }
+
+.plaque-plate {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  width: 100%;
+  padding: 1.15rem 1.05rem 1.2rem;
+  border-radius: 0.28rem;
+  background: var(--plaque-plate);
+  color: var(--plaque-ink);
+  text-align: center;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 38%, transparent),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.plaque-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-bottom: 0.15rem;
+}
+
+.plaque-crest {
+  display: grid;
+  place-items: center;
+  width: 2.05rem;
+  height: 2.05rem;
+  color: var(--plaque-crest);
+}
+
+.plaque-crest svg {
+  width: 2.05rem;
+  height: 2.05rem;
+}
+
+.plaque-status {
+  margin: 0;
+  text-align: left;
+}
+
+.plaque-status-main,
+.plaque-status-sub {
+  display: block;
+}
+
+.plaque-status-main {
+  color: var(--plaque-muted);
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plaque-status-sub {
+  color: var(--plaque-ink);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.plaque-number {
+  margin: 0.15rem 0 0;
+  color: var(--plaque-number);
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-shadow: 0 1px 0 var(--plaque-emboss);
+}
+
+.plaque-title {
+  margin: 0.15rem 0 0;
+  max-width: 22rem;
+  color: var(--plaque-ink);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.plaque-inventor,
+.plaque-assignee,
+.plaque-when {
+  margin: 0;
+  color: var(--plaque-muted);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+}
+
+.plaque-inventor {
+  margin-top: 0.35rem;
+}
+
+.plaque-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28rem;
+  margin: 0.7rem auto 0;
+  color: var(--plaque-link);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.plaque-link svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.plaque-hit:hover .plaque-face {
+  transform: translateY(-3px);
+  box-shadow:
+    0 24px 40px var(--plaque-shadow),
+    0 2px 0 color-mix(in srgb, var(--plaque-frame-hi) 70%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #ffffff 22%, transparent);
+}
+
+.plaque-hit:hover .plaque-link {
+  color: var(--accent-hover);
+}
+
+.plaque.finish-steel .plaque-plate {
+  background: var(--plaque-plate-steel);
+}
+
+.plaque.finish-brass .plaque-plate {
+  background: var(--plaque-plate-brass);
+}
+
+.plaque.is-application .plaque-face {
+  background: var(--plaque-face-app);
+  box-shadow: var(--plaque-app-shadow);
+}
+
+.plaque.is-application .plaque-plate {
+  background: var(--plaque-plate-app);
+  color: var(--plaque-app-ink);
+}
+
+.plaque.is-application .plaque-status-sub,
+.plaque.is-application .plaque-number {
+  color: var(--plaque-app-accent);
+}
+
+.plaque.is-application .plaque-crest,
+.plaque.is-application .plaque-title,
+.plaque.is-application .plaque-inventor,
+.plaque.is-application .plaque-assignee,
+.plaque.is-application .plaque-when {
+  color: var(--plaque-app-ink);
+}
+
+.plaque.is-application .plaque-status-main,
+.plaque.is-application .plaque-inventor,
+.plaque.is-application .plaque-assignee,
+.plaque.is-application .plaque-when {
+  color: var(--plaque-app-muted);
+}
+
+html[data-theme="atlas"] .plaque-title {
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+html[data-theme="atlas"] .plaque.is-application .plaque-when {
+  display: inline-flex;
+  margin-top: 0.55rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  background: var(--plaque-app-accent);
+  color: #fff8ef;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+html[data-theme="cadence"] .page-patents h1 {
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+html[data-theme="cadence"] .patents-kicker {
+  letter-spacing: 0.2em;
+}
+
+html[data-theme="cadence"] .plaque-title {
+  margin-top: 0.45rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--plaque-ink) 28%, transparent);
+}
+
+html[data-theme="cadence"] .plaque.is-application .plaque-face {
+  box-shadow:
+    0 0 0 1px var(--plaque-app-accent),
+    0 0 28px var(--plaque-app-glow),
+    0 18px 34px var(--plaque-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plaque-face {
+    transition: none;
+  }
+
+  .plaque-hit:hover .plaque-face {
+    transform: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .plaque-wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .plaque-wall {
+    grid-template-columns: 1fr;
+    max-width: 24rem;
+    margin-inline: auto;
+  }
+
+  .plaque-face {
+    min-height: 20rem;
+  }
+}
