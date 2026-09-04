@@ -1,0 +1,26 @@
+---
+layout: null
+title: Whiskey
+permalink: /whiskey/
+sitemap: false
+robots: noindex, nofollow
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="refresh" content="0; url={{ '/bar/?tab=whiskey' | relative_url }}">
+  <link rel="canonical" href="{{ '/bar/?tab=whiskey' | absolute_url }}">
+  <title>Redirecting to the bar</title>
+  <script>
+    (function () {
+      var dest = {{ '/bar/?tab=whiskey' | jsonify }};
+      location.replace(dest);
+    })();
+  </script>
+</head>
+<body>
+  <p><a href="{{ '/bar/?tab=whiskey' | relative_url }}">Continue to the bar</a></p>
+</body>
+</html>

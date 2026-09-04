@@ -1,0 +1,141 @@
+---
+layout: default
+title: Bar
+nav: bar
+permalink: /bar/
+private: true
+sitemap: false
+robots: noindex, nofollow
+hide_footer: true
+description: Private bar — whiskey, wine, and beer on three shelves.
+extra_css:
+  - /assets/css/bar.css
+extra_js:
+  - /assets/js/bar.js
+---
+
+<script type="application/json" id="bar-data">
+{
+  "shelves": {{ site.data.bar.shelves | jsonify }},
+  "tabs": {{ site.data.bar.tabs | jsonify }},
+  "catalogs": {
+    "whiskey": {{ site.data.whiskey.bottles | jsonify }},
+    "wine": {{ site.data.wine.bottles | jsonify }},
+    "beer": {{ site.data.beer.bottles | jsonify }}
+  }
+}
+</script>
+
+<div class="bar-page">
+  <header class="bar-toolbar">
+    <div class="bar-heading">
+      <p class="bar-kicker">
+        <span data-theme-line="summit">Summit · Your bar</span>
+        <span data-theme-line="atlas">Atlas · Your bar</span>
+        <span data-theme-line="cadence">Cadence · Your bar</span>
+      </p>
+      <h1>
+        <span data-theme-line="summit">Your bar</span>
+        <span data-theme-line="atlas">Your bar</span>
+        <span data-theme-line="cadence">Your bar</span>
+      </h1>
+    </div>
+
+    <nav class="bar-tabs" role="tablist" aria-label="Drink">
+      {% for tab in site.data.bar.tabs %}
+        <button type="button" role="tab" data-tab="{{ tab.id }}"{% if tab.id == "whiskey" %} class="is-active" aria-selected="true" aria-current="true"{% else %} aria-selected="false"{% endif %}>{{ tab.name }}</button>
+      {% endfor %}
+    </nav>
+
+    <label class="bar-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.2"></circle>
+        <path d="M16 16.5 20.5 21"></path>
+      </svg>
+      <span class="visually-hidden">Search bottles</span>
+      <input id="bar-search" type="search" placeholder="Search bottles..." autocomplete="off" spellcheck="false">
+    </label>
+  </header>
+
+  <div class="bar-stage" id="bar-room" data-pour="amber">
+    <span class="bar-stage-stream" id="bar-stage-stream" aria-hidden="true"></span>
+    <div class="bar-panes" id="bar-panes">
+      {% for tab in site.data.bar.tabs %}
+        {% if tab.id == "whiskey" %}
+          {% assign bottles = site.data.whiskey.bottles %}
+        {% elsif tab.id == "wine" %}
+          {% assign bottles = site.data.wine.bottles %}
+        {% else %}
+          {% assign bottles = site.data.beer.bottles %}
+        {% endif %}
+        <div class="bar-pane{% if tab.id == "whiskey" %} is-active{% endif %}" data-tab="{{ tab.id }}" {% unless tab.id == "whiskey" %}hidden{% endunless %}>
+          {% for shelf in site.data.bar.shelves %}
+            {% assign shelf_bottles = bottles | where: "shelf", shelf.id %}
+            <section class="bar-shelf" data-shelf="{{ shelf.id }}" aria-labelledby="bar-{{ tab.id }}-{{ shelf.id }}">
+              <header class="bar-shelf-label">
+                <p class="bar-shelf-icon" aria-hidden="true">{% if shelf.icon == "crown" %}♛{% elsif shelf.icon == "diamond" %}◆{% else %}⌂{% endif %}</p>
+                <h2 id="bar-{{ tab.id }}-{{ shelf.id }}">{{ shelf.name }}</h2>
+                <p class="bar-shelf-kicker">
+                  <span data-theme-line="summit">{{ shelf.kicker.summit }}</span>
+                  <span data-theme-line="atlas">{{ shelf.kicker.atlas }}</span>
+                  <span data-theme-line="cadence">{{ shelf.kicker.cadence }}</span>
+                </p>
+              </header>
+              <div class="bar-row" data-tab-row="{{ tab.id }}" data-shelf-row="{{ shelf.id }}">
+                {% for bottle in shelf_bottles %}
+                  <figure class="bar-slot" data-id="{{ bottle.id }}" data-tab="{{ tab.id }}" data-shelf="{{ bottle.shelf }}" data-search="{{ bottle.name }} {{ bottle.brand }} {{ bottle.region }} {{ bottle.type }} {{ bottle.occasion }} {{ bottle.tags | join: ' ' }}">
+                    <button type="button" class="bar-bottle" aria-expanded="false" aria-controls="bar-detail">
+                      <img class="bar-bottle-img" src="{{ bottle.image | relative_url }}" alt="{{ bottle.name }}" width="80" height="240" loading="lazy">
+                      {% if bottle.occasion %}
+                        <span class="bar-chip">{{ bottle.occasion }}</span>
+                      {% endif %}
+                      <span class="bar-name">{{ bottle.name }}</span>
+                      <span class="bar-stars" data-stars-for="{{ bottle.id }}" hidden></span>
+                    </button>
+                  </figure>
+                {% endfor %}
+              </div>
+              <div class="bar-plank" aria-hidden="true"></div>
+            </section>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <aside class="bar-glass-col" aria-label="Glass">
+      <div class="bar-glass-stage" id="bar-glass-stage" data-glass="tumbler" data-pour="amber">
+        <div class="bar-glass bar-glass-tumbler is-on" data-kind="tumbler">
+          <span class="bar-glass-fill"></span>
+        </div>
+        <div class="bar-glass bar-glass-wine" data-kind="wine">
+          <span class="bar-glass-fill"></span>
+        </div>
+        <div class="bar-glass bar-glass-pint" data-kind="pint">
+          <span class="bar-glass-fill"></span>
+        </div>
+      </div>
+      <p class="bar-glass-caption" id="bar-glass-caption">Whiskey tumbler · click a bottle to pour</p>
+    </aside>
+  </div>
+
+  <p id="bar-empty" class="bar-empty" hidden>Nothing on these shelves matches that search.</p>
+
+  <aside class="bar-detail" id="bar-detail" hidden>
+    <button type="button" class="bar-detail-close" id="bar-detail-close" aria-label="Close tasting notes">×</button>
+    <div class="bar-detail-inner">
+      <p class="bar-detail-brand" id="bar-detail-brand"></p>
+      <h2 id="bar-detail-name"></h2>
+      <p class="bar-detail-meta" id="bar-detail-meta"></p>
+      <p class="bar-detail-tags" id="bar-detail-tags"></p>
+      <div class="bar-tasting">
+        <p><strong>Nose</strong> <span id="bar-detail-nose"></span></p>
+        <p><strong>Palate</strong> <span id="bar-detail-palate"></span></p>
+        <p><strong>Finish</strong> <span id="bar-detail-finish"></span></p>
+      </div>
+      <div class="bar-rate">
+        <p class="bar-rate-label" id="bar-rate-label">Your rating</p>
+        <div class="bar-rate-stars" id="bar-rate-stars" role="radiogroup" aria-labelledby="bar-rate-label"></div>
+      </div>
+    </div>
+  </aside>
+</div>

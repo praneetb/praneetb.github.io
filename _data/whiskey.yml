@@ -1,0 +1,336 @@
+# Private whiskey bar catalog.
+# Tasting notes are short paraphrases of widely published public notes — not verbatim reviews.
+# image_note records closest-SKU substitutions when an exact official cutout was unavailable.
+
+shelves:
+  - id: premium
+    name: Premium
+    icon: crown
+    kicker:
+      summit: Exceptional. Rare. Extraordinary.
+      atlas: The high shelf. The long pour.
+      cadence: Rare. Measured. Worth the wait.
+    glass: crystal
+  - id: core
+    name: Core
+    icon: diamond
+    kicker:
+      summit: Signature. Balanced. Refined.
+      atlas: The working collection.
+      cadence: Everyday craft, mid-shelf calm.
+    glass: glencairn
+  - id: everyday
+    name: Everyday
+    icon: house
+    kicker:
+      summit: Reliable. Approachable. Always a good choice.
+      atlas: Open the bottle. Start the night.
+      cadence: Familiar. Friendly. Ready.
+    glass: tumbler
+
+bottles:
+  - id: macallan-rare-cask
+    name: Macallan Rare Cask
+    brand: The Macallan
+    shelf: premium
+    occasion: Special
+    region: Speyside
+    type: Single malt Scotch
+    age:
+    abv: 43
+    tags: [sherry, dried-fruit, spice, chocolate]
+    nose: Deep dried fruit, dark chocolate, and polished oak from first-fill sherry casks.
+    palate: Rich raisin and fig, warm spice, and a velvety oak sweetness.
+    finish: Long, warming, with lingering cocoa and orange peel.
+    image: /assets/whiskey/macallan-rare-cask.png
+    image_note: Official The Macallan 2024 Rare Cask brand-asset pack shot, bottle isolated.
+    credit: The Macallan / Edrington brand assets
+
+  - id: macallan-18
+    name: Macallan 18
+    brand: The Macallan
+    shelf: premium
+    occasion: Occasional
+    region: Speyside
+    type: Single malt Scotch
+    age: 18
+    abv: 43
+    tags: [sherry, dried-fruit, ginger, oak]
+    nose: Dried fruit, ginger, and cinnamon over seasoned sherry oak.
+    palate: Orange peel, toasted oak, and a slow spice warmth.
+    finish: Long and drying, with fruitcake and oak tannin.
+    image: /assets/whiskey/macallan-18.png
+    image_note: Cropped from a Commons photo of the Colour Collection 12/15/18 lineup.
+    credit: Wikimedia Commons (Macallan whisky, 12-15-18 years.jpg)
+
+  - id: glenlivet-25
+    name: Glenlivet 25
+    brand: The Glenlivet
+    shelf: premium
+    occasion:
+    region: Speyside
+    type: Single malt Scotch
+    age: 25
+    abv: 43
+    tags: [fruity, oak, sherry, tropical]
+    nose: Ripe orchard fruit, honeyed oak, and a quiet sherry sweetness.
+    palate: Silkier than the younger bottles — tropical fruit, toasted almond, gentle spice.
+    finish: Long, elegant, with lingering citrus oil and oak.
+    image: /assets/whiskey/glenlivet-25.png
+    image_note: Closest rights-safe photo is The Glenlivet 12 (Commons). Exact 25 SKU cutout unavailable.
+    credit: Wikimedia Commons (The Glenlivet 12 year old whisky.jpg)
+
+  - id: lagavulin-16
+    name: Lagavulin 16
+    brand: Lagavulin
+    shelf: premium
+    occasion:
+    region: Islay
+    type: Single malt Scotch
+    age: 16
+    abv: 43
+    tags: [peaty, smoky, seaweed, iodine]
+    nose: Dense peat smoke, iodine, and seaweed over a deep sweetness.
+    palate: Dry smoke first, then salt, oak, and a gentle malt sweetness.
+    finish: Long, maritime, and peat-filled.
+    image: /assets/whiskey/lagavulin-16.png
+    image_note: Product-style bottle reconstructed from Commons photo of Lagavulin 16 (box isolation failed).
+    credit: Visual based on Wikimedia Commons (Lagavulin Single Islay Malt 16.jpg)
+
+  - id: indri
+    name: Indri
+    brand: Indri
+    shelf: premium
+    occasion:
+    region: India
+    type: Single malt
+    age:
+    abv: 46
+    tags: [fruity, vanilla, sherry, spicy]
+    nose: Caramelized pineapple, vanilla, black tea, and a raisin hint from PX sherry wood.
+    palate: Smooth and warm — gentle spice, tropical fruit, and a light nuttiness.
+    finish: Medium-long, balanced, with lingering fruit and oak.
+    image: /assets/whiskey/indri.png
+    image_note: Official ImpEx / Piccadily Indri Trini bottle shot (The Three Wood).
+    credit: ImpEx Beverages / Piccadily (Indri Trini product image)
+
+  - id: jw-blue
+    name: Johnnie Walker Blue Label
+    brand: Johnnie Walker
+    shelf: premium
+    occasion:
+    region: Scotland
+    type: Blended Scotch
+    age:
+    abv: 40
+    tags: [honey, smoky, chocolate, spice]
+    nose: Honey, soft smoke, and dark chocolate with a floral lift.
+    palate: Silk and smoke together — dried fruit, spice, and a rounded malt core.
+    finish: Long, lingering, with cocoa and a last wisp of peat.
+    image: /assets/whiskey/jw-blue.png
+    image_note: Product-style bottle reconstructed from Commons studio photo of Blue Label (box isolation failed).
+    credit: Visual based on Wikimedia Commons (JW Blue Label.jpg)
+
+  - id: macallan-12
+    name: Macallan 12
+    brand: The Macallan
+    shelf: core
+    occasion: Regular
+    region: Speyside
+    type: Single malt Scotch
+    age: 12
+    abv: 40
+    tags: [vanilla, dried-fruit, sherry, oak]
+    nose: Vanilla, citrus, and light dried fruit from mixed oak.
+    palate: Balanced and approachable — honey, oak, and a soft spice.
+    finish: Medium, clean, with lingering vanilla.
+    image: /assets/whiskey/macallan-12.png
+    image_note: Commons product-style photo of Fine Oak / Triple Cask 12.
+    credit: Wikimedia Commons (Macallan 12.jpg)
+
+  - id: oban
+    name: Oban
+    brand: Oban
+    shelf: core
+    occasion:
+    region: Highland
+    type: Single malt Scotch
+    age: 14
+    abv: 43
+    tags: [citrus, salty, smoky, honey]
+    nose: Orange zest, sea salt, and a light wisp of smoke.
+    palate: Honeyed malt, citrus oil, and a coastal dryness.
+    finish: Medium-long, salty, with lingering oak.
+    image: /assets/whiskey/oban.png
+    image_note: Commons photo of Oban 14.
+    credit: Wikimedia Commons (Oban 14yo.jpg)
+
+  - id: glenmorangie
+    name: Glenmorangie
+    brand: Glenmorangie
+    shelf: core
+    occasion:
+    region: Highland
+    type: Single malt Scotch
+    age: 10
+    abv: 40
+    tags: [citrus, vanilla, floral, honey]
+    nose: Fresh citrus, vanilla cream, and a floral lift from American oak.
+    palate: Light and silky — lemon, honey, and toasted oak.
+    finish: Clean and lingering, with citrus zest.
+    image: /assets/whiskey/glenmorangie.png
+    image_note: Closest rights-safe bottle is The Original 10, not the 18 shown in the mock.
+    credit: Wikimedia Commons (Glenmorangie 10.jpg)
+
+  - id: glenfiddich-18
+    name: Glenfiddich 18
+    brand: Glenfiddich
+    shelf: core
+    occasion:
+    region: Speyside
+    type: Single malt Scotch
+    age: 18
+    abv: 40
+    tags: [apple, oak, spicy, honey]
+    nose: Baked apple, dry oak, and a warm spice.
+    palate: Richer than the 12 — honey, orchard fruit, and cinnamon oak.
+    finish: Long, drying, with apple skin and oak.
+    image: /assets/whiskey/glenfiddich-18.png
+    image_note: Closest rights-safe photo is Glenfiddich 12 (Commons). Exact 18 SKU cutout unavailable.
+    credit: Wikimedia Commons (Glenfiddich12yo.jpg)
+
+  - id: amrut
+    name: Amrut
+    brand: Amrut
+    shelf: core
+    occasion:
+    region: India
+    type: Single malt
+    age:
+    abv: 46
+    tags: [tropical, spicy, oak, honey]
+    nose: Tropical fruit, barley sweetness, and a bright oak spice.
+    palate: Full and lively — mango, pepper, and toasted oak.
+    finish: Warming, with lingering spice and fruit.
+    image: /assets/whiskey/amrut.png
+    image_note: Commons photo of Amrut Indian single malt (standard expression).
+    credit: Wikimedia Commons (Amrut singlemalt whisky 2013-06-11 18-39.jpg)
+
+  - id: balvenie
+    name: The Balvenie
+    brand: The Balvenie
+    shelf: core
+    occasion:
+    region: Speyside
+    type: Single malt Scotch
+    age: 12
+    abv: 40
+    tags: [honey, vanilla, sherry, oak]
+    nose: Honey, vanilla, and a gentle sherry sweetness from the second wood.
+    palate: Soft malt, citrus, and a nutty oak warmth.
+    finish: Medium, honeyed, with lingering spice.
+    image: /assets/whiskey/balvenie.png
+    image_note: Commons photo of DoubleWood 12.
+    credit: Wikimedia Commons (Balvenie Whisky Doublewood 12 years old.jpg)
+
+  - id: aberlour
+    name: Aberlour
+    brand: Aberlour
+    shelf: core
+    occasion:
+    region: Speyside
+    type: Single malt Scotch
+    age: 10
+    abv: 40
+    tags: [sherry, spicy, fruit, oak]
+    nose: Soft sherry, orchard fruit, and a hint of spice.
+    palate: Rounded malt, raisin, and a gentle oak bite.
+    finish: Medium, warming, with lingering fruit.
+    image: /assets/whiskey/aberlour.png
+    image_note: Closest rights-safe photo is Aberlour 10, not the 16 shown in the mock.
+    credit: Wikimedia Commons (Aberlour single malt 10 years old.jpg)
+
+  - id: chivas
+    name: Chivas Regal
+    brand: Chivas Regal
+    shelf: everyday
+    occasion:
+    region: Scotland
+    type: Blended Scotch
+    age: 12
+    abv: 40
+    tags: [honey, apple, vanilla, floral]
+    nose: Honey, ripe apple, and a light floral malt.
+    palate: Smooth and easy — vanilla, orchard fruit, and soft oak.
+    finish: Short to medium, clean and sweet.
+    image: /assets/whiskey/chivas.png
+    image_note: Commons photo of Chivas Regal 12.
+    credit: Wikimedia Commons (Chivas Regal.jpg)
+
+  - id: jw-black
+    name: Johnnie Walker Black Label
+    brand: Johnnie Walker
+    shelf: everyday
+    occasion:
+    region: Scotland
+    type: Blended Scotch
+    age: 12
+    abv: 40
+    tags: [smoky, vanilla, spice, honey]
+    nose: Soft peat, vanilla, and a hint of dried fruit.
+    palate: Smooth smoke over malt sweetness and pepper.
+    finish: Medium, smoky, with lingering vanilla.
+    image: /assets/whiskey/jw-black.png
+    image_note: Commons studio photo of Black Label.
+    credit: Wikimedia Commons (Black Label2.JPG)
+
+  - id: jw-red
+    name: Johnnie Walker Red Label
+    brand: Johnnie Walker
+    shelf: everyday
+    occasion:
+    region: Scotland
+    type: Blended Scotch
+    age:
+    abv: 40
+    tags: [spicy, smoky, pepper, malt]
+    nose: Bright spice, a pinch of smoke, and cereal malt.
+    palate: Peppery and lively — the mixer-friendly Walker.
+    finish: Short, spicy, with a last curl of smoke.
+    image: /assets/whiskey/jw-red.png
+    image_note: Isolated from Commons studio photo of Red Label beside its tin.
+    credit: Wikimedia Commons (Johnnie Walker Red Label.jpg)
+
+  - id: jameson
+    name: Jameson
+    brand: Jameson
+    shelf: everyday
+    occasion:
+    region: Ireland
+    type: Irish blend
+    age:
+    abv: 40
+    tags: [vanilla, spicy, floral, malt]
+    nose: Light floral malt, vanilla, and a touch of spice.
+    palate: Soft and triple-distilled — vanilla, nut, and a gentle pepper.
+    finish: Clean and short, easy to come back to.
+    image: /assets/whiskey/jameson.png
+    image_note: Commons photo of Jameson Original.
+    credit: Wikimedia Commons (Jameson Irish Whiskey.JPG)
+
+  - id: bushmills
+    name: Bushmills
+    brand: Bushmills
+    shelf: everyday
+    occasion:
+    region: Ireland
+    type: Irish blend
+    age:
+    abv: 40
+    tags: [honey, malt, vanilla, light]
+    nose: Honey, light malt, and a soft vanilla.
+    palate: Smooth and mellow — cereal sweetness with a hint of spice.
+    finish: Short, clean, and approachable.
+    image: /assets/whiskey/bushmills.png
+    image_note: Commons photo of Bushmills Original.
+    credit: Wikimedia Commons (Bushmills whiskey.jpg)
