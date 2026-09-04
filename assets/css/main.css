@@ -204,8 +204,7 @@ a:focus-visible,
 
 .page-resume,
 .page-travel,
-.page-admin,
-.page-song {
+.page-admin {
   max-width: calc(var(--wide) + 3rem);
 }
 
