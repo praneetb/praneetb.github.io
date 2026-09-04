@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 240" width="80" height="240">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity=".28"/>
+      <stop offset=".45" stop-color="#1f4d3a"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".3"/>
+    </linearGradient>
+  </defs>
+  <rect x="18" y="52" width="44" height="150" rx="8" fill="url(#g)"/>
+  <ellipse cx="40" cy="52" rx="22" ry="7" fill="#d8d0c4"/>
+  <ellipse cx="40" cy="202" rx="22" ry="6" fill="#1a120c" opacity=".35"/>
+  <rect x="24" y="88" width="32" height="70" rx="2" fill="#f4ead8"/>
+  <text x="40" y="118" text-anchor="middle" font-family="Georgia,serif" font-size="6" fill="#2a160c">Heady Topper</text>
+</svg>

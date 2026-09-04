@@ -628,6 +628,7 @@ html[data-theme="cadence"] .theme-switch {
 .page-travel,
 .page-patents,
 .page-whiskey,
+.page-bar,
 .page-admin {
   max-width: calc(var(--wide) + 3rem);
 }

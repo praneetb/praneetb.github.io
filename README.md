@@ -4,13 +4,13 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 ## Public and private
 
-Logged-out visitors see a quiet calling card on `/` — name, role, a short bio, Half Dome, and links to [Resume](/resume/) and [GitHub](https://github.com/praneetb). There is no public navigation to Travel, Whiskey, Patents, Media, the bucket list, Notes, or Manya.
+Logged-out visitors see a quiet calling card on `/` — name, role, a short bio, Half Dome, and links to [Resume](/resume/) and [GitHub](https://github.com/praneetb). There is no public navigation to Travel, Bar, Patents, Media, the bucket list, Notes, or Manya.
 
 Sign in (username + password) unlocks a site-wide session. After a successful login, the header gains private navigation and `/space/` becomes the private landing:
 
 - [Your space](/space/)
 - [Travel](/travel/) — cockpit globe and visited countries in this browser; Seven Wonders live on the bucket list
-- [Whiskey](/whiskey/) — private three-shelf bar from `_data/whiskey.yml`; search, hover lift, pour-on-select, tasting notes, and star ratings in this browser
+- [Bar](/bar/) — private three-tab bar (Whiskey / Wine / Beer) with Premium / Core / Everyday shelves from `_data/whiskey.yml`, `_data/wine.yml`, and `_data/beer.yml`; search the active tab, hover lift, pour into the matching glass, tasting notes, and star ratings in this browser. `/whiskey/` redirects to `/bar/?tab=whiskey`
 - [Patents](/patents/) — private plaque wall of issued patents and one abandoned application; Summit / Atlas / Cadence restyle the wall and metal
 - [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)

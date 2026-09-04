@@ -4,7 +4,7 @@
   var PRIVATE_LINKS = [
     { path: "/space/", label: "Home", match: /\/space\/?$/ },
     { path: "/travel/", label: "Travel", match: /\/travel\/?$/ },
-    { path: "/whiskey/", label: "Whiskey", match: /\/whiskey\/?$/ },
+    { path: "/bar/", label: "Bar", match: /\/(bar|whiskey)\/?$/ },
     { path: "/patents/", label: "Patents", match: /\/patents\/?$/ },
     { path: "/media/", label: "Media", match: /\/media\/?$/ },
     { path: "/bucket-list/", label: "Bucket list", match: /\/bucket(-list)?\/?$/ },

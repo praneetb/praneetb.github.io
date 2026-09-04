@@ -7,112 +7,16 @@ private: true
 sitemap: false
 robots: noindex, nofollow
 hide_footer: true
-description: Private whiskey bar — three shelves, tasting notes, and ratings.
-extra_css:
-  - /assets/css/whiskey.css
-extra_js:
-  - /assets/js/whiskey.js
+description: The whiskey bar now lives on Your bar.
 ---
 
-<script type="application/json" id="whiskey-data">
-{{ site.data.whiskey | jsonify }}
+<script>
+  (function () {
+    var base = (document.documentElement.getAttribute("data-baseurl") || "").replace(/\/$/, "");
+    location.replace(base + "/bar/?tab=whiskey");
+  })();
 </script>
-
-<div class="whiskey-bar">
-  <header class="whiskey-toolbar">
-    <div class="whiskey-heading">
-      <p class="whiskey-kicker">
-        <span data-theme-line="summit">Whiskey · My bar</span>
-        <span data-theme-line="atlas">Whiskey · The collection</span>
-        <span data-theme-line="cadence">Whiskey · The pour</span>
-      </p>
-      <h1>
-        <span data-theme-line="summit">My bar</span>
-        <span data-theme-line="atlas">The collection</span>
-        <span data-theme-line="cadence">The pour</span>
-      </h1>
-    </div>
-
-    <label class="whiskey-search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-        <circle cx="11" cy="11" r="6.2"></circle>
-        <path d="M16 16.5 20.5 21"></path>
-      </svg>
-      <span class="visually-hidden">Search your bar</span>
-      <input id="whiskey-search" type="search" placeholder="Search your bar..." autocomplete="off" spellcheck="false">
-    </label>
-
-    <div class="whiskey-sort" role="group" aria-label="Sort bottles">
-      <button type="button" class="is-active" data-sort="shelf">Shelf order</button>
-      <button type="button" data-sort="rating">By rating</button>
-    </div>
-  </header>
-
-  <div class="whiskey-room" id="whiskey-room">
-    {% for shelf in site.data.whiskey.shelves %}
-      {% assign shelf_bottles = site.data.whiskey.bottles | where: "shelf", shelf.id %}
-      <section class="whiskey-shelf" data-shelf="{{ shelf.id }}" aria-labelledby="whiskey-shelf-{{ shelf.id }}">
-        <header class="whiskey-shelf-label">
-          <p class="whiskey-shelf-icon" aria-hidden="true">
-            {% if shelf.icon == "crown" %}♛{% elsif shelf.icon == "diamond" %}◆{% else %}⌂{% endif %}
-          </p>
-          <h2 id="whiskey-shelf-{{ shelf.id }}">{{ shelf.name }}</h2>
-          <p class="whiskey-shelf-kicker">
-            <span data-theme-line="summit">{{ shelf.kicker.summit }}</span>
-            <span data-theme-line="atlas">{{ shelf.kicker.atlas }}</span>
-            <span data-theme-line="cadence">{{ shelf.kicker.cadence }}</span>
-          </p>
-        </header>
-
-        <div class="whiskey-row" data-shelf-row="{{ shelf.id }}">
-          {% for bottle in shelf_bottles %}
-            <figure class="whiskey-slot" data-id="{{ bottle.id }}" data-shelf="{{ bottle.shelf }}">
-              <button type="button" class="whiskey-bottle" aria-expanded="false" aria-controls="whiskey-detail">
-                <img
-                  class="whiskey-bottle-img"
-                  src="{{ bottle.image | relative_url }}"
-                  alt="{{ bottle.name }}"
-                  width="220"
-                  height="920"
-                  loading="lazy">
-                {% if bottle.occasion %}
-                  <span class="whiskey-chip">{{ bottle.occasion }}</span>
-                {% endif %}
-                <span class="whiskey-name">{{ bottle.name }}</span>
-                <span class="whiskey-stars" data-stars-for="{{ bottle.id }}" hidden></span>
-              </button>
-              <div class="whiskey-pour" aria-hidden="true">
-                <span class="whiskey-stream"></span>
-                <span class="whiskey-glass whiskey-glass-{{ shelf.glass }}">
-                  <span class="whiskey-glass-fill"></span>
-                </span>
-              </div>
-            </figure>
-          {% endfor %}
-        </div>
-        <div class="whiskey-plank" aria-hidden="true"></div>
-      </section>
-    {% endfor %}
-  </div>
-
-  <p id="whiskey-empty" class="whiskey-empty" hidden>Nothing on these shelves matches that search.</p>
-
-  <aside class="whiskey-detail" id="whiskey-detail" hidden>
-    <button type="button" class="whiskey-detail-close" id="whiskey-detail-close" aria-label="Close tasting notes">×</button>
-    <div class="whiskey-detail-inner">
-      <p class="whiskey-detail-brand" id="whiskey-detail-brand"></p>
-      <h2 id="whiskey-detail-name"></h2>
-      <p class="whiskey-detail-meta" id="whiskey-detail-meta"></p>
-      <p class="whiskey-detail-tags" id="whiskey-detail-tags"></p>
-      <div class="whiskey-tasting">
-        <p><strong>Nose</strong> <span id="whiskey-detail-nose"></span></p>
-        <p><strong>Palate</strong> <span id="whiskey-detail-palate"></span></p>
-        <p><strong>Finish</strong> <span id="whiskey-detail-finish"></span></p>
-      </div>
-      <div class="whiskey-rate">
-        <p class="whiskey-rate-label" id="whiskey-rate-label">Your rating</p>
-        <div class="whiskey-rate-stars" id="whiskey-rate-stars" role="radiogroup" aria-labelledby="whiskey-rate-label"></div>
-      </div>
-    </div>
-  </aside>
-</div>
+<noscript>
+  <meta http-equiv="refresh" content="0; url={{ '/bar/?tab=whiskey' | relative_url }}">
+</noscript>
+<p class="lede"><a href="{{ '/bar/?tab=whiskey' | relative_url }}">Continue to the bar</a></p>

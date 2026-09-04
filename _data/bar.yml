@@ -1,0 +1,42 @@
+# Shared bar chrome. Bottle catalogs live in whiskey.yml, wine.yml, and beer.yml.
+# Wine and beer starter lists are placeholders for later Obsidian edits.
+
+shelves:
+  - id: premium
+    name: Premium
+    icon: crown
+    kicker:
+      summit: Exceptional. Rare. Extraordinary.
+      atlas: The high shelf. The long pour.
+      cadence: Rare. Measured. Worth the wait.
+  - id: core
+    name: Core
+    icon: diamond
+    kicker:
+      summit: Signature. Balanced. Refined.
+      atlas: The working collection.
+      cadence: Everyday craft, mid-shelf calm.
+  - id: everyday
+    name: Everyday
+    icon: house
+    kicker:
+      summit: Reliable. Approachable. Always a good choice.
+      atlas: Open the bottle. Start the night.
+      cadence: Familiar. Friendly. Ready.
+
+tabs:
+  - id: whiskey
+    name: Whiskey
+    glass: tumbler
+    caption: Whiskey tumbler · click a bottle to pour
+    pour: amber
+  - id: wine
+    name: Wine
+    glass: wine
+    caption: Wine stem · click a bottle to pour
+    pour: wine
+  - id: beer
+    name: Beer
+    glass: pint
+    caption: Pint glass · click a bottle to pour
+    pour: gold
