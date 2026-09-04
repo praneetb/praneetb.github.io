@@ -2,27 +2,53 @@
 layout: default
 title: Bucket list
 nav: bucket
+permalink: /bucket-list/
 private: true
-description: Praneet Bachheti’s bucket list. Empty until real items are added.
+sitemap: false
+robots: noindex, nofollow
+description: Private list of places still to stand in — New7Wonders and Half Dome.
+extra_css:
+  - /assets/css/bucket.css
+extra_js:
+  - /assets/js/bucket.js
 ---
 
 <p class="kicker">Bucket list</p>
 <h1>Things to do</h1>
+<p class="lede">The New7Wonders of the World, and a granite dome already climbed.</p>
+<p class="bucket-progress" id="bucket-progress" aria-live="polite"></p>
 
-{% assign items = site.data.bucket.items %}
-{% if items and items.size > 0 %}
-<p class="count">{{ items.size }} {% if items.size == 1 %}item{% else %}items{% endif %}</p>
-<ul class="bucket-list">
-  {% for item in items %}
-  <li{% if item.done %} class="done"{% endif %}>
-    <p class="bucket-title">{{ item.title }}</p>
-    {% if item.notes %}<p class="bucket-notes">{{ item.notes }}</p>{% endif %}
+<ul class="bucket-grid" id="bucket-grid">
+  {% for item in site.data.bucket.items %}
+  <li class="bucket-card{% if item.defaultCompleted %} is-done{% endif %}" data-bucket-id="{{ item.id }}">
+    <figure class="bucket-card-media">
+      <img
+        src="{{ item.photo | relative_url }}"
+        alt="{{ item.title }}"
+        width="960"
+        height="640"
+        loading="lazy">
+    </figure>
+    <div class="bucket-card-copy">
+      <h2 class="bucket-card-title">{{ item.title }}</h2>
+      <p class="bucket-card-place">{{ item.place }}</p>
+      {% if item.credit %}<p class="bucket-card-credit">{{ item.credit }}</p>{% endif %}
+    </div>
+    <label class="bucket-toggle">
+      <input
+        type="checkbox"
+        data-bucket-check="{{ item.id }}"
+        {% if item.defaultCompleted %}checked{% endif %}
+        aria-label="Mark {{ item.title }} completed">
+      <span class="bucket-toggle-box" aria-hidden="true"></span>
+      <span class="bucket-toggle-text">Done</span>
+    </label>
   </li>
   {% endfor %}
 </ul>
-{% else %}
-<p class="lede">The page is blank on purpose. Nothing here is filler.</p>
-<div class="notebook">
-  <p class="empty">No items yet. When a real list is ready, add it in <code>_data/bucket.yml</code> — title required, notes and done optional.</p>
-</div>
-{% endif %}
+
+<script type="application/json" id="bucket-catalog">
+{
+  "items": {{ site.data.bucket.items | jsonify }}
+}
+</script>

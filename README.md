@@ -11,10 +11,10 @@ Sign in (username + password) unlocks a site-wide session. After a successful lo
 - [Your space](/space/)
 - [Travel](/travel/) — interactive 3D globe; visited places stay in this browser
 - [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
-- [Bucket list](/bucket-list/) — things to do (`_data/bucket.yml`)
+- [Bucket list](/bucket-list/) — New7Wonders plus Half Dome; completion stays in this browser
 - [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
 
-Direct URLs to those private pages show a sign-in prompt when locked. Public visitors never see another browser’s local travel data.
+Direct URLs to those private pages show a sign-in prompt when locked. Public visitors never see another browser’s local travel or bucket-list data.
 
 Resume stays public.
 
@@ -22,7 +22,7 @@ Resume stays public.
 
 The gate is client-side for static GitHub Pages. `assets/js/site-admin.js` verifies a salted PBKDF2-SHA256 username digest and decrypts `assets/notes.enc.json` with PBKDF2-SHA256 / AES-GCM. The repo stores only the salted verifier and ciphertext — not a username, password, or plaintext notes. One successful login unlocks admin, private nav, and Notes. Session state lives in `sessionStorage`, or `localStorage` if “Stay signed in on this device” is checked. Sign out clears both.
 
-Travel and the bucket list ship empty. Do not invent countries or items, and do not commit a private travel list or a plaintext vault.
+Travel ships an empty visited-country list. The bucket list ships a public catalog (New7Wonders plus Half Dome); checked/completed state stays in the browser. Do not commit a private travel list, bucket progress, or a plaintext vault.
 
 ## Publishing notes
 

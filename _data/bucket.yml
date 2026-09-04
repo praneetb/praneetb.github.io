@@ -1,9 +1,54 @@
-# Things to do. Leave this list empty until you have a real list.
-# Do not invent entries. When you add an item, it will appear on /bucket-list/.
-#
-# Example:
-# - title: Walk a long trail you have been putting off
-#   notes: Optional detail
-#   done: false
+# Catalog only. Do not put Praneet’s completion progress here.
+# Checked state lives in the browser (localStorage).
+# defaultCompleted seeds a first visit when no saved state exists yet;
+# after that, localStorage wins — including if an item is later unchecked.
 
-items: []
+items:
+  - id: great-wall
+    title: Great Wall of China
+    place: China
+    photo: /assets/images/bucket/great-wall.jpg
+    credit: Severin.stalder / Wikimedia Commons, CC BY-SA 3.0
+
+  - id: petra
+    title: Petra
+    place: Jordan
+    photo: /assets/images/bucket/petra.jpg
+    credit: Graham Racher / Wikimedia Commons, CC BY-SA 2.0
+
+  - id: christ-redeemer
+    title: Christ the Redeemer
+    place: Rio de Janeiro, Brazil
+    photo: /assets/images/bucket/christ-redeemer.jpg
+    credit: Nico Kaiser / Wikimedia Commons, CC BY 2.0
+
+  - id: machu-picchu
+    title: Machu Picchu
+    place: Peru · hike still ahead
+    photo: /assets/images/bucket/machu-picchu.jpg
+    credit: Martin St-Amant / Wikimedia Commons, CC BY-SA 3.0
+
+  - id: chichen-itza
+    title: Chichén Itzá
+    place: Mexico
+    photo: /assets/images/bucket/chichen-itza.jpg
+    credit: Daniel Schwen / Wikimedia Commons, CC BY-SA 4.0
+
+  - id: colosseum
+    title: Roman Colosseum
+    place: Italy
+    photo: /assets/images/bucket/colosseum.jpg
+    credit: FeaturedPics / Wikimedia Commons, CC BY-SA 4.0
+
+  - id: taj-mahal
+    title: Taj Mahal
+    place: India
+    photo: /assets/images/bucket/taj-mahal.jpg
+    credit: Yann / Wikimedia Commons, CC BY-SA 3.0
+
+  - id: half-dome
+    title: Half Dome
+    place: Yosemite Valley, California
+    photo: /assets/images/bucket/half-dome.jpg
+    credit: Av9 / Wikimedia Commons, public domain
+    defaultCompleted: true

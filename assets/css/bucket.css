@@ -1,0 +1,163 @@
+.page-bucket {
+  max-width: 46rem;
+}
+
+.bucket-progress {
+  margin: 0 0 1.45rem;
+  color: var(--ink-soft);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.88rem;
+}
+
+.bucket-grid {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bucket-card {
+  display: grid;
+  grid-template-columns: 8.4rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem 1.05rem;
+  padding: 0.7rem 0.9rem 0.7rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.32);
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.bucket-card.is-done {
+  opacity: 0.72;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.bucket-card-media {
+  margin: 0;
+}
+
+.bucket-card-media img {
+  display: block;
+  width: 8.4rem;
+  height: 6.1rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  background: var(--paper-deep);
+}
+
+.bucket-card-title {
+  margin: 0;
+  font-family: "Source Serif 4", "Iowan Old Style", Palatino, serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.bucket-card.is-done .bucket-card-title {
+  color: var(--ink-soft);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.bucket-card-place {
+  margin: 0.22rem 0 0;
+  color: var(--ink-soft);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+
+.bucket-card-credit {
+  margin: 0.28rem 0 0;
+  color: #9a9086;
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.bucket-toggle {
+  display: grid;
+  justify-items: center;
+  gap: 0.28rem;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bucket-toggle input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.bucket-toggle-box {
+  display: grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border: 1.5px solid #c4b8aa;
+  border-radius: 50%;
+  background: #fffdf9;
+}
+
+.bucket-toggle-box::after {
+  content: "";
+  width: 0.55rem;
+  height: 0.32rem;
+  margin-top: -0.12rem;
+  border-left: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  transform: rotate(-45deg);
+}
+
+.bucket-toggle input:checked + .bucket-toggle-box {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.bucket-toggle input:checked + .bucket-toggle-box::after {
+  border-color: #fffdf9;
+}
+
+.bucket-toggle input:focus-visible + .bucket-toggle-box {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.bucket-card.is-done .bucket-toggle-box {
+  opacity: 0.85;
+}
+
+@media (max-width: 640px) {
+  .bucket-card {
+    grid-template-columns: 6.4rem minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    padding: 0.6rem 0.7rem 0.6rem 0.55rem;
+  }
+
+  .bucket-card-media img {
+    width: 6.4rem;
+    height: 5.1rem;
+  }
+
+  .bucket-card-title {
+    font-size: 1.05rem;
+  }
+
+  .bucket-toggle-text {
+    display: none;
+  }
+}
