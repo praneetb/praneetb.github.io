@@ -3,6 +3,7 @@ layout: default
 title: Travel
 nav: travel
 private: true
+hide_footer: true
 description: A private 3D globe and visited places. The committed country list stays empty.
 extra_css:
   - /assets/css/travel.css
@@ -15,75 +16,119 @@ extra_js:
 <script>window.TRAVEL_BASE = "{{ site.baseurl }}";</script>
 <script type="application/json" id="travel-public-data">
 {
-  "countries": {{ site.data.travel.countries | jsonify }},
-  "wonders": {% if site.data.travel.wonders %}{{ site.data.travel.wonders | jsonify }}{% else %}[]{% endif %}
+  "countries": {{ site.data.travel.countries | jsonify }}
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/globe.gl@2.41.4/dist/globe.gl.min.js"></script>
 
-<div class="travel-dash">
-  <header class="travel-hero">
-    <div>
-      <p class="travel-kicker">Personal · My travel</p>
-      <h1>The places that shape my story.</h1>
-      <p class="travel-sub">Drag to explore, scroll to zoom, or choose a country or wonder to bring it into view.</p>
-    </div>
-    <div class="travel-stat" aria-live="polite">
-      <span class="travel-stat-num" id="travel-stat-num">0</span>
-      <span class="travel-stat-label" id="travel-stat-label">countries visited.</span>
-    </div>
-  </header>
-
-  <section class="travel-globe-card" aria-label="Interactive globe">
+<div class="travel-cockpit">
+  <section class="travel-globe-stage" aria-label="Interactive globe">
     <div id="travel-globe" class="travel-globe" role="img" aria-label="Earth. Drag to rotate, scroll to zoom."></div>
-    <p class="travel-globe-caption">
-      <span class="travel-globe-live" id="travel-globe-live"><i aria-hidden="true"></i> <span data-globe-state>Slowly rotating</span></span>
-      <span>Drag to spin · Scroll to zoom · Select a place to locate it</span>
-    </p>
+    <p class="travel-globe-caption">☝️ Drag to spin • click a country to fly</p>
   </section>
 
-  <div class="travel-panels">
-    <section class="travel-panel" aria-labelledby="travel-countries-heading">
-      <header class="travel-panel-head">
-        <h2 id="travel-countries-heading">
+  <aside class="travel-rail" aria-labelledby="travel-visited-heading">
+    <header class="travel-rail-head">
+      <h1 id="travel-visited-heading">
+        Visited
+        <span class="travel-count" id="travel-stat-num" aria-live="polite">0</span>
+      </h1>
+      <div class="travel-tools">
+        <button type="button" id="travel-filter-btn" class="travel-icon-btn" aria-expanded="false" aria-controls="travel-filter-menu" title="Sort and tools">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path>
+            <path d="M4 6h16M7 12h10M10 18h4"></path>
           </svg>
-          Countries visited
-        </h2>
-        <button type="button" id="travel-add-open" class="travel-add-btn" hidden>+ Add country</button>
-      </header>
-      <p id="travel-status" class="travel-status" hidden></p>
-      <div id="travel-country-grid" class="travel-country-grid"></div>
-      <p id="travel-country-empty" class="travel-empty">Nothing recorded yet.</p>
-    </section>
+          <span class="visually-hidden">Sort and tools</span>
+        </button>
+        <div id="travel-filter-menu" class="travel-menu" hidden>
+          <p class="travel-menu-label">Sort</p>
+          <button type="button" class="travel-menu-item is-active" data-sort="name">Name A–Z</button>
+          <button type="button" class="travel-menu-item" data-sort="recent">Newest first</button>
+          <button type="button" id="travel-backup-open" class="travel-menu-item travel-menu-admin" hidden>Backup this browser…</button>
+        </div>
+      </div>
+    </header>
 
-    <section class="travel-panel" aria-labelledby="travel-wonders-heading">
-      <header class="travel-panel-head travel-panel-head-stack">
-        <h2 id="travel-wonders-heading">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2.4l1.55 5.1h5.35l-4.33 3.15 1.66 5.1L12 12.7 7.77 15.75l1.66-5.1L5.1 7.5h5.35L12 2.4z"></path>
-          </svg>
-          Wonders of the World
-        </h2>
-        <p id="travel-wonder-count" class="travel-panel-meta">0 of 7 visited.</p>
-      </header>
-      <div id="travel-wonder-list" class="travel-wonder-list"></div>
-    </section>
-  </div>
+    <label class="travel-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.2"></circle>
+        <path d="M16 16.5L20.5 21"></path>
+      </svg>
+      <span class="visually-hidden">Search countries</span>
+      <input id="travel-search" type="search" placeholder="Search countries..." autocomplete="off" spellcheck="false">
+    </label>
 
-  <details id="travel-backup" class="travel-backup" hidden>
-    <summary>Backup this browser list</summary>
-    <h2>Backup</h2>
+    <p id="travel-status" class="travel-status" hidden></p>
+
+    <div id="travel-country-list" class="travel-country-list"></div>
+    <p id="travel-country-empty" class="travel-empty">Nothing recorded yet.</p>
+
+    <form id="travel-add-form" class="travel-add-bar" hidden>
+      <label for="travel-add-select">Add country</label>
+      <div class="travel-add-row">
+        <select id="travel-add-select" autocomplete="off">
+          <option value="">Select a country...</option>
+        </select>
+        <button type="submit" class="travel-btn">Add</button>
+      </div>
+    </form>
+  </aside>
+</div>
+
+<dialog id="travel-editor" class="travel-dialog">
+  <form id="travel-editor-form">
+    <h3 id="travel-editor-title">Edit country</h3>
+    <input id="travel-edit-id" type="hidden">
+    <input id="travel-name" type="hidden">
+    <input id="travel-code" type="hidden">
+    <p class="travel-edit-name" id="travel-edit-name"></p>
+    <div class="travel-edit-date">
+      <label>
+        Month
+        <select id="travel-month" name="month">
+          <option value="">—</option>
+          <option value="1">Jan</option>
+          <option value="2">Feb</option>
+          <option value="3">Mar</option>
+          <option value="4">Apr</option>
+          <option value="5">May</option>
+          <option value="6">Jun</option>
+          <option value="7">Jul</option>
+          <option value="8">Aug</option>
+          <option value="9">Sep</option>
+          <option value="10">Oct</option>
+          <option value="11">Nov</option>
+          <option value="12">Dec</option>
+        </select>
+      </label>
+      <label>
+        Year
+        <input id="travel-year" name="year" type="text" inputmode="numeric" maxlength="4" autocomplete="off">
+      </label>
+    </div>
+    <label>
+      Notes
+      <input id="travel-notes" name="notes" type="text" autocomplete="off">
+    </label>
+    <p id="travel-editor-status" class="travel-status" hidden></p>
+    <div class="travel-form-actions">
+      <button id="travel-save" type="submit" class="travel-btn">Save</button>
+      <button id="travel-cancel-edit" type="button" class="travel-btn travel-btn-quiet">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="travel-backup" class="travel-dialog">
+  <form method="dialog" class="travel-backup-form">
+    <h3>Backup this browser list</h3>
     <p class="empty-note">Export or import JSON for this browser. Nothing here is published to the site.</p>
     <label class="travel-export-label" for="travel-export">Current JSON</label>
-    <textarea id="travel-export" class="travel-json" readonly rows="8" spellcheck="false"></textarea>
+    <textarea id="travel-export" class="travel-json" readonly rows="7" spellcheck="false"></textarea>
     <div class="travel-form-actions">
       <button id="travel-download" type="button" class="travel-btn travel-btn-quiet">Download JSON</button>
     </div>
     <label class="travel-export-label" for="travel-import">Import JSON</label>
-    <textarea id="travel-import" class="travel-json" rows="6" spellcheck="false"></textarea>
+    <textarea id="travel-import" class="travel-json" rows="5" spellcheck="false"></textarea>
     <div class="travel-form-actions">
       <button id="travel-import-btn" type="button" class="travel-btn travel-btn-quiet">Import pasted JSON</button>
       <label class="travel-file-label">
@@ -91,35 +136,8 @@ extra_js:
         <input id="travel-import-file" type="file" accept="application/json,.json">
       </label>
     </div>
-  </details>
-
-</div>
-
-<dialog id="travel-editor" class="travel-dialog">
-  <form id="travel-editor-form">
-    <h3 id="travel-editor-title">Add a country</h3>
-    <input id="travel-edit-id" type="hidden">
-    <label>
-      Country
-      <input id="travel-name" name="name" type="text" autocomplete="off" required>
-    </label>
-    <div id="travel-add-results" class="travel-add-results"></div>
-    <label>
-      Year
-      <input id="travel-year" name="year" type="text" inputmode="numeric" maxlength="4" autocomplete="off">
-    </label>
-    <label>
-      Notes
-      <input id="travel-notes" name="notes" type="text" autocomplete="off">
-    </label>
-    <label>
-      ISO code
-      <input id="travel-code" name="code" type="text" maxlength="2" autocapitalize="characters" autocomplete="off" spellcheck="false">
-    </label>
-    <p id="travel-editor-status" class="travel-status" hidden></p>
     <div class="travel-form-actions">
-      <button id="travel-save" type="submit" class="travel-btn">Add country</button>
-      <button id="travel-cancel-edit" type="button" class="travel-btn travel-btn-quiet">Cancel</button>
+      <button type="submit" class="travel-btn travel-btn-quiet">Close</button>
     </div>
   </form>
 </dialog>

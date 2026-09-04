@@ -9,7 +9,7 @@ Logged-out visitors see a quiet calling card on `/` — name, role, a short bio,
 Sign in (username + password) unlocks a site-wide session. After a successful login, the header gains private navigation and `/space/` becomes the private landing:
 
 - [Your space](/space/)
-- [Travel](/travel/) — interactive 3D globe; visited places stay in this browser
+- [Travel](/travel/) — cockpit globe and visited countries in this browser; Seven Wonders live on the bucket list
 - [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)
 - [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
