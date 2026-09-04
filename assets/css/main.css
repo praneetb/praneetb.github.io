@@ -39,9 +39,22 @@ html[data-theme="summit"] {
   --tile-manya-bg: #c5d5c0;
   --tile-manya-ink: #1c1917;
   --tile-manya-muted: #3e4a3c;
+  --tile-whiskey-bg: #3d2914;
+  --tile-whiskey-ink: #f7e7c3;
+  --tile-whiskey-muted: rgba(247, 231, 195, 0.78);
   --tile-patents-bg: #5c4033;
   --tile-patents-ink: #f7f1e8;
   --tile-patents-muted: rgba(247, 241, 232, 0.78);
+  --whiskey-room: #1a100a;
+  --whiskey-spot: rgba(232, 176, 96, 0.12);
+  --whiskey-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+  --whiskey-wood: linear-gradient(180deg, #4a2e1b 0%, #2c1810 100%);
+  --whiskey-ink: #f4ead8;
+  --whiskey-gold: #e0b15a;
+  --whiskey-gold-ink: #2a160c;
+  --whiskey-search-bg: #f4ead8;
+  --whiskey-search-ink: #2a160c;
+  --whiskey-panel: color-mix(in srgb, #2a1a10 86%, #f4ead8);
   --plaque-wall: #f3ebe0;
   --plaque-wall-spot: rgba(255, 250, 238, 0.9);
   --plaque-wall-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
@@ -124,9 +137,22 @@ html[data-theme="atlas"] {
   --tile-manya-bg: #023047;
   --tile-manya-ink: #ffffff;
   --tile-manya-muted: rgba(255, 255, 255, 0.72);
+  --tile-whiskey-bg: #8a4b08;
+  --tile-whiskey-ink: #fff8ef;
+  --tile-whiskey-muted: rgba(255, 248, 239, 0.78);
   --tile-patents-bg: #6d7b88;
   --tile-patents-ink: #ffffff;
   --tile-patents-muted: rgba(255, 255, 255, 0.78);
+  --whiskey-room: #1c140c;
+  --whiskey-spot: rgba(255, 183, 3, 0.14);
+  --whiskey-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  --whiskey-wood: linear-gradient(180deg, #5a3818 0%, #2a1a0c 100%);
+  --whiskey-ink: #fff8ef;
+  --whiskey-gold: #ffb703;
+  --whiskey-gold-ink: #023047;
+  --whiskey-search-bg: #fff8ef;
+  --whiskey-search-ink: #023047;
+  --whiskey-panel: color-mix(in srgb, #023047 82%, #ffb703);
   --plaque-wall: #c5d0d8;
   --plaque-wall-spot: rgba(255, 255, 255, 0.46);
   --plaque-wall-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
@@ -207,9 +233,22 @@ html[data-theme="cadence"] {
   --tile-manya-bg: #cdb4db;
   --tile-manya-ink: #1b1464;
   --tile-manya-muted: rgba(27, 20, 100, 0.72);
+  --tile-whiskey-bg: #f4a261;
+  --tile-whiskey-ink: #0b0a1f;
+  --tile-whiskey-muted: rgba(11, 10, 31, 0.7);
   --tile-patents-bg: #c9a227;
   --tile-patents-ink: #0b0a1f;
   --tile-patents-muted: rgba(11, 10, 31, 0.7);
+  --whiskey-room: #0b0a1f;
+  --whiskey-spot: rgba(244, 162, 97, 0.16);
+  --whiskey-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  --whiskey-wood: linear-gradient(180deg, #3a2418 0%, #161022 100%);
+  --whiskey-ink: #f4f1fa;
+  --whiskey-gold: #f4a261;
+  --whiskey-gold-ink: #0b0a1f;
+  --whiskey-search-bg: #f4ead8;
+  --whiskey-search-ink: #0b0a1f;
+  --whiskey-panel: color-mix(in srgb, #1b1464 78%, #0b0a1f);
   --plaque-wall: #0b0a1f;
   --plaque-wall-spot: rgba(46, 196, 182, 0.14);
   --plaque-wall-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
@@ -588,6 +627,7 @@ html[data-theme="cadence"] .theme-switch {
 .page-resume,
 .page-travel,
 .page-patents,
+.page-whiskey,
 .page-admin {
   max-width: calc(var(--wide) + 3rem);
 }

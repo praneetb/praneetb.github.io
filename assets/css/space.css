@@ -62,6 +62,11 @@
   color: var(--tile-media-ink);
 }
 
+.space-tile[data-tile="whiskey"] {
+  background: var(--tile-whiskey-bg);
+  color: var(--tile-whiskey-ink);
+}
+
 .space-tile[data-tile="patents"] {
   background: var(--tile-patents-bg);
   color: var(--tile-patents-ink);
