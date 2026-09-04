@@ -264,8 +264,7 @@ body.theme-travel .page-gate {
 .travel-trivia {
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
-  min-height: 0;
+  flex: 0 0 auto;
 }
 
 .travel-trivia-heading {
@@ -335,24 +334,40 @@ body.theme-travel .page-gate {
 
 .travel-known-for {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   gap: 0.35rem;
   flex: 0 0 auto;
   margin: 0.65rem 0 0;
   color: rgba(243, 238, 230, 0.62);
   font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.04em;
+  font-size: 0.72rem;
   line-height: 1.4;
-  text-transform: uppercase;
+}
+
+.travel-known-for-icon {
+  flex: 0 0 auto;
 }
 
 .travel-known-for svg {
-  flex: 0 0 auto;
+  display: block;
   width: 0.85rem;
   height: 0.85rem;
   margin-top: 0.08rem;
   color: var(--travel-gold);
+}
+
+.travel-known-for-label {
+  color: var(--travel-gold);
+  font-size: 0.62rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.travel-known-for-tags {
+  min-width: 0;
 }
 
 .travel-globe-stage {
@@ -841,12 +856,11 @@ body.theme-travel .empty-note {
 @media (max-width: 860px) {
   .travel-cockpit {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(0, 0.95fr) minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(16rem, 1.05fr) minmax(11rem, 1fr) minmax(10rem, 0.9fr);
   }
 
   .travel-inspect {
     min-height: 0;
-    max-height: none;
   }
 
   .travel-stats {

@@ -651,8 +651,18 @@
     if (tags.length) {
       var known = document.createElement("p");
       known.className = "travel-known-for";
-      known.innerHTML = iconSvg('<path d="M12 3.5l1.15 3.55h3.73l-3.02 2.2 1.15 3.55L12 10.6 8.99 12.8l1.15-3.55-3.02-2.2h3.73z"></path>') + "<span></span>";
-      known.querySelector("span").textContent = "Also known for — " + tags.join(" · ");
+      var spark = document.createElement("span");
+      spark.className = "travel-known-for-icon";
+      spark.innerHTML = iconSvg('<path d="M12 3.5l1.15 3.55h3.73l-3.02 2.2 1.15 3.55L12 10.6 8.99 12.8l1.15-3.55-3.02-2.2h3.73z"></path>');
+      var knownLabel = document.createElement("span");
+      knownLabel.className = "travel-known-for-label";
+      knownLabel.textContent = "Also known for —";
+      var knownTags = document.createElement("span");
+      knownTags.className = "travel-known-for-tags";
+      knownTags.textContent = tags.join(" · ");
+      known.appendChild(spark);
+      known.appendChild(knownLabel);
+      known.appendChild(knownTags);
       root.appendChild(known);
     }
   }
