@@ -92,17 +92,21 @@
   color: #b3a89b;
 }
 
-.notes-folder.is-collapsed .notes-files {
+.notes-folder-children {
+  padding: 0 0 0.05rem 0.85rem;
+}
+
+.notes-folder.is-collapsed > .notes-folder-children {
   display: none;
 }
 
-.notes-folder.is-collapsed .chevron {
+.notes-folder.is-collapsed > .notes-folder-toggle .chevron {
   transform: rotate(-90deg);
 }
 
 .notes-files {
   margin: 0;
-  padding: 0 0 0.15rem 0.95rem;
+  padding: 0 0 0.15rem 0.1rem;
   list-style: none;
 }
 

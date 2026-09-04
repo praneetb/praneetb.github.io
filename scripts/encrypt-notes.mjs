@@ -8,6 +8,11 @@
  * Writes assets/notes.enc.json (ciphertext only). Never pass a password as a
  * committed flag or check the vault into this repo.
  *
+ * Each note keeps its full relative path and parent folder path (empty at the
+ * vault root). `folders` is every intermediate prefix, so a note at
+ * `10-Work/Projects/People/x.md` contributes `10-Work`, `10-Work/Projects`,
+ * and `10-Work/Projects/People`.
+ *
  * Site policy: no finance content on this site. The publisher must skip
  * finance paths even for a private pack.
  *
@@ -173,6 +178,23 @@ function noteId(rel) {
     .replace(/^-|-$/g, "");
 }
 
+function folderPathOf(rel) {
+  const folder = path.posix.dirname(String(rel || "").replace(/\\/g, "/"));
+  return folder === "." ? "" : folder;
+}
+
+function addFolderPrefixes(folders, folderPath) {
+  const parts = partsOf(folderPath);
+  let acc = "";
+  let i;
+  for (i = 0; i < parts.length; i += 1) {
+    acc = acc ? acc + "/" + parts[i] : parts[i];
+    if (!blockedSegment(acc)) {
+      folders.add(acc);
+    }
+  }
+}
+
 async function walk(dir, prefix, files) {
   const entries = await fs.readdir(dir, { withFileTypes: true });
   for (const entry of entries) {
@@ -208,15 +230,14 @@ async function collect(vault) {
     const abs = path.join(vault, rel);
     const body = await fs.readFile(abs, "utf8");
     const stat = await fs.stat(abs);
-    const folder = path.posix.dirname(rel.replace(/\\/g, "/"));
-    const topFolder = folder === "." ? "" : folder.split("/")[0];
-    if (topFolder && !blockedSegment(topFolder)) {
-      folders.add(topFolder);
+    const folder = folderPathOf(rel);
+    if (folder) {
+      addFolderPrefixes(folders, folder);
     }
     notes.push({
       id: noteId(rel),
       path: rel.replace(/\\/g, "/"),
-      folder: topFolder,
+      folder: folder,
       title: titleFrom(rel, body),
       updated: stat.mtime.toISOString().slice(0, 10),
       body: body.replace(/^\uFEFF/, "")
@@ -227,13 +248,15 @@ async function collect(vault) {
       folders.add(name);
     }
   });
+  const folderList = Array.from(folders).sort();
   return {
     v: 1,
     source: "obsidian",
     readonly: true,
-    folders: Array.from(folders).sort(),
-    collapsed: ["People", "Archive"].filter(function (name) {
-      return folders.has(name);
+    folders: folderList,
+    collapsed: folderList.filter(function (name) {
+      var base = name.split("/").pop();
+      return base === "People" || base === "Archive";
     }),
     notes: notes
   };
@@ -270,6 +293,9 @@ async function main() {
       console.log(note.path);
     });
     console.error(payload.notes.length + " notes, " + payload.folders.length + " folders");
+    payload.folders.forEach(function (folder) {
+      console.error("  " + folder);
+    });
     return;
   }
   const password = process.env.NOTES_PASSWORD || process.env.SITE_PASSWORD;
@@ -298,7 +324,12 @@ async function main() {
   );
 }
 
-main().catch(function (err) {
-  console.error(err);
-  process.exit(1);
-});
+export { addFolderPrefixes, collect, folderPathOf };
+
+const isCli = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isCli) {
+  main().catch(function (err) {
+    console.error(err);
+    process.exit(1);
+  });
+}
