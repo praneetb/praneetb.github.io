@@ -7,4 +7,6 @@ _vendor
 vendor/bundle
 .bundle
 /vault
+/_manya_reports_pdfs
 *.secret.md
+

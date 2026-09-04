@@ -20,3 +20,4 @@ exclude:
   - CNAME
   - cover
   - scripts
+  - _manya_reports_pdfs
