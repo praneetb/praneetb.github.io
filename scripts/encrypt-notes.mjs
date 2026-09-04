@@ -3,12 +3,20 @@
  * Publish an Obsidian vault as an encrypted notes pack for GitHub Pages.
  *
  *   NOTES_PASSWORD='…' node scripts/encrypt-notes.mjs /path/to/vault
+ *   node scripts/encrypt-notes.mjs --list /path/to/vault
  *
  * Writes assets/notes.enc.json (ciphertext only). Never pass a password as a
  * committed flag or check the vault into this repo.
  *
- * Skipped: any Private/ folder segment, *.secret.md, .obsidian/, .trash/,
- * *.base, workspace/cache junk, and non-Markdown files.
+ * Site policy: no finance content on this site except the existing Rose
+ * ledger. The publisher must skip finance paths even for a private pack.
+ *
+ * Skipped:
+ *   - any folder named Finance / finance, including 20-Personal/Finance
+ *   - Private/, _staging/, .obsidian/, .trash/
+ *   - prompts/ (treated as agent-prompt packs) and *.prompt.md
+ *   - *.secret.md, *.base, workspace/cache junk
+ *   - binary, canvas, and other non-Markdown (trivial canvases are not shipped)
  */
 
 import { randomBytes, pbkdf2Sync, createCipheriv } from "node:crypto";
@@ -22,7 +30,19 @@ const ITER = 600000;
 const KEY_LEN = 32;
 const IV_LEN = 12;
 
-const SKIP_DIRS = new Set([".obsidian", ".trash", ".git", ".smart-env", "node_modules"]);
+const SKIP_DIRS = new Set([
+  ".obsidian",
+  ".trash",
+  ".git",
+  ".cursor",
+  ".smart-env",
+  "node_modules",
+  "_staging",
+  "private",
+  "finance",
+  "prompts"
+]);
+
 const SKIP_FILES = new Set([
   "workspace.json",
   "workspace-mobile.json",
@@ -30,36 +50,105 @@ const SKIP_FILES = new Set([
   ".DS_Store"
 ]);
 
+const BINARY_EXT = new Set([
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".gif",
+  ".webp",
+  ".svg",
+  ".pdf",
+  ".mp3",
+  ".wav",
+  ".m4a",
+  ".mp4",
+  ".mov",
+  ".zip",
+  ".7z",
+  ".woff",
+  ".woff2",
+  ".ttf",
+  ".otf",
+  ".excalidraw",
+  ".canvas",
+  ".base"
+]);
+
 function usage() {
   console.error("Usage: NOTES_PASSWORD='…' node scripts/encrypt-notes.mjs <vault-dir> [outfile]");
+  console.error("       node scripts/encrypt-notes.mjs --list <vault-dir>");
   process.exit(1);
 }
 
+function partsOf(rel) {
+  return String(rel || "")
+    .replace(/\\/g, "/")
+    .split("/")
+    .filter(Boolean);
+}
+
 function blockedSegment(rel) {
-  return rel.split(/[/\\]/).filter(Boolean).some(function (part) {
-    return part === "Private" || SKIP_DIRS.has(part);
+  var parts = partsOf(rel);
+  var lower = parts.map(function (part) {
+    return part.toLowerCase();
   });
+  var i;
+  if (!parts.length) {
+    return true;
+  }
+  for (i = 0; i < lower.length; i += 1) {
+    if (SKIP_DIRS.has(lower[i])) {
+      return true;
+    }
+  }
+  for (i = 0; i < lower.length - 1; i += 1) {
+    if (lower[i] === "20-personal" && lower[i + 1] === "finance") {
+      return true;
+    }
+  }
+  return false;
+}
+
+function looksLikeAgentPrompt(rel) {
+  var parts = partsOf(rel);
+  var base = parts[parts.length - 1] || "";
+  var lower = parts.map(function (part) {
+    return part.toLowerCase();
+  });
+  if (lower.indexOf("prompts") !== -1) {
+    return true;
+  }
+  if (/\.prompt\.md$/i.test(base)) {
+    return true;
+  }
+  if (/^(skill|agents|system)\.md$/i.test(base) && lower.some(function (part) {
+    return part === ".cursor" || part === "cursor" || part === "agent";
+  })) {
+    return true;
+  }
+  return false;
 }
 
 function skipFile(rel) {
-  const parts = rel.split(/[/\\]/).filter(Boolean);
-  if (!parts.length || blockedSegment(rel)) {
+  var parts = partsOf(rel);
+  if (!parts.length || blockedSegment(rel) || looksLikeAgentPrompt(rel)) {
     return true;
   }
-  const base = parts[parts.length - 1];
+  var base = parts[parts.length - 1];
+  var ext = path.extname(base).toLowerCase();
   if (SKIP_FILES.has(base)) {
     return true;
   }
   if (/\.secret\.md$/i.test(base)) {
     return true;
   }
-  if (/\.base$/i.test(base)) {
+  if (BINARY_EXT.has(ext)) {
     return true;
   }
   if (/^(workspace|cache)/i.test(base) && !base.endsWith(".md")) {
     return true;
   }
-  return !/\.md$/i.test(base);
+  return ext !== ".md";
 }
 
 function titleFrom(rel, body) {
@@ -104,28 +193,36 @@ async function collect(vault) {
   const notes = [];
   const folders = new Set();
   const top = await fs.readdir(vault, { withFileTypes: true });
-  top.forEach(function (entry) {
-    if (entry.isDirectory() && !SKIP_DIRS.has(entry.name) && entry.name !== "Private") {
-      folders.add(entry.name);
-    }
-  });
+  const topNames = new Set(
+    top.filter(function (entry) {
+      return entry.isDirectory();
+    }).map(function (entry) {
+      return entry.name;
+    })
+  );
   for (const rel of files) {
     const abs = path.join(vault, rel);
     const body = await fs.readFile(abs, "utf8");
     const stat = await fs.stat(abs);
     const folder = path.posix.dirname(rel.replace(/\\/g, "/"));
-    if (folder && folder !== ".") {
-      folders.add(folder.split("/")[0]);
+    const topFolder = folder === "." ? "" : folder.split("/")[0];
+    if (topFolder && !blockedSegment(topFolder)) {
+      folders.add(topFolder);
     }
     notes.push({
       id: noteId(rel),
       path: rel.replace(/\\/g, "/"),
-      folder: folder === "." ? "" : folder.split("/")[0],
+      folder: topFolder,
       title: titleFrom(rel, body),
       updated: stat.mtime.toISOString().slice(0, 10),
       body: body.replace(/^\uFEFF/, "")
     });
   }
+  ["People", "Archive"].forEach(function (name) {
+    if (topNames.has(name) && !blockedSegment(name)) {
+      folders.add(name);
+    }
+  });
   return {
     v: 1,
     source: "obsidian",
@@ -157,13 +254,24 @@ function encryptJson(password, payload) {
 }
 
 async function main() {
-  const vault = process.argv[2];
+  const listOnly = process.argv[2] === "--list";
+  const vault = listOnly ? process.argv[3] : process.argv[2];
   const outfile = path.resolve(process.argv[3] || DEFAULT_OUT);
-  const password = process.env.NOTES_PASSWORD || process.env.SITE_PASSWORD;
-  if (!vault || !password) {
+  if (!vault) {
     usage();
   }
   const payload = await collect(path.resolve(vault));
+  if (listOnly) {
+    payload.notes.forEach(function (note) {
+      console.log(note.path);
+    });
+    console.error(payload.notes.length + " notes, " + payload.folders.length + " folders");
+    return;
+  }
+  const password = process.env.NOTES_PASSWORD || process.env.SITE_PASSWORD;
+  if (!password) {
+    usage();
+  }
   const envelope = encryptJson(password, payload);
   await fs.mkdir(path.dirname(outfile), { recursive: true });
   await fs.writeFile(outfile, JSON.stringify(envelope));

@@ -12,8 +12,8 @@ Sign in (username + password) unlocks a site-wide session. After a successful lo
 - [Travel](/travel/) — interactive 3D globe; visited places stay in this browser
 - [Song](/song/) — today’s pick; favorites stay in this browser
 - [Bucket list](/bucket-list/) — things to do (`_data/bucket.yml`)
-- [Rose](/rose/) — private hours ledger (ciphertext only in the repo)
-- [Notes](/notes/) — read-only vault reader (ciphertext only in the repo)
+- [Rose](/rose/) — private hours ledger (ciphertext only in the repo). This is the only finance surface on the site.
+- [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
 
 Direct URLs to those private pages show a sign-in prompt when locked. Public visitors never see another browser’s local travel or song data.
 
@@ -30,10 +30,11 @@ Travel and the bucket list ship empty. Do not invent countries or items, and do 
 Do not commit Markdown from a personal vault. Export from Obsidian, then encrypt:
 
 ```bash
+node scripts/encrypt-notes.mjs --list /path/to/vault
 NOTES_PASSWORD='…' node scripts/encrypt-notes.mjs /path/to/vault
 ```
 
-That writes `assets/notes.enc.json`. The script skips any `Private/` folder segment, `*.secret.md`, `.obsidian/`, `.trash/`, `*.base`, and workspace/cache junk. The first ship uses a small demo corpus in that encrypted pack so `/notes/` is usable after login.
+That writes `assets/notes.enc.json`. The publisher skips finance paths (`20-Personal/Finance` and any folder named `Finance` / `finance`), `Private/`, `_staging/`, `.obsidian/`, `.trash/`, `prompts/` (agent-prompt packs) and `*.prompt.md`, `*.secret.md`, `*.base`, workspace/cache junk, and binary/canvas files. Site policy: no finance content on this site even behind login, except the existing Rose ledger. The first ship uses a small demo corpus in that encrypted pack; a real vault sync can come later.
 
 ## Local preview
 
