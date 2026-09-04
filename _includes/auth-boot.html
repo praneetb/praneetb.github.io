@@ -1,0 +1,16 @@
+<script>
+(function () {
+  var KEY = "site.admin";
+  var signedIn = false;
+  try {
+    signedIn = sessionStorage.getItem(KEY) === KEY || localStorage.getItem(KEY) === KEY;
+  } catch (err) {}
+  var root = document.documentElement;
+  root.classList.toggle("is-signed-in", signedIn);
+  var base = (root.getAttribute("data-baseurl") || "").replace(/\/$/, "");
+  var path = location.pathname.replace(/\/index\.html$/, "/");
+  if (signedIn && (path === base + "/" || path === base || path === "/")) {
+    location.replace(base + "/space/");
+  }
+})();
+</script>

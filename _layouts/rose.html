@@ -6,16 +6,20 @@
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
-  <meta name="theme-color" content="#f3efe6">
+  <meta name="theme-color" content="#f7f4ef">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/rose.css' | relative_url }}">
+  {% include auth-boot.html %}
 </head>
-<body>
+<body data-private="true">
   <a class="skip-link" href="#content">Skip to content</a>
   {% include nav.html %}
   <main id="content" class="page page-rose">
-    {{ content }}
+    {% include page-gate.html %}
+    <div class="private-content">
+      {{ content }}
+    </div>
   </main>
   {% include footer.html %}
   <script src="{{ '/assets/js/site-admin.js' | relative_url }}"></script>

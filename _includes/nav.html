@@ -1,36 +1,37 @@
 <header class="site-header">
   <div class="site-header-inner">
-    <a class="wordmark" href="{{ '/' | relative_url }}"{% if page.nav == 'home' %} aria-current="page"{% endif %}>
-      <span class="mark" aria-hidden="true">P</span>
-      <span class="wordmark-text">Praneet Bachheti</span>
-    </a>
-    <div class="site-header-tools">
-      <nav class="nav" aria-label="Primary">
-        <a href="{{ '/' | relative_url }}"{% if page.nav == 'home' %} aria-current="page"{% endif %}>Home</a>
-        <a href="{{ '/resume/' | relative_url }}"{% if page.nav == 'resume' %} aria-current="page"{% endif %}>Resume</a>
-        <a href="{{ '/travel/' | relative_url }}"{% if page.nav == 'travel' %} aria-current="page"{% endif %}>Travel</a>
-        <a href="{{ '/bucket-list/' | relative_url }}"{% if page.nav == 'bucket' %} aria-current="page"{% endif %}>Bucket list</a>
-        <a href="{{ '/song/' | relative_url }}"{% if page.nav == 'song' %} aria-current="page"{% endif %}>Song</a>
-        <span id="site-nav-private" hidden></span>
-      </nav>
-      <button type="button" id="site-admin-toggle" class="site-lock" aria-label="Unlock">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 11V8a4 4 0 0 1 8 0v3"/><rect x="6" y="11" width="12" height="9" rx="1.6"/></svg>
-      </button>
+    <a class="wordmark" href="{{ '/' | relative_url }}"{% if page.nav == 'home' %} aria-current="page"{% endif %}>Praneet Bachheti</a>
+    <nav id="site-private-nav" class="nav" aria-label="Private" hidden></nav>
+    <div class="site-header-account">
+      <button type="button" id="site-signin" class="site-signin">Sign in</button>
+      <div id="site-account" class="site-account" hidden>
+        <span class="site-avatar" aria-hidden="true">P</span>
+        <button type="button" id="site-signout" class="site-signout">Sign out</button>
+      </div>
     </div>
   </div>
+  <p id="welcome-strip" class="welcome-strip" hidden>Welcome back</p>
 </header>
 
 <dialog id="site-admin-dialog" class="site-admin-dialog">
   <form id="site-admin-form">
-    <h2>Unlock</h2>
+    <h2>Sign in</h2>
+    <label>
+      Username
+      <input id="site-admin-username" name="username" type="text" autocomplete="username" required>
+    </label>
     <label>
       Password
       <input id="site-admin-password" name="password" type="password" autocomplete="current-password" required>
     </label>
+    <label class="site-admin-persist">
+      <input id="site-admin-persist" name="persist" type="checkbox">
+      Stay signed in on this device
+    </label>
     <p id="site-admin-error" class="site-gate-error" hidden></p>
     <div class="site-admin-actions">
-      <button type="submit">Unlock</button>
       <button id="site-admin-cancel" type="button">Cancel</button>
+      <button type="submit">Sign in</button>
     </div>
   </form>
 </dialog>

@@ -7,6 +7,7 @@
 
   var listeners = [];
   var envelopePromise = null;
+  var signInHandler = null;
 
   function notify(unlocked) {
     listeners.slice().forEach(function (fn) {
@@ -38,6 +39,22 @@
       bytes[i] = binary.charCodeAt(i);
     }
     return bytes;
+  }
+
+  function timingSafeEqual(a, b) {
+    if (!a || !b || a.length !== b.length) {
+      return false;
+    }
+    var diff = 0;
+    var i;
+    for (i = 0; i < a.length; i += 1) {
+      diff |= a[i] ^ b[i];
+    }
+    return diff === 0;
+  }
+
+  function normalizeUsername(value) {
+    return String(value || "").normalize("NFKC").trim().toLowerCase();
   }
 
   function loadEnvelope() {
@@ -75,6 +92,33 @@
     );
   }
 
+  async function verifyUsername(username, envelope) {
+    var spec = envelope && envelope.user;
+    if (!spec || spec.kdf !== "PBKDF2-SHA256" || !spec.iter || !spec.salt || !spec.hash) {
+      return false;
+    }
+    var salt = b64ToBytes(spec.salt);
+    var expected = b64ToBytes(spec.hash);
+    var material = await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(normalizeUsername(username)),
+      "PBKDF2",
+      false,
+      ["deriveBits"]
+    );
+    var bits = await crypto.subtle.deriveBits(
+      {
+        name: "PBKDF2",
+        hash: "SHA-256",
+        iterations: spec.iter,
+        salt: salt
+      },
+      material,
+      expected.length * 8
+    );
+    return timingSafeEqual(new Uint8Array(bits), expected);
+  }
+
   async function decryptEnvelope(password) {
     var envelope = await loadEnvelope();
     if (!envelope || envelope.kdf !== "PBKDF2-SHA256" || !envelope.iter || !envelope.salt || !envelope.iv || !envelope.ct) {
@@ -89,20 +133,32 @@
     return JSON.parse(new TextDecoder().decode(plain));
   }
 
-  function readStorage(key) {
+  function storageGet(key) {
     try {
-      return sessionStorage.getItem(key);
+      return sessionStorage.getItem(key) || localStorage.getItem(key);
     } catch (err) {
       return null;
     }
   }
 
+  function storageRemove(store, key) {
+    try {
+      store.removeItem(key);
+    } catch (err) {
+      // Ignore storage errors when leaving a session.
+    }
+  }
+
+  function storageSet(store, key, value) {
+    store.setItem(key, value);
+  }
+
   function isUnlocked() {
-    return readStorage(ADMIN_KEY) === ADMIN_KEY;
+    return storageGet(ADMIN_KEY) === ADMIN_KEY;
   }
 
   function getLedger() {
-    var raw = readStorage(LEDGER_KEY);
+    var raw = storageGet(LEDGER_KEY);
     if (!raw) {
       return null;
     }
@@ -113,43 +169,83 @@
     }
   }
 
-  function persistUnlock(ledger) {
+  function persistUnlock(ledger, persist) {
+    var payload = JSON.stringify(ledger);
     try {
-      sessionStorage.setItem(ADMIN_KEY, ADMIN_KEY);
-      sessionStorage.setItem(ROSE_KEY, ROSE_KEY);
-      sessionStorage.setItem(LEDGER_KEY, JSON.stringify(ledger));
+      storageSet(sessionStorage, ADMIN_KEY, ADMIN_KEY);
+      storageSet(sessionStorage, ROSE_KEY, ROSE_KEY);
+      storageSet(sessionStorage, LEDGER_KEY, payload);
     } catch (err) {
       try {
-        sessionStorage.setItem(ADMIN_KEY, ADMIN_KEY);
-        sessionStorage.setItem(ROSE_KEY, ROSE_KEY);
+        storageSet(sessionStorage, ADMIN_KEY, ADMIN_KEY);
+        storageSet(sessionStorage, ROSE_KEY, ROSE_KEY);
       } catch (ignored) {
         // Unlock still lasts for this visit if sessionStorage is blocked.
       }
+    }
+    if (persist) {
+      try {
+        storageSet(localStorage, ADMIN_KEY, ADMIN_KEY);
+        storageSet(localStorage, ROSE_KEY, ROSE_KEY);
+        storageSet(localStorage, LEDGER_KEY, payload);
+      } catch (err) {
+        // Session still works if persistent storage is blocked.
+      }
+    } else {
+      storageRemove(localStorage, ADMIN_KEY);
+      storageRemove(localStorage, ROSE_KEY);
+      storageRemove(localStorage, LEDGER_KEY);
+    }
+    try {
+      document.documentElement.classList.add("is-signed-in");
+    } catch (err) {
+      // Class toggle is cosmetic for gated pages.
     }
     notify(true);
   }
 
   function lock() {
+    storageRemove(sessionStorage, ADMIN_KEY);
+    storageRemove(sessionStorage, ROSE_KEY);
+    storageRemove(sessionStorage, LEDGER_KEY);
+    storageRemove(localStorage, ADMIN_KEY);
+    storageRemove(localStorage, ROSE_KEY);
+    storageRemove(localStorage, LEDGER_KEY);
     try {
-      sessionStorage.removeItem(ADMIN_KEY);
-      sessionStorage.removeItem(ROSE_KEY);
-      sessionStorage.removeItem(LEDGER_KEY);
+      document.documentElement.classList.remove("is-signed-in");
     } catch (err) {
-      // Ignore storage errors when leaving admin.
+      // Class toggle is cosmetic for gated pages.
     }
     notify(false);
   }
 
-  async function tryUnlock(password) {
-    if (!password) {
+  async function tryUnlock(username, password, persist) {
+    if (!username || !password) {
       return { ok: false };
     }
     try {
-      var ledger = await decryptEnvelope(password);
-      if (!ledger || typeof ledger !== "object") {
+      var envelope = await loadEnvelope();
+      if (!envelope || !envelope.user) {
+        var missing = new Error("unconfigured");
+        missing.name = "UnconfiguredError";
+        throw missing;
+      }
+      var userOk = await verifyUsername(username, envelope);
+      var ledger = null;
+      var decryptOk = false;
+      try {
+        ledger = await decryptEnvelope(password);
+        decryptOk = !!(ledger && typeof ledger === "object");
+      } catch (err) {
+        if (err && (err.name === "UnconfiguredError" || err.message === "missing")) {
+          return { ok: false, unconfigured: true };
+        }
+        decryptOk = false;
+      }
+      if (!userOk || !decryptOk) {
         return { ok: false };
       }
-      persistUnlock(ledger);
+      persistUnlock(ledger, persist);
       return { ok: true, ledger: ledger };
     } catch (err) {
       if (err && (err.name === "UnconfiguredError" || err.message === "missing")) {
@@ -165,6 +261,18 @@
     }
   }
 
+  function requestSignIn() {
+    if (typeof signInHandler === "function") {
+      signInHandler();
+      return;
+    }
+    document.dispatchEvent(new CustomEvent("site:signin"));
+  }
+
+  function setSignInHandler(fn) {
+    signInHandler = typeof fn === "function" ? fn : null;
+  }
+
   global.SiteAdmin = {
     ADMIN_KEY: ADMIN_KEY,
     isConfigured: function () {
@@ -174,6 +282,8 @@
     getLedger: getLedger,
     lock: lock,
     tryUnlock: tryUnlock,
-    onChange: onChange
+    onChange: onChange,
+    requestSignIn: requestSignIn,
+    setSignInHandler: setSignInHandler
   };
 })(window);

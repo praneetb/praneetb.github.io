@@ -3,6 +3,7 @@ layout: default
 title: Admin
 nav: admin
 permalink: /admin/
+private: true
 sitemap: false
 robots: noindex, nofollow
 description: Unlisted admin unlock for this site.
@@ -10,29 +11,16 @@ extra_js:
   - /assets/js/admin-page.js
 ---
 
-<div id="admin-gate" class="site-gate">
+<div id="admin-panel">
   <p class="kicker">Admin</p>
-  <h1>Locked</h1>
-  <p id="admin-gate-status" class="lede">This page is locked.</p>
-  <form id="admin-gate-form" class="site-gate-form" hidden>
-    <label>
-      Password
-      <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
-    </label>
-    <p id="admin-gate-error" class="site-gate-error" hidden></p>
-    <button type="submit">Unlock</button>
-  </form>
-</div>
-
-<div id="admin-panel" hidden>
-  <p class="kicker">Admin</p>
-  <h1>Unlocked for this tab</h1>
-  <p class="lede">Admin stays on until you lock or close the tab. Public pages stay unchanged for everyone else.</p>
+  <h1>Signed in for this device</h1>
+  <p class="lede">The same sign-in opens travel, song, the bucket list, and Rose. Public pages stay unchanged for everyone else.</p>
   <ul class="links">
-    <li><a href="{{ '/travel/' | relative_url }}">Open travel editor</a></li>
+    <li><a href="{{ '/space/' | relative_url }}">Open your space</a></li>
+    <li><a href="{{ '/travel/' | relative_url }}">Open travel</a></li>
     <li><a href="{{ '/rose/' | relative_url }}">Open hours ledger</a></li>
   </ul>
   <p class="travel-form-actions">
-    <button type="button" id="admin-lock" class="travel-btn">Lock</button>
+    <button type="button" id="admin-lock" class="travel-btn">Sign out</button>
   </p>
 </div>

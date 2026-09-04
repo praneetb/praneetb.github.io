@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-baseurl="{{ site.baseurl }}"{% if page.nav == 'travel' %} class="theme-travel"{% elsif page.nav == 'home' %} class="theme-home"{% endif %}>
+<html lang="en" data-baseurl="{{ site.baseurl }}"{% if page.nav == 'travel' %} class="theme-travel"{% endif %}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,7 @@
   <meta name="robots" content="{{ page.robots }}">
   {% endif %}
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
-  <meta name="theme-color" content="{% if page.nav == 'travel' %}#07090e{% elsif page.nav == 'home' %}#110e0c{% else %}#f3efe6{% endif %}">
+  <meta name="theme-color" content="{% if page.nav == 'travel' %}#07090e{% else %}#f7f4ef{% endif %}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   {% if page.extra_css %}
@@ -17,14 +17,24 @@
   <link rel="stylesheet" href="{{ href | relative_url }}">
     {% endfor %}
   {% endif %}
+  {% include auth-boot.html %}
 </head>
-<body{% if page.nav == 'travel' %} class="theme-travel"{% elsif page.nav == 'home' %} class="theme-home"{% endif %}>
+<body{% if page.nav == 'travel' %} class="theme-travel"{% endif %}{% if page.private %} data-private="true"{% endif %}>
   <a class="skip-link" href="#content">Skip to content</a>
   {% include nav.html %}
   <main id="content" class="page page-{{ page.nav }}">
-    {{ content }}
+    {% if page.private %}
+      {% include page-gate.html %}
+      <div class="private-content">
+        {{ content }}
+      </div>
+    {% else %}
+      {{ content }}
+    {% endif %}
   </main>
-  {% include footer.html %}
+  {% unless page.hide_footer %}
+    {% include footer.html %}
+  {% endunless %}
   <script src="{{ '/assets/js/site-admin.js' | relative_url }}"></script>
   <script src="{{ '/assets/js/header-gate.js' | relative_url }}"></script>
   {% if page.extra_js %}

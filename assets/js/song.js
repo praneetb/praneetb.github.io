@@ -335,7 +335,14 @@
     });
   }
 
+  function isUnlocked() {
+    return !!(window.SiteAdmin && window.SiteAdmin.isUnlocked());
+  }
+
   function render() {
+    if (!isUnlocked()) {
+      return;
+    }
     renderToday();
     renderFavorites();
   }
@@ -364,6 +371,13 @@
     var cancel = el("song-mood-cancel");
     if (cancel) {
       cancel.addEventListener("click", closeMoodDialog);
+    }
+    if (window.SiteAdmin && typeof window.SiteAdmin.onChange === "function") {
+      window.SiteAdmin.onChange(function (unlocked) {
+        if (unlocked) {
+          render();
+        }
+      });
     }
   }
 

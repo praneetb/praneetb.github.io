@@ -2,125 +2,29 @@
 layout: default
 title: Praneet Bachheti
 nav: home
-description: A personal magazine. He hiked Half Dome in July 2024. Violin, Tuesdays in the water, and the rest of the page.
+hide_footer: true
+description: Senior Principal Engineer in Fremont. Networking and security systems, patents, violin, and the outdoors.
 extra_css:
-  - /assets/css/magazine.css
+  - /assets/css/home.css
 ---
 
-<article class="cover">
-  <img
-    class="cover-image"
-    src="{{ '/assets/images/sunset-half-dome-lodge.jpg' | relative_url }}"
-    alt="Half Dome at sunset, Yosemite Valley. Photograph by Av9, public domain."
-    width="2560"
-    height="1920">
-  <div class="cover-shade" aria-hidden="true"></div>
-  <div class="cover-copy">
-    <p class="cover-issue">Yosemite Valley · The granite issue</p>
-    <h1 class="cover-title">Praneet <span>Bachheti</span></h1>
-    <p class="cover-kicker">He hiked Half Dome in July 2024.</p>
+<article class="calling-card">
+  <div class="calling-card-copy">
+    <h1>Praneet Bachheti</h1>
+    <p class="calling-card-role">Senior Principal Engineer · Fremont, CA</p>
+    <p class="calling-card-bio">I build and scale networking and security systems that are reliable, observable, and built for change. I hold multiple patents in network security and traffic management. Outside of work, I play the violin and spend as much time as I can in the outdoors.</p>
+    <p class="calling-card-links">
+      <a href="{{ '/resume/' | relative_url }}">Resume</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://github.com/praneetb">GitHub</a>
+    </p>
   </div>
-  <p class="cover-credit">
-    Photograph by <a href="https://commons.wikimedia.org/wiki/File:Sunset_Half_Dome_Lodge.jpg">Av9</a>,
-    23 July 2010. Sunset on Half Dome seen from near Yosemite Lodge, Yosemite Valley.
-    Public domain. Not his photograph.
-  </p>
+  <figure class="calling-card-hero">
+    <img
+      src="{{ '/assets/images/sunset-half-dome-lodge.jpg' | relative_url }}"
+      alt="Half Dome at sunset, Yosemite Valley. Photograph by Av9, public domain."
+      width="2560"
+      height="1920">
+    <figcaption>Half Dome · Yosemite</figcaption>
+  </figure>
 </article>
-
-<div class="magazine-well">
-  <section class="spread spread-music" aria-labelledby="music-heading">
-    <p class="spread-folio">01</p>
-    <div class="spread-copy">
-      <p class="spread-kicker">Music</p>
-      <h2 id="music-heading">The violin stays in the room.</h2>
-      <p>He plays it. A little guitar, too. Not a set list — a habit that does not need an audience.</p>
-      <p class="spread-aside">Today’s pick lives on the <a href="{{ '/song/' | relative_url }}">Song</a> page.</p>
-    </div>
-  </section>
-
-  <section class="spread spread-hobby" aria-labelledby="harley-heading">
-    <figure class="spread-figure">
-      <div class="spread-reserve" role="img" aria-label="Photograph forthcoming. Softail Slim. His.">
-        <p class="spread-reserve-kicker">Harley-Davidson</p>
-        <p class="spread-reserve-name">Softail Slim</p>
-        <p class="spread-reserve-meta">His bike, his frame. Not a catalog shot.</p>
-      </div>
-      <figcaption>Photograph forthcoming — his bike, his frame.</figcaption>
-    </figure>
-    <div class="spread-copy">
-      <p class="spread-kicker">Harley-Davidson</p>
-      <h2 id="harley-heading">Softail Slim.</h2>
-      <p>His.</p>
-    </div>
-  </section>
-
-  <section class="spread spread-hobby spread-hobby-flip" aria-labelledby="swimming-heading">
-    <figure class="spread-figure">
-      <img
-        src="{{ '/assets/images/swim-praneet.jpg' | relative_url }}"
-        alt="Praneet swimming at City Sports Club, Fremont"
-        width="675"
-        height="1200">
-      <figcaption>Photograph by Praneet Bachheti (still from his video). Tuesdays at City Sports Club, Farwell/Mowry, Fremont. Not a set.</figcaption>
-    </figure>
-    <div class="spread-copy">
-      <p class="spread-kicker">Swimming</p>
-      <h2 id="swimming-heading">Tuesdays in the water.</h2>
-      <p>City Sports, Fremont.</p>
-      <p class="spread-aside">Farwell at Mowry. Not a set — the weekly habit.</p>
-    </div>
-  </section>
-
-  <section class="spread spread-hobby" aria-labelledby="pickleball-heading">
-    <figure class="spread-figure">
-      <div class="spread-reserve" role="img" aria-label="Central Park Knoll Pickleball Courts, Fremont. His photograph of this court has not been added yet.">
-        <p class="spread-reserve-kicker">Fremont</p>
-        <p class="spread-reserve-name">Central Park Knoll</p>
-        <p class="spread-reserve-meta">Civic Center Drive / 40000 Paseo Padre Parkway</p>
-      </div>
-      <figcaption>Photograph forthcoming — his court, his frame. Not a stock shot.</figcaption>
-    </figure>
-    <div class="spread-copy">
-      <p class="spread-kicker">Pickleball</p>
-      <h2 id="pickleball-heading">Wednesday afternoons, Sunday mornings.</h2>
-      <p>Central Park Knoll, Fremont.</p>
-      <p class="spread-aside">
-        <a href="https://www.yelp.com/biz/central-park-knoll-pickleball-courts-fremont">Central Park Knoll Pickleball Courts</a>
-        · Civic Center Drive / 40000 Paseo Padre Parkway
-      </p>
-    </div>
-  </section>
-
-  <section class="spread spread-issued" aria-labelledby="issued-heading">
-    <p class="spread-folio">Issued</p>
-    <div class="spread-copy">
-      <p class="spread-kicker">Accomplishments</p>
-      <h2 id="issued-heading">Four grants. Quiet lines.</h2>
-      <p>Inventor on the grants is Praneet Bachheti. Issued only — no applications, no abstracts.</p>
-      <ol class="issued-list">
-        {% for patent in site.data.issued %}
-        <li>
-          <a class="issued-number" href="{{ patent.url }}">{{ patent.number }}</a>
-          <span class="issued-title">{{ patent.title }}</span>
-          <span class="issued-meta">Issued {{ patent.issued }} · {{ patent.assignee }}</span>
-        </li>
-        {% endfor %}
-      </ol>
-    </div>
-  </section>
-
-  <div class="spread-pair">
-    <section class="spread spread-invite" aria-labelledby="travel-heading">
-      <p class="spread-kicker">Travel</p>
-      <h2 id="travel-heading">A globe, not a stamp collection.</h2>
-      <p>The public list stays empty until he writes one. Nothing here is filler.</p>
-      <p><a class="spread-go" href="{{ '/travel/' | relative_url }}">Open the map</a></p>
-    </section>
-    <section class="spread spread-invite" aria-labelledby="bucket-heading">
-      <p class="spread-kicker">Bucket list</p>
-      <h2 id="bucket-heading">A notebook with the cover still blank.</h2>
-      <p>The page is empty on purpose. When a real list is ready, it will live there.</p>
-      <p><a class="spread-go" href="{{ '/bucket-list/' | relative_url }}">Open the list</a></p>
-    </section>
-  </div>
-</div>

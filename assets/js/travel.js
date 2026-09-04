@@ -606,9 +606,6 @@
   function applyMode() {
     var addBtn = el("travel-add-open");
     var backup = el("travel-backup");
-    var gate = el("travel-gate");
-    var unlockBtn = el("travel-unlock");
-    var lockBtn = el("travel-lock");
     var adminMode = isAdmin();
     document.body.classList.toggle("travel-is-admin", adminMode);
     if (addBtn) {
@@ -616,15 +613,6 @@
     }
     if (backup) {
       backup.hidden = !adminMode;
-    }
-    if (gate) {
-      gate.hidden = true;
-    }
-    if (unlockBtn) {
-      unlockBtn.hidden = adminMode;
-    }
-    if (lockBtn) {
-      lockBtn.hidden = !adminMode;
     }
     if (!adminMode) {
       closeEditor();
@@ -831,6 +819,10 @@
     if (!box) {
       return;
     }
+    if (globe) {
+      updateGlobeMarkers();
+      return;
+    }
     if (typeof Globe !== "function") {
       box.textContent = "The globe could not load. Check the network and refresh.";
       return;
@@ -906,74 +898,24 @@
     });
   }
 
-  function onUnlockSubmit(event) {
-    event.preventDefault();
-    var api = admin();
-    var input = el("travel-password");
-    var error = el("travel-gate-error");
-    if (!api || !api.isConfigured()) {
-      if (error) {
-        error.hidden = false;
-        error.textContent = "This gate is not configured yet.";
-      }
-      return;
-    }
-    var form = el("travel-gate-form");
-    var button = form ? form.querySelector("button[type='submit']") : null;
-    if (button) {
-      button.disabled = true;
-      button.textContent = "Unlocking…";
-    }
-    api.tryUnlock(input ? input.value : "").then(function (result) {
-      if (button) {
-        button.disabled = false;
-        button.textContent = "Unlock";
-      }
-      if (result.unconfigured) {
-        if (error) {
-          error.hidden = false;
-          error.textContent = "This gate is not configured yet.";
-        }
-        return;
-      }
-      if (!result.ok) {
-        if (error) {
-          error.hidden = false;
-          error.textContent = "That password is not correct.";
-        }
-        if (input) {
-          input.value = "";
-          input.focus();
-        }
-        return;
-      }
-      if (input) {
-        input.value = "";
-      }
-      if (error) {
-        error.hidden = true;
-        error.textContent = "";
-      }
-      applyMode();
-    });
+  function startPrivateView() {
+    applyMode();
+    initGlobe();
   }
 
   function init() {
-    applyMode();
-    initGlobe();
-
     var addBtn = el("travel-add-open");
     var form = el("travel-editor-form");
     var cancel = el("travel-cancel-edit");
     var nameInput = el("travel-name");
-    var unlockBtn = el("travel-unlock");
-    var lockBtn = el("travel-lock");
-    var gate = el("travel-gate");
-    var gateForm = el("travel-gate-form");
     var importFile = el("travel-import-file");
     var importBtn = el("travel-import-btn");
     var downloadBtn = el("travel-download");
     var dialog = el("travel-editor");
+
+    if (isAdmin()) {
+      startPrivateView();
+    }
 
     if (addBtn) {
       addBtn.addEventListener("click", function () {
@@ -1001,31 +943,6 @@
       dialog.addEventListener("close", function () {
         editingId = null;
       });
-    }
-    if (unlockBtn) {
-      unlockBtn.addEventListener("click", function () {
-        if (gate) {
-          gate.hidden = !gate.hidden;
-          if (!gate.hidden) {
-            var input = el("travel-password");
-            if (input) {
-              input.focus();
-            }
-          }
-        }
-      });
-    }
-    if (lockBtn) {
-      lockBtn.addEventListener("click", function () {
-        var api = admin();
-        if (api) {
-          api.lock();
-        }
-        applyMode();
-      });
-    }
-    if (gateForm) {
-      gateForm.addEventListener("submit", onUnlockSubmit);
     }
     if (importFile) {
       importFile.addEventListener("change", function (event) {
@@ -1066,8 +983,10 @@
 
     var api = admin();
     if (api && typeof api.onChange === "function") {
-      api.onChange(function () {
-        applyMode();
+      api.onChange(function (unlocked) {
+        if (unlocked) {
+          startPrivateView();
+        }
       });
     }
   }

@@ -1,0 +1,16 @@
+---
+layout: default
+title: Bucket list
+nav: bucket
+permalink: /bucket/
+private: true
+sitemap: false
+robots: noindex, nofollow
+---
+
+<p class="kicker">Bucket list</p>
+<h1>Things to do</h1>
+<p class="lede"><a href="{{ '/bucket-list/' | relative_url }}">Open the list</a></p>
+<script>
+  location.replace({{ '/bucket-list/' | relative_url | jsonify }});
+</script>

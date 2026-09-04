@@ -2,7 +2,8 @@
 layout: default
 title: Travel
 nav: travel
-description: A public 3D globe and the New7Wonders catalog. The committed country list stays empty.
+private: true
+description: A private 3D globe and visited places. The committed country list stays empty.
 extra_css:
   - /assets/css/travel.css
 extra_js:
@@ -92,21 +93,6 @@ extra_js:
     </div>
   </details>
 
-  <p class="travel-mode-controls">
-    <button type="button" id="travel-unlock" class="travel-quiet-unlock" aria-label="Unlock">·</button>
-    <button type="button" id="travel-lock" class="travel-btn travel-btn-quiet" hidden>Lock</button>
-  </p>
-
-  <div id="travel-gate" class="site-gate" hidden>
-    <form id="travel-gate-form" class="site-gate-form">
-      <label>
-        Password
-        <input id="travel-password" name="password" type="password" autocomplete="current-password" required>
-      </label>
-      <p id="travel-gate-error" class="site-gate-error" hidden></p>
-      <button type="submit">Unlock</button>
-    </form>
-  </div>
 </div>
 
 <dialog id="travel-editor" class="travel-dialog">

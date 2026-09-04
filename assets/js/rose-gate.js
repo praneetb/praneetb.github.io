@@ -162,7 +162,7 @@
     wrap.appendChild(sessionsSection);
 
     var toolbar = node("p", "rose-toolbar");
-    var lockBtn = node("button", "rose-lock-btn", "Lock");
+    var lockBtn = node("button", "rose-lock-btn", "Sign out");
     lockBtn.type = "button";
     lockBtn.id = "rose-lock";
     lockBtn.addEventListener("click", onLock);
@@ -173,79 +173,18 @@
   }
 
   function showDashboard(ledger) {
-    var gate = el("rose-gate");
     var root = el("rose-dashboard-root");
     var data = ledger || (admin() && admin().getLedger());
     if (!root || !data) {
-      showLock(false);
       return;
     }
     renderDashboard(root, data);
-    root.hidden = false;
-    if (gate) {
-      gate.hidden = true;
-    }
   }
 
-  function showLock(unconfigured) {
-    var gate = el("rose-gate");
-    var form = el("rose-gate-form");
-    var status = el("rose-gate-status");
-    var error = el("rose-gate-error");
+  function clearDashboard() {
     var root = el("rose-dashboard-root");
-    var button = form ? form.querySelector("button[type='submit']") : null;
     if (root) {
-      root.hidden = true;
       root.replaceChildren();
-    }
-    if (gate) {
-      gate.hidden = false;
-    }
-    if (error) {
-      error.hidden = true;
-      error.textContent = "";
-    }
-    if (button) {
-      button.disabled = false;
-      button.textContent = "Unlock";
-    }
-    if (unconfigured) {
-      if (status) {
-        status.textContent = "This gate is not configured yet.";
-      }
-      if (form) {
-        form.hidden = true;
-      }
-      return;
-    }
-    if (status) {
-      status.textContent = "Enter the password to continue.";
-    }
-    if (form) {
-      form.hidden = false;
-    }
-  }
-
-  function stayLocked(message) {
-    var error = el("rose-gate-error");
-    var input = el("rose-password");
-    var root = el("rose-dashboard-root");
-    var form = el("rose-gate-form");
-    var button = form ? form.querySelector("button[type='submit']") : null;
-    if (root) {
-      root.hidden = true;
-    }
-    if (button) {
-      button.disabled = false;
-      button.textContent = "Unlock";
-    }
-    if (error) {
-      error.hidden = false;
-      error.textContent = message;
-    }
-    if (input) {
-      input.value = "";
-      input.focus();
     }
   }
 
@@ -254,64 +193,23 @@
     if (api) {
       api.lock();
     }
-    showLock(false);
-  }
-
-  async function onSubmit(event) {
-    event.preventDefault();
-    var api = admin();
-    var form = el("rose-gate-form");
-    var button = form ? form.querySelector("button[type='submit']") : null;
-    if (!api) {
-      stayLocked("This gate is not configured yet.");
-      return;
-    }
-    var input = el("rose-password");
-    var password = input ? input.value : "";
-    if (button) {
-      button.disabled = true;
-      button.textContent = "Unlocking…";
-    }
-    var result = await api.tryUnlock(password);
-    if (result.unconfigured) {
-      showLock(true);
-      return;
-    }
-    if (!result.ok) {
-      stayLocked("That password is not correct.");
-      return;
-    }
-    if (input) {
-      input.value = "";
-    }
-    if (button) {
-      button.disabled = false;
-      button.textContent = "Unlock";
-    }
-    showDashboard(result.ledger);
+    clearDashboard();
+    location.assign((document.documentElement.getAttribute("data-baseurl") || "").replace(/\/$/, "") + "/");
   }
 
   function init() {
     var api = admin();
-    if (!api) {
-      showLock(true);
-      return;
-    }
-    if (api.isUnlocked() && api.getLedger()) {
+    if (api && api.isUnlocked() && api.getLedger()) {
       showDashboard(api.getLedger());
     } else {
-      showLock(false);
-    }
-    var form = el("rose-gate-form");
-    if (form) {
-      form.addEventListener("submit", onSubmit);
+      clearDashboard();
     }
     if (api && typeof api.onChange === "function") {
       api.onChange(function (unlocked) {
         if (unlocked && api.getLedger()) {
           showDashboard(api.getLedger());
         } else {
-          showLock(false);
+          clearDashboard();
         }
       });
     }
