@@ -167,7 +167,7 @@
         button.textContent = "Sign in";
       }
       if (result.unconfigured) {
-        setError("Wrong username or password");
+        setError("Site login is not ready yet. Hard-refresh and try again.");
         return;
       }
       if (!result.ok) {

@@ -59,7 +59,7 @@
   }
 
   function loadJson(url) {
-    return fetch(url, { credentials: "same-origin" }).then(function (response) {
+    return fetch(url, { credentials: "same-origin", cache: "no-store" }).then(function (response) {
       if (!response.ok) {
         throw new Error("missing");
       }
@@ -247,6 +247,14 @@
     notify(false);
   }
 
+  function forgetNotesEnvelope() {
+    notesEnvelopePromise = null;
+  }
+
+  function isUnconfiguredError(err) {
+    return !!(err && (err.name === "UnconfiguredError" || err.message === "missing"));
+  }
+
   async function tryUnlock(username, password, persist) {
     if (!username || !password) {
       return { ok: false };
@@ -254,6 +262,7 @@
     try {
       var envelope = await loadNotesEnvelope();
       if (!envelope || !envelope.user) {
+        forgetNotesEnvelope();
         var missing = new Error("unconfigured");
         missing.name = "UnconfiguredError";
         throw missing;
@@ -265,7 +274,8 @@
         notes = await decryptNotes(password);
         decryptOk = !!(notes && Array.isArray(notes.notes));
       } catch (err) {
-        if (err && (err.name === "UnconfiguredError" || err.message === "missing")) {
+        if (isUnconfiguredError(err)) {
+          forgetNotesEnvelope();
           return { ok: false, unconfigured: true };
         }
         decryptOk = false;
@@ -276,7 +286,8 @@
       persistUnlock(notes, persist);
       return { ok: true, notes: notes };
     } catch (err) {
-      if (err && (err.name === "UnconfiguredError" || err.message === "missing")) {
+      forgetNotesEnvelope();
+      if (isUnconfiguredError(err)) {
         return { ok: false, unconfigured: true };
       }
       return { ok: false };
