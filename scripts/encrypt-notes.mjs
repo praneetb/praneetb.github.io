@@ -15,6 +15,7 @@
  *   - any folder named Finance / finance, including 20-Personal/Finance
  *   - Private/, _staging/, .obsidian/, .trash/
  *   - prompts/ (treated as agent-prompt packs) and *.prompt.md
+ *   - _system/, _templates/, .claude/ (not shown on the web reader)
  *   - *.secret.md, *.base, workspace/cache junk
  *   - binary, canvas, and other non-Markdown (trivial canvases are not shipped)
  */
@@ -35,9 +36,12 @@ const SKIP_DIRS = new Set([
   ".trash",
   ".git",
   ".cursor",
+  ".claude",
   ".smart-env",
   "node_modules",
   "_staging",
+  "_system",
+  "_templates",
   "private",
   "finance",
   "prompts"
