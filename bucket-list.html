@@ -6,47 +6,83 @@ permalink: /bucket-list/
 private: true
 sitemap: false
 robots: noindex, nofollow
-description: Private list of places still to stand in — New7Wonders and Half Dome.
+description: Private Polaroid wall of places still to stand in — New7Wonders and heights.
 extra_css:
   - /assets/css/bucket.css
 ---
 
 {% assign items = site.data.bucket.items %}
-{% assign done_count = 0 %}
-{% for item in items %}
-  {% if item.completed %}
-    {% assign done_count = done_count | plus: 1 %}
+{% assign wonders = items | where: "category", "wonders" %}
+{% assign heights = items | where: "category", "heights" %}
+{% assign collected_wonders = wonders | where: "completed", true %}
+{% assign collected_heights = heights | where: "completed", true %}
+{% assign ahead_wonders = wonders | where: "completed", false %}
+{% assign ahead_heights = heights | where: "completed", false %}
+{% assign collected_count = collected_wonders.size | plus: collected_heights.size %}
+{% assign ahead_count = ahead_wonders.size | plus: ahead_heights.size %}
+
+<header class="bucket-hero">
+  <h1>Bucket list</h1>
+  <p class="bucket-tagline">Places still to stand in.</p>
+</header>
+
+{% if collected_count > 0 %}
+<section class="bucket-band bucket-band-collected" aria-labelledby="bucket-collected-title">
+  <header class="bucket-band-head">
+    <h2 id="bucket-collected-title" class="bucket-band-title">Collected</h2>
+    <p class="bucket-band-count">{{ collected_count }} collected</p>
+  </header>
+
+  {% if collected_wonders.size > 0 %}
+  <div class="bucket-group">
+    <h3 class="bucket-group-title">Seven Wonders</h3>
+    <ul class="bucket-wall">
+      {% for item in collected_wonders %}
+        {% include bucket-polaroid.html item=item taped=true %}
+      {% endfor %}
+    </ul>
+  </div>
   {% endif %}
-{% endfor %}
 
-<p class="kicker">Bucket list</p>
-<h1>Things to do</h1>
-<p class="lede">The New7Wonders of the World, and a granite dome already climbed.</p>
-<p class="bucket-progress">{{ done_count }} of {{ items.size }} completed</p>
+  {% if collected_heights.size > 0 %}
+  <div class="bucket-group">
+    <h3 class="bucket-group-title">Heights</h3>
+    <ul class="bucket-wall">
+      {% for item in collected_heights %}
+        {% include bucket-polaroid.html item=item taped=true %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</section>
+{% endif %}
 
-<ul class="bucket-grid">
-  {% for item in items %}
-  <li class="bucket-card{% if item.completed %} is-done{% endif %}" data-bucket-id="{{ item.id }}">
-    <figure class="bucket-card-media">
-      <img
-        src="{{ item.photo | relative_url }}"
-        alt="{{ item.title }}"
-        width="960"
-        height="640"
-        loading="lazy">
-    </figure>
-    <div class="bucket-card-copy">
-      <h2 class="bucket-card-title">{{ item.title }}</h2>
-      <p class="bucket-card-place">{{ item.place }}</p>
-      {% if item.credit %}<p class="bucket-card-credit">{{ item.credit }}</p>{% endif %}
-    </div>
-    <span
-      class="bucket-mark{% if item.completed %} is-on{% endif %}"
-      role="img"
-      aria-label="{% if item.completed %}Completed{% else %}Not completed{% endif %}">
-      <span class="bucket-mark-box" aria-hidden="true"></span>
-      <span class="bucket-mark-text">{% if item.completed %}Done{% else %}Open{% endif %}</span>
-    </span>
-  </li>
-  {% endfor %}
-</ul>
+{% if ahead_count > 0 %}
+<section class="bucket-band bucket-band-ahead" aria-labelledby="bucket-ahead-title">
+  <header class="bucket-band-head">
+    <h2 id="bucket-ahead-title" class="bucket-band-title">Still ahead</h2>
+  </header>
+
+  {% if ahead_wonders.size > 0 %}
+  <div class="bucket-group">
+    <h3 class="bucket-group-title">Seven Wonders</h3>
+    <ul class="bucket-wall">
+      {% for item in ahead_wonders %}
+        {% include bucket-polaroid.html item=item %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if ahead_heights.size > 0 %}
+  <div class="bucket-group">
+    <h3 class="bucket-group-title">Heights</h3>
+    <ul class="bucket-wall">
+      {% for item in ahead_heights %}
+        {% include bucket-polaroid.html item=item %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</section>
+{% endif %}
