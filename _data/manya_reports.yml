@@ -1,0 +1,50 @@
+# Drive file ids and display labels only.
+# Report-card PDFs stay in Google Drive. Do not commit PDF bytes or report text.
+
+items:
+  - title: Kindergarten
+    file_id: 12yz19PLHuu1dUKo9swM6smvPBpdCswXM
+  - title: 1st Grade
+    file_id: 13dD7xkHwqMUoeoClEuEeyo3OCAwR1DlI
+  - title: 2nd Grade
+    file_id: 134kjCuZDPV-HQ8UwZb9r1Gtzp9hCBeqX
+  - title: 2nd Grade
+    note: Report 2
+    file_id: 13Nkij0rhzu6bIGJZfACM7StPME7D_1Zj
+  - title: 3rd Grade
+    file_id: 13SzSuQb73f8TAyAjC4w43B02DyiAnEZM
+  - title: 3rd Grade
+    note: Report 2
+    file_id: 13035xyWDJyIL-Np7ahtoMIaCMWWlOpPg
+  - title: 4th Grade
+    file_id: 12h6DDGYincI7Wu7ZXXDkDmL9l7QfZtSP
+  - title: 4th Grade
+    note: Report 2
+    file_id: 13BWsDY7J3fUODnnGqC_NS_hVyZRvt6L_
+  - title: 5th Grade
+    file_id: 13P5kw_ChNY7fGbL44MI0IgQzRVc70Nh_
+  - title: 5th Grade
+    note: Report 2
+    file_id: 13-IukhBGwIjVmaOtkfaOikq-Yp4xB7ED
+  - title: 6th Grade
+    file_id: 13Pd-fDAjRiWk87dP5hw_AjW3tRyBE0q8
+  - title: 6th Grade
+    note: Report card
+    file_id: 12nWO7OWtPEWeH4IzOJYuiMx0hEu_RLRN
+  - title: 7th Grade
+    file_id: 13dizjBHPTdsoSI0f3vN9VbPlAAo3RjhK
+  - title: 8th Grade
+    file_id: 13eoKj5HgBYZsLvS6WeDOlFlQJmXtyj8b
+  - title: 9th Grade
+    file_id: 13gnLHMiimOudFPVQFzmIkWgavV6TGXPg
+  - title: 10th Grade
+    note: BASIS
+    file_id: 1-fIL53x1wCnqiRdpRtycxKN-Veatx57Y
+  - title: 10th Grade
+    file_id: 16QHZgRfjqacgXG_7-FcmWFiF-7jPpw5Z
+  - title: 11th Grade
+    file_id: 16PY5YjhaqvW-jXsJ6gu6wd4-QqJKdNaK
+  - title: 12th Grade
+    file_id: 1loQQzGwKgpZqAcfyeUbvRS9LeWG5Jen9
+  - title: Transcript 2022–2023
+    file_id: 11DRc0PLIbSj6qi6HddbbGYS6iK_JiO_W

@@ -1,0 +1,41 @@
+---
+layout: default
+title: Report cards
+nav: manya
+permalink: /manya/school/reports/
+private: true
+sitemap: false
+robots: noindex, nofollow
+hide_footer: true
+description: Private list of Manya’s school report cards. Files stay in Google Drive.
+extra_css:
+  - /assets/css/manya.css
+---
+
+<nav class="manya-trail" aria-label="Section">
+  <a href="{{ '/manya/' | relative_url }}">Manya</a>
+  <span aria-hidden="true">·</span>
+  <a href="{{ '/manya/school/' | relative_url }}">School</a>
+  <span aria-hidden="true">·</span>
+  <span>Reports</span>
+</nav>
+
+<p class="kicker">Reports</p>
+<h1 class="manya-title">Report cards</h1>
+<p class="lede">Each card opens in Google Drive. This site does not keep the files.</p>
+
+<ol class="manya-reports">
+  {% for item in site.data.manya_reports.items %}
+  <li class="manya-report">
+    <div class="manya-report-copy">
+      <h2 class="manya-report-title">{{ item.title }}</h2>
+      {% if item.note %}<p class="manya-report-note">{{ item.note }}</p>{% endif %}
+    </div>
+    <a
+      class="manya-report-open"
+      href="https://drive.google.com/file/d/{{ item.file_id }}/view"
+      target="_blank"
+      rel="noopener">Open in Drive</a>
+  </li>
+  {% endfor %}
+</ol>
