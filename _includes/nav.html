@@ -1,12 +1,49 @@
 <header class="site-header">
   <div class="site-header-inner">
-    <a class="wordmark" href="{{ '/' | relative_url }}"{% if page.nav == 'home' %} aria-current="page"{% endif %}>Praneet Bachheti</a>
+    <a class="wordmark" href="{{ '/' | relative_url }}"{% if page.nav == 'home' %} aria-current="page"{% endif %}>
+      <span class="wordmark-mark" aria-hidden="true">
+        <svg class="wordmark-mark-summit" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#5C5A56"/>
+          <path d="M6 22.5 12.2 13l3.1 4.4L18.6 12 26 22.5H6z" fill="#F7F1E8" opacity=".92"/>
+          <circle cx="16" cy="16" r="15.15" stroke="#F7F1E8" stroke-opacity=".22"/>
+        </svg>
+        <svg class="wordmark-mark-atlas" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="15" fill="#023047"/>
+          <path d="M16 3.2a12.8 12.8 0 0 1 0 25.6" fill="#00B4D8"/>
+          <path d="M16 3.2a12.8 12.8 0 0 0 0 25.6" fill="#7B2CBF"/>
+          <path d="M4.4 12.2h23.2A12.8 12.8 0 0 0 4.4 12.2z" fill="#FFB703"/>
+          <circle cx="16" cy="16" r="12.8" stroke="#FFF8EF" stroke-width="1.2" stroke-opacity=".35"/>
+        </svg>
+        <svg class="wordmark-mark-cadence" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="16" fill="#1B1464"/>
+          <path d="M3 18.2c1.4-2.6 2.6-4 3.8-4s2.2 2.6 3.4 2.6 2.4-4.8 3.8-4.8 2.6 6.2 4 6.2 2.2-3.6 3.6-3.6 2.6 3.2 3.8 3.2 2.4-2.4 3.6-2.4" stroke="#F4A261" stroke-width="1.7" stroke-linecap="round"/>
+          <circle cx="16" cy="11.2" r="1.7" fill="#2EC4B6"/>
+        </svg>
+      </span>
+      <span class="wordmark-text">Praneet Bachheti</span>
+    </a>
     <nav id="site-private-nav" class="nav" aria-label="Private" hidden></nav>
-    <div class="site-header-account">
-      <button type="button" id="site-signin" class="site-signin">Sign in</button>
-      <div id="site-account" class="site-account" hidden>
-        <span class="site-avatar" aria-hidden="true">P</span>
-        <button type="button" id="site-signout" class="site-signout">Sign out</button>
+    <div class="site-header-tools">
+      <div class="theme-switch" role="radiogroup" aria-label="Site theme">
+        <button type="button" role="radio" aria-checked="true" aria-label="Summit" data-theme-value="summit">
+          <span class="theme-swatch" aria-hidden="true"></span>
+          <span class="theme-switch-label">Summit</span>
+        </button>
+        <button type="button" role="radio" aria-checked="false" aria-label="Atlas" data-theme-value="atlas">
+          <span class="theme-swatch" aria-hidden="true"></span>
+          <span class="theme-switch-label">Atlas</span>
+        </button>
+        <button type="button" role="radio" aria-checked="false" aria-label="Cadence" data-theme-value="cadence">
+          <span class="theme-swatch" aria-hidden="true"></span>
+          <span class="theme-switch-label">Cadence</span>
+        </button>
+      </div>
+      <div class="site-header-account">
+        <button type="button" id="site-signin" class="site-signin">Sign in</button>
+        <div id="site-account" class="site-account" hidden>
+          <span class="site-avatar" aria-hidden="true">P</span>
+          <button type="button" id="site-signout" class="site-signout">Sign out</button>
+        </div>
       </div>
     </div>
   </div>

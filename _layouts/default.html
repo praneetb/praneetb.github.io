@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" data-baseurl="{{ site.baseurl }}"{% if page.nav == 'travel' %} class="theme-travel"{% endif %}>
+<html lang="en" data-theme="summit" data-baseurl="{{ site.baseurl }}"{% if page.nav == 'travel' %} class="theme-travel"{% endif %}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+  (function () {
+    var KEY = "site.theme";
+    var allowed = { summit: 1, atlas: 1, cadence: 1 };
+    var theme = "summit";
+    try {
+      theme = localStorage.getItem(KEY) || theme;
+    } catch (err) {}
+    if (!allowed[theme]) {
+      theme = "summit";
+    }
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+  </script>
   <title>{% if page.title and page.nav != 'home' %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
   {% if page.robots %}
   <meta name="robots" content="{{ page.robots }}">
   {% endif %}
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
-  <meta name="theme-color" content="#f7f4ef">
+  <meta name="theme-color" content="#F7F1E8">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   {% if page.extra_css %}
@@ -35,6 +49,7 @@
   {% unless page.hide_footer %}
     {% include footer.html %}
   {% endunless %}
+  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
   <script src="{{ '/assets/js/site-admin.js' | relative_url }}"></script>
   <script src="{{ '/assets/js/header-gate.js' | relative_url }}"></script>
   {% if page.extra_js %}

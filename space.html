@@ -12,10 +12,19 @@ extra_css:
   - /assets/css/space.css
 ---
 
-<h1 class="space-title">Your space</h1>
+<h1 class="space-title">
+  <span data-theme-line="summit">Your space</span>
+  <span data-theme-line="atlas">Your space</span>
+  <span data-theme-line="cadence">Your space. Your cadence.</span>
+</h1>
+<p class="space-lede">
+  <span data-theme-line="summit">Five doors. One quiet hub.</span>
+  <span data-theme-line="atlas">Maps, songs, and side quests.</span>
+  <span data-theme-line="cadence">Everything that matters, in rhythm.</span>
+</p>
 
 <div class="space-grid">
-  <a class="space-tile" href="{{ '/travel/' | relative_url }}">
+  <a class="space-tile" data-tile="travel" href="{{ '/travel/' | relative_url }}">
     <span class="space-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
         <circle cx="12" cy="12" r="8.2"/>
@@ -24,12 +33,12 @@ extra_css:
     </span>
     <span class="space-copy">
       <span class="space-name">Travel</span>
-      <span class="space-sub">Globe and visited places</span>
+      <span class="space-sub">Where next?</span>
     </span>
     <span class="space-arrow" aria-hidden="true">→</span>
   </a>
 
-  <a class="space-tile" href="{{ '/media/' | relative_url }}">
+  <a class="space-tile" data-tile="media" href="{{ '/media/' | relative_url }}">
     <span class="space-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
         <rect x="3.6" y="5.4" width="16.8" height="13.2" rx="1.8"/>
@@ -38,12 +47,12 @@ extra_css:
     </span>
     <span class="space-copy">
       <span class="space-name">Media</span>
-      <span class="space-sub">Jellyfin library</span>
+      <span class="space-sub">Songs, films, and moments</span>
     </span>
     <span class="space-arrow" aria-hidden="true">→</span>
   </a>
 
-  <a class="space-tile" href="{{ '/bucket-list/' | relative_url }}">
+  <a class="space-tile" data-tile="bucket" href="{{ '/bucket-list/' | relative_url }}">
     <span class="space-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
         <path d="M3.5 18.5 9 9l3.2 4.6L15 8.5l5.5 10"/>
@@ -53,12 +62,12 @@ extra_css:
     </span>
     <span class="space-copy">
       <span class="space-name">Bucket list</span>
-      <span class="space-sub">Wonders and Yosemite</span>
+      <span class="space-sub">Dreams worth chasing</span>
     </span>
     <span class="space-arrow" aria-hidden="true">→</span>
   </a>
 
-  <a class="space-tile" href="{{ '/notes/' | relative_url }}">
+  <a class="space-tile" data-tile="notes" href="{{ '/notes/' | relative_url }}">
     <span class="space-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
         <path d="M7 3.8h8.2L19 7.6V20.2H7z"/>
@@ -68,12 +77,12 @@ extra_css:
     </span>
     <span class="space-copy">
       <span class="space-name">Notes</span>
-      <span class="space-sub">Private reading room</span>
+      <span class="space-sub">Ideas. Thoughts. Plans.</span>
     </span>
     <span class="space-arrow" aria-hidden="true">→</span>
   </a>
 
-  <a class="space-tile" href="{{ '/manya/' | relative_url }}">
+  <a class="space-tile" data-tile="manya" href="{{ '/manya/' | relative_url }}">
     <span class="space-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
         <path d="M12 6.2c-2.4-1.4-5.4-1.6-7.4-.6v12.2c2-.8 4.8-.6 7.4.8 2.6-1.4 5.4-1.6 7.4-.8V5.6c-2-1-5-.8-7.4.6z"/>
@@ -82,7 +91,7 @@ extra_css:
     </span>
     <span class="space-copy">
       <span class="space-name">Manya</span>
-      <span class="space-sub">School and report cards</span>
+      <span class="space-sub">Heart. Home. Always.</span>
     </span>
     <span class="space-arrow" aria-hidden="true">→</span>
   </a>

@@ -20,6 +20,17 @@
   var FLY_MS = 1100;
   var LINGER_MS = 5000;
 
+  function atmosphereColor() {
+    var theme = document.documentElement.getAttribute("data-theme");
+    if (theme === "atlas") {
+      return "#00B4D8";
+    }
+    if (theme === "cadence") {
+      return "#2EC4B6";
+    }
+    return "#8fb7c8";
+  }
+
   var globe = null;
   var dragging = false;
   var flyTimers = [];
@@ -1042,7 +1053,7 @@
       .bumpImageUrl(EARTH_BUMP)
       .backgroundColor("rgba(0,0,0,0)")
       .showAtmosphere(true)
-      .atmosphereColor("#8fb7c8")
+      .atmosphereColor(atmosphereColor())
       .atmosphereAltitude(0.18)
       .htmlElementsData([])
       .htmlLat("lat")
@@ -1147,6 +1158,12 @@
     if (document.documentElement.classList.contains("is-signed-in") || isAdmin()) {
       startView();
     }
+
+    document.addEventListener("site:theme", function () {
+      if (globe) {
+        globe.atmosphereColor(atmosphereColor());
+      }
+    });
 
     if (addForm) {
       addForm.addEventListener("submit", function (event) {
