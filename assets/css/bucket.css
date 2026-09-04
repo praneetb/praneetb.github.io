@@ -26,7 +26,6 @@
   border: 1px solid var(--rule);
   border-radius: 0.85rem;
   background: rgba(255, 255, 255, 0.32);
-  transition: opacity 0.2s ease, background 0.2s ease;
 }
 
 .bucket-card.is-done {
@@ -78,32 +77,21 @@
   line-height: 1.35;
 }
 
-.bucket-toggle {
+.bucket-mark {
   display: grid;
   justify-items: center;
   gap: 0.28rem;
-  cursor: pointer;
   color: var(--ink-soft);
   font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
 }
 
-.bucket-toggle input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.bucket-toggle-box {
+.bucket-mark-box {
   display: grid;
   place-items: center;
   width: 1.55rem;
@@ -113,7 +101,7 @@
   background: #fffdf9;
 }
 
-.bucket-toggle-box::after {
+.bucket-mark-box::after {
   content: "";
   width: 0.55rem;
   height: 0.32rem;
@@ -123,21 +111,16 @@
   transform: rotate(-45deg);
 }
 
-.bucket-toggle input:checked + .bucket-toggle-box {
+.bucket-mark.is-on .bucket-mark-box {
   border-color: var(--accent);
   background: var(--accent);
 }
 
-.bucket-toggle input:checked + .bucket-toggle-box::after {
+.bucket-mark.is-on .bucket-mark-box::after {
   border-color: #fffdf9;
 }
 
-.bucket-toggle input:focus-visible + .bucket-toggle-box {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.bucket-card.is-done .bucket-toggle-box {
+.bucket-card.is-done .bucket-mark-box {
   opacity: 0.85;
 }
 
@@ -157,7 +140,7 @@
     font-size: 1.05rem;
   }
 
-  .bucket-toggle-text {
+  .bucket-mark-text {
     display: none;
   }
 }

@@ -9,18 +9,24 @@ robots: noindex, nofollow
 description: Private list of places still to stand in — New7Wonders and Half Dome.
 extra_css:
   - /assets/css/bucket.css
-extra_js:
-  - /assets/js/bucket.js
 ---
+
+{% assign items = site.data.bucket.items %}
+{% assign done_count = 0 %}
+{% for item in items %}
+  {% if item.completed %}
+    {% assign done_count = done_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
 
 <p class="kicker">Bucket list</p>
 <h1>Things to do</h1>
 <p class="lede">The New7Wonders of the World, and a granite dome already climbed.</p>
-<p class="bucket-progress" id="bucket-progress" aria-live="polite"></p>
+<p class="bucket-progress">{{ done_count }} of {{ items.size }} completed</p>
 
-<ul class="bucket-grid" id="bucket-grid">
-  {% for item in site.data.bucket.items %}
-  <li class="bucket-card{% if item.defaultCompleted %} is-done{% endif %}" data-bucket-id="{{ item.id }}">
+<ul class="bucket-grid">
+  {% for item in items %}
+  <li class="bucket-card{% if item.completed %} is-done{% endif %}" data-bucket-id="{{ item.id }}">
     <figure class="bucket-card-media">
       <img
         src="{{ item.photo | relative_url }}"
@@ -34,21 +40,13 @@ extra_js:
       <p class="bucket-card-place">{{ item.place }}</p>
       {% if item.credit %}<p class="bucket-card-credit">{{ item.credit }}</p>{% endif %}
     </div>
-    <label class="bucket-toggle">
-      <input
-        type="checkbox"
-        data-bucket-check="{{ item.id }}"
-        {% if item.defaultCompleted %}checked{% endif %}
-        aria-label="Mark {{ item.title }} completed">
-      <span class="bucket-toggle-box" aria-hidden="true"></span>
-      <span class="bucket-toggle-text">Done</span>
-    </label>
+    <span
+      class="bucket-mark{% if item.completed %} is-on{% endif %}"
+      role="img"
+      aria-label="{% if item.completed %}Completed{% else %}Not completed{% endif %}">
+      <span class="bucket-mark-box" aria-hidden="true"></span>
+      <span class="bucket-mark-text">{% if item.completed %}Done{% else %}Open{% endif %}</span>
+    </span>
   </li>
   {% endfor %}
 </ul>
-
-<script type="application/json" id="bucket-catalog">
-{
-  "items": {{ site.data.bucket.items | jsonify }}
-}
-</script>

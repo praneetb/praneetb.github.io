@@ -1,7 +1,6 @@
-# Catalog only. Do not put Praneet’s completion progress here.
-# Checked state lives in the browser (localStorage).
-# defaultCompleted seeds a first visit when no saved state exists yet;
-# after that, localStorage wins — including if an item is later unchecked.
+# Bucket list catalog and completion.
+# Completion is committed here and rendered read-only on the page.
+# Do not toggle checks in the browser — update this file when asked.
 
 items:
   - id: great-wall
@@ -9,46 +8,53 @@ items:
     place: China
     photo: /assets/images/bucket/great-wall.jpg
     credit: Severin.stalder / Wikimedia Commons, CC BY-SA 3.0
+    completed: false
 
   - id: petra
     title: Petra
     place: Jordan
     photo: /assets/images/bucket/petra.jpg
     credit: Graham Racher / Wikimedia Commons, CC BY-SA 2.0
+    completed: false
 
   - id: christ-redeemer
     title: Christ the Redeemer
     place: Rio de Janeiro, Brazil
     photo: /assets/images/bucket/christ-redeemer.jpg
     credit: Nico Kaiser / Wikimedia Commons, CC BY 2.0
+    completed: false
 
   - id: machu-picchu
     title: Machu Picchu
     place: Peru · hike still ahead
     photo: /assets/images/bucket/machu-picchu.jpg
     credit: Martin St-Amant / Wikimedia Commons, CC BY-SA 3.0
+    completed: false
 
   - id: chichen-itza
     title: Chichén Itzá
     place: Mexico
     photo: /assets/images/bucket/chichen-itza.jpg
     credit: Daniel Schwen / Wikimedia Commons, CC BY-SA 4.0
+    completed: false
 
   - id: colosseum
     title: Roman Colosseum
     place: Italy
     photo: /assets/images/bucket/colosseum.jpg
     credit: FeaturedPics / Wikimedia Commons, CC BY-SA 4.0
+    completed: false
 
   - id: taj-mahal
     title: Taj Mahal
     place: India
     photo: /assets/images/bucket/taj-mahal.jpg
     credit: Yann / Wikimedia Commons, CC BY-SA 3.0
+    completed: false
 
   - id: half-dome
     title: Half Dome
     place: Yosemite Valley, California
     photo: /assets/images/bucket/half-dome.jpg
     credit: Av9 / Wikimedia Commons, public domain
-    defaultCompleted: true
+    completed: true
