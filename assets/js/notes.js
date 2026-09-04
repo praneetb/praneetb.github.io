@@ -18,18 +18,33 @@
     return (pack && pack.notes) || [];
   }
 
+  var FOLDER_ORDER = ["Daily", "Projects", "People", "Travel", "Music", "Archive"];
+
   function folders() {
     var names = (pack && pack.folders) || [];
-    if (names.length) {
-      return names.slice();
+    if (!names.length) {
+      var seen = {};
+      notes().forEach(function (note) {
+        if (note.folder) {
+          seen[note.folder] = true;
+        }
+      });
+      names = Object.keys(seen);
     }
-    var seen = {};
-    notes().forEach(function (note) {
-      if (note.folder) {
-        seen[note.folder] = true;
+    return names.slice().sort(function (a, b) {
+      var ia = FOLDER_ORDER.indexOf(a);
+      var ib = FOLDER_ORDER.indexOf(b);
+      if (ia === -1 && ib === -1) {
+        return a.localeCompare(b);
       }
+      if (ia === -1) {
+        return 1;
+      }
+      if (ib === -1) {
+        return -1;
+      }
+      return ia - ib;
     });
-    return Object.keys(seen).sort();
   }
 
   function slug(value) {
