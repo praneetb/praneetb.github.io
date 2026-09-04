@@ -420,6 +420,21 @@
     }
   }
 
+  async function mergeReportsFromIdb() {
+    var db = await openReportsDb();
+    try {
+      var tx = db.transaction(REPORTS_STORE, "readonly");
+      var rows = await idbRequest(tx.objectStore(REPORTS_STORE).getAll());
+      (rows || []).forEach(function (row) {
+        if (row && row.id && !reportsIndex[row.id]) {
+          rememberReport(row);
+        }
+      });
+    } finally {
+      db.close();
+    }
+  }
+
   function persistReportsReady(persist) {
     try {
       storageSet(sessionStorage, REPORTS_READY_KEY, "1");
@@ -473,6 +488,15 @@
         return false;
       }
       indexFromPacks([reportsPack, satPack]);
+      if (!reportsPack || !satPack) {
+        try {
+          // Keep the other pack's existing IDB blobs if this unlock only
+          // decrypted one envelope (SAT failure must not wipe school reports).
+          await mergeReportsFromIdb();
+        } catch (err) {
+          // Memory still has whichever pack decrypted.
+        }
+      }
       try {
         await writeReportsToIdb();
         // Drop in-memory blobs after a successful IDB write so PDFs are not
@@ -515,6 +539,15 @@
 
   function needsManyaReportsUnlock() {
     return isUnlocked() && Object.keys(reportsIndex).length === 0;
+  }
+
+  async function needsManyaReport(id) {
+    var key = String(id || "");
+    if (!isUnlocked() || !key) {
+      return false;
+    }
+    var blob = await getManyaReportBlob(key);
+    return !blob;
   }
 
   function getManyaReportMeta(id) {
@@ -704,6 +737,7 @@
     getManyaReportMeta: getManyaReportMeta,
     hasManyaReports: hasManyaReports,
     needsManyaReportsUnlock: needsManyaReportsUnlock,
+    needsManyaReport: needsManyaReport,
     awaitReportsReady: ensureReportsHydrated
   };
 })(window);
