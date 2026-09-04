@@ -20,31 +20,65 @@
 
   var FOLDER_ORDER = ["Daily", "Projects", "People", "Travel", "Music", "Archive"];
 
-  function folders() {
-    var names = (pack && pack.folders) || [];
-    if (!names.length) {
-      var seen = {};
-      notes().forEach(function (note) {
-        if (note.folder) {
-          seen[note.folder] = true;
-        }
-      });
-      names = Object.keys(seen);
+  function folderParts(folderPath) {
+    return String(folderPath || "")
+      .replace(/\\/g, "/")
+      .split("/")
+      .filter(Boolean);
+  }
+
+  function folderLabel(folderPath) {
+    var parts = folderParts(folderPath);
+    var segment = parts[parts.length - 1] || String(folderPath || "");
+    return segment.replace(/^\d+-/, "");
+  }
+
+  function parentFolder(folderPath) {
+    var parts = folderParts(folderPath);
+    if (parts.length <= 1) {
+      return "";
     }
-    return names.slice().sort(function (a, b) {
-      var ia = FOLDER_ORDER.indexOf(a);
-      var ib = FOLDER_ORDER.indexOf(b);
-      if (ia === -1 && ib === -1) {
-        return a.localeCompare(b);
-      }
-      if (ia === -1) {
-        return 1;
-      }
-      if (ib === -1) {
-        return -1;
-      }
-      return ia - ib;
+    return parts.slice(0, -1).join("/");
+  }
+
+  function addFolderPrefixes(seen, folderPath) {
+    var parts = folderParts(folderPath);
+    var acc = "";
+    var i;
+    for (i = 0; i < parts.length; i += 1) {
+      acc = acc ? acc + "/" + parts[i] : parts[i];
+      seen[acc] = true;
+    }
+  }
+
+  function allFolderPaths() {
+    var seen = {};
+    ((pack && pack.folders) || []).forEach(function (folder) {
+      addFolderPrefixes(seen, folder);
     });
+    notes().forEach(function (note) {
+      if (note.folder) {
+        addFolderPrefixes(seen, note.folder);
+      }
+    });
+    return Object.keys(seen);
+  }
+
+  function compareFolders(a, b) {
+    var la = folderLabel(a);
+    var lb = folderLabel(b);
+    var ia = FOLDER_ORDER.indexOf(la);
+    var ib = FOLDER_ORDER.indexOf(lb);
+    if (ia === -1 && ib === -1) {
+      return a.localeCompare(b);
+    }
+    if (ia === -1) {
+      return 1;
+    }
+    if (ib === -1) {
+      return -1;
+    }
+    return ia - ib;
   }
 
   function slug(value) {
@@ -353,6 +387,114 @@
     return hay.indexOf(query) !== -1;
   }
 
+  function buildTree(visible) {
+    var folderSet = allFolderPaths();
+    var nodes = {};
+    folderSet.forEach(function (folderPath) {
+      nodes[folderPath] = { path: folderPath, children: [], notes: [] };
+    });
+    var roots = [];
+    folderSet.forEach(function (folderPath) {
+      var parent = parentFolder(folderPath);
+      if (parent && nodes[parent]) {
+        nodes[parent].children.push(folderPath);
+      } else {
+        roots.push(folderPath);
+      }
+    });
+    visible.forEach(function (note) {
+      var folder = note.folder || "";
+      if (folder && nodes[folder]) {
+        nodes[folder].notes.push(note);
+      }
+    });
+    folderSet.forEach(function (folderPath) {
+      nodes[folderPath].children.sort(compareFolders);
+      nodes[folderPath].notes.sort(function (a, b) {
+        return a.title.localeCompare(b.title);
+      });
+    });
+    roots.sort(compareFolders);
+    return { roots: roots, nodes: nodes };
+  }
+
+  function folderHasVisibleNotes(folderPath, nodes) {
+    var node = nodes[folderPath];
+    if (!node) {
+      return false;
+    }
+    if (node.notes.length) {
+      return true;
+    }
+    return node.children.some(function (child) {
+      return folderHasVisibleNotes(child, nodes);
+    });
+  }
+
+  function appendNoteList(parent, items) {
+    if (!items.length) {
+      return;
+    }
+    var list = document.createElement("ul");
+    list.className = "notes-files";
+    items.forEach(function (note) {
+      var item = document.createElement("li");
+      var link = document.createElement("a");
+      link.className = "notes-file" + (note.id === currentId ? " is-active" : "");
+      link.href = "#" + encodeURIComponent(note.id);
+      link.setAttribute("data-id", note.id);
+      link.textContent = note.title;
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+    parent.appendChild(list);
+  }
+
+  function collapsedMap(query) {
+    var collapsed = {};
+    var searching = !!query;
+    var listed = (pack && pack.collapsed) || [];
+    allFolderPaths().forEach(function (folderPath) {
+      var base = folderParts(folderPath).pop();
+      if (!searching && (listed.indexOf(folderPath) !== -1 || listed.indexOf(base) !== -1)) {
+        collapsed[folderPath] = true;
+      }
+    });
+    return collapsed;
+  }
+
+  function renderFolderNode(folderPath, nodes, collapsed, query) {
+    if (query && !folderHasVisibleNotes(folderPath, nodes)) {
+      return null;
+    }
+    var node = nodes[folderPath];
+    var wrap = document.createElement("div");
+    var isCollapsed = !!collapsed[folderPath];
+    wrap.className = "notes-folder" + (isCollapsed ? " is-collapsed" : "");
+    wrap.setAttribute("data-folder", folderPath);
+    var toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "notes-folder-toggle";
+    toggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+    toggle.innerHTML = '<span class="chevron" aria-hidden="true">▾</span>' + escapeHtml(folderLabel(folderPath));
+    toggle.addEventListener("click", function () {
+      var next = wrap.classList.toggle("is-collapsed");
+      toggle.setAttribute("aria-expanded", next ? "false" : "true");
+    });
+    wrap.appendChild(toggle);
+    var children = document.createElement("div");
+    children.className = "notes-folder-children";
+    node.children.forEach(function (childPath) {
+      var child = renderFolderNode(childPath, nodes, collapsed, query);
+      if (child) {
+        children.appendChild(child);
+      }
+    });
+    appendNoteList(children, node.notes);
+    wrap.appendChild(children);
+    return wrap;
+  }
+
   function renderTree(query) {
     var root = el("notes-tree");
     var count = el("notes-count");
@@ -364,60 +506,18 @@
     var visible = notes().filter(function (note) {
       return matchesQuery(note, q);
     });
-    var collapsed = {};
-    ((pack && pack.collapsed) || []).forEach(function (name) {
-      collapsed[name] = !q;
-    });
-    folders().forEach(function (folder) {
-      var items = visible.filter(function (note) {
-        return (note.folder || "") === folder;
-      });
-      if (!items.length && q) {
-        return;
+    var tree = buildTree(visible);
+    var collapsed = collapsedMap(q);
+    tree.roots.forEach(function (folderPath) {
+      var node = renderFolderNode(folderPath, tree.nodes, collapsed, q);
+      if (node) {
+        root.appendChild(node);
       }
-      var wrap = document.createElement("div");
-      wrap.className = "notes-folder" + (collapsed[folder] ? " is-collapsed" : "");
-      var toggle = document.createElement("button");
-      toggle.type = "button";
-      toggle.className = "notes-folder-toggle";
-      toggle.innerHTML = '<span class="chevron" aria-hidden="true">▾</span>' + escapeHtml(folder);
-      toggle.addEventListener("click", function () {
-        wrap.classList.toggle("is-collapsed");
-      });
-      wrap.appendChild(toggle);
-      var list = document.createElement("ul");
-      list.className = "notes-files";
-      items.forEach(function (note) {
-        var item = document.createElement("li");
-        var link = document.createElement("a");
-        link.className = "notes-file" + (note.id === currentId ? " is-active" : "");
-        link.href = "#" + encodeURIComponent(note.id);
-        link.setAttribute("data-id", note.id);
-        link.textContent = note.title;
-        item.appendChild(link);
-        list.appendChild(item);
-      });
-      wrap.appendChild(list);
-      root.appendChild(wrap);
     });
     var loose = visible.filter(function (note) {
       return !note.folder;
     });
-    if (loose.length) {
-      var looseList = document.createElement("ul");
-      looseList.className = "notes-files";
-      loose.forEach(function (note) {
-        var item = document.createElement("li");
-        var link = document.createElement("a");
-        link.className = "notes-file";
-        link.href = "#" + encodeURIComponent(note.id);
-        link.setAttribute("data-id", note.id);
-        link.textContent = note.title;
-        item.appendChild(link);
-        looseList.appendChild(item);
-      });
-      root.appendChild(looseList);
-    }
+    appendNoteList(root, loose);
     if (count) {
       var total = notes().length;
       count.textContent = total === 1 ? "1 note" : total + " notes";
