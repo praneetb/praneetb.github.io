@@ -6,10 +6,14 @@
   var EARTH_TEX = "https://cdn.jsdelivr.net/npm/three-globe@2.44.1/example/img/earth-blue-marble.jpg";
   var EARTH_BUMP = "https://cdn.jsdelivr.net/npm/three-globe@2.44.1/example/img/earth-topology.png";
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var CRUISE_ALTITUDE = 1.55;
+  var FLY_ALTITUDE = 0.95;
+  var FLY_MS = 1100;
+  var LINGER_MS = 5000;
 
   var globe = null;
   var dragging = false;
-  var flyTimer = null;
+  var flyTimers = [];
   var selectedId = null;
   var editingId = null;
   var searchQuery = "";
@@ -332,19 +336,49 @@
     globe.htmlElementsData(markerData());
   }
 
+  function clearFlyTimers() {
+    flyTimers.forEach(function (id) {
+      clearTimeout(id);
+    });
+    flyTimers = [];
+  }
+
+  function afterFly(ms, fn) {
+    var id = setTimeout(function () {
+      flyTimers = flyTimers.filter(function (item) {
+        return item !== id;
+      });
+      fn();
+    }, ms);
+    flyTimers.push(id);
+    return id;
+  }
+
+  function resumeCruise(controls) {
+    if (dragging) {
+      return;
+    }
+    controls.autoRotate = true;
+  }
+
   function flyTo(lat, lng) {
     if (!globe || lat == null || lng == null) {
       return;
     }
-    clearTimeout(flyTimer);
+    clearFlyTimers();
     var controls = globe.controls();
+    var dest = { lat: Number(lat), lng: Number(lng) };
     controls.autoRotate = false;
-    globe.pointOfView({ lat: Number(lat), lng: Number(lng), altitude: 1.45 }, 1100);
-    flyTimer = setTimeout(function () {
-      if (!dragging) {
-        controls.autoRotate = true;
+    globe.pointOfView({ lat: dest.lat, lng: dest.lng, altitude: FLY_ALTITUDE }, FLY_MS);
+    afterFly(FLY_MS + LINGER_MS, function () {
+      if (dragging) {
+        return;
       }
-    }, 1300);
+      globe.pointOfView({ lat: dest.lat, lng: dest.lng, altitude: CRUISE_ALTITUDE }, FLY_MS);
+      afterFly(FLY_MS, function () {
+        resumeCruise(controls);
+      });
+    });
   }
 
   function selectPlace(id, doFly) {
@@ -761,7 +795,7 @@
       .htmlElement(markerElement)
       .htmlTransitionDuration(0);
 
-    globe.pointOfView({ lat: 16, lng: 28, altitude: 1.55 }, 0);
+    globe.pointOfView({ lat: 16, lng: 28, altitude: CRUISE_ALTITUDE }, 0);
 
     var controls = globe.controls();
     controls.autoRotate = true;
@@ -779,6 +813,10 @@
     controls.addEventListener("start", function () {
       dragging = true;
       controls.autoRotate = false;
+      clearFlyTimers();
+      if (globe) {
+        globe.pointOfView(globe.pointOfView());
+      }
     });
     controls.addEventListener("end", function () {
       dragging = false;
