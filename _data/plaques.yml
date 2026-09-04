@@ -1,0 +1,57 @@
+# Private plaque gallery. Titles and assignees match the Patents page brief.
+# Google Patents URLs verified (US7068645 is B1; B2 404s).
+inventor: Praneet Bachheti
+items:
+  - number: US 7,107,360
+    url: https://patents.google.com/patent/US7107360B1
+    title: Network address translation in a gateway
+    assignee: Cisco Technology, Inc.
+    status: issued
+    date: 12 September 2006
+    year: 2006
+    finish: gold
+
+  - number: US 7,586,940
+    url: https://patents.google.com/patent/US7586940B1
+    title: Forwarding packets in a gateway performing network address translation
+    assignee: Cisco
+    status: issued
+    date: 8 September 2009
+    year: 2009
+    finish: steel
+
+  - number: US 7,986,703
+    url: https://patents.google.com/patent/US7986703B2
+    title: Forwarding packets in a gateway performing NAT (continuation)
+    assignee: Cisco
+    status: issued
+    date: 26 July 2011
+    year: 2011
+    finish: gold
+
+  - number: US 7,068,645
+    url: https://patents.google.com/patent/US7068645B1
+    title: Providing different levels of service to data flows on tunnels
+    assignee: Cisco
+    status: issued
+    date: 27 June 2006
+    year: 2006
+    finish: brass
+
+  - number: US 6,901,079
+    url: https://patents.google.com/patent/US6901079B1
+    title: Providing different levels of service to different point-to-point sessions
+    assignee: Cisco
+    status: issued
+    date: 31 May 2005
+    year: 2005
+    finish: gold
+
+  - number: US 2014/0204763
+    url: https://patents.google.com/patent/US20140204763A1
+    title: Method and system for routing data
+    assignee: Aruba Networks / HPE
+    status: application
+    date: 24 July 2014
+    year: 2014
+    finish: application
