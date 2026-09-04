@@ -160,6 +160,14 @@
     });
   }
 
+  function resetStream() {
+    var stream = $("bar-stage-stream");
+    if (stream) {
+      stream.classList.remove("is-on");
+      stream.style.cssText = "";
+    }
+  }
+
   function setGlass(tab) {
     var meta = tabMeta(tab);
     var stage = $("bar-glass-stage");
@@ -179,11 +187,85 @@
     if (caption) {
       caption.textContent = meta.caption || "";
     }
-    var stream = $("bar-stage-stream");
-    if (stream) {
-      stream.classList.remove("is-on");
-      stream.style.cssText = "";
+    resetStream();
+  }
+
+  function clearPourSides(slot) {
+    if (!slot) {
+      return;
     }
+    slot.classList.remove("is-pour-left", "is-pour-right", "is-pour-under");
+  }
+
+  function homeGlass() {
+    var stage = $("bar-glass-stage");
+    var room = $("bar-room");
+    if (stage && room && stage.parentNode !== room) {
+      room.appendChild(stage);
+    }
+    return stage;
+  }
+
+  function undockGlass() {
+    var stage = homeGlass();
+    if (!stage) {
+      return;
+    }
+    stage.classList.remove("is-pouring", "is-filled", "is-docked");
+    stage.style.left = "";
+    stage.style.top = "";
+    stage.setAttribute("aria-hidden", "true");
+    resetStream();
+  }
+
+  function dockGlass(slot) {
+    var stage = $("bar-glass-stage");
+    var room = $("bar-room");
+    if (!stage || !room || !slot) {
+      return "right";
+    }
+
+    document.querySelectorAll(".bar-slot.is-pour-left, .bar-slot.is-pour-right, .bar-slot.is-pour-under").forEach(clearPourSides);
+
+    slot.appendChild(stage);
+    stage.classList.add("is-docked");
+    stage.setAttribute("aria-hidden", "false");
+
+    var roomBox = room.getBoundingClientRect();
+    var slotBox = slot.getBoundingClientRect();
+    var stageW = stage.offsetWidth || 86;
+    var stageH = stage.offsetHeight || 106;
+    var gap = 10;
+    var viewLeft = Math.max(roomBox.left, 10);
+    var viewRight = Math.min(roomBox.right, window.innerWidth - 10);
+    var fitsRight = slotBox.right + gap + stageW <= viewRight;
+    var fitsLeft = slotBox.left - gap - stageW >= viewLeft;
+    var side = "right";
+
+    if (!fitsRight && fitsLeft) {
+      side = "left";
+    } else if (!fitsRight && !fitsLeft) {
+      side = "under";
+    }
+
+    var nameH = 28;
+    var left;
+    var top;
+    if (side === "left") {
+      left = -stageW - gap;
+      top = slot.offsetHeight - nameH - stageH;
+    } else if (side === "under") {
+      left = (slot.offsetWidth - stageW) / 2;
+      top = slot.offsetHeight + 4;
+    } else {
+      left = slot.offsetWidth + gap;
+      top = slot.offsetHeight - nameH - stageH;
+    }
+
+    stage.style.left = left + "px";
+    stage.style.top = Math.max(0, top) + "px";
+    slot.classList.add("is-pour-" + side);
+    return side;
   }
 
   function clearSelection() {
@@ -194,6 +276,7 @@
     }
     document.querySelectorAll(".bar-slot.is-selected, .bar-slot.is-pouring").forEach(function (slot) {
       slot.classList.remove("is-selected", "is-pouring");
+      clearPourSides(slot);
       var btn = slot.querySelector(".bar-bottle");
       if (btn) {
         btn.setAttribute("aria-expanded", "false");
@@ -202,15 +285,7 @@
     document.querySelectorAll(".bar-shelf.is-pouring").forEach(function (shelf) {
       shelf.classList.remove("is-pouring");
     });
-    var stage = $("bar-glass-stage");
-    if (stage) {
-      stage.classList.remove("is-pouring");
-    }
-    var stream = $("bar-stage-stream");
-    if (stream) {
-      stream.classList.remove("is-on");
-      stream.style.cssText = "";
-    }
+    undockGlass();
     var panel = $("bar-detail");
     if (panel) {
       panel.hidden = true;
@@ -294,13 +369,21 @@
     var bottleBox = bottle.getBoundingClientRect();
     var glass = stage.querySelector(".bar-glass.is-on") || stage;
     var glassBox = glass.getBoundingClientRect();
-    var x1 = bottleBox.left + bottleBox.width * 0.55 - roomBox.left;
-    var y1 = bottleBox.top + 12 - roomBox.top;
+    var neckX = 0.78;
+    var neckY = 10;
+    if (slot.classList.contains("is-pour-left")) {
+      neckX = 0.22;
+    } else if (slot.classList.contains("is-pour-under")) {
+      neckX = 0.5;
+      neckY = bottleBox.height * 0.12;
+    }
+    var x1 = bottleBox.left + bottleBox.width * neckX - roomBox.left;
+    var y1 = bottleBox.top + neckY - roomBox.top;
     var x2 = glassBox.left + glassBox.width * 0.5 - roomBox.left;
-    var y2 = glassBox.top + 14 - roomBox.top;
+    var y2 = glassBox.top + 12 - roomBox.top;
     var dx = x2 - x1;
     var dy = y2 - y1;
-    var length = Math.max(56, Math.hypot(dx, dy));
+    var length = Math.max(40, Math.hypot(dx, dy));
     var angle = (Math.atan2(dy, dx) * 180) / Math.PI - 90;
     stream.style.left = x1 + "px";
     stream.style.top = y1 + "px";
@@ -316,19 +399,43 @@
     if (!stage) {
       return;
     }
-    stage.classList.remove("is-pouring", "is-filled");
+    stage.classList.remove("is-pouring", "is-filled", "is-docked");
     void stage.offsetWidth;
+    dockGlass(slot);
     if (reducedMotion()) {
       stage.classList.add("is-filled");
       return;
     }
-    aimStream(slot);
-    stage.classList.add("is-pouring");
-    window.setTimeout(function () {
-      if (stage.classList.contains("is-pouring")) {
-        stage.classList.add("is-filled");
+    window.requestAnimationFrame(function () {
+      if (!stage.classList.contains("is-docked")) {
+        return;
       }
-    }, POUR_MS);
+      aimStream(slot);
+      stage.classList.add("is-pouring");
+      window.setTimeout(function () {
+        if (stage.classList.contains("is-pouring")) {
+          stage.classList.add("is-filled");
+        }
+      }, POUR_MS);
+    });
+  }
+
+  function syncDockedGlass() {
+    if (!selectedKey) {
+      return;
+    }
+    var sep = selectedKey.indexOf(":");
+    var tab = selectedKey.slice(0, sep);
+    var id = selectedKey.slice(sep + 1);
+    var slot = slotEl(tab, id);
+    var stage = $("bar-glass-stage");
+    if (!slot || !stage || !stage.classList.contains("is-docked")) {
+      return;
+    }
+    dockGlass(slot);
+    if (!reducedMotion() && stage.classList.contains("is-pouring") && !stage.classList.contains("is-filled")) {
+      aimStream(slot);
+    }
   }
 
   function selectBottle(tab, id) {
@@ -419,6 +526,10 @@
     }
 
     transitioning = true;
+    var panes = $("bar-panes");
+    if (panes) {
+      panes.classList.add("is-busy");
+    }
     if (currentPane) {
       currentPane.classList.add("is-leaving");
       currentPane.classList.remove("is-entering", "is-active");
@@ -434,6 +545,9 @@
       applySearch();
       window.setTimeout(function () {
         nextPane.classList.remove("is-entering");
+        if (panes) {
+          panes.classList.remove("is-busy");
+        }
         transitioning = false;
       }, TRANSITION_MS);
     }, TRANSITION_MS);
@@ -492,6 +606,8 @@
         clearSelection();
       }
     });
+    window.addEventListener("resize", syncDockedGlass);
+    document.addEventListener("scroll", syncDockedGlass, true);
   }
 
   if (document.readyState === "loading") {
