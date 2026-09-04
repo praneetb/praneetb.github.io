@@ -21,3 +21,4 @@ exclude:
   - cover
   - scripts
   - _manya_reports_pdfs
+  - _manya_sat_psat_pdfs

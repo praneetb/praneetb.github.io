@@ -1,17 +1,22 @@
 # Drive file ids and display labels only.
-# SAT/PSAT PDFs stay in Google Drive. Do not commit PDF bytes or scores.
-# Folder id: 1-wS0Z-1QVJ1vBAMZ7tCpUKvIgUw9_CoH
+# SAT/PSAT PDFs stay in Google Drive (or the encrypted pack). Do not commit
+# PDF bytes or scores. Folder id: 1-wS0Z-1QVJ1vBAMZ7tCpUKvIgUw9_CoH
+# Encrypt with: NOTES_PASSWORD='…' node scripts/encrypt-manya-reports.mjs DIR --kind sat-psat
 
 items:
   - title: PSAT
     note: October 2021 · 9th Grade
     file_id: 13dqAewc10nZca9ZQSehfrrbPoupPlJCN
+    # PSATStudentScoreReport_1638990450305.pdf
   - title: PSAT
     note: October 2022 · 10th Grade
     file_id: 1-zkOgTeI4ua_kxMSaZkCYah-5kZZrt7T
+    # PSATStudentScoreReport_1674878262180.pdf
   - title: Digital PSAT/NMSQT
     note: Fall 2023 · 11th Grade
     file_id: 13uZQTIgXC2DF6GPvaZD_ddRSRrH_KZ9p
+    # digital_psat_nm_125460378_ec93bc41-8de2-48e9-ae33-03fe728c1b27.pdf
   - title: SAT
     note: November 2023
     file_id: 14d0FmC6aNjHQUUXna2qxzaBrXP7PGUEt
+    # SATStudentScoreReport_1700241693739.pdf

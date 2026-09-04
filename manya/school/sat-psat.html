@@ -7,9 +7,11 @@ private: true
 sitemap: false
 robots: noindex, nofollow
 hide_footer: true
-description: Private list of Manya’s SAT and PSAT score reports. Files stay in Google Drive.
+description: Private list of Manya’s SAT and PSAT score reports. PDFs open on this page after sign-in.
 extra_css:
   - /assets/css/manya.css
+extra_js:
+  - /assets/js/manya-reports.js
 ---
 
 <nav class="manya-trail" aria-label="Section">
@@ -22,20 +24,28 @@ extra_css:
 
 <p class="kicker">School</p>
 <h1 class="manya-title">SAT and PSAT</h1>
-<p class="lede">Each report opens in Google Drive. This site does not keep the files or the scores.</p>
+<p class="lede">Each report opens on this page. Files are encrypted on the site; Drive stays the archive. Scores are not listed here.</p>
 
 <ol class="manya-reports">
   {% for item in site.data.manya_sat_psat.items %}
-  <li class="manya-report">
+  <li
+    class="manya-report"
+    data-report-id="{{ item.file_id }}"
+    data-report-title="{{ item.title | escape }}{% if item.note %} · {{ item.note | escape }}{% endif %}">
     <div class="manya-report-copy">
       <h2 class="manya-report-title">{{ item.title }}</h2>
       {% if item.note %}<p class="manya-report-note">{{ item.note }}</p>{% endif %}
     </div>
-    <a
-      class="manya-report-open"
-      href="https://drive.google.com/file/d/{{ item.file_id }}/view"
-      target="_blank"
-      rel="noopener">Open in Drive</a>
+    <div class="manya-report-actions">
+      <button type="button" class="manya-report-open" data-view-report>View report</button>
+      <a
+        class="manya-report-drive"
+        href="https://drive.google.com/file/d/{{ item.file_id }}/view"
+        target="_blank"
+        rel="noopener">Open in Drive</a>
+    </div>
   </li>
   {% endfor %}
 </ol>
+
+{% include manya-report-dialog.html %}

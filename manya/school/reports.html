@@ -65,15 +65,4 @@ extra_js:
   {% endfor %}
 </ol>
 
-<dialog id="manya-report-dialog" class="manya-report-dialog" aria-labelledby="manya-report-dialog-title">
-  <div class="manya-report-dialog-bar">
-    <h2 id="manya-report-dialog-title">Report</h2>
-    <div class="manya-report-dialog-tools">
-      <a id="manya-report-download" class="manya-report-download" hidden>Download</a>
-      <button id="manya-report-close" type="button">Close</button>
-    </div>
-  </div>
-  <p id="manya-report-status" class="manya-report-status" hidden></p>
-  <button id="manya-report-signin" type="button" class="manya-report-signin" hidden>Sign in again</button>
-  <iframe id="manya-report-frame" class="manya-report-frame" title="Report PDF" hidden></iframe>
-</dialog>
+{% include manya-report-dialog.html %}
