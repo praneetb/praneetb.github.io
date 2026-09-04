@@ -171,7 +171,7 @@
     }
     if (!blob) {
       if (gate.needsManyaReportsUnlock && gate.needsManyaReportsUnlock()) {
-        setStatus("Sign in again to decrypt the report cards on this device.", "reauth");
+        setStatus("Sign in again to decrypt this report on this device.", "reauth");
         return;
       }
       if (gate.hasManyaReports && gate.hasManyaReports()) {
@@ -235,12 +235,14 @@
     downloadLink = el("manya-report-download");
     closeBtn = el("manya-report-close");
     signinBtn = el("manya-report-signin");
-    var stage = document.querySelector(".manya-report-stage");
-    if (!dialog || !stage) {
+    var lists = document.querySelectorAll(".manya-report-stage, .manya-reports");
+    if (!dialog || !lists.length) {
       return;
     }
-    stage.addEventListener("click", onCardActivate);
-    stage.addEventListener("keydown", onCardKey);
+    Array.prototype.forEach.call(lists, function (list) {
+      list.addEventListener("click", onCardActivate);
+      list.addEventListener("keydown", onCardKey);
+    });
     if (closeBtn) {
       closeBtn.addEventListener("click", closeDialog);
     }

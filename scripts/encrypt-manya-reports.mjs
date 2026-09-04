@@ -1,16 +1,19 @@
 #!/usr/bin/env node
 /**
- * Publish Manya report-card PDFs as an encrypted pack for GitHub Pages.
+ * Publish Manya report-card or SAT/PSAT PDFs as an encrypted pack.
  *
  *   NOTES_PASSWORD='…' node scripts/encrypt-manya-reports.mjs /path/to/pdf-folder
  *   NOTES_PASSWORD='…' node scripts/encrypt-manya-reports.mjs /path/to/pdf-folder --map map.json
+ *   NOTES_PASSWORD='…' node scripts/encrypt-manya-reports.mjs /path/to/sat-folder --kind sat-psat
  *   node scripts/encrypt-manya-reports.mjs --list /path/to/pdf-folder
+ *   node scripts/encrypt-manya-reports.mjs --list /path/to/sat-folder --kind sat-psat
  *
- * Writes assets/manya/reports.enc.json (ciphertext only). Never pass a
- * password as a committed flag and never check raw PDFs into this repo.
+ * Writes assets/manya/reports.enc.json or assets/manya/sat-psat.enc.json
+ * (ciphertext only). Never pass a password as a committed flag and never
+ * check raw PDFs into this repo.
  *
- * Drive remains the source of truth for the original files. Stable ids are
- * the Google Drive file ids from `_data/manya_reports.yml`. This envelope
+ * Drive remains the source of truth. Stable ids are Google Drive file ids
+ * from `_data/manya_reports.yml` or `_data/manya_sat_psat.yml`. This envelope
  * must NOT include a `user` verifier — site login stays on notes.enc.json.
  *
  * Mapping (first match wins):
@@ -18,8 +21,9 @@
  *      { "Manya-KG.pdf": "<file_id>" }
  *      or { "reports": [ { "id", "filename", "title"? } ] }
  *      or [ { "id", "filename", "title"? } ]
- *   2. Filename contains a Drive file_id from manya_reports.yml
- *   3. Unique title / "title-note" slug match against the YAML catalog
+ *   2. Well-known SAT/PSAT College Board filenames (when --kind sat-psat)
+ *   3. Filename contains a Drive file_id from the catalog YAML
+ *   4. Unique title / "title-note" slug match against the YAML catalog
  */
 
 import { randomBytes, pbkdf2Sync, createCipheriv } from "node:crypto";
@@ -28,17 +32,43 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const DEFAULT_OUT = path.join(ROOT, "assets", "manya", "reports.enc.json");
-const DEFAULT_YML = path.join(ROOT, "_data", "manya_reports.yml");
+const KIND_PRESETS = {
+  reports: {
+    kind: "manya-reports",
+    yml: path.join(ROOT, "_data", "manya_reports.yml"),
+    out: path.join(ROOT, "assets", "manya", "reports.enc.json"),
+    label: "reports"
+  },
+  "sat-psat": {
+    kind: "manya-sat-psat",
+    yml: path.join(ROOT, "_data", "manya_sat_psat.yml"),
+    out: path.join(ROOT, "assets", "manya", "sat-psat.enc.json"),
+    label: "SAT/PSAT reports"
+  }
+};
+const SAT_PSAT_FILENAMES = {
+  "psatstudentscorereport_1638990450305.pdf": "13dqAewc10nZca9ZQSehfrrbPoupPlJCN",
+  "psatstudentscorereport_1674878262180.pdf": "1-zkOgTeI4ua_kxMSaZkCYah-5kZZrt7T",
+  "digital_psat_nm_125460378_ec93bc41-8de2-48e9-ae33-03fe728c1b27.pdf":
+    "13uZQTIgXC2DF6GPvaZD_ddRSRrH_KZ9p",
+  "satstudentscorereport_1700241693739.pdf": "14d0FmC6aNjHQUUXna2qxzaBrXP7PGUEt"
+};
+const DEFAULT_KIND = "reports";
 const ITER = 600000;
 const KEY_LEN = 32;
 const IV_LEN = 12;
 
+function presetFor(kind) {
+  return KIND_PRESETS[kind] || KIND_PRESETS[DEFAULT_KIND];
+}
+
 function usage() {
   console.error(
-    "Usage: NOTES_PASSWORD='…' node scripts/encrypt-manya-reports.mjs <pdf-dir> [--map map.json] [outfile]"
+    "Usage: NOTES_PASSWORD='…' node scripts/encrypt-manya-reports.mjs <pdf-dir> [--kind reports|sat-psat] [--map map.json] [outfile]"
   );
-  console.error("       node scripts/encrypt-manya-reports.mjs --list <pdf-dir> [--map map.json]");
+  console.error(
+    "       node scripts/encrypt-manya-reports.mjs --list <pdf-dir> [--kind reports|sat-psat] [--map map.json]"
+  );
   process.exit(1);
 }
 
@@ -182,8 +212,18 @@ async function loadMapFile(mapPath) {
   return parseMapJson(raw);
 }
 
+function knownSatPsatId(filename) {
+  return SAT_PSAT_FILENAMES[String(filename || "").toLowerCase()] || "";
+}
+
 async function findDefaultMap(dir) {
-  const names = ["map.json", "manifest.json", "reports.map.json", "ids.json"];
+  const names = [
+    "map.json",
+    "manifest.json",
+    "reports.map.json",
+    "sat-psat.map.json",
+    "ids.json"
+  ];
   var i;
   for (i = 0; i < names.length; i += 1) {
     const candidate = path.join(dir, names[i]);
@@ -262,7 +302,8 @@ function uniqueSlugMatch(filename, catalog) {
 
 async function resolveReports(dir, options) {
   const opts = options || {};
-  const catalog = opts.catalog || (await loadCatalog(opts.ymlPath || DEFAULT_YML));
+  const preset = presetFor(opts.kind || DEFAULT_KIND);
+  const catalog = opts.catalog || (await loadCatalog(opts.ymlPath || preset.yml));
   const mapPath = opts.mapPath || (await findDefaultMap(dir));
   const mappings = opts.mappings || (mapPath ? await loadMapFile(mapPath) : []);
   const files = await listPdfs(dir);
@@ -276,15 +317,21 @@ async function resolveReports(dir, options) {
   for (i = 0; i < files.length; i += 1) {
     const filename = files[i];
     const mapped = mapLookup(mappings, filename);
+    const knownId = opts.kind === "sat-psat" ? knownSatPsatId(filename) : "";
+    const known = knownId ? catalogById(catalog, knownId) : null;
     const byId = matchByFileId(filename, catalog);
     const bySlug = uniqueSlugMatch(filename, catalog);
     const chosen = mapped
       ? { id: mapped.id, title: mapped.title, filename: filename }
-      : byId
-        ? { id: byId.id, title: byId.title, filename: filename }
-        : bySlug
-          ? { id: bySlug.id, title: bySlug.title, filename: filename }
-          : null;
+      : known
+        ? { id: known.id, title: known.title, filename: filename }
+        : knownId
+          ? { id: knownId, title: "", filename: filename }
+          : byId
+            ? { id: byId.id, title: byId.title, filename: filename }
+            : bySlug
+              ? { id: bySlug.id, title: bySlug.title, filename: filename }
+              : null;
     if (!chosen || !chosen.id) {
       unmatched.push(filename);
       continue;
@@ -307,7 +354,9 @@ async function resolveReports(dir, options) {
     throw new Error(
       "Could not map PDF(s) to Drive file ids: " +
         unmatched.join(", ") +
-        ". Pass --map map.json (filename → file_id from _data/manya_reports.yml)."
+        ". Pass --map map.json (filename → file_id from " +
+        path.relative(ROOT, preset.yml) +
+        ")."
     );
   }
   const order = {};
@@ -350,7 +399,7 @@ async function buildPayload(dir, options) {
   }
   return {
     v: 1,
-    kind: "manya-reports",
+    kind: presetFor(options && options.kind).kind,
     reports: reports,
     _meta: { mapPath: resolved.mapPath }
   };
@@ -375,7 +424,14 @@ function encryptJson(password, payload) {
 }
 
 function parseArgs(argv) {
-  const args = { listOnly: false, dir: "", mapPath: "", outfile: DEFAULT_OUT };
+  const args = {
+    listOnly: false,
+    kind: DEFAULT_KIND,
+    dir: "",
+    mapPath: "",
+    ymlPath: "",
+    outfile: ""
+  };
   const rest = argv.slice(2);
   var i;
   for (i = 0; i < rest.length; i += 1) {
@@ -385,16 +441,32 @@ function parseArgs(argv) {
     } else if (token === "--map") {
       args.mapPath = rest[i + 1] || "";
       i += 1;
+    } else if (token === "--kind") {
+      args.kind = rest[i + 1] || "";
+      i += 1;
+    } else if (token === "--yml") {
+      args.ymlPath = rest[i + 1] || "";
+      i += 1;
     } else if (token === "--out") {
-      args.outfile = path.resolve(rest[i + 1] || DEFAULT_OUT);
+      args.outfile = path.resolve(rest[i + 1] || "");
       i += 1;
     } else if (!args.dir) {
       args.dir = token;
-    } else if (args.outfile === DEFAULT_OUT) {
+    } else if (!args.outfile) {
       args.outfile = path.resolve(token);
     } else {
       usage();
     }
+  }
+  if (args.kind && !KIND_PRESETS[args.kind]) {
+    usage();
+  }
+  const preset = presetFor(args.kind);
+  if (!args.outfile) {
+    args.outfile = preset.out;
+  }
+  if (!args.ymlPath) {
+    args.ymlPath = preset.yml;
   }
   return args;
 }
@@ -405,7 +477,11 @@ async function main() {
     usage();
   }
   const dir = path.resolve(args.dir);
-  const built = await buildPayload(dir, { mapPath: args.mapPath || undefined });
+  const built = await buildPayload(dir, {
+    mapPath: args.mapPath || undefined,
+    ymlPath: args.ymlPath,
+    kind: args.kind
+  });
   const payload = {
     v: built.v,
     kind: built.kind,
@@ -433,7 +509,9 @@ async function main() {
       args.outfile +
       " (" +
       payload.reports.length +
-      " reports). Ciphertext only; no user verifier; do not commit raw PDFs."
+      " " +
+      presetFor(args.kind).label +
+      "). Ciphertext only; no user verifier; do not commit raw PDFs."
   );
 }
 

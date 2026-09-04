@@ -13,6 +13,7 @@
   var listeners = [];
   var notesEnvelopePromise = null;
   var reportsEnvelopePromise = null;
+  var satPsatEnvelopePromise = null;
   var signInHandler = null;
   var reportsIndex = {};
   var reportsBlobs = {};
@@ -95,6 +96,21 @@
     return reportsEnvelopePromise;
   }
 
+  function loadSatPsatEnvelope() {
+    if (!satPsatEnvelopePromise) {
+      satPsatEnvelopePromise = loadJson(assetUrl("manya/sat-psat.enc.json")).then(
+        function (envelope) {
+          return envelope;
+        },
+        function () {
+          satPsatEnvelopePromise = Promise.resolve(null);
+          return null;
+        }
+      );
+    }
+    return satPsatEnvelopePromise;
+  }
+
   async function deriveAesKey(password, envelope) {
     var salt = b64ToBytes(envelope.salt);
     var material = await crypto.subtle.importKey(
@@ -174,13 +190,30 @@
     return pack;
   }
 
-  async function decryptReports(password) {
-    var envelope = await loadReportsEnvelope();
+  function acceptedReportKind(kind) {
+    return kind === "manya-reports" || kind === "manya-sat-psat";
+  }
+
+  async function decryptReportPack(password, envelope) {
+    if (!envelope) {
+      return null;
+    }
     var pack = await decryptEnvelope(password, envelope);
-    if (!pack || pack.kind !== "manya-reports" || !Array.isArray(pack.reports)) {
+    if (!pack || !Array.isArray(pack.reports)) {
+      return null;
+    }
+    if (pack.kind && !acceptedReportKind(pack.kind)) {
       return null;
     }
     return pack;
+  }
+
+  async function decryptReports(password) {
+    return decryptReportPack(password, await loadReportsEnvelope());
+  }
+
+  async function decryptSatPsat(password) {
+    return decryptReportPack(password, await loadSatPsatEnvelope());
   }
 
   function storageGet(key) {
@@ -260,8 +293,7 @@
     }
   }
 
-  function indexFromPack(pack) {
-    resetReportsMemory();
+  function mergePack(pack) {
     ((pack && pack.reports) || []).forEach(function (report) {
       if (!report || !report.id || !report.pdf_b64) {
         return;
@@ -274,6 +306,11 @@
         blob: b64ToBlob(report.pdf_b64, report.mime || "application/pdf")
       });
     });
+  }
+
+  function indexFromPacks(packs) {
+    resetReportsMemory();
+    (packs || []).forEach(mergePack);
   }
 
   function openReportsDb() {
@@ -412,14 +449,30 @@
     await clearReportsIdb();
   }
 
+  async function tryDecryptNamedPack(password, decryptFn, resetFn) {
+    try {
+      return await decryptFn(password);
+    } catch (err) {
+      if (resetFn && err && err.message === "missing") {
+        resetFn();
+      }
+      return null;
+    }
+  }
+
   async function cacheManyaReports(password) {
     try {
-      var pack = await decryptReports(password);
-      if (!pack) {
+      var reportsPack = await tryDecryptNamedPack(password, decryptReports, function () {
+        reportsEnvelopePromise = null;
+      });
+      var satPack = await tryDecryptNamedPack(password, decryptSatPsat, function () {
+        satPsatEnvelopePromise = null;
+      });
+      if (!reportsPack && !satPack) {
         await clearReportsCache();
         return false;
       }
-      indexFromPack(pack);
+      indexFromPacks([reportsPack, satPack]);
       try {
         await writeReportsToIdb();
         // Drop in-memory blobs after a successful IDB write so PDFs are not
@@ -430,9 +483,6 @@
       }
       return Object.keys(reportsIndex).length > 0;
     } catch (err) {
-      if (err && err.message === "missing") {
-        reportsEnvelopePromise = null;
-      }
       resetReportsMemory();
       return false;
     }
@@ -569,6 +619,7 @@
   function forgetNotesEnvelope() {
     notesEnvelopePromise = null;
     reportsEnvelopePromise = null;
+    satPsatEnvelopePromise = null;
   }
 
   function isUnconfiguredError(err) {
