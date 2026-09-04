@@ -93,7 +93,9 @@
 }
 
 .notes-folder-children {
+  margin-left: 0.35rem;
   padding: 0 0 0.05rem 0.85rem;
+  border-left: 1px solid var(--rule);
 }
 
 .notes-folder.is-collapsed > .notes-folder-children {
