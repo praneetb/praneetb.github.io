@@ -1,22 +1,26 @@
 ---
-layout: default
+layout: null
 title: Whiskey
-nav: whiskey
 permalink: /whiskey/
-private: true
 sitemap: false
 robots: noindex, nofollow
-hide_footer: true
-description: The whiskey bar now lives on Your bar.
 ---
-
-<script>
-  (function () {
-    var base = (document.documentElement.getAttribute("data-baseurl") || "").replace(/\/$/, "");
-    location.replace(base + "/bar/?tab=whiskey");
-  })();
-</script>
-<noscript>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
   <meta http-equiv="refresh" content="0; url={{ '/bar/?tab=whiskey' | relative_url }}">
-</noscript>
-<p class="lede"><a href="{{ '/bar/?tab=whiskey' | relative_url }}">Continue to the bar</a></p>
+  <link rel="canonical" href="{{ '/bar/?tab=whiskey' | absolute_url }}">
+  <title>Redirecting to the bar</title>
+  <script>
+    (function () {
+      var dest = {{ '/bar/?tab=whiskey' | jsonify }};
+      location.replace(dest);
+    })();
+  </script>
+</head>
+<body>
+  <p><a href="{{ '/bar/?tab=whiskey' | relative_url }}">Continue to the bar</a></p>
+</body>
+</html>
