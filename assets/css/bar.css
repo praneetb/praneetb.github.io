@@ -609,7 +609,12 @@ body:has(.page-bar) .welcome-strip {
 }
 
 .bar-glass-stage.is-docked .bar-glass-caption {
-  opacity: 1;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  opacity: 0;
 }
 
 .bar-empty {
