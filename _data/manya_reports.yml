@@ -1,50 +1,201 @@
-# Drive file ids and display labels only.
-# Report-card PDFs stay in Google Drive. Do not commit PDF bytes or report text.
+# Drive file ids, card labels, and short PDF extracts.
+# Report-card PDFs stay in Google Drive. Do not commit PDF bytes.
+# Summaries are text-only highlights (school, year, 1–3 lines) and are easy to replace.
 
 items:
   - title: Kindergarten
     file_id: 12yz19PLHuu1dUKo9swM6smvPBpdCswXM
+    avatar: kg
+    school: Stratford Fremont
+    year: 2012–13
+    highlights:
+      - Mastered reading and math by year’s end
+      - Excellent citizenship and focus
+      - Teachers noted recitation and critical thinking
+
   - title: 1st Grade
     file_id: 13dD7xkHwqMUoeoClEuEeyo3OCAwR1DlI
+    avatar: "1"
+    school: Stratford Fremont
+    year: 2013–14
+    highlights:
+      - Grammar, math, and science in the high 90s
+      - Excellent citizenship
+      - Consistent effort across the year
+
   - title: 2nd Grade
     file_id: 134kjCuZDPV-HQ8UwZb9r1Gtzp9hCBeqX
+    avatar: "2"
+    school: Stratford Fremont
+    year: 2014–15
+    highlights:
+      - Strong in science, history, and writing
+      - Grew more confident in recitation
+      - Excellent PE and Spanish
+
   - title: 2nd Grade
     note: Report 2
     file_id: 13Nkij0rhzu6bIGJZfACM7StPME7D_1Zj
+    avatar: "2"
+    school: Stratford Fremont
+    year: 2014–15
+    highlights:
+      - Strong study skills
+      - Grew in organizing and sharing ideas
+      - Cooperative in class
+
   - title: 3rd Grade
     file_id: 13SzSuQb73f8TAyAjC4w43B02DyiAnEZM
+    avatar: "3"
+    school: Stratford Fremont
+    year: 2015–16
+    highlights:
+      - Grammar, spelling, and math stayed strong
+      - Writing and work habits improved through the year
+      - Teachers noted second-term accountability
+
   - title: 3rd Grade
     note: Report 2
     file_id: 13035xyWDJyIL-Np7ahtoMIaCMWWlOpPg
+    avatar: "3"
+    school: Stratford Fremont
+    year: 2015–16
+    highlights:
+      - Steady academic and social skills
+      - Personal accountability improved after first term
+
   - title: 4th Grade
     file_id: 12h6DDGYincI7Wu7ZXXDkDmL9l7QfZtSP
+    avatar: "4"
+    school: Stratford Fremont
+    year: 2016–17
+    highlights:
+      - Grammar, math, and recitation in the high 90s
+      - Grew in participation and time management
+      - Excellent citizenship
+
   - title: 4th Grade
     note: Report 2
     file_id: 13BWsDY7J3fUODnnGqC_NS_hVyZRvt6L_
+    avatar: "4"
+    school: Stratford Fremont
+    year: 2016–17
+    highlights:
+      - Cooperative and independent work stayed solid
+      - Participation improved after first term
+
   - title: 5th Grade
     file_id: 13P5kw_ChNY7fGbL44MI0IgQzRVc70Nh_
+    avatar: "5"
+    school: Stratford Fremont
+    year: 2017–18
+    highlights:
+      - Grammar, reading, math, and writing in the mid–high 90s
+      - Excellent citizenship and work habits
+
   - title: 5th Grade
     note: Report 2
     file_id: 13-IukhBGwIjVmaOtkfaOikq-Yp4xB7ED
+    avatar: "5"
+    school: Stratford Fremont
+    year: 2017–18
+    highlights:
+      - Study skills excellent all year
+      - Participation and communication grew to excellent
+
   - title: 6th Grade
     file_id: 13Pd-fDAjRiWk87dP5hw_AjW3tRyBE0q8
+    avatar: "6"
+    school: Stratford Fremont
+    year: 2018–19
+    highlights:
+      - Term GPAs 4.00, 3.96, and 4.00
+      - Pre-Algebra, literature, and Spanish at A / A+
+
   - title: 6th Grade
     note: Report card
     file_id: 12nWO7OWtPEWeH4IzOJYuiMx0hEu_RLRN
+    avatar: "6"
+    school: Stratford Fremont
+    year: 2018–19
+    highlights:
+      - Excellent grammar citizenship and work habits
+      - Strong science, Spanish, and art
+
   - title: 7th Grade
     file_id: 13dizjBHPTdsoSI0f3vN9VbPlAAo3RjhK
+    avatar: "7"
+    school: BASIS Independent Fremont
+    year: 2019–20
+    highlights:
+      - Algebra & Geometry II, biology, and Spanish I in the mid–high 90s
+      - Intro to CS finished at 99–100
+
   - title: 8th Grade
     file_id: 13eoKj5HgBYZsLvS6WeDOlFlQJmXtyj8b
+    avatar: "8"
+    school: BASIS Independent Online
+    year: 2020–21
+    highlights:
+      - Pre-Calculus AB at 99–103
+      - Strong English, chemistry, and creative writing
+
   - title: 9th Grade
     file_id: 13gnLHMiimOudFPVQFzmIkWgavV6TGXPg
+    avatar: "9"
+    school: BASIS Independent Fremont
+    year: 2021–22
+    highlights:
+      - AP Calculus AB, Drama, and Spanish II at 100
+      - Final average 97
+
   - title: 10th Grade
     note: BASIS
     file_id: 1-fIL53x1wCnqiRdpRtycxKN-Veatx57Y
+    avatar: "10"
+    school: BASIS Independent Fremont
+    year: 2022–23
+    highlights:
+      - AP Calculus BC, Computer Science A, and Physics 2
+      - Honors Biology; Geometry Challenge Test passed
+      - Final average 97
+
   - title: 10th Grade
     file_id: 16QHZgRfjqacgXG_7-FcmWFiF-7jPpw5Z
+    avatar: "10"
+    school: BASIS Independent Fremont
+    year: 2022–23
+    highlights:
+      - AP U.S. History and Spanish III in the high 90s
+      - PE & Sports at 100
+      - Final average 97
+
   - title: 11th Grade
     file_id: 16PY5YjhaqvW-jXsJ6gu6wd4-QqJKdNaK
+    avatar: "11"
+    school: BASIS Independent Fremont
+    year: 2023–24
+    highlights:
+      - Post-AP Linear Algebra and Spanish IV at 100
+      - AP English Language finished at 95
+      - Geometry proficiency exam passed
+
   - title: 12th Grade
     file_id: 1loQQzGwKgpZqAcfyeUbvRS9LeWG5Jen9
+    avatar: "12"
+    school: BASIS Independent Fremont
+    year: 2024–25
+    highlights:
+      - Capstones in cosmology and multivariable calculus at 100
+      - Author study and data structures in the mid-90s
+      - Final average 98
+
   - title: Transcript 2022–2023
     file_id: 11DRc0PLIbSj6qi6HddbbGYS6iK_JiO_W
+    avatar: "10"
+    school: BASIS Independent Fremont
+    year: 2022–23
+    highlights:
+      - Grade 10 year: AP Calc BC, CSA, Physics 2, U.S. History
+      - Cumulative GPA 3.98 (weighted 4.67)
+      - Geometry proficiency exam passed

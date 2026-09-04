@@ -3,6 +3,10 @@
   padding-top: 3rem;
 }
 
+.page-manya:has(.manya-report-stage) {
+  max-width: min(54rem, 100%);
+}
+
 .manya-trail {
   display: flex;
   flex-wrap: wrap;
@@ -93,7 +97,7 @@
   counter-reset: manya-report;
 }
 
-.manya-report {
+.manya-reports .manya-report {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -140,8 +144,197 @@
   color: var(--accent-ink);
 }
 
+.manya-report-stage {
+  --manya-step: min(1.35rem, 4vw);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 2rem 0 0;
+  padding: 0.4rem 0 2.4rem;
+  list-style: none;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 2.35rem,
+    color-mix(in srgb, var(--ink) 5%, transparent) 2.35rem,
+    color-mix(in srgb, var(--ink) 5%, transparent) 2.37rem
+  );
+}
+
+.manya-report-stage .manya-report {
+  --i: 0;
+  position: relative;
+  z-index: calc(1 + var(--i));
+  display: grid;
+  grid-template-columns: 5.6rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.95rem 1.05rem;
+  width: min(100%, 36.5rem);
+  margin: -0.45rem 0 0 calc((var(--i) % 6) * var(--manya-step));
+  padding: 0.95rem 1.05rem 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 1.15rem;
+  background: var(--surface);
+  box-shadow: 0 16px 36px var(--shadow);
+  animation:
+    manya-card-in 0.72s cubic-bezier(0.22, 0.8, 0.24, 1) calc(var(--i) * 70ms) both,
+    manya-float 6.2s ease-in-out calc(0.85s + var(--i) * 90ms) infinite;
+}
+
+.manya-report-stage .manya-report:first-child {
+  margin-top: 0;
+}
+
+.manya-report-stage .manya-report::before,
+.manya-report-stage .manya-report::after {
+  content: "";
+  position: absolute;
+  width: 0.72rem;
+  height: 0.72rem;
+  background: var(--accent);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  opacity: 0.72;
+  pointer-events: none;
+  animation: manya-twinkle 2.8s ease-in-out infinite;
+}
+
+.manya-report-stage .manya-report::before {
+  top: 0.42rem;
+  right: 1.15rem;
+  animation-delay: calc(var(--i) * 120ms);
+}
+
+.manya-report-stage .manya-report::after {
+  width: 0.5rem;
+  height: 0.5rem;
+  bottom: 0.7rem;
+  left: 0.35rem;
+  opacity: 0.5;
+  animation-delay: calc(0.6s + var(--i) * 90ms);
+}
+
+.manya-report-avatar {
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--paper-deep);
+  box-shadow:
+    0 0 0 3px var(--surface),
+    0 0 0 5px color-mix(in srgb, var(--accent) 55%, var(--rule));
+}
+
+.manya-report-stage .manya-report-copy {
+  display: grid;
+  justify-items: start;
+  min-width: 0;
+}
+
+.manya-report-stage .manya-report-title {
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+}
+
+.manya-report-meta {
+  margin: 0.18rem 0 0;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.manya-report-highlights {
+  margin: 0.45rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.manya-report-highlights li + li {
+  margin-top: 0.18rem;
+}
+
+.manya-report-stage .manya-report-open {
+  margin-top: 0.7rem;
+  justify-self: end;
+}
+
+.manya-report-stage .manya-report:hover,
+.manya-report-stage .manya-report:focus-within {
+  z-index: 40;
+  animation-play-state: paused;
+  transform: translateY(-7px);
+  box-shadow: 0 22px 44px var(--shadow-strong);
+}
+
+@keyframes manya-card-in {
+  from {
+    opacity: 0;
+    transform: translate3d(-1.1rem, 1.35rem, 0) rotate(-1.4deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(calc(((var(--i) % 2) * 2 - 1) * 0.45deg));
+  }
+}
+
+@keyframes manya-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes manya-twinkle {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: scale(0.85) rotate(0deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15) rotate(18deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manya-report-stage .manya-report,
+  .manya-report-stage .manya-report::before,
+  .manya-report-stage .manya-report::after {
+    animation: none !important;
+  }
+
+  .manya-report-stage .manya-report:hover,
+  .manya-report-stage .manya-report:focus-within {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .manya-report-stage .manya-report {
+    grid-template-columns: 4.4rem minmax(0, 1fr);
+    width: 100%;
+    margin-left: 0;
+    gap: 0.75rem 0.85rem;
+  }
+
+  .manya-report-avatar {
+    width: 4.4rem;
+    height: 4.4rem;
+  }
+
+  .manya-report-stage .manya-report-open {
+    justify-self: start;
+  }
+}
+
 @media (max-width: 560px) {
-  .manya-report {
+  .manya-reports .manya-report {
     grid-template-columns: 1fr;
     justify-items: start;
   }

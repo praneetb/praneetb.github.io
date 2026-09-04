@@ -21,21 +21,41 @@ extra_css:
 </nav>
 
 <p class="kicker">Reports</p>
-<h1 class="manya-title">Report cards</h1>
+<h1 class="manya-title">Report cards · Manya</h1>
 <p class="lede">Each card opens in Google Drive. This site does not keep the files.</p>
 
-<ol class="manya-reports">
+<ol class="manya-report-stage">
   {% for item in site.data.manya_reports.items %}
-  <li class="manya-report">
+  <li class="manya-report" style="--i: {{ forloop.index0 }};">
+    <img
+      class="manya-report-avatar"
+      src="{{ '/assets/manya/' | append: item.avatar | append: '.png' | relative_url }}"
+      alt="Cartoon of Manya, {{ item.title }}"
+      width="160"
+      height="160"
+      {% if forloop.index > 4 %}loading="lazy"{% endif %}
+      decoding="async">
     <div class="manya-report-copy">
       <h2 class="manya-report-title">{{ item.title }}</h2>
-      {% if item.note %}<p class="manya-report-note">{{ item.note }}</p>{% endif %}
+      <p class="manya-report-meta">
+        {% if item.school %}{{ item.school }}{% endif %}
+        {% if item.school and item.year %} · {% endif %}
+        {% if item.year %}{{ item.year }}{% endif %}
+        {% if item.note %} · {{ item.note }}{% endif %}
+      </p>
+      {% if item.highlights %}
+      <ul class="manya-report-highlights">
+        {% for line in item.highlights %}
+        <li>{{ line }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <a
+        class="manya-report-open"
+        href="https://drive.google.com/file/d/{{ item.file_id }}/view"
+        target="_blank"
+        rel="noopener">Open in Drive</a>
     </div>
-    <a
-      class="manya-report-open"
-      href="https://drive.google.com/file/d/{{ item.file_id }}/view"
-      target="_blank"
-      rel="noopener">Open in Drive</a>
   </li>
   {% endfor %}
 </ol>
