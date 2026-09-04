@@ -2,12 +2,11 @@
   "use strict";
 
   const ADMIN_KEY = "site.admin";
-  const ROSE_KEY = "rose.gate.unlocked";
-  const LEDGER_KEY = "rose.ledger";
   const NOTES_KEY = "site.notes";
+  const LEGACY_ROSE_KEY = "rose.gate.unlocked";
+  const LEGACY_LEDGER_KEY = "rose.ledger";
 
   var listeners = [];
-  var envelopePromise = null;
   var notesEnvelopePromise = null;
   var signInHandler = null;
 
@@ -68,18 +67,9 @@
     });
   }
 
-  function loadEnvelope() {
-    if (!envelopePromise) {
-      envelopePromise = loadJson(assetUrl("rose.enc.json"));
-    }
-    return envelopePromise;
-  }
-
   function loadNotesEnvelope() {
     if (!notesEnvelopePromise) {
-      notesEnvelopePromise = loadJson(assetUrl("notes.enc.json")).catch(function () {
-        return null;
-      });
+      notesEnvelopePromise = loadJson(assetUrl("notes.enc.json"));
     }
     return notesEnvelopePromise;
   }
@@ -147,10 +137,6 @@
     return JSON.parse(new TextDecoder().decode(plain));
   }
 
-  async function decryptRose(password) {
-    return decryptEnvelope(password, await loadEnvelope());
-  }
-
   function emptyNotes() {
     return { v: 1, source: "obsidian", readonly: true, folders: [], collapsed: [], notes: [] };
   }
@@ -191,16 +177,9 @@
     return storageGet(ADMIN_KEY) === ADMIN_KEY;
   }
 
-  function getLedger() {
-    var raw = storageGet(LEDGER_KEY);
-    if (!raw) {
-      return null;
-    }
-    try {
-      return JSON.parse(raw);
-    } catch (err) {
-      return null;
-    }
+  function clearLegacyRose(store) {
+    storageRemove(store, LEGACY_ROSE_KEY);
+    storageRemove(store, LEGACY_LEDGER_KEY);
   }
 
   function getNotes() {
@@ -219,18 +198,15 @@
     }
   }
 
-  function persistUnlock(ledger, notes, persist) {
-    var payload = JSON.stringify(ledger);
+  function persistUnlock(notes, persist) {
     var notesPayload = JSON.stringify(notes || emptyNotes());
     try {
       storageSet(sessionStorage, ADMIN_KEY, ADMIN_KEY);
-      storageSet(sessionStorage, ROSE_KEY, ROSE_KEY);
-      storageSet(sessionStorage, LEDGER_KEY, payload);
       storageSet(sessionStorage, NOTES_KEY, notesPayload);
+      clearLegacyRose(sessionStorage);
     } catch (err) {
       try {
         storageSet(sessionStorage, ADMIN_KEY, ADMIN_KEY);
-        storageSet(sessionStorage, ROSE_KEY, ROSE_KEY);
       } catch (ignored) {
         // Unlock still lasts for this visit if sessionStorage is blocked.
       }
@@ -238,17 +214,15 @@
     if (persist) {
       try {
         storageSet(localStorage, ADMIN_KEY, ADMIN_KEY);
-        storageSet(localStorage, ROSE_KEY, ROSE_KEY);
-        storageSet(localStorage, LEDGER_KEY, payload);
         storageSet(localStorage, NOTES_KEY, notesPayload);
+        clearLegacyRose(localStorage);
       } catch (err) {
         // Session still works if persistent storage is blocked.
       }
     } else {
       storageRemove(localStorage, ADMIN_KEY);
-      storageRemove(localStorage, ROSE_KEY);
-      storageRemove(localStorage, LEDGER_KEY);
       storageRemove(localStorage, NOTES_KEY);
+      clearLegacyRose(localStorage);
     }
     try {
       document.documentElement.classList.add("is-signed-in");
@@ -260,13 +234,11 @@
 
   function lock() {
     storageRemove(sessionStorage, ADMIN_KEY);
-    storageRemove(sessionStorage, ROSE_KEY);
-    storageRemove(sessionStorage, LEDGER_KEY);
     storageRemove(sessionStorage, NOTES_KEY);
+    clearLegacyRose(sessionStorage);
     storageRemove(localStorage, ADMIN_KEY);
-    storageRemove(localStorage, ROSE_KEY);
-    storageRemove(localStorage, LEDGER_KEY);
     storageRemove(localStorage, NOTES_KEY);
+    clearLegacyRose(localStorage);
     try {
       document.documentElement.classList.remove("is-signed-in");
     } catch (err) {
@@ -280,19 +252,18 @@
       return { ok: false };
     }
     try {
-      var envelope = await loadEnvelope();
+      var envelope = await loadNotesEnvelope();
       if (!envelope || !envelope.user) {
         var missing = new Error("unconfigured");
         missing.name = "UnconfiguredError";
         throw missing;
       }
       var userOk = await verifyUsername(username, envelope);
-      var ledger = null;
       var notes = emptyNotes();
       var decryptOk = false;
       try {
-        ledger = await decryptRose(password);
-        decryptOk = !!(ledger && typeof ledger === "object");
+        notes = await decryptNotes(password);
+        decryptOk = !!(notes && Array.isArray(notes.notes));
       } catch (err) {
         if (err && (err.name === "UnconfiguredError" || err.message === "missing")) {
           return { ok: false, unconfigured: true };
@@ -302,13 +273,8 @@
       if (!userOk || !decryptOk) {
         return { ok: false };
       }
-      try {
-        notes = await decryptNotes(password);
-      } catch (err) {
-        notes = emptyNotes();
-      }
-      persistUnlock(ledger, notes, persist);
-      return { ok: true, ledger: ledger, notes: notes };
+      persistUnlock(notes, persist);
+      return { ok: true, notes: notes };
     } catch (err) {
       if (err && (err.name === "UnconfiguredError" || err.message === "missing")) {
         return { ok: false, unconfigured: true };
@@ -341,7 +307,6 @@
       return true;
     },
     isUnlocked: isUnlocked,
-    getLedger: getLedger,
     getNotes: getNotes,
     lock: lock,
     tryUnlock: tryUnlock,
