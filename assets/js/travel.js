@@ -3,6 +3,15 @@
 
   var COUNTRY_KEY = "travel.countries.v1";
   var FLAG_CDN = "https://flagcdn.com/w80/";
+  var FLAG_CDN_LARGE = "https://flagcdn.com/w640/";
+  var CONTINENT_GROUPS = {
+    Africa: "AO BF BI BJ BW CD CF CG CI CM CV DJ DZ EG EH ER ET GA GH GM GN GQ GW KE KM LR LS LY MA MG ML MR MU MW MZ NA NE NG RW SC SD SL SN SO SS ST SZ TD TG TN TZ UG ZA ZM ZW",
+    Asia: "AE AF AM AZ BD BH BN BT CN CY GE ID IL IN IQ IR JO JP KG KH KP KR KW KZ LA LB LK MM MN MV MY NP OM PH PK QA SA SG SY TH TJ TL TM TR TW UZ VN YE",
+    Europe: "AD AL AT BA BE BG BY CH CZ DE DK EE ES FI FR GB GR HR HU IE IS IT LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS RU SE SI SK SM UA VA XK",
+    "North America": "AG BB BS BZ CA CR CU DM DO GD GL GT HN HT JM KN LC MX NI PA SV TT US VC",
+    "South America": "AR BO BR CL CO EC GY PE PY SR UY VE",
+    Oceania: "AU FJ FM KI MH NR NZ PG PW SB TO TV VU WS"
+  };
   var EARTH_TEX = "https://cdn.jsdelivr.net/npm/three-globe@2.44.1/example/img/earth-blue-marble.jpg";
   var EARTH_BUMP = "https://cdn.jsdelivr.net/npm/three-globe@2.44.1/example/img/earth-topology.png";
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -152,6 +161,34 @@
 
   function flagUrl(code) {
     return FLAG_CDN + String(code).toLowerCase() + ".png";
+  }
+
+  function flagUrlLarge(code) {
+    return FLAG_CDN_LARGE + String(code).toLowerCase() + ".png";
+  }
+
+  var continentByCode = null;
+
+  function continents() {
+    if (!continentByCode) {
+      continentByCode = {};
+      Object.keys(CONTINENT_GROUPS).forEach(function (name) {
+        CONTINENT_GROUPS[name].split(" ").forEach(function (code) {
+          if (code) {
+            continentByCode[code] = name;
+          }
+        });
+      });
+    }
+    return continentByCode;
+  }
+
+  function continentFor(code) {
+    return continents()[String(code || "").toUpperCase()] || "";
+  }
+
+  function iconSvg(paths) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' + paths + "</svg>";
   }
 
   function resolveCountry(name, code) {
@@ -381,16 +418,24 @@
     });
   }
 
+  function selectedEntry() {
+    if (!selectedId) {
+      return null;
+    }
+    return visibleCountries().filter(function (item) {
+      return item.id === selectedId;
+    })[0] || null;
+  }
+
   function selectPlace(id, doFly) {
     selectedId = id;
     renderCountryList();
+    renderSelected();
     updateGlobeMarkers();
     if (!doFly) {
       return;
     }
-    var entry = visibleCountries().filter(function (item) {
-      return item.id === id;
-    })[0];
+    var entry = selectedEntry();
     var loc = locationForCountry(entry);
     if (loc) {
       flyTo(loc.lat, loc.lng);
@@ -401,6 +446,102 @@
     var num = el("travel-stat-num");
     if (num) {
       num.textContent = String(list.length);
+    }
+    var text = el("travel-stats-text");
+    if (!text) {
+      return;
+    }
+    var parts = [list.length === 1 ? "1 country" : list.length + " countries"];
+    var seen = {};
+    var continentCount = 0;
+    list.forEach(function (entry) {
+      var name = continentFor(entry.code);
+      if (name && !seen[name]) {
+        seen[name] = true;
+        continentCount += 1;
+      }
+    });
+    if (continentCount) {
+      parts.push(continentCount === 1 ? "1 continent" : continentCount + " continents");
+    }
+    var years = list
+      .map(function (entry) {
+        return parseInt(entry.year, 10);
+      })
+      .filter(function (year) {
+        return year >= 1000 && year <= 3000;
+      })
+      .sort(function (a, b) {
+        return a - b;
+      });
+    if (years.length) {
+      parts.push(years[0] === years[years.length - 1] ? String(years[0]) : years[0] + "–" + years[years.length - 1]);
+    }
+    text.textContent = parts.join(" · ");
+  }
+
+  function renderSelected() {
+    var root = el("travel-selected");
+    if (!root) {
+      return;
+    }
+    var entry = selectedEntry();
+    root.replaceChildren();
+    if (!entry) {
+      root.classList.add("is-empty");
+      var empty = document.createElement("p");
+      empty.className = "travel-selected-empty";
+      empty.textContent = "Pick a country.";
+      root.appendChild(empty);
+      return;
+    }
+    root.classList.remove("is-empty");
+
+    var visual = document.createElement("div");
+    visual.className = "travel-selected-visual";
+    if (entry.code) {
+      var img = document.createElement("img");
+      img.src = flagUrlLarge(entry.code);
+      img.alt = "";
+      visual.appendChild(img);
+    } else {
+      visual.classList.add("is-plain");
+    }
+    root.appendChild(visual);
+
+    var copy = document.createElement("div");
+    copy.className = "travel-selected-copy";
+    var title = document.createElement("h2");
+    title.textContent = entry.name;
+    copy.appendChild(title);
+
+    var visit = formatVisit(entry);
+    if (visit) {
+      var when = document.createElement("p");
+      when.className = "travel-selected-meta";
+      when.innerHTML = iconSvg('<rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M8 3.5v3.5M16 3.5v3.5M3.5 10h17"></path>') + "<span></span>";
+      when.querySelector("span").textContent = visit;
+      copy.appendChild(when);
+    }
+    if (entry.notes) {
+      var notes = document.createElement("p");
+      notes.className = "travel-selected-meta";
+      notes.innerHTML = iconSvg('<path d="M12 21s7-6.2 7-11.2A7 7 0 0 0 5 9.8C5 14.8 12 21 12 21z"></path><circle cx="12" cy="10" r="2.2"></circle>') + "<span></span>";
+      notes.querySelector("span").textContent = entry.notes;
+      copy.appendChild(notes);
+    }
+    root.appendChild(copy);
+
+    var loc = locationForCountry(entry);
+    if (loc) {
+      var fly = document.createElement("button");
+      fly.type = "button";
+      fly.className = "travel-fly-again";
+      fly.innerHTML = iconSvg('<path d="M3 12.2l18-8.2-5.4 16.2-4.2-6.2L3 12.2z"></path><path d="M10.8 13.8L21 4"></path>') + "<span>Fly again</span>";
+      fly.addEventListener("click", function () {
+        flyTo(loc.lat, loc.lng);
+      });
+      root.appendChild(fly);
     }
   }
 
@@ -483,15 +624,7 @@
           removeCountry(entry);
         });
         row.appendChild(remove);
-      } else {
-        var gap = document.createElement("span");
-        row.appendChild(gap);
       }
-      var go = document.createElement("span");
-      go.className = "travel-row-go";
-      go.setAttribute("aria-hidden", "true");
-      go.textContent = "›";
-      row.appendChild(go);
       row.addEventListener("click", function () {
         selectPlace(entry.id, true);
       });
@@ -521,6 +654,7 @@
   function renderAll() {
     var list = visibleCountries();
     renderStat(list);
+    renderSelected();
     renderCountryList();
     renderAddSelect();
     renderBackup(isAdmin() ? readCountryStore() : []);
