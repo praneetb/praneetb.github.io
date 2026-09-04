@@ -1,13 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Great+Vibes&family=Playfair+Display:wght@600;700&display=swap");
 
 .page-bucket {
-  --bucket-paper: #f3ece1;
-  --bucket-band: #e8dccb;
-  --bucket-ink: #2a2118;
-  --bucket-script: #c45c38;
-  --bucket-done: #4a6d4a;
-  --bucket-note: #b42318;
-  --bucket-shadow: rgba(62, 38, 18, 0.16);
   max-width: min(86rem, calc(100vw - 1.5rem));
   padding-top: 1.6rem;
   padding-bottom: 4.8rem;
@@ -33,7 +26,7 @@ body:has(.page-bucket) .site-header {
 .page-bucket h1 {
   margin: 0;
   color: var(--bucket-ink);
-  font-family: "Playfair Display", "Source Serif 4", "Iowan Old Style", Palatino, serif;
+  font-family: var(--font-display);
   font-size: clamp(2.6rem, 6vw, 4.15rem);
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -88,13 +81,13 @@ body:has(.page-bucket) .site-header {
   content: "";
   width: 2.6rem;
   height: 0;
-  border-top: 1.5px solid rgba(196, 92, 56, 0.55);
-  box-shadow: 0 4px 0 -2.5px rgba(196, 92, 56, 0.28), 0 8px 0 -5px rgba(196, 92, 56, 0.18);
+  border-top: 1.5px solid color-mix(in srgb, var(--bucket-script) 55%, transparent);
+  box-shadow: 0 4px 0 -2.5px color-mix(in srgb, var(--bucket-script) 28%, transparent), 0 8px 0 -5px color-mix(in srgb, var(--bucket-script) 18%, transparent);
 }
 
 .bucket-band-count {
   margin: 0.28rem 0 0;
-  color: #7a6a58;
+  color: var(--ink-soft);
   font-family: "Caveat", "Segoe Print", cursive;
   font-size: 1.15rem;
   font-weight: 600;
@@ -110,7 +103,7 @@ body:has(.page-bucket) .site-header {
   padding-bottom: 0.12rem;
   border-bottom: 1.5px solid var(--bucket-script);
   color: var(--bucket-ink);
-  font-family: "Playfair Display", "Source Serif 4", Palatino, serif;
+  font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -225,7 +218,7 @@ body:has(.page-bucket) .site-header {
 }
 
 .bucket-seal-text {
-  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-ui);
   font-size: 0.52rem;
   font-weight: 700;
   letter-spacing: 0.08em;

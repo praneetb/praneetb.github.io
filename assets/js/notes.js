@@ -282,11 +282,12 @@
         });
         return;
       }
+      var siteTheme = document.documentElement.getAttribute("data-theme");
       mermaid.initialize({
         startOnLoad: false,
-        theme: "neutral",
+        theme: siteTheme === "cadence" ? "dark" : "neutral",
         securityLevel: "strict",
-        fontFamily: "Source Sans 3, ui-sans-serif, sans-serif"
+        fontFamily: getComputedStyle(document.documentElement).getPropertyValue("--font-ui") || "DM Sans, ui-sans-serif, sans-serif"
       });
       nodes.forEach(function (node, index) {
         var code = blocks[Number(node.getAttribute("data-mermaid"))];

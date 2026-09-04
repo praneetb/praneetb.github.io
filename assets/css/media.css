@@ -6,8 +6,9 @@
   margin-top: 1.6rem;
   padding: 1.35rem 1.4rem 1.25rem;
   border: 1px solid var(--rule);
-  border-radius: 0.85rem;
-  background: rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 14px 32px var(--shadow);
 }
 
 .media-open {
@@ -16,8 +17,8 @@
   border: 1px solid var(--accent);
   border-radius: 999px;
   background: var(--accent);
-  color: var(--paper);
-  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  color: var(--accent-ink);
+  font-family: var(--font-ui);
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
@@ -26,12 +27,12 @@
 .media-open:hover {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
-  color: var(--paper);
+  color: var(--accent-ink);
 }
 
 .media-note {
   margin: 0.85rem 0 0;
   color: var(--ink-soft);
-  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-ui);
   font-size: 0.92rem;
 }

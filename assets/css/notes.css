@@ -13,7 +13,7 @@
 .notes-vault,
 .notes-links {
   padding: 1.15rem 1.1rem 1.4rem;
-  background: #f3eee7;
+  background: var(--paper-deep);
 }
 
 .notes-links {
@@ -47,7 +47,7 @@
   padding: 0.45rem 0.65rem;
   border: 1px solid var(--rule);
   border-radius: 0.45rem;
-  background: #fffdf9;
+  background: var(--input-bg);
   color: var(--ink);
   font: inherit;
   font-size: 0.88rem;
@@ -89,7 +89,7 @@
 
 .notes-folder-toggle .chevron {
   width: 0.7rem;
-  color: #b3a89b;
+  color: var(--ink-soft);
 }
 
 .notes-folder-children {
@@ -123,16 +123,16 @@
 
 .notes-file:hover {
   color: var(--ink);
-  background: rgba(196, 92, 56, 0.08);
+  background: var(--accent-wash);
 }
 
 .notes-file.is-active {
   background: var(--accent);
-  color: #fff8f3;
+  color: var(--accent-ink);
 }
 
 .notes-file.is-active:hover {
-  color: #fff8f3;
+  color: var(--accent-ink);
 }
 
 .notes-count {
@@ -161,7 +161,7 @@
 .notes-empty h1,
 #notes-title {
   margin: 0 0 0.45rem;
-  font-family: "Source Serif 4", "Iowan Old Style", Palatino, serif;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 2.7rem);
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -183,7 +183,7 @@
 .notes-body h2,
 .notes-body h3 {
   margin: 1.7rem 0 0.65rem;
-  font-family: "Source Serif 4", "Iowan Old Style", Palatino, serif;
+  font-family: var(--font-display);
   font-weight: 600;
 }
 
@@ -216,7 +216,7 @@
 }
 
 .notes-body th {
-  background: #efe8de;
+  background: var(--paper-deep);
   font-weight: 600;
 }
 
@@ -235,7 +235,7 @@
   overflow: auto;
   padding: 0.8rem 0.9rem;
   border-radius: 0.5rem;
-  background: #efe8de;
+  background: var(--paper-deep);
   font-size: 0.84rem;
 }
 
@@ -243,14 +243,14 @@
   margin: 1rem 0 1.4rem;
   padding: 0.8rem;
   overflow: auto;
-  background: #fffdf9;
+  background: var(--input-bg);
   border: 1px solid var(--rule);
   border-radius: 0.6rem;
 }
 
 .notes-end {
   margin: 2.4rem 0 0;
-  color: #b3a89b;
+  color: var(--ink-soft);
   font-size: 0.78rem;
   text-align: center;
 }
@@ -275,7 +275,7 @@
 
 .notes-muted {
   margin: 0 0 1.1rem;
-  color: #9a9086;
+  color: var(--ink-soft);
   font-size: 0.84rem;
 }
 

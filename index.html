@@ -9,16 +9,6 @@ extra_css:
 ---
 
 <article class="calling-card">
-  <div class="calling-card-copy">
-    <h1>Praneet Bachheti</h1>
-    <p class="calling-card-role">Senior Principal Engineer · Fremont, CA</p>
-    <p class="calling-card-bio">I build and scale networking and security systems that are reliable, observable, and built for change. I hold multiple patents in network security and traffic management. Outside of work, I play the violin and spend as much time as I can in the outdoors.</p>
-    <p class="calling-card-links">
-      <a href="{{ '/resume/' | relative_url }}">Resume</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://github.com/praneetb">GitHub</a>
-    </p>
-  </div>
   <figure class="calling-card-hero">
     <img
       src="{{ '/assets/images/sunset-half-dome-lodge.jpg' | relative_url }}"
@@ -27,4 +17,22 @@ extra_css:
       height="1920">
     <figcaption>Half Dome · Yosemite</figcaption>
   </figure>
+  <div class="calling-card-copy">
+    <p class="calling-card-kicker">
+      <span data-theme-line="summit">Climb. Explore. Create.</span>
+      <span data-theme-line="atlas">Places, songs, and side quests.</span>
+      <span data-theme-line="cadence">Life, tuned.</span>
+    </p>
+    <h1>Praneet Bachheti</h1>
+    <p class="calling-card-role">Senior Principal Engineer · Fremont, CA</p>
+    <p class="calling-card-bio">I build and scale networking and security systems that are reliable, observable, and built for change. I hold multiple patents in network security and traffic management. Outside of work, I play the violin and spend as much time as I can in the outdoors.</p>
+    <p class="calling-card-links">
+      <a href="{{ '/resume/' | relative_url }}">Resume</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://github.com/praneetb">GitHub</a>
+    </p>
+    <p class="calling-card-cta">
+      <button type="button" class="home-signin" data-open-signin>Sign in →</button>
+    </p>
+  </div>
 </article>
