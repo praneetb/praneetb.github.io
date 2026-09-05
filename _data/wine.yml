@@ -1,240 +1,255 @@
-# Starter wine list for /bar/?tab=wine. Names are a plausible house set — edit later.
+# Wine catalog for /bar/?tab=wine.
+# Source of truth: Drive obsidian-vault/30-Knowledge/Interests/Wine/{Premium,Core,Everyday}/
 # Images are labeled SVG silhouettes in assets/bar/.
+# Tasting notes are short public paraphrases from typical profiles — vault stubs still say (stub — edit).
 
 bottles:
-  - id: blanc-de-blancs
-    name: Blanc de Blancs
-    brand: House Champagne
+  - id: krug-grande-cuvee
+    name: Krug Grande Cuvée
+    brand: Krug
     shelf: premium
     region: Champagne
-    type: Sparkling
+    type: Champagne
     abv: 12
-    tags: [citrus, toast, mineral]
-    nose: Brioche, lemon zest, and wet stone.
-    palate: Fine mousse, green apple, and chalk.
-    finish: Long, clean, and saline.
-    image: /assets/bar/wine-blanc-de-blancs.svg
+    tags: [champagne, toast, citrus, mineral]
+    nose: Brioche, lemon zest, and toasted hazelnut.
+    palate: Fine mousse, orchard fruit, and chalk.
+    finish: Long, saline, and layered.
+    image: /assets/bar/wine-krug-grande-cuvee.svg
     color: "#c9b37a"
-  - id: reserve-rouge
-    name: Reserve Rouge
-    brand: Reserve Rouge
-    shelf: premium
-    region: Bordeaux
-    type: Red blend
-    abv: 13.5
-    tags: [cedar, cassis, oak]
-    nose: Blackcurrant, cedar, and pencil shavings.
-    palate: Firm tannin, dark fruit, and tobacco.
-    finish: Long and structured.
-    image: /assets/bar/wine-reserve-rouge.svg
-    color: "#5a1220"
-  - id: altitude
-    name: Altitude
-    brand: Altitude
+  - id: caymus-special-selection
+    name: Caymus Special Selection
+    brand: Caymus
     shelf: premium
     region: Napa Valley
     type: Cabernet Sauvignon
     abv: 14.5
-    tags: [blackberry, oak, cocoa]
-    nose: Ripe blackberry, cedar, and cocoa.
-    palate: Plush fruit, vanilla oak, and a warm spice.
+    tags: [napa, cabernet, oak, cocoa]
+    nose: Ripe blackberry, cocoa, and vanilla oak.
+    palate: Plush fruit, soft tannin, and warm spice.
     finish: Long, polished, and dark.
-    image: /assets/bar/wine-altitude.svg
+    image: /assets/bar/wine-caymus-special-selection.svg
     color: "#4a1024"
-  - id: valley-pinot
-    name: Valley Pinot
-    brand: Valley Pinot
+  - id: dom-perignon
+    name: Dom Pérignon
+    brand: Dom Pérignon
     shelf: premium
-    region: Willamette
-    type: Pinot Noir
-    abv: 13
-    tags: [cherry, earth, spice]
-    nose: Red cherry, forest floor, and a hint of clove.
-    palate: Silk and bright fruit over a savory edge.
-    finish: Lingering cherry skin.
-    image: /assets/bar/wine-valley-pinot.svg
-    color: "#7a2048"
-  - id: barolo-riserva
-    name: Barolo Riserva
-    brand: Barolo Riserva
+    region: Champagne
+    type: Champagne
+    abv: 12.5
+    tags: [champagne, toast, citrus, prestige]
+    nose: Toast, citrus oil, and white flowers.
+    palate: Precise, creamy mid, green apple, and chalk.
+    finish: Long, clean, and mineral.
+    image: /assets/bar/wine-dom-perignon.svg
+    color: "#d4c6a0"
+  - id: penfolds-grange
+    name: Penfolds Grange
+    brand: Penfolds
     shelf: premium
-    region: Piedmont
-    type: Nebbiolo
-    abv: 14
-    tags: [rose, tar, cherry]
-    nose: Rose petal, tar, and dried cherry.
-    palate: Austere at first, then orange peel and tea.
-    finish: Very long, drying, and noble.
-    image: /assets/bar/wine-barolo-riserva.svg
+    region: South Australia
+    type: Shiraz
+    abv: 14.5
+    tags: [shiraz, australia, spice, dark-fruit]
+    nose: Dark berry, licorice, and polished oak.
+    palate: Dense fruit, pepper, and chocolate oak.
+    finish: Long, powerful, and spicy.
+    image: /assets/bar/wine-penfolds-grange.svg
+    color: "#5a1220"
+  - id: chateau-margaux
+    name: Château Margaux
+    brand: Château Margaux
+    shelf: premium
+    region: Bordeaux
+    type: Bordeaux blend
+    abv: 13.5
+    tags: [bordeaux, first-growth, cassis, cedar]
+    nose: Blackcurrant, cedar, and violet.
+    palate: Silk and structure — cassis, graphite, and oak.
+    finish: Very long, noble, and precise.
+    image: /assets/bar/wine-chateau-margaux.svg
     color: "#6b1630"
-  - id: puligny
-    name: Puligny
-    brand: Puligny
+  - id: opus-one
+    name: Opus One
+    brand: Opus One
     shelf: premium
-    region: Burgundy
-    type: Chardonnay
-    abv: 13
-    tags: [hazelnut, citrus, mineral]
-    nose: Hazelnut, lemon oil, and white flowers.
-    palate: Layered and precise, with a creamy mid.
-    finish: Stone and citrus pith.
-    image: /assets/bar/wine-puligny.svg
-    color: "#d8c48a"
+    region: Napa Valley
+    type: Bordeaux blend
+    abv: 14
+    tags: [napa, bordeaux-blend, cassis, oak]
+    nose: Cassis, cedar, and a floral lift.
+    palate: Layered dark fruit, cocoa, and fine tannin.
+    finish: Long and polished.
+    image: /assets/bar/wine-opus-one.svg
+    color: "#3a1018"
 
-  - id: house-cab
-    name: House Cab
-    brand: House Cab
+  - id: caymus-cabernet
+    name: Caymus Cabernet
+    brand: Caymus
     shelf: core
+    region: Napa Valley
+    type: Cabernet Sauvignon
+    abv: 14.5
+    tags: [napa, cabernet, berry, oak]
+    nose: Ripe berry, vanilla, and soft oak.
+    palate: Round, approachable, and fruit-forward.
+    finish: Medium-long and friendly.
+    image: /assets/bar/wine-caymus-cabernet.svg
+    color: "#5a1828"
+  - id: stags-leap-artemis
+    name: Stags Leap Artemis
+    brand: Stag's Leap
+    shelf: core
+    region: Napa Valley
+    type: Cabernet Sauvignon
+    abv: 14.5
+    tags: [napa, cabernet, cherry, herb]
+    nose: Black cherry, dried herb, and oak spice.
+    palate: Structured fruit with a savory edge.
+    finish: Firm and lingering.
+    image: /assets/bar/wine-stags-leap-artemis.svg
+    color: "#4e1828"
+  - id: veuve-clicquot-yellow-label
+    name: Veuve Clicquot Yellow Label
+    brand: Veuve Clicquot
+    shelf: core
+    region: Champagne
+    type: Champagne
+    abv: 12
+    tags: [champagne, apple, toast, citrus]
+    nose: Apple, brioche, and citrus peel.
+    palate: Crisp mousse and a soft toast note.
+    finish: Clean and festive.
+    image: /assets/bar/wine-veuve-clicquot-yellow-label.svg
+    color: "#e6b422"
+  - id: louis-jadot-beaujolais
+    name: Louis Jadot Beaujolais
+    brand: Louis Jadot
+    shelf: core
+    region: Beaujolais
+    type: Gamay
+    abv: 12.5
+    tags: [beaujolais, gamay, cherry, light]
+    nose: Fresh cherry and a hint of banana.
+    palate: Light, juicy, and chillable.
+    finish: Short and bright.
+    image: /assets/bar/wine-louis-jadot-beaujolais.svg
+    color: "#8a2a3a"
+  - id: meiomi-pinot-noir
+    name: Meiomi Pinot Noir
+    brand: Meiomi
+    shelf: core
+    region: California
+    type: Pinot Noir
+    abv: 13.5
+    tags: [pinot-noir, berry, soft, california]
+    nose: Dark berry, cola, and a soft oak.
+    palate: Round and easy, with a silky mid.
+    finish: Medium and friendly.
+    image: /assets/bar/wine-meiomi-pinot-noir.svg
+    color: "#7a2048"
+  - id: duckhorn-merlot
+    name: Duckhorn Merlot
+    brand: Duckhorn
+    shelf: core
+    region: Napa Valley
+    type: Merlot
+    abv: 14
+    tags: [merlot, napa, plum, cocoa]
+    nose: Plum, cocoa, and soft herb.
+    palate: Round tannin and dark fruit.
+    finish: Medium and polished.
+    image: /assets/bar/wine-duckhorn-merlot.svg
+    color: "#6a2430"
+  - id: cloudy-bay-sauvignon-blanc
+    name: Cloudy Bay Sauvignon Blanc
+    brand: Cloudy Bay
+    shelf: core
+    region: Marlborough NZ
+    type: Sauvignon Blanc
+    abv: 13
+    tags: [sauvignon-blanc, citrus, passionfruit, mineral]
+    nose: Passionfruit, grapefruit, and cut grass.
+    palate: Crisp acid and tropical zip.
+    finish: Bright and clean.
+    image: /assets/bar/wine-cloudy-bay-sauvignon-blanc.svg
+    color: "#e6d9a8"
+
+  - id: la-crema-sonoma-coast-pinot
+    name: La Crema Sonoma Coast Pinot
+    brand: La Crema
+    shelf: everyday
+    region: Sonoma Coast
+    type: Pinot Noir
+    abv: 13.5
+    tags: [pinot-noir, cherry, soft, sonoma]
+    nose: Red cherry and a light spice.
+    palate: Soft, food-friendly, weeknight-ready.
+    finish: Short and clean.
+    image: /assets/bar/wine-la-crema-sonoma-coast-pinot.svg
+    color: "#7b1e2e"
+  - id: kim-crawford-sauvignon-blanc
+    name: Kim Crawford Sauvignon Blanc
+    brand: Kim Crawford
+    shelf: everyday
+    region: Marlborough NZ
+    type: Sauvignon Blanc
+    abv: 12.5
+    tags: [sauvignon-blanc, citrus, tropical, easy]
+    nose: Gooseberry, lime, and passionfruit.
+    palate: Zesty and unfussy.
+    finish: Crisp and short.
+    image: /assets/bar/wine-kim-crawford-sauvignon-blanc.svg
+    color: "#efe6c4"
+  - id: yellow-tail
+    name: Yellow Tail
+    brand: Yellow Tail
+    shelf: everyday
+    region: Australia
+    type: Red blend
+    abv: 13
+    tags: [australia, berry, soft, entry]
+    nose: Soft berry and a hint of vanilla.
+    palate: Round, low-tannin, easy.
+    finish: Short and clean.
+    image: /assets/bar/wine-yellow-tail.svg
+    color: "#c9a227"
+  - id: josh-cellars-cabernet
+    name: Josh Cellars Cabernet
+    brand: Josh Cellars
+    shelf: everyday
     region: California
     type: Cabernet Sauvignon
     abv: 13.5
-    tags: [plum, oak, spice]
-    nose: Plum, vanilla, and a little mint.
-    palate: Friendly tannin and dark fruit.
-    finish: Medium, clean oak.
-    image: /assets/bar/wine-house-cab.svg
-    color: "#5c1a28"
-  - id: terra-roja
-    name: Terra Roja
-    brand: Terra Roja
-    shelf: core
-    region: Rioja
-    type: Tempranillo
-    abv: 13.5
-    tags: [leather, cherry, vanilla]
-    nose: Cherry, leather, and American oak vanilla.
-    palate: Soft spice and red fruit.
-    finish: Warm and savory.
-    image: /assets/bar/wine-terra-roja.svg
-    color: "#8a2a2a"
-  - id: estate-blend
-    name: Estate Blend
-    brand: Estate Blend
-    shelf: core
-    region: Sonoma
-    type: Red blend
-    abv: 14
-    tags: [berry, cocoa, herb]
-    nose: Mixed berry, cocoa, and dried herb.
-    palate: Round and easy, with a chocolate note.
+    tags: [cabernet, california, berry, soft]
+    nose: Blackberry and a little oak.
+    palate: Soft tannin and ripe fruit.
     finish: Medium and friendly.
-    image: /assets/bar/wine-estate-blend.svg
-    color: "#4e1828"
-  - id: sancerre
-    name: Sancerre
-    brand: Sancerre
-    shelf: core
-    region: Loire
-    type: Sauvignon Blanc
-    abv: 13
-    tags: [citrus, flint, grass]
-    nose: Grapefruit, flint, and cut grass.
-    palate: Crisp acid and wet stone.
-    finish: Short, bright, and clean.
-    image: /assets/bar/wine-sancerre.svg
-    color: "#e6d9a8"
-  - id: chianti
-    name: Chianti Classico
-    brand: Chianti Classico
-    shelf: core
-    region: Tuscany
-    type: Sangiovese
-    abv: 13.5
-    tags: [cherry, herb, earth]
-    nose: Sour cherry, oregano, and warm earth.
-    palate: Food-friendly acid and light tannin.
-    finish: Dusty and savory.
-    image: /assets/bar/wine-chianti.svg
-    color: "#7b1e2e"
-  - id: chablis
-    name: Chablis
-    brand: Chablis
-    shelf: core
-    region: Burgundy
-    type: Chardonnay
-    abv: 12.5
-    tags: [oyster, lemon, mineral]
-    nose: Lemon, oyster shell, and green apple.
-    palate: Lean and steely.
-    finish: Saline and short.
-    image: /assets/bar/wine-chablis.svg
-    color: "#efe6c4"
-
-  - id: daily-red
-    name: Daily Red
-    brand: Daily Red
-    shelf: everyday
-    region: California
-    type: Red blend
-    abv: 13
-    tags: [berry, soft, easy]
-    nose: Soft berry and a hint of vanilla.
-    palate: Round, low-tannin, weeknight-ready.
-    finish: Short and clean.
-    image: /assets/bar/wine-daily-red.svg
-    color: "#6a2430"
-  - id: sunday-table
-    name: Sunday Table
-    brand: Sunday Table
-    shelf: everyday
-    region: France
-    type: White blend
-    abv: 12
-    tags: [pear, floral, light]
-    nose: Pear, white flower, and a little honey.
-    palate: Light and fresh.
-    finish: Easy and short.
-    image: /assets/bar/wine-sunday-table.svg
-    color: "#f0e4b8"
-  - id: bistro-blend
-    name: Bistro Blend
-    brand: Bistro Blend
-    shelf: everyday
-    region: France
-    type: Red blend
-    abv: 13
-    tags: [plum, herb, earth]
-    nose: Plum and dried herb.
-    palate: Simple, savory, and food-friendly.
-    finish: Short.
-    image: /assets/bar/wine-bistro-blend.svg
+    image: /assets/bar/wine-josh-cellars-cabernet.svg
     color: "#5a2028"
-  - id: house-white
-    name: House White
-    brand: House White
+  - id: barefoot
+    name: Barefoot
+    brand: Barefoot
     shelf: everyday
     region: California
     type: White blend
     abv: 12.5
-    tags: [apple, citrus, clean]
+    tags: [california, apple, citrus, entry]
     nose: Apple and lemon.
     palate: Crisp and unfussy.
     finish: Clean.
-    image: /assets/bar/wine-house-white.svg
+    image: /assets/bar/wine-barefoot.svg
     color: "#f3ecc0"
-  - id: cotes-du-rhone
-    name: Côtes du Rhône
-    brand: Côtes du Rhône
+  - id: apothic-red
+    name: Apothic Red
+    brand: Apothic
     shelf: everyday
-    region: Rhône
-    type: GSM blend
+    region: California
+    type: Red blend
     abv: 13.5
-    tags: [pepper, berry, herb]
-    nose: Raspberry, cracked pepper, and garrigue.
-    palate: Juicy and a little spicy.
-    finish: Medium and warm.
-    image: /assets/bar/wine-cotes-du-rhone.svg
+    tags: [red-blend, berry, sweet, california]
+    nose: Dark berry and a soft sweetness.
+    palate: Smooth, slightly sweet, weeknight-ready.
+    finish: Short and round.
+    image: /assets/bar/wine-apothic-red.svg
     color: "#6e1c2c"
-  - id: prosecco
-    name: Prosecco
-    brand: Prosecco
-    shelf: everyday
-    region: Veneto
-    type: Sparkling
-    abv: 11
-    tags: [pear, floral, bubbles]
-    nose: Pear and white peach.
-    palate: Soft bubbles and a touch of sweetness.
-    finish: Short and festive.
-    image: /assets/bar/wine-prosecco.svg
-    color: "#e8d9a0"
