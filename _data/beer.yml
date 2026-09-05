@@ -1,5 +1,7 @@
-# Starter beer list for /bar/?tab=beer. A plausible house set — edit later.
+# Beer catalog for /bar/?tab=beer.
+# Source of truth: Drive obsidian-vault/30-Knowledge/Interests/Beer/{Premium,Core,Everyday}/
 # Images are labeled SVG silhouettes in assets/bar/.
+# Tasting notes are short public paraphrases from typical profiles — vault stubs still say (stub — edit).
 
 bottles:
   - id: westvleteren
@@ -9,7 +11,7 @@ bottles:
     region: Belgium
     type: Quadrupel
     abv: 10.2
-    tags: [dark-fruit, caramel, spice]
+    tags: [dark-fruit, caramel, spice, belgian]
     nose: Dark fruit, brown sugar, and clove.
     palate: Dense, sweet, and warming.
     finish: Long, vinous, and spicy.
@@ -23,27 +25,41 @@ bottles:
     region: Belgium
     type: Trappist ale
     abv: 6.2
-    tags: [funky, bitter, citrus]
+    tags: [funky, bitter, citrus, belgian]
     nose: Leather, orange peel, and a wild note.
     palate: Dry, bitter, and alive.
     finish: Lingering hop and funk.
     image: /assets/bar/beer-orval.svg
     color: "#c45c18"
     shape: bottle
-  - id: chimay-blue
-    name: Chimay Blue
-    brand: Chimay
+  - id: guinness-foreign-extra
+    name: Guinness Foreign Extra
+    brand: Guinness
     shelf: premium
-    region: Belgium
-    type: Strong dark ale
-    abv: 9
-    tags: [fig, caramel, spice]
-    nose: Fig, caramel, and pepper.
-    palate: Rich malt and a soft bitterness.
-    finish: Warm and dark.
-    image: /assets/bar/beer-chimay-blue.svg
-    color: "#1d2a6b"
+    region: Ireland
+    type: Foreign extra stout
+    abv: 7.5
+    tags: [stout, roast, coffee, irish]
+    nose: Roast barley, coffee, and dark chocolate.
+    palate: Fuller and bitterer than Draught.
+    finish: Long, dry, and roasted.
+    image: /assets/bar/beer-guinness-foreign-extra.svg
+    color: "#1a1a1a"
     shape: bottle
+  - id: heady-topper
+    name: The Alchemist Heady Topper
+    brand: The Alchemist
+    shelf: premium
+    region: Vermont
+    type: Double IPA
+    abv: 8
+    tags: [tropical, haze, resin, ipa]
+    nose: Mango, pine, and a soft haze.
+    palate: Juicy and bitter in the same sip.
+    finish: Resinous and long.
+    image: /assets/bar/beer-heady-topper.svg
+    color: "#1f4d3a"
+    shape: can
   - id: pliny
     name: Pliny the Elder
     brand: Russian River
@@ -51,55 +67,69 @@ bottles:
     region: California
     type: Double IPA
     abv: 8
-    tags: [pine, citrus, resin]
+    tags: [pine, citrus, resin, ipa]
     nose: Pine, grapefruit, and resin.
     palate: Bitter, bright, and dry.
     finish: Hop oils and a clean malt snap.
     image: /assets/bar/beer-pliny.svg
     color: "#d8c48a"
     shape: bottle
-  - id: heady-topper
-    name: Heady Topper
-    brand: The Alchemist
+  - id: sierra-nevada-bigfoot
+    name: Sierra Nevada Bigfoot
+    brand: Sierra Nevada
     shelf: premium
-    region: Vermont
-    type: Double IPA
-    abv: 8
-    tags: [tropical, haze, resin]
-    nose: Mango, pine, and a soft haze.
-    palate: Juicy and bitter in the same sip.
-    finish: Resinous and long.
-    image: /assets/bar/beer-heady-topper.svg
-    color: "#1f4d3a"
-    shape: can
-  - id: gueuze
-    name: Gueuze
-    brand: Cantillon
-    shelf: premium
-    region: Belgium
-    type: Lambic
-    abv: 5
-    tags: [tart, funk, lemon]
-    nose: Lemon pith, hay, and barnyard.
-    palate: Bright acid and a dry finish.
-    finish: Mouthwatering and long.
-    image: /assets/bar/beer-gueuze.svg
-    color: "#7a2a1a"
+    region: California
+    type: Barleywine
+    abv: 9.6
+    tags: [barleywine, caramel, pine, california]
+    nose: Caramel malt, pine resin, and dark fruit.
+    palate: Rich, hoppy, and warming.
+    finish: Long and resinous.
+    image: /assets/bar/beer-sierra-nevada-bigfoot.svg
+    color: "#5a2a10"
     shape: bottle
 
-  - id: sierra-nevada
-    name: Sierra Nevada Pale Ale
-    brand: Sierra Nevada
+  - id: allagash
+    name: Allagash White
+    brand: Allagash
     shelf: core
-    region: California
-    type: Pale ale
-    abv: 5.6
-    tags: [pine, grapefruit, malt]
-    nose: Pine and grapefruit over toasted malt.
-    palate: The house pale — bitter and balanced.
-    finish: Clean hop snap.
-    image: /assets/bar/beer-sierra-nevada.svg
-    color: "#1f4a8a"
+    region: Maine
+    type: Witbier
+    abv: 5.2
+    tags: [orange, spice, wheat, belgian-style]
+    nose: Orange peel, coriander, and wheat.
+    palate: Soft, cloudy, and refreshing.
+    finish: Light spice.
+    image: /assets/bar/beer-allagash.svg
+    color: "#f2efe6"
+    shape: bottle
+  - id: modelo
+    name: Modelo Especial
+    brand: Modelo
+    shelf: core
+    region: Mexico
+    type: Lager
+    abv: 4.4
+    tags: [corn, crisp, light, mexican]
+    nose: Corn sweetness and a little lime.
+    palate: Easy and cold.
+    finish: Clean.
+    image: /assets/bar/beer-modelo.svg
+    color: "#c9a227"
+    shape: bottle
+  - id: fat-tire
+    name: New Belgium Fat Tire
+    brand: New Belgium
+    shelf: core
+    region: Colorado
+    type: Amber ale
+    abv: 5.2
+    tags: [biscuit, caramel, light, amber]
+    nose: Biscuit and caramel.
+    palate: Easy amber malt.
+    finish: Soft and short.
+    image: /assets/bar/beer-fat-tire.svg
+    color: "#c47a20"
     shape: bottle
   - id: lagunitas
     name: Lagunitas IPA
@@ -108,26 +138,26 @@ bottles:
     region: California
     type: IPA
     abv: 6.2
-    tags: [citrus, pine, caramel]
+    tags: [citrus, pine, caramel, ipa]
     nose: Citrus peel and pine.
     palate: A little caramel under the hops.
     finish: Bitter and friendly.
     image: /assets/bar/beer-lagunitas.svg
     color: "#c45a1a"
     shape: bottle
-  - id: allagash
-    name: Allagash White
-    brand: Allagash
+  - id: stone-ipa
+    name: Stone IPA
+    brand: Stone
     shelf: core
-    region: Maine
-    type: Witbier
-    abv: 5.2
-    tags: [orange, spice, wheat]
-    nose: Orange peel, coriander, and wheat.
-    palate: Soft, cloudy, and refreshing.
-    finish: Light spice.
-    image: /assets/bar/beer-allagash.svg
-    color: "#f2efe6"
+    region: California
+    type: IPA
+    abv: 6.9
+    tags: [pine, citrus, bitter, ipa]
+    nose: Pine and grapefruit.
+    palate: Assertive bitterness over toasted malt.
+    finish: Dry and hoppy.
+    image: /assets/bar/beer-stone-ipa.svg
+    color: "#1a1a1a"
     shape: bottle
   - id: anchor-steam
     name: Anchor Steam
@@ -136,56 +166,28 @@ bottles:
     region: San Francisco
     type: California common
     abv: 4.9
-    tags: [toast, earth, hops]
+    tags: [toast, earth, hops, steam]
     nose: Toasted malt and woody hops.
     palate: Soft carbonation and a historic snap.
     finish: Dry and earthy.
     image: /assets/bar/beer-anchor-steam.svg
     color: "#8a1c1c"
     shape: bottle
-  - id: fat-tire
-    name: Fat Tire
-    brand: New Belgium
+  - id: sierra-nevada
+    name: Sierra Nevada Pale Ale
+    brand: Sierra Nevada
     shelf: core
-    region: Colorado
-    type: Amber ale
-    abv: 5.2
-    tags: [biscuit, caramel, light]
-    nose: Biscuit and caramel.
-    palate: Easy amber malt.
-    finish: Soft and short.
-    image: /assets/bar/beer-fat-tire.svg
-    color: "#c47a20"
-    shape: bottle
-  - id: sam-smith
-    name: Samuel Smith Organic
-    brand: Samuel Smith
-    shelf: core
-    region: England
+    region: California
     type: Pale ale
-    abv: 5
-    tags: [malt, floral, earth]
-    nose: English malt and floral hops.
-    palate: Rounded and a little nutty.
-    finish: Gentle bitterness.
-    image: /assets/bar/beer-sam-smith.svg
-    color: "#2f5a2a"
+    abv: 5.6
+    tags: [pine, grapefruit, malt, pale]
+    nose: Pine and grapefruit over toasted malt.
+    palate: The house pale — bitter and balanced.
+    finish: Clean hop snap.
+    image: /assets/bar/beer-sierra-nevada.svg
+    color: "#1f4a8a"
     shape: bottle
 
-  - id: stella
-    name: Stella Artois
-    brand: Stella Artois
-    shelf: everyday
-    region: Belgium
-    type: Lager
-    abv: 5
-    tags: [crisp, floral, light]
-    nose: Light floral hops and grain.
-    palate: Crisp and clean.
-    finish: Short.
-    image: /assets/bar/beer-stella.svg
-    color: "#d8c48a"
-    shape: bottle
   - id: heineken
     name: Heineken
     brand: Heineken
@@ -193,40 +195,40 @@ bottles:
     region: Netherlands
     type: Lager
     abv: 5
-    tags: [crisp, skunky, light]
+    tags: [crisp, skunky, light, lager]
     nose: Light malt and a familiar hop.
     palate: Clean lager, slightly bitter.
     finish: Short.
     image: /assets/bar/beer-heineken.svg
     color: "#1a7a3a"
     shape: bottle
-  - id: modelo
-    name: Modelo Especial
-    brand: Modelo
+  - id: blue-moon
+    name: Blue Moon
+    brand: Blue Moon
     shelf: everyday
-    region: Mexico
-    type: Lager
-    abv: 4.4
-    tags: [corn, crisp, light]
-    nose: Corn sweetness and a little lime.
-    palate: Easy and cold.
-    finish: Clean.
-    image: /assets/bar/beer-modelo.svg
-    color: "#c9a227"
-    shape: bottle
-  - id: corona
-    name: Corona Extra
-    brand: Corona
-    shelf: everyday
-    region: Mexico
-    type: Lager
-    abv: 4.6
-    tags: [light, lime, crisp]
-    nose: Light grain and citrus.
-    palate: Watery-crisp, built for a lime.
-    finish: Short.
-    image: /assets/bar/beer-corona.svg
+    region: USA
+    type: Witbier
+    abv: 5.4
+    tags: [orange, wheat, spice, american]
+    nose: Orange peel and coriander.
+    palate: Soft wheat and a citrus lift.
+    finish: Light and easy.
+    image: /assets/bar/beer-blue-moon.svg
     color: "#1f4d8a"
+    shape: bottle
+  - id: budweiser
+    name: Budweiser
+    brand: Budweiser
+    shelf: everyday
+    region: USA
+    type: Lager
+    abv: 5
+    tags: [grain, crisp, light, american]
+    nose: Grain and a little rice sweetness.
+    palate: Soft, crisp, and familiar.
+    finish: Short.
+    image: /assets/bar/beer-budweiser.svg
+    color: "#8a1c1c"
     shape: bottle
   - id: guinness
     name: Guinness Draught
@@ -235,24 +237,38 @@ bottles:
     region: Ireland
     type: Stout
     abv: 4.2
-    tags: [roast, coffee, cream]
+    tags: [roast, coffee, cream, irish]
     nose: Roast barley and coffee.
     palate: Creamy and dry, not heavy.
     finish: Bitter cocoa.
     image: /assets/bar/beer-guinness.svg
     color: "#1a1a1a"
     shape: can
-  - id: miller
-    name: Miller High Life
-    brand: Miller
+  - id: corona
+    name: Corona Extra
+    brand: Corona
     shelf: everyday
-    region: USA
+    region: Mexico
     type: Lager
     abv: 4.6
-    tags: [grain, crisp, light]
-    nose: Grain and a little corn.
-    palate: The champagne of everyday.
-    finish: Short and fizzy.
-    image: /assets/bar/beer-miller.svg
-    color: "#c9a24a"
+    tags: [light, lime, crisp, mexican]
+    nose: Light grain and citrus.
+    palate: Watery-crisp, built for a lime.
+    finish: Short.
+    image: /assets/bar/beer-corona.svg
+    color: "#1f4d8a"
+    shape: bottle
+  - id: stella
+    name: Stella Artois
+    brand: Stella Artois
+    shelf: everyday
+    region: Belgium
+    type: Lager
+    abv: 5
+    tags: [crisp, floral, light, lager]
+    nose: Light floral hops and grain.
+    palate: Crisp and clean.
+    finish: Short.
+    image: /assets/bar/beer-stella.svg
+    color: "#d8c48a"
     shape: bottle
