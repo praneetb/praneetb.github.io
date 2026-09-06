@@ -195,10 +195,10 @@ body.is-home .page-home {
 .home-spread {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1.12fr) minmax(0, 0.92fr) minmax(0, 0.86fr) minmax(0, 0.78fr);
+  grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.06fr) minmax(0, 0.94fr) minmax(0, 0.86fr) minmax(0, 0.80fr) minmax(0, 0.72fr);
   grid-template-areas:
-    "violin travel food bar patents"
-    "bucket bucket bucket vault vault";
+    "violin travel health food bar patents"
+    "bucket bucket bucket vault vault vault";
   gap: 0.55rem 0.45rem;
   align-items: start;
   padding: 0.2rem 0 0.4rem;
@@ -227,6 +227,14 @@ body.is-home .page-home {
   transform: rotate(3.4deg);
 }
 
+.home-polaroid.is-health {
+  grid-area: health;
+  justify-self: center;
+  width: min(100%, 18.5rem);
+  margin: 0.15rem 0 0;
+  transform: rotate(-2.8deg);
+}
+
 .home-polaroid figure {
   margin: 0;
   padding: 0.55rem 0.55rem 0.45rem;
@@ -246,6 +254,12 @@ body.is-home .page-home {
 
 .home-polaroid.is-travel img {
   height: 12.4rem;
+}
+
+.home-polaroid.is-health img {
+  height: 11.8rem;
+  object-position: 50% 28%;
+  background: #f4f1ea;
 }
 
 .home-polaroid figcaption {
@@ -331,6 +345,12 @@ body.is-home .page-home {
     linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
   background-size: 0.38rem 0.38rem;
   transform: translateX(-50%) rotate(6deg);
+}
+
+.home-tape-mint {
+  width: 5.2rem;
+  background: linear-gradient(180deg, #b8d9c4, #7faf8e);
+  transform: translateX(-50%) rotate(-6deg);
 }
 
 .home-scrap,
@@ -868,14 +888,15 @@ html[data-theme="cadence"] .diary-submit {
   .home-spread {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-      "violin travel food"
-      "bar patents patents"
+      "violin travel health"
+      "food bar patents"
       "bucket bucket vault";
     gap: 0.8rem 0.55rem;
   }
 
   .home-polaroid.is-violin,
   .home-polaroid.is-travel,
+  .home-polaroid.is-health,
   .home-peek.is-food,
   .home-peek.is-bar,
   .home-scrap.is-patents {
@@ -923,6 +944,7 @@ html[data-theme="cadence"] .diary-submit {
 
   .home-polaroid.is-violin,
   .home-polaroid.is-travel,
+  .home-polaroid.is-health,
   .home-peek.is-food,
   .home-peek.is-bar,
   .home-scrap.is-patents,
@@ -943,8 +965,13 @@ html[data-theme="cadence"] .diary-submit {
     transform: rotate(2deg);
   }
 
+  .home-polaroid.is-health {
+    transform: rotate(-1.6deg);
+  }
+
   .home-polaroid img,
-  .home-polaroid.is-travel img {
+  .home-polaroid.is-travel img,
+  .home-polaroid.is-health img {
     height: 11.5rem;
   }
 

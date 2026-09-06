@@ -8,6 +8,8 @@
 #   node scripts/bake-home.mjs --list /path/to/obsidian-vault
 #
 # Does not write assets/notes.enc.json.
+# Health Polaroid on `/` is static in index.html (Pickleball · Running · Walking).
+# Do not bake Whoop Recovery / Strain / Sleep / HRV onto the public home.
 
 vault:
   travel: 20-Personal/Travel/Countries Visited.md

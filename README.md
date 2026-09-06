@@ -4,9 +4,9 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 ## Public and private
 
-Logged-out visitors see the public home on `/` — a cream-paper scrapbook spread (handwritten greeting, overlapping Polaroids, pictured peeks, torn notes) with vault-backed peeks for Travel, Cocktails, Fermentation, Patents, Bucket, Bar, and Violin. There is no Half Dome hero banner and no people photos. Tile peeks stay vault-backed via `_data/home.yml` (`scripts/bake-home.mjs`). Travel uses a credited Venice sunset still; the one violin Polaroid is an instrument-only painting (fiddle + bow, no person) with the practice-room / vault-log line on the caption. Cocktails, Bar, Patents, and Bucket carry credited stills (no faces). Media, Notes, and Manya are not shown on the public home, even as locked tiles.
+Logged-out visitors see the public home on `/` — a cream-paper scrapbook spread (handwritten greeting, overlapping Polaroids, pictured peeks, torn notes) with vault-backed peeks for Travel, Cocktails, Fermentation, Patents, Bucket, Bar, and Violin, plus a static Health Polaroid (movement names only). There is no Half Dome hero banner and no people photos. Tile peeks stay vault-backed via `_data/home.yml` (`scripts/bake-home.mjs`). Travel uses a credited Venice sunset still; the one violin Polaroid is an instrument-only painting (fiddle + bow, no person) with the practice-room / vault-log line on the caption. Health uses a credited pickleball-equipment still (no person) and lists Pickleball · Running · Walking — never Whoop Recovery, Strain, Sleep, or HRV numbers. Cocktails, Bar, Patents, and Bucket carry credited stills (no faces). Media, Notes, and Manya are not shown on the public home, even as locked tiles.
 
-Public panel links — Travel, Bar, Cocktails, Fermentation, Patents, Bucket, Violin — stay in the header for everyone, signed out or signed in. Media, Notes, Manya, and Space are gated extras that appear only after login; they never replace the public panels.
+Public panel links — Travel, Bar, Cocktails, Fermentation, Patents, Bucket, Violin, Health — stay in the header for everyone, signed out or signed in. Health’s panel and Polaroid open `/health/`; the dashboard stays `private: true` and the page-gate handles guests. Media, Notes, Manya, and Space are gated extras that appear only after login; they never replace the public panels.
 
 These pages are public and read-only for guests (Sign in stays in the header):
 
@@ -17,6 +17,7 @@ These pages are public and read-only for guests (Sign in stays in the header):
 - [Patents](/patents/) — spicy Problem → punch → why it stuck cards from `_data/plaques.yml`, baked from vault `10-Work/Reference/Patents.md` (five Cisco grants and one abandoned Aruba/HPE application). Formal titles stay in the fine print. Summit / Atlas / Cadence restyle the lab-notebook page.
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)
 - [Violin](/violin/) — public foyer and piece detail from `_data/violin.yml`, baked from the daily sync path `30-Knowledge/Interests/Violin/` (`Violin MOC.md`, `Pieces`, `Practice-Log`, `Recordings`, `Teacher-Notes`). Pieces, logs, recordings, and teacher notes stay empty while that tree is stubs only. The public home links one Polaroid here (practice room / vault log lives on the caption); it does not invent practice counts.
+- [Health](/health/) — public header link and home Polaroid only. The Polaroid caption is a fixed movement summary (Pickleball · Running · Walking). The signed-in pulse scrapbook stays gated; do not put Whoop scores on the public home.
 
 Sign in (username + password) unlocks a site-wide session. After a successful login from `/`, the browser goes to `/space/`. The wordmark then points at `/space/`; the public home can still be opened directly. Signed-in chrome keeps those public panels and adds private navigation:
 
@@ -26,7 +27,7 @@ Sign in (username + password) unlocks a site-wide session. After a successful lo
 - [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
 - [Manya](/manya/) — private family hub; [School](/manya/school/), [report cards](/manya/school/reports/) (age-cartoon cards; PDFs open in a page viewer from an encrypted pack keyed by Drive file ids in `_data/manya_reports.yml`), and [SAT / PSAT](/manya/school/sat-psat/) (titles and dates; same on-page viewer from `sat-psat.enc.json`; no scores listed)
 
-Direct URLs to Media, Notes, Manya, and Space show a sign-in prompt when locked. The visited-country list is site data, not a per-browser stash.
+Direct URLs to Health, Media, Notes, Manya, and Space show a sign-in prompt when locked. The visited-country list is site data, not a per-browser stash.
 
 Resume stays public. [Privacy](/privacy/) is public too — how this personal site uses data, including Whoop and similar integrations.
 
