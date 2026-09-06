@@ -42,15 +42,15 @@ extra_js:
 {% endif %}
 {% assign patent_issued_n = home.patents.issued | default: patent_count %}
 {% assign patent_app_n = home.patents.applications | default: 1 %}
-{% assign bucket_done = home.bucket.done %}
-{% assign bucket_todo = home.bucket.todo %}
-{% if bucket_done == nil or bucket_todo == nil %}
+{% assign peek_done = home.bucket.done %}
+{% assign peek_todo = home.bucket.todo %}
+{% if peek_done == nil or peek_todo == nil %}
   {% for item in site.data.bucket.items %}
-    {% if item.id == "half-dome" and bucket_done == nil %}
-      {% assign bucket_done = item %}
+    {% if item.id == "half-dome" and peek_done == nil %}
+      {% assign peek_done = item %}
     {% endif %}
-    {% if item.id == "great-wall" and bucket_todo == nil %}
-      {% assign bucket_todo = item %}
+    {% if item.id == "great-wall" and peek_todo == nil %}
+      {% assign peek_todo = item %}
     {% endif %}
   {% endfor %}
 {% endif %}
@@ -189,29 +189,29 @@ extra_js:
 
     <a class="home-tile home-tile-bucket" href="{{ '/bucket-list/' | relative_url }}">
       <div class="home-tile-media home-polaroid-stage">
-        {% if bucket_done %}
+        {% if peek_done %}
         <figure class="home-polaroid is-done">
           <img
-            src="{{ bucket_done.photo | relative_url }}"
+            src="{{ peek_done.photo | relative_url }}"
             alt=""
             width="400"
             height="300">
           <figcaption>
             <span class="home-polaroid-mark" aria-hidden="true"></span>
-            {{ bucket_done.caption | default: bucket_done.title }}
+            {{ peek_done.caption | default: peek_done.title }}
           </figcaption>
         </figure>
         {% endif %}
-        {% if bucket_todo %}
+        {% if peek_todo %}
         <figure class="home-polaroid is-open">
           <img
-            src="{{ bucket_todo.photo | relative_url }}"
+            src="{{ peek_todo.photo | relative_url }}"
             alt=""
             width="400"
             height="300">
           <figcaption>
             <span class="home-polaroid-mark" aria-hidden="true"></span>
-            {{ bucket_todo.caption | default: bucket_todo.title }}
+            {{ peek_todo.caption | default: peek_todo.title }}
           </figcaption>
         </figure>
         {% endif %}
@@ -224,7 +224,7 @@ extra_js:
           </svg>
           Bucket
         </h2>
-        <p class="home-tile-peek">Done {{ bucket_done.title | default: "Half Dome" }} · To-do {{ bucket_todo.title | default: "Great Wall of China" }}</p>
+        <p class="home-tile-peek">Done {{ peek_done.title | default: "Half Dome" }} · To-do {{ peek_todo.title | default: "Great Wall of China" }}</p>
       </div>
     </a>
   </nav>
