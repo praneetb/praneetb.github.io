@@ -1,0 +1,14 @@
+travel-venice.jpg
+  Chiesa Santa Maria della Salute at Sunset, Venice.
+  Photograph by Walter Schärer, 25 September 2008.
+  Wikimedia Commons / Panoramio, CC BY-SA 3.0
+  https://commons.wikimedia.org/wiki/File:Chiesa_Santa_Maria_della_Salute_at_Sunset_-_panoramio.jpg
+
+Violin Polaroid on the public home uses the existing site still:
+  assets/images/violin/piece.jpg
+  William Michael Harnett, The Old Violin, 1886.
+  National Gallery of Art, Washington.
+  Wikimedia Commons, CC0
+  https://commons.wikimedia.org/wiki/File:William_Michael_Harnett,_The_Old_Violin,_1886,_NGA_79531.jpg
+
+Do not use assets/images/violin/hero.jpg on the public home — that still shows a person playing.
