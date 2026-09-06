@@ -59,6 +59,7 @@ extra_js:
   <section class="violin-board" aria-labelledby="violin-pieces-heading">
     <div class="violin-pieces">
       <h2 id="violin-pieces-heading">Pieces I’m working toward</h2>
+      {% if v.pieces and v.pieces.size > 0 %}
       <ul class="violin-piece-grid">
         {% for piece in v.pieces %}
         <li>
@@ -76,9 +77,6 @@ extra_js:
             <span class="violin-piece-copy">
               <span class="violin-piece-title">{{ piece.title }}</span>
               <span class="violin-piece-sub">{{ piece.subtitle }}</span>
-              {% if piece.placeholder %}
-              <span class="violin-placeholder-mark">Placeholder</span>
-              {% endif %}
             </span>
             <span class="violin-status" data-status="{{ piece.status }}">
               <i></i>{{ piece.status }}
@@ -87,6 +85,12 @@ extra_js:
         </li>
         {% endfor %}
       </ul>
+      {% else %}
+      <div class="violin-empty-board">
+        <p>No pieces in the vault yet.</p>
+        <p>Repertoire appears when notes land in <code>30-Knowledge/Interests/Violin/Pieces</code>.</p>
+      </div>
+      {% endif %}
     </div>
 
     <aside class="violin-stats" aria-label="Practice progress from the vault log">

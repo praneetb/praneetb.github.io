@@ -243,22 +243,25 @@ html[data-theme="summit"] .page-violin-piece {
   font-size: 0.88rem;
 }
 
-.violin-placeholder-mark,
-.violin-placeholder-banner {
-  display: inline-block;
-  margin-top: 0.2rem;
-  color: var(--ink-soft);
-  font-family: var(--font-ui);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.violin-empty-board {
+  min-height: 10.4rem;
+  padding: 1.15rem 1.2rem 1.2rem;
+  border: 1px dashed var(--rule);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 80%, var(--paper));
 }
 
-.violin-placeholder-banner {
-  margin: 0.7rem 0 0;
-  padding: 0.4rem 0.65rem;
-  border-radius: 999px;
+.violin-empty-board p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.violin-empty-board p + p {
+  margin-top: 0.45rem;
+}
+
+.violin-status-pill[data-status="stub"] {
   background: color-mix(in srgb, var(--accent-wash) 70%, var(--surface));
 }
 

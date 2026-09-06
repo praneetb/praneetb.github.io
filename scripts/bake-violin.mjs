@@ -5,16 +5,16 @@
  *   node scripts/bake-violin.mjs /path/to/obsidian-vault
  *   node scripts/bake-violin.mjs --list /path/to/obsidian-vault
  *
- * Reads:
- *   30-Knowledge/Interests/Violin/Violin.md
+ * Reads (daily sync path):
+ *   30-Knowledge/Interests/Violin/Violin MOC.md
  *   30-Knowledge/Interests/Violin/Pieces/
  *   30-Knowledge/Interests/Violin/Practice-Log/
  *   30-Knowledge/Interests/Violin/Recordings/
  *   30-Knowledge/Interests/Violin/Teacher-Notes/
  *
- * Never invents practice sessions, recordings, or teacher notes.
- * If Pieces is empty, writes 2–3 placeholder piece names (marked
- * placeholder: true). Private lists stay [] when those folders are empty.
+ * Never invents repertoire, practice sessions, recordings, or teacher notes.
+ * Empty folders and stub notes bake to []. Streak/weeks come only from
+ * Practice-Log dates.
  *
  * Does not write assets/notes.enc.json.
  */
@@ -28,64 +28,13 @@ const OUT = path.join(ROOT, "_data", "violin.yml");
 
 const VAULT_ROOT = "30-Knowledge/Interests/Violin";
 const PATHS = {
-  moc: `${VAULT_ROOT}/Violin.md`,
+  moc: `${VAULT_ROOT}/Violin MOC.md`,
   pieces: `${VAULT_ROOT}/Pieces`,
   practice_log: `${VAULT_ROOT}/Practice-Log`,
   recordings: `${VAULT_ROOT}/Recordings`,
   teacher_notes: `${VAULT_ROOT}/Teacher-Notes`
 };
-
-const PLACEHOLDER_PIECES = [
-  {
-    id: "meditation",
-    placeholder: true,
-    title: "Méditation",
-    subtitle: "Massenet",
-    full_title: "Méditation from Thaïs",
-    composer: "Jules Massenet",
-    composer_short: "Massenet",
-    status: "polishing",
-    key: "D-flat Major",
-    difficulty: "Level 6–7 (Advanced)",
-    icon: "fleur",
-    why_i_like_it:
-      "A serene, intimate monologue of a piece—lyrical, tender, and deeply expressive. It invites both vulnerability and control, with every phrase revealing something new.",
-    image: "/assets/images/violin/piece.jpg",
-    vault_path: `${VAULT_ROOT}/Pieces/Meditation.md`
-  },
-  {
-    id: "ave-maria",
-    placeholder: true,
-    title: "Ave Maria",
-    subtitle: "Bach / Gounod",
-    full_title: "Ave Maria",
-    composer: "Bach / Gounod",
-    composer_short: "Bach / Gounod",
-    status: "learning",
-    key: "",
-    difficulty: "",
-    icon: "note",
-    why_i_like_it: "",
-    image: "/assets/images/violin/piece.jpg",
-    vault_path: `${VAULT_ROOT}/Pieces/Ave-Maria.md`
-  },
-  {
-    id: "simple-gifts",
-    placeholder: true,
-    title: "Simple Gifts",
-    subtitle: "Trad. arr.",
-    full_title: "Simple Gifts",
-    composer: "Traditional, arranged",
-    composer_short: "Trad. arr.",
-    status: "ready",
-    key: "",
-    difficulty: "",
-    icon: "star",
-    why_i_like_it: "",
-    image: "/assets/images/violin/piece.jpg",
-    vault_path: `${VAULT_ROOT}/Pieces/Simple-Gifts.md`
-  }
-];
+const MOC_CANDIDATES = [`${VAULT_ROOT}/Violin MOC.md`, `${VAULT_ROOT}/Violin.md`];
 
 function usage() {
   console.error("Usage: node scripts/bake-violin.mjs /path/to/obsidian-vault");
@@ -209,6 +158,34 @@ async function readNote(file) {
   return parsed;
 }
 
+function isStubNote(note) {
+  const data = note.data || {};
+  if (/^(true|yes|stub)$/i.test(String(data.stub || ""))) {
+    return true;
+  }
+  const raw = String(note.body || "").trim();
+  const withoutHeading = raw.replace(/^#\s+.+$/m, "").trim();
+  const hasMeta = Boolean(
+    data.composer ||
+      data.status ||
+      data.why_i_like_it ||
+      data.key ||
+      data.date ||
+      data.minutes ||
+      data.piece ||
+      data.audio ||
+      data.from ||
+      data.body
+  );
+  if (hasMeta) {
+    return false;
+  }
+  if (!withoutHeading) {
+    return true;
+  }
+  return /^(stub|todo|tbd|placeholder|coming soon)\.?$/i.test(withoutHeading);
+}
+
 function pieceFromNote(note, vaultDir) {
   const title = note.data.title || firstHeading(note.body) || note.name;
   const composer = note.data.composer || note.data.composer_short || "";
@@ -220,7 +197,6 @@ function pieceFromNote(note, vaultDir) {
     "";
   return {
     id: note.data.id || slug(title) || slug(note.name),
-    placeholder: false,
     title: title,
     subtitle: note.data.subtitle || composer,
     full_title: note.data.full_title || title,
@@ -316,23 +292,20 @@ export function deriveProgress(logs) {
 function renderYaml(data) {
   const lines = [];
   lines.push("# Violin section — baked site data.");
-  lines.push("# Source of truth: Obsidian vault path");
+  lines.push("# Daily sync path (source of truth):");
   lines.push("#   30-Knowledge/Interests/Violin/");
-  lines.push("#     Violin.md              (MOC)");
+  lines.push("#     Violin MOC.md          (MOC)");
   lines.push("#     Pieces/                (public piece notes)");
   lines.push("#     Practice-Log/          (private sessions)");
   lines.push("#     Recordings/            (private audio + take notes)");
   lines.push("#     Teacher-Notes/         (private teacher feedback)");
   lines.push("#");
-  lines.push("# Bake (does not invent logs, recordings, or teacher notes):");
+  lines.push("# Bake (does not invent repertoire, sessions, recordings, or teacher notes):");
   lines.push("#   node scripts/bake-violin.mjs /path/to/obsidian-vault");
   lines.push("#");
-  lines.push("# When those vault folders are empty, practice_log / recordings /");
-  lines.push("# teacher_notes stay []. Streak and weeks are derived only from");
-  lines.push("# Practice-Log dates. Piece names may be 2–3 placeholders, marked");
-  lines.push("# placeholder: true, until real Pieces notes exist.");
-  lines.push("#");
-  lines.push("# Do not invent practice sessions, recordings, or teacher notes.");
+  lines.push("# The live vault tree is stubs only. Empty folders and stub notes bake to");
+  lines.push("# []. Streak and weeks are derived only from Practice-Log dates.");
+  lines.push("# Do not invent piece names or practice sessions.");
   lines.push("");
   lines.push("vault:");
   lines.push("  root: " + VAULT_ROOT);
@@ -357,16 +330,20 @@ function renderYaml(data) {
   lines.push("  title: Violin — Learning in public");
   lines.push("  lede: Daily practice. Small wins. Real progress.");
   lines.push("  cta: Watch story");
-  lines.push("  image: /assets/images/violin/story.jpg");
+  lines.push("  image: /assets/images/violin/hero.jpg");
   lines.push("");
   lines.push("# Derived only from practice_log[].date. Zero when the log is empty.");
   lines.push("streak_days: " + data.streak_days);
   lines.push("weeks: " + data.weeks);
   lines.push("");
-  lines.push("pieces:");
+  lines.push("# Public. Empty until real Pieces notes are baked from the vault.");
+  if (!data.pieces.length) {
+    lines.push("pieces: []");
+  } else {
+    lines.push("pieces:");
+  }
   data.pieces.forEach(function (piece) {
     lines.push("  - id: " + piece.id);
-    lines.push("    placeholder: " + (piece.placeholder ? "true" : "false"));
     lines.push("    title: " + yamlQuote(piece.title));
     lines.push("    subtitle: " + yamlQuote(piece.subtitle));
     lines.push("    full_title: " + yamlQuote(piece.full_title));
@@ -430,33 +407,45 @@ function renderYaml(data) {
   return lines.join("\n");
 }
 
+async function findMoc(vaultDir) {
+  for (const rel of MOC_CANDIDATES) {
+    try {
+      await fs.access(path.join(vaultDir, rel));
+      return rel;
+    } catch (err) {
+      // try next
+    }
+  }
+  return PATHS.moc;
+}
+
 async function bake(vaultDir) {
   const piecesDir = path.join(vaultDir, PATHS.pieces);
   const logDir = path.join(vaultDir, PATHS.practice_log);
   const recDir = path.join(vaultDir, PATHS.recordings);
   const notesDir = path.join(vaultDir, PATHS.teacher_notes);
-  const mocPath = path.join(vaultDir, PATHS.moc);
+  const mocRel = await findMoc(vaultDir);
 
   const pieceFiles = await listMarkdown(piecesDir);
   const logFiles = await listMarkdown(logDir);
   const recFiles = await listMarkdown(recDir);
   const noteFiles = await listMarkdown(notesDir);
-  let mocExists = false;
-  try {
-    await fs.access(mocPath);
-    mocExists = true;
-  } catch (err) {
-    mocExists = false;
-  }
 
   const pieces = [];
   for (const file of pieceFiles) {
-    pieces.push(pieceFromNote(await readNote(file), vaultDir));
+    const note = await readNote(file);
+    if (!isStubNote(note)) {
+      pieces.push(pieceFromNote(note, vaultDir));
+    }
   }
 
   const practice_log = [];
   for (const file of logFiles) {
-    const entry = logFromNote(await readNote(file), vaultDir);
+    const note = await readNote(file);
+    if (isStubNote(note)) {
+      continue;
+    }
+    const entry = logFromNote(note, vaultDir);
     if (entry) {
       practice_log.push(entry);
     }
@@ -467,36 +456,41 @@ async function bake(vaultDir) {
 
   const recordings = [];
   for (const file of recFiles) {
-    recordings.push(recordingFromNote(await readNote(file), vaultDir));
+    const note = await readNote(file);
+    if (!isStubNote(note)) {
+      recordings.push(recordingFromNote(note, vaultDir));
+    }
   }
 
   const teacher_notes = [];
   for (const file of noteFiles) {
-    teacher_notes.push(teacherFromNote(await readNote(file), vaultDir));
+    const note = await readNote(file);
+    if (!isStubNote(note)) {
+      teacher_notes.push(teacherFromNote(note, vaultDir));
+    }
   }
 
   const progress = deriveProgress(practice_log);
-  const usedPlaceholders = pieces.length === 0;
+  const empty = !pieces.length && !practice_log.length && !recordings.length && !teacher_notes.length;
   return {
-    pieces: usedPlaceholders ? PLACEHOLDER_PIECES : pieces,
+    pieces: pieces,
     practice_log: practice_log,
     recordings: recordings,
     teacher_notes: teacher_notes,
     streak_days: progress.streak_days,
     weeks: progress.weeks,
-    baked_from: usedPlaceholders ? "empty-vault" : "vault",
-    baked_note: usedPlaceholders
-      ? "Vault folders were empty or missing Pieces notes. Private lists are empty. Three public piece names are placeholders until Pieces notes are baked."
-      : "Baked from " +
+    baked_from: empty ? "vault-stubs" : "vault",
+    baked_note: empty
+      ? "Live tree is " +
         VAULT_ROOT +
-        (mocExists ? " (MOC present)" : " (MOC missing)") +
-        ".",
+        "/ (Violin MOC.md plus empty Pieces, Practice-Log, Recordings, Teacher-Notes stubs). Site lists stay empty until real notes appear."
+      : "Baked from " + VAULT_ROOT + " (MOC " + mocRel + ").",
     counts: {
       pieces: pieces.length,
       practice_log: practice_log.length,
       recordings: recordings.length,
       teacher_notes: teacher_notes.length,
-      moc: mocExists
+      moc: mocRel
     }
   };
 }
@@ -519,7 +513,7 @@ async function main() {
   console.log(
     "pieces=" +
       data.pieces.length +
-      (data.baked_from === "empty-vault" ? " (placeholders)" : "") +
+      (data.baked_from === "vault-stubs" ? " (stubs)" : "") +
       " logs=" +
       data.practice_log.length +
       " recordings=" +
