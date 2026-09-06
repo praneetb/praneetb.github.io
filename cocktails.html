@@ -1,0 +1,131 @@
+---
+layout: default
+title: Cocktails
+nav: cocktails
+permalink: /cocktails/
+private: false
+hide_footer: true
+description: Recipes and short pours from the vault — Old Fashioned, Mai Tai, Long Island Iced Tea, Rum Buck, and Sloe Gin Fizz.
+extra_css:
+  - /assets/css/cocktails.css
+extra_js:
+  - /assets/js/cocktails.js
+---
+
+{% assign drinks = site.data.cocktails.items %}
+{% assign first = drinks | first %}
+
+<script type="application/json" id="cocktails-data">
+{
+  "filters": {{ site.data.cocktails.filters | jsonify }},
+  "items": {{ drinks | jsonify }}
+}
+</script>
+
+<div class="cocktails-page">
+  <header class="cocktails-heading">
+    <h1><span class="cocktails-path">/</span>cocktails<span class="cocktails-path">/</span></h1>
+  </header>
+
+  <div class="cocktails-shell">
+    <aside class="cocktails-rail" aria-label="Cocktail list">
+      <label class="cocktails-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.2"></circle>
+          <path d="M16 16.5 20.5 21"></path>
+        </svg>
+        <span class="visually-hidden">Search recipes</span>
+        <input id="cocktails-search" type="search" placeholder="Search recipes..." autocomplete="off" spellcheck="false">
+        <kbd class="cocktails-search-key">⌘K</kbd>
+      </label>
+
+      <div class="cocktails-filters" role="group" aria-label="Method">
+        {% for filter in site.data.cocktails.filters %}
+        <button type="button" class="cocktails-chip{% if filter.id == 'all' %} is-active{% endif %}" data-filter="{{ filter.id }}" aria-pressed="{% if filter.id == 'all' %}true{% else %}false{% endif %}">{{ filter.name }}</button>
+        {% endfor %}
+      </div>
+
+      <ol id="cocktails-list" class="cocktails-list">
+        {% for drink in drinks %}
+        <li>
+          <button type="button" class="cocktails-item{% if forloop.first %} is-active{% endif %}" data-cocktail="{{ drink.id }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+            <span class="cocktails-item-copy">
+              <span class="cocktails-item-name">{{ drink.name }}</span>
+              <span class="cocktails-item-meta">{{ drink.subtitle | default: drink.method }}</span>
+            </span>
+            <span class="cocktails-item-go" aria-hidden="true">›</span>
+          </button>
+        </li>
+        {% endfor %}
+      </ol>
+      <p id="cocktails-empty" class="cocktails-empty" hidden>No recipes match.</p>
+    </aside>
+
+    <article class="cocktails-detail" id="cocktails-detail" aria-live="polite">
+      <div class="cocktails-video" id="cocktails-video" data-empty="true">
+        <video id="cocktails-player" playsinline controls hidden></video>
+        <img id="cocktails-poster" alt="" hidden>
+        <div class="cocktails-video-empty" id="cocktails-video-empty">
+          <button type="button" class="cocktails-play" id="cocktails-play" aria-label="Play pour" disabled>
+            <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+              <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M26 20.5 46 32 26 43.5z" fill="currentColor"/>
+            </svg>
+          </button>
+          <p>Video coming soon</p>
+        </div>
+        <span class="cocktails-video-tag" id="cocktails-video-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.2"/>
+            <path d="M12 8.2v4.2l2.8 1.6"/>
+          </svg>
+          30s pour
+        </span>
+      </div>
+
+      <header class="cocktails-detail-head">
+        <h2 id="cocktails-name">{{ first.name }}</h2>
+        <p class="cocktails-glass" id="cocktails-glass">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M7.2 5.2h9.6l-1.4 4.6c-.5 1.6-.8 3.3-.8 5v4.6H9.4v-4.6c0-1.7-.3-3.4-.8-5z"/>
+            <path d="M9.2 19.4h5.6"/>
+          </svg>
+          <span>Glass: <span id="cocktails-glass-text">{{ first.glass }}</span></span>
+        </p>
+      </header>
+
+      <section class="cocktails-block" aria-labelledby="cocktails-ingredients-heading">
+        <h3 id="cocktails-ingredients-heading">Ingredients</h3>
+        <ul id="cocktails-ingredients" class="cocktails-ingredients">
+          {% for line in first.ingredients %}
+          <li><span>{{ line.amount }}</span> {{ line.name }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="cocktails-block" aria-labelledby="cocktails-method-heading">
+        <h3 id="cocktails-method-heading">Method</h3>
+        <p id="cocktails-method" class="cocktails-method">{{ first.method_text }}</p>
+      </section>
+
+      <p class="cocktails-source" id="cocktails-source">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M7 3.8h8.2L19 7.6V20.2H7z"/>
+          <path d="M15.2 3.8V7.6H19"/>
+          <path d="M9.4 11.2h7.2M9.4 14.4h7.2M9.4 17.6h4.6"/>
+        </svg>
+        Source • <span id="cocktails-source-text">{{ first.source | default: "Obsidian Recipes" }}</span>
+      </p>
+
+      <label class="cocktails-notes">
+        <span class="cocktails-notes-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M5.5 16.8 16.2 6.1a1.6 1.6 0 0 1 2.3 0l.4.4a1.6 1.6 0 0 1 0 2.3L8.2 19.3 5 20z"/>
+          </svg>
+          My notes
+        </span>
+        <textarea id="cocktail-notes" rows="3" maxlength="800" placeholder="Your private notes on this cocktail..."></textarea>
+      </label>
+    </article>
+  </div>
+</div>

@@ -1,13 +1,15 @@
 (function () {
   "use strict";
 
-  // Signed-in header only. Travel, Bar, Patents, and Bucket list are public
-  // pages (no login wall). Media, Notes, Manya, and Space stay gated via
-  // page.private — unsigned visitors never see this nav.
+  // Signed-in header only. Travel, Bar, Cocktails, Fermentation, Patents, and
+  // Bucket list are public pages (no login wall). Media, Notes, Manya, and
+  // Space stay gated via page.private — unsigned visitors never see this nav.
   var PRIVATE_LINKS = [
     { path: "/space/", label: "Home", match: /\/space\/?$/ },
     { path: "/travel/", label: "Travel", match: /\/travel\/?$/ },
     { path: "/bar/", label: "Bar", match: /\/(bar|whiskey)\/?$/ },
+    { path: "/cocktails/", label: "Cocktails", match: /\/cocktails\/?$/ },
+    { path: "/fermentation/", label: "Fermentation", match: /\/fermentation\/?$/ },
     { path: "/patents/", label: "Patents", match: /\/patents\/?$/ },
     { path: "/media/", label: "Media", match: /\/media\/?$/ },
     { path: "/bucket-list/", label: "Bucket list", match: /\/bucket(-list)?\/?$/ },

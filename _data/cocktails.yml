@@ -1,0 +1,124 @@
+# Recipes from the vault: 30-Knowledge/Recipes/
+# Only these five. Do not invent drinks or substitute classic IBA formulas.
+# video / poster are optional. Empty video shows the pour placeholder.
+# Drop files under assets/cocktails/ and set the paths here.
+
+filters:
+  - id: all
+    name: All
+  - id: stirred
+    name: Stirred
+  - id: shaken
+    name: Shaken
+  - id: built
+    name: Built
+
+items:
+  - id: old-fashioned
+    name: Old Fashioned
+    method: stirred
+    subtitle: Jamaican rum • stirred
+    glass: rocks
+    source: Obsidian Recipes
+    video:
+    poster:
+    ingredients:
+      - amount: ¼ oz
+        name: Demerara syrup
+      - amount: 4 dashes
+        name: Angostura bitters
+      - amount: 2 fl oz
+        name: Jamaican rum
+      - amount: 1
+        name: Orange slice
+      - amount: 1
+        name: Maraschino cherry
+    method_text: Stir with ice for a few seconds, then pour over one large ice piece. Garnish with orange slice and maraschino cherry.
+
+  - id: mai-tai
+    name: Mai Tai
+    method: built
+    subtitle: rum • built
+    glass: rocks
+    source: Obsidian Recipes
+    video:
+    poster:
+    ingredients:
+      - amount: 1 oz
+        name: Appleton 12yr
+      - amount: 1 oz
+        name: La Favorite Ambre
+      - amount: ½ oz
+        name: Kōloa Dark
+      - amount: ¾ oz
+        name: Pierre Ferrand Dry Curaçao
+      - amount: 1 oz
+        name: Lime
+      - amount: ½ oz
+        name: Orgeat
+      - amount: float
+        name: 151 (flame)
+    method_text: Build the rums, curaçao, lime, and orgeat. Float / flame 151. Garnish with mint, lime husk, and a cherry.
+
+  - id: long-island
+    name: Long Island Iced Tea
+    method: built
+    subtitle: built
+    glass: highball
+    source: Obsidian Recipes
+    video:
+    poster:
+    ingredients:
+      - amount: ½ oz
+        name: Vodka
+      - amount: ½ oz
+        name: Rum
+      - amount: ½ oz
+        name: Gin
+      - amount: ½ oz
+        name: Tequila
+      - amount: ½ oz
+        name: Triple sec
+      - amount: 1 oz
+        name: Sweet & sour
+      - amount: 1 oz
+        name: Cola
+    method_text: Build with ½ oz each vodka, rum, gin, tequila, and triple sec, then 1 oz sweet & sour and 1 oz cola. Garnish with lemon and mint.
+
+  - id: rum-buck
+    name: Rum Buck
+    method: built
+    subtitle: ginger beer • built
+    glass: highball
+    source: Obsidian Recipes
+    video:
+    poster:
+    ingredients:
+      - amount: 1½ oz
+        name: Hamilton 86 Demerara
+      - amount: ½ oz
+        name: St. Elizabeth Allspice Dram (float)
+      - amount: ¼ oz
+        name: Lime
+      - amount: 4–5 oz
+        name: Bundaberg ginger beer
+    method_text: Build Hamilton 86 Demerara, lime, and Bundaberg ginger beer. Float ½ oz St. Elizabeth Allspice Dram. Garnish with a lime wheel.
+
+  - id: sloe-gin-fizz
+    name: Sloe Gin Fizz
+    method: shaken
+    subtitle: shaken
+    glass: highball
+    source: Obsidian Recipes
+    video:
+    poster:
+    ingredients:
+      - amount: 1½ oz
+        name: Sloe gin
+      - amount: 1 oz
+        name: Lemon
+      - amount: ¾ oz
+        name: Simple syrup
+      - amount: top
+        name: Club soda
+    method_text: Shake and strain. Top with club soda. Garnish with lemon and a cherry.

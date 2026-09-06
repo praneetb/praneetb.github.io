@@ -68,6 +68,16 @@
   color: var(--tile-whiskey-ink);
 }
 
+.space-tile[data-tile="cocktails"] {
+  background: var(--tile-cocktails-bg);
+  color: var(--tile-cocktails-ink);
+}
+
+.space-tile[data-tile="fermentation"] {
+  background: var(--tile-fermentation-bg);
+  color: var(--tile-fermentation-ink);
+}
+
 .space-tile[data-tile="patents"] {
   background: var(--tile-patents-bg);
   color: var(--tile-patents-ink);

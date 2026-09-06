@@ -1,0 +1,134 @@
+---
+layout: default
+title: Fermentation
+nav: fermentation
+permalink: /fermentation/
+private: false
+hide_footer: true
+description: Brews and bread from the vault — kombucha, salgam, sourdough starter, and a Dutch oven loaf.
+extra_css:
+  - /assets/css/fermentation.css
+extra_js:
+  - /assets/js/fermentation.js
+---
+
+{% assign items = site.data.fermentation.items %}
+{% assign first = items | first %}
+
+<script type="application/json" id="fermentation-data">
+{
+  "filters": {{ site.data.fermentation.filters | jsonify }},
+  "items": {{ items | jsonify }}
+}
+</script>
+
+<div class="ferm-page">
+  <header class="ferm-heading">
+    <p class="ferm-kicker">
+      <span data-theme-line="summit">Vault · Fermentation</span>
+      <span data-theme-line="atlas">Vault · Fermentation</span>
+      <span data-theme-line="cadence">Vault · Fermentation</span>
+    </p>
+    <h1>Fermentation</h1>
+  </header>
+
+  <div class="ferm-shell">
+    <aside class="ferm-rail" aria-label="Fermentation vault">
+      <p class="ferm-rail-kicker">His vault</p>
+      <label class="ferm-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.2"></circle>
+          <path d="M16 16.5 20.5 21"></path>
+        </svg>
+        <span class="visually-hidden">Search his vault</span>
+        <input id="ferm-search" type="search" placeholder="Search his vault..." autocomplete="off" spellcheck="false">
+        <kbd class="ferm-search-key">⌘K</kbd>
+      </label>
+
+      <div class="ferm-filters" role="group" aria-label="Kind">
+        {% for filter in site.data.fermentation.filters %}
+        <button type="button" class="ferm-chip{% if filter.id == 'all' %} is-active{% endif %}" data-filter="{{ filter.id }}" aria-pressed="{% if filter.id == 'all' %}true{% else %}false{% endif %}">{{ filter.name }}</button>
+        {% endfor %}
+      </div>
+
+      <ul id="ferm-list" class="ferm-list">
+        {% for item in items %}
+        <li>
+          <button type="button" class="ferm-item{% if forloop.first %} is-active{% endif %}" data-ferm="{{ item.id }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+            <span class="ferm-thumb" data-ferm="{{ item.id }}" data-kind="{{ item.kind }}" aria-hidden="true"></span>
+            <span class="ferm-item-copy">
+              <span class="ferm-item-name">{{ item.name }}</span>
+              <span class="ferm-item-meta">{{ item.subtitle }}</span>
+            </span>
+            <span class="ferm-item-mark" aria-hidden="true"></span>
+          </button>
+        </li>
+        {% endfor %}
+      </ul>
+      <p id="ferm-empty" class="ferm-empty" hidden>Nothing in the vault matches.</p>
+      <p class="ferm-rail-foot">From the vault · Praneet Bachheti</p>
+    </aside>
+
+    <article class="ferm-detail" id="ferm-detail" aria-live="polite">
+      <header class="ferm-detail-head">
+        <div>
+          <h2 id="ferm-name">{{ first.name }}</h2>
+          <p class="ferm-detail-rule" aria-hidden="true"></p>
+        </div>
+        <p class="ferm-detail-meta" id="ferm-meta">{{ first.meta }}</p>
+      </header>
+
+      <div class="ferm-video" id="ferm-video" data-empty="true">
+        <video id="ferm-player" playsinline controls hidden></video>
+        <img id="ferm-poster" alt="" hidden>
+        <div class="ferm-video-empty" id="ferm-video-empty">
+          <p>Video coming soon</p>
+        </div>
+        <span class="ferm-video-tag" id="ferm-video-tag" hidden></span>
+      </div>
+
+      <p class="ferm-lede" id="ferm-lede"{% unless first.lede %} hidden{% endunless %}>{{ first.lede }}</p>
+
+      <div class="ferm-grid">
+        <section class="ferm-block" id="ferm-ingredients-block" aria-labelledby="ferm-ingredients-heading"{% unless first.ingredients %} hidden{% endunless %}>
+          <h3 id="ferm-ingredients-heading">Ingredients</h3>
+          <ul id="ferm-ingredients" class="ferm-ingredients">
+            {% for line in first.ingredients %}
+            <li data-icon="{{ line.icon }}"><span>{{ line.amount }}</span> {{ line.name }}</li>
+            {% endfor %}
+          </ul>
+        </section>
+
+        <section class="ferm-block" id="ferm-tools-block" aria-labelledby="ferm-tools-heading" hidden>
+          <h3 id="ferm-tools-heading">Tools</h3>
+          <ul id="ferm-tools" class="ferm-tools"></ul>
+        </section>
+
+        <section class="ferm-block" id="ferm-schedule-block" aria-labelledby="ferm-schedule-heading" hidden>
+          <h3 id="ferm-schedule-heading">Feed schedule</h3>
+          <ol id="ferm-schedule" class="ferm-schedule"></ol>
+        </section>
+
+        <section class="ferm-block" id="ferm-steps-block" aria-labelledby="ferm-steps-heading" hidden>
+          <h3 id="ferm-steps-heading">Method</h3>
+          <ol id="ferm-steps" class="ferm-steps"></ol>
+        </section>
+
+        <section class="ferm-block" id="ferm-log-block" aria-labelledby="ferm-log-heading"{% unless first.log %} hidden{% endunless %}>
+          <h3 id="ferm-log-heading">Log (latest)</h3>
+          <p id="ferm-log" class="ferm-log">
+            {% if first.log %}
+            <time>{{ first.log.date }}</time>
+            {{ first.log.text }}
+            {% endif %}
+          </p>
+        </section>
+
+        <section class="ferm-block" id="ferm-note-block" aria-labelledby="ferm-note-heading"{% unless first.note %} hidden{% endunless %}>
+          <h3 id="ferm-note-heading">Note</h3>
+          <p id="ferm-note">{{ first.note }}</p>
+        </section>
+      </div>
+    </article>
+  </div>
+</div>
