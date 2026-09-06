@@ -40,9 +40,9 @@ extra_js:
       <figure class="violin-piece-photo">
         <img
           src="{{ piece.image | default: site.data.violin.hero.image | relative_url }}"
-          alt="{{ piece.full_title | default: piece.title }} — still of a violin"
-          width="1280"
-          height="1600">
+          alt="{{ piece.full_title | default: piece.title }} — violin still"
+          width="864"
+          height="1152">
       </figure>
       <div class="violin-piece-main">
         <h1>{{ piece.full_title | default: piece.title }}{% if piece.composer_short %} · {{ piece.composer_short }}{% endif %}</h1>
@@ -89,9 +89,9 @@ extra_js:
     <figure class="violin-piece-photo">
       <img
         src="{{ site.data.violin.hero.image | relative_url }}"
-        alt="A violin still — repertoire notes have not been published yet"
-        width="1280"
-        height="1600">
+        alt="Stylized illustration of a formal violinist — repertoire notes have not been published yet"
+        width="864"
+        height="1152">
     </figure>
     <div class="violin-piece-main">
       <h1>A piece will land here</h1>

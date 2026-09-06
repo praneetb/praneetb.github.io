@@ -1,8 +1,7 @@
-hero.jpg / story.jpg
-  Diego Galaz playing the violin.
-  Eduardo Elúa, 11 September 2010.
-  Wikimedia Commons, CC BY-SA 4.0
-  https://commons.wikimedia.org/wiki/File:Diego_Galaz_tocano_el_viol%C3%ADn.jpg
+hero.png
+  Stylized illustration of a formal violinist (black-line tuxedo figure, brown violin, white ground).
+  Not a photograph of Praneet. Not a stock person photo.
+  Site illustration for the public violin foyer and piece fallback.
 
 piece.jpg
   William Michael Harnett, The Old Violin, 1886.
