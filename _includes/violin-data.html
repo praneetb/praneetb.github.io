@@ -1,0 +1,11 @@
+<script type="application/json" id="violin-data">
+{
+  "vault": {{ site.data.violin.vault | jsonify }},
+  "streak_days": {{ site.data.violin.streak_days | default: 0 }},
+  "weeks": {{ site.data.violin.weeks | default: 0 }},
+  "pieces": {{ site.data.violin.pieces | jsonify }},
+  "practice_log": {{ site.data.violin.practice_log | jsonify }},
+  "recordings": {{ site.data.violin.recordings | jsonify }},
+  "teacher_notes": {{ site.data.violin.teacher_notes | jsonify }}
+}
+</script>

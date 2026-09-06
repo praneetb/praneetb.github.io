@@ -1,0 +1,144 @@
+---
+layout: default
+title: Practice room
+nav: violin-practice
+permalink: /violin/practice/
+private: true
+sitemap: false
+robots: noindex, nofollow
+hide_footer: true
+description: Private violin practice room — logs, recordings, and teacher notes from the vault.
+extra_css:
+  - /assets/css/violin.css
+extra_js:
+  - /assets/js/violin.js
+---
+
+{% assign logs = site.data.violin.practice_log %}
+{% assign recordings = site.data.violin.recordings %}
+{% assign notes = site.data.violin.teacher_notes %}
+{% include violin-data.html %}
+
+<div class="violin-studio" data-studio="practice">
+  <aside class="violin-sidebar">
+    <p class="violin-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M8.2 14.8c1.6 1.6 4.2 1.4 5.6-.2l5.4-5.8c.8-.8.8-2.2 0-3l-1.4-1.4c-.8-.8-2.2-.8-3 0L9 10.2c-1.6 1.4-1.8 4-.2 5.6z"/>
+        <path d="M13.6 6.2 17.8 10.4"/>
+        <circle cx="8.6" cy="16.2" r="2.1"/>
+      </svg>
+      <span>
+        <strong>ViolinPath</strong>
+        <em>Private Practice Studio</em>
+      </span>
+    </p>
+    <nav aria-label="Practice studio">
+      <a href="{{ '/violin/practice/' | relative_url }}" aria-current="page">Practice room</a>
+      <a href="#practice-log">Practice Log</a>
+      <a href="#recordings">Recordings</a>
+      <a href="#teacher-notes">Teacher Notes</a>
+      <a href="{{ '/violin/' | relative_url }}">Public foyer</a>
+    </nav>
+    <p class="violin-private-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+        <rect x="6" y="11" width="12" height="9" rx="1.6"/>
+        <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+      </svg>
+      Private · signed in
+      <span>Your practice space is private.</span>
+    </p>
+  </aside>
+
+  <div class="violin-studio-main">
+    <header class="violin-studio-head">
+      <h1>Practice room</h1>
+      <p class="violin-studio-lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+          <rect x="6" y="11" width="12" height="9" rx="1.6"/>
+          <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+        </svg>
+        Private · signed in
+      </p>
+    </header>
+
+    <div class="violin-studio-grid">
+      <section class="violin-card" id="practice-log" aria-labelledby="log-heading">
+        <header>
+          <h2 id="log-heading">Practice Log</h2>
+          <p>Recent sessions from <code>Practice-Log</code>.</p>
+        </header>
+        {% if logs and logs.size > 0 %}
+        <div class="violin-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Minutes</th>
+                <th>Piece</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for entry in logs %}
+              <tr>
+                <td>{{ entry.date | escape }}</td>
+                <td>{{ entry.minutes }} min</td>
+                <td>{{ entry.piece | escape }}</td>
+                <td>{{ entry.note | escape }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="violin-empty">No practice sessions in the vault yet. Entries appear here after they are baked from <code>30-Knowledge/Interests/Violin/Practice-Log</code>.</p>
+        {% endif %}
+      </section>
+
+      <section class="violin-card" id="recordings" aria-labelledby="rec-heading">
+        <header>
+          <h2 id="rec-heading">Recordings</h2>
+          <p>Private takes from <code>Recordings</code>.</p>
+        </header>
+        {% if recordings and recordings.size > 0 %}
+        <ul class="violin-rec-list">
+          {% for rec in recordings %}
+          <li>
+            <a href="{{ '/violin/practice/recording/' | relative_url }}?id={{ rec.id | url_encode }}">
+              <span class="violin-rec-date">{{ rec.date | escape }}</span>
+              <span class="violin-rec-title">{{ rec.title | escape }}</span>
+              <span class="violin-rec-dur">{{ rec.duration | escape }}</span>
+              <span class="violin-wave" aria-hidden="true"></span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="violin-empty">No recordings in the vault yet. Takes stay off the public foyer.</p>
+        {% endif %}
+      </section>
+    </div>
+
+    <section class="violin-card violin-card-wide" id="teacher-notes" aria-labelledby="notes-heading">
+      <header>
+        <h2 id="notes-heading">Teacher Notes</h2>
+        <p>Feedback published from <code>Teacher-Notes</code>.</p>
+      </header>
+      {% if notes and notes.size > 0 %}
+      <ol class="violin-note-list">
+        {% for note in notes %}
+        <li>
+          <span class="violin-note-mark" aria-hidden="true">T</span>
+          <div>
+            <p class="violin-note-date">{{ note.date | escape }}</p>
+            <p>{{ note.body | escape }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+      {% else %}
+      <p class="violin-empty">No teacher notes in the vault yet. This room does not invent feedback.</p>
+      {% endif %}
+    </section>
+  </div>
+</div>

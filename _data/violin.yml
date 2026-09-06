@@ -1,0 +1,56 @@
+# Violin section — baked site data.
+# Daily sync path (source of truth):
+#   30-Knowledge/Interests/Violin/
+#     Violin MOC.md          (MOC)
+#     Pieces/                (public piece notes)
+#     Practice-Log/          (private sessions)
+#     Recordings/            (private audio + take notes)
+#     Teacher-Notes/         (private teacher feedback)
+#
+# Bake (does not invent repertoire, sessions, recordings, or teacher notes):
+#   node scripts/bake-violin.mjs /path/to/obsidian-vault
+#
+# The live vault tree is stubs only. Empty folders and stub notes bake to
+# []. Streak and weeks are derived only from Practice-Log dates.
+# Do not invent piece names or practice sessions.
+
+vault:
+  root: 30-Knowledge/Interests/Violin
+  moc: 30-Knowledge/Interests/Violin/Violin MOC.md
+  pieces: 30-Knowledge/Interests/Violin/Pieces
+  practice_log: 30-Knowledge/Interests/Violin/Practice-Log
+  recordings: 30-Knowledge/Interests/Violin/Recordings
+  teacher_notes: 30-Knowledge/Interests/Violin/Teacher-Notes
+
+baked_from: vault-stubs
+baked_note: >-
+  Live tree is 30-Knowledge/Interests/Violin/ (Violin MOC.md plus empty Pieces, Practice-Log, Recordings, Teacher-Notes stubs). Site lists stay empty until real notes appear.
+
+hero:
+  title: Violin
+  kicker: Learning in public.
+  lede: A public record of learning violin with intention, patience, and a little music along the way.
+  image: /assets/images/violin/hero.jpg
+  image_alt: Close view of a violin being played, warm wood and bow in motion.
+  image_credit: Wikimedia Commons, public-domain / CC stills — see assets/images/violin/CREDITS.txt
+
+story:
+  title: Violin — Learning in public
+  lede: Daily practice. Small wins. Real progress.
+  cta: Watch story
+  image: /assets/images/violin/hero.jpg
+
+# Derived only from practice_log[].date. Zero when the log is empty.
+streak_days: 0
+weeks: 0
+
+# Public. Empty until real Pieces notes are baked from the vault.
+pieces: []
+# Private. Empty until Practice-Log notes are baked from the vault.
+practice_log: []
+
+# Private. Empty until Recordings notes (and audio) are baked from the vault.
+recordings: []
+
+# Private. Empty until Teacher-Notes are baked from the vault.
+teacher_notes: []

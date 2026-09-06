@@ -1,0 +1,128 @@
+---
+layout: default
+title: Violin piece
+nav: violin-piece
+permalink: /violin/piece/
+private: false
+hide_footer: true
+description: Public notes on a violin piece — composer, status, and why I like it. No private recordings.
+extra_css:
+  - /assets/css/violin.css
+extra_js:
+  - /assets/js/violin.js
+---
+
+{% assign pieces = site.data.violin.pieces %}
+{% include violin-data.html %}
+
+<div class="violin-shell violin-piece-page">
+  <div class="violin-localbar">
+    <p class="violin-local-kicker">Summit</p>
+    <nav class="violin-local-nav" aria-label="Violin">
+      <a href="{{ '/violin/' | relative_url }}" aria-current="page">Pieces</a>
+      <a href="{{ '/violin/' | relative_url }}#violin-pieces-heading">Composers</a>
+      <a href="{{ '/violin/' | relative_url }}#violin-pieces-heading">Repertoire</a>
+      <a href="{{ '/violin/practice/' | relative_url }}">My Progress</a>
+    </nav>
+    <a class="violin-practice-cta" href="{{ '/violin/practice/' | relative_url }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <rect x="6" y="11" width="12" height="9" rx="1.6"/>
+        <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+      </svg>
+      <span class="violin-when-out">Sign in to Practice Room</span>
+      <span class="violin-when-in">My Summit</span>
+    </a>
+  </div>
+
+  {% if pieces and pieces.size > 0 %}
+    {% for piece in pieces %}
+    <article class="violin-piece-detail" data-piece-id="{{ piece.id }}"{% unless forloop.first %} hidden{% endunless %}>
+      <figure class="violin-piece-photo">
+        <img
+          src="{{ piece.image | default: site.data.violin.hero.image | relative_url }}"
+          alt="{{ piece.full_title | default: piece.title }} — still of a violin"
+          width="1280"
+          height="1600">
+      </figure>
+      <div class="violin-piece-main">
+        <h1>{{ piece.full_title | default: piece.title }}{% if piece.composer_short %} · {{ piece.composer_short }}{% endif %}</h1>
+        <p class="violin-status-pill" data-status="{{ piece.status }}">
+          <span aria-hidden="true">✦</span>
+          {{ piece.status | capitalize }}
+        </p>
+        <section class="violin-why" aria-labelledby="why-{{ piece.id }}">
+          <h2 id="why-{{ piece.id }}">Why I like it</h2>
+          {% if piece.why_i_like_it and piece.why_i_like_it != "" %}
+          <p>{{ piece.why_i_like_it }}</p>
+          {% else %}
+          <p class="violin-empty-copy">A personal note will land here when the vault piece is published.</p>
+          {% endif %}
+        </section>
+      </div>
+      <dl class="violin-meta">
+        <div>
+          <dt>Composer</dt>
+          <dd>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8.2" r="2.6"/><path d="M6.4 18.4c.6-3 2.6-4.6 5.6-4.6s5 1.6 5.6 4.6"/></svg>
+            {{ piece.composer | default: "—" }}
+          </dd>
+        </div>
+        <div>
+          <dt>Key</dt>
+          <dd>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 18.4a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8z"/><path d="M11.4 16V5.2l8 1.2v8.8"/></svg>
+            {% if piece.key and piece.key != "" %}{{ piece.key }}{% else %}—{% endif %}
+          </dd>
+        </div>
+        <div>
+          <dt>Difficulty</dt>
+          <dd>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 17.4V13h3.2v4.4zM10.4 17.4V8.6H13.6v8.8zM15.8 17.4V6.2H19v11.2z"/></svg>
+            {% if piece.difficulty and piece.difficulty != "" %}{{ piece.difficulty }}{% else %}—{% endif %}
+          </dd>
+        </div>
+      </dl>
+    </article>
+    {% endfor %}
+  {% else %}
+  <article class="violin-piece-detail">
+    <figure class="violin-piece-photo">
+      <img
+        src="{{ site.data.violin.hero.image | relative_url }}"
+        alt="A violin still — repertoire notes have not been published yet"
+        width="1280"
+        height="1600">
+    </figure>
+    <div class="violin-piece-main">
+      <h1>A piece will land here</h1>
+      <p class="violin-status-pill" data-status="stub">
+        <span aria-hidden="true">✦</span>
+        Vault stub
+      </p>
+      <section class="violin-why" aria-labelledby="why-empty">
+        <h2 id="why-empty">Why I like it</h2>
+        <p class="violin-empty-copy">No piece notes yet. Public detail is baked from <code>30-Knowledge/Interests/Violin/Pieces</code> when a real note appears. Private recordings stay off this page.</p>
+      </section>
+    </div>
+    <dl class="violin-meta">
+      <div>
+        <dt>Composer</dt>
+        <dd>—</dd>
+      </div>
+      <div>
+        <dt>Key</dt>
+        <dd>—</dd>
+      </div>
+      <div>
+        <dt>Difficulty</dt>
+        <dd>—</dd>
+      </div>
+    </dl>
+  </article>
+  {% endif %}
+
+  <p class="violin-back">
+    <a href="{{ '/violin/' | relative_url }}">← Back to Violin</a>
+  </p>
+  <div class="violin-mountains" aria-hidden="true"></div>
+</div>

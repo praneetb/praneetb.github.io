@@ -4,7 +4,7 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 ## Public and private
 
-Logged-out visitors see the public home on `/` — a fluid story scroll: Half Dome hero, then full-width Travel, Bar, Cocktails, Fermentation, Patents, and Bucket list cards, and a visitor diary. Media, Notes, and Manya are not shown on the public home, even as locked tiles.
+Logged-out visitors see the public home on `/` — a fluid story scroll: Half Dome hero, then full-width Travel, Violin, Bar, Cocktails, Fermentation, Patents, and Bucket list cards, and a visitor diary. Media, Notes, and Manya are not shown on the public home, even as locked tiles.
 
 Public panel links — Travel, Bar, Cocktails, Fermentation, Patents, Bucket — stay in the header for everyone, signed out or signed in. Media, Notes, Manya, and Space are gated extras that appear only after login; they never replace the public panels.
 
@@ -16,11 +16,13 @@ These pages are public and read-only for guests (Sign in stays in the header):
 - [Fermentation](/fermentation/) — vault set from `_data/fermentation.yml` (kombucha, salgam, sourdough starter, sourdough bread); search and All / Drinks / Bread / Logs; short video when present
 - [Patents](/patents/) — plaque wall of issued patents and one abandoned application; Summit / Atlas / Cadence restyle the wall and metal
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)
+- [Violin](/violin/) — public foyer and piece detail from `_data/violin.yml`, baked from the daily sync path `30-Knowledge/Interests/Violin/` (`Violin MOC.md`, `Pieces`, `Practice-Log`, `Recordings`, `Teacher-Notes`). Pieces, logs, recordings, and teacher notes stay empty while that tree is stubs only. A home story card links here.
 
 Sign in (username + password) unlocks a site-wide session. After a successful login from `/`, the browser goes to `/space/`. The wordmark then points at `/space/`; the public home can still be opened directly. Signed-in chrome keeps those public panels and adds private navigation:
 
-- [Your space](/space/) — hub for the public rooms plus Media, Notes, and Manya
+- [Your space](/space/) — hub for the public rooms plus Media, Violin, Notes, and Manya
 - [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
+- [Violin practice](/violin/practice/) — gated practice room and recording detail; Media stays, Violin is a sibling tile
 - [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
 - [Manya](/manya/) — private family hub; [School](/manya/school/), [report cards](/manya/school/reports/) (age-cartoon cards; PDFs open in a page viewer from an encrypted pack keyed by Drive file ids in `_data/manya_reports.yml`), and [SAT / PSAT](/manya/school/sat-psat/) (titles and dates; same on-page viewer from `sat-psat.enc.json`; no scores listed)
 
@@ -64,6 +66,14 @@ NOTES_PASSWORD='…' node scripts/encrypt-notes.mjs /path/to/vault
 ```
 
 That writes `assets/notes.enc.json`. The publisher skips finance paths (`20-Personal/Finance` and any folder named `Finance` / `finance`), `Private/`, `_staging/`, `.obsidian/`, `.trash/`, `prompts/` (agent-prompt packs) and `*.prompt.md`, `*.secret.md`, `*.base`, workspace/cache junk, and binary/canvas files. Site policy: no finance content on this site, even behind login. The first ship uses a small demo corpus in that encrypted pack; a real vault sync can come later.
+
+Violin public/private room data is separate site YAML, not the encrypted notes pack:
+
+```bash
+node scripts/bake-violin.mjs /path/to/vault
+```
+
+That writes `_data/violin.yml` from `30-Knowledge/Interests/Violin/` (`Violin MOC.md` plus the four folders). Empty folders and stub notes bake to `[]`. Streak and weeks are derived only from Practice-Log dates. Do not invent repertoire or sessions. Do not change `assets/notes.enc.json` for this bake.
 
 ## Publishing Manya report cards
 
