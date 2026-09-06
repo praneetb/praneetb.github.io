@@ -17,6 +17,9 @@
  * Practice-Log dates.
  *
  * Does not write assets/notes.enc.json.
+ *
+ * Sibling bake from the same daily vault export:
+ *   node scripts/bake-patents.mjs /path/to/obsidian-vault
  */
 
 import { promises as fs } from "node:fs";

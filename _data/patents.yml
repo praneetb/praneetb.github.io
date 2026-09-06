@@ -1,14 +1,26 @@
-- title: Providing different quality of services (QoS) to different point-to-point sessions
-  url: https://patents.google.com/patent/US6901079B1
+# Resume patent list — baked from 10-Work/Reference/Patents.md
+# Formal titles only. Do not invent entries.
+
+- title: Providing different quality of services (QOS) to different point-to-point sessions
+  number: "US 6,901,079 B1"
+  url: https://patents.google.com/patent/US6901079B1/en
+
+- title: Providing different QOS to layer-3 datagrams when transported on tunnels
+  number: "US 7,068,645 B1"
+  url: https://patents.google.com/patent/US7068645B1/en
 
 - title: Network address translation in a gateway
-  url: https://patents.google.com/patent/US7107360B1
+  number: "US 7,107,360 B1"
+  url: https://patents.google.com/patent/US7107360B1/en
 
-- title: Providing different QoS to layer-3 datagrams when transported on tunnels
-  url: https://patents.google.com/patent/US7068645B1
+- title: Forwarding packets in a gateway performing network address translation (NAT)
+  number: "US 7,586,940 B1"
+  url: https://patents.google.com/patent/US7586940B1/en
 
-- title: Forwarding packets in a gateway performing network address translation
-  url: https://patents.google.com/patent/US7586940B1
+- title: Forwarding packets in a gateway performing network address translation (NAT)
+  number: "US 7,986,703 B2"
+  url: https://patents.google.com/patent/US7986703B2/en
 
-- title: Method and system for routing data
-  url: https://patents.google.com/patent/US20140204763A1
+- title: Method and System for Routing Data
+  number: US 2014/0204763 A1
+  url: https://patents.google.com/patent/US20140204763A1/en

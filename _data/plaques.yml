@@ -1,57 +1,123 @@
-# Private plaque gallery. Titles and assignees match the Patents page brief.
-# Google Patents URLs verified (US7068645 is B1; B2 404s).
+# Patents page — baked site data.
+# Daily sync path (source of truth):
+#   10-Work/Reference/Patents.md
+#
+# Bake (does not invent patents; does not touch notes.enc.json):
+#   node scripts/bake-patents.mjs /path/to/obsidian-vault
+#
+# Formal titles / numbers / dates / assignees / status come from the
+# vault note. Editorial problem / punch / stuck lines are keyed by
+# patent id in scripts/bake-patents.mjs.
+
 inventor: Praneet Bachheti
+vault:
+  note: 10-Work/Reference/Patents.md
 items:
-  - number: US 7,107,360
-    url: https://patents.google.com/patent/US7107360B1
-    title: Network address translation in a gateway
-    assignee: Cisco Technology, Inc.
+  - id: US6901079B1
+    number: "US 6,901,079 B1"
+    url: https://patents.google.com/patent/US6901079B1/en
+    title: Providing different quality of services (QOS) to different point-to-point sessions
+    assignee: "Cisco Technology, Inc."
+    assignee_short: Cisco
+    inventors: "Amit Phadnis, Pankaj Vyas"
     status: issued
-    date: 12 September 2006
-    year: 2006
-    finish: gold
-
-  - number: US 7,586,940
-    url: https://patents.google.com/patent/US7586940B1
-    title: Forwarding packets in a gateway performing network address translation
-    assignee: Cisco
-    status: issued
-    date: 8 September 2009
-    year: 2009
-    finish: steel
-
-  - number: US 7,986,703
-    url: https://patents.google.com/patent/US7986703B2
-    title: Forwarding packets in a gateway performing NAT (continuation)
-    assignee: Cisco
-    status: issued
-    date: 26 July 2011
-    year: 2011
-    finish: gold
-
-  - number: US 7,068,645
-    url: https://patents.google.com/patent/US7068645B1
-    title: Providing different levels of service to data flows on tunnels
-    assignee: Cisco
-    status: issued
-    date: 27 June 2006
-    year: 2006
-    finish: brass
-
-  - number: US 6,901,079
-    url: https://patents.google.com/patent/US6901079B1
-    title: Providing different levels of service to different point-to-point sessions
-    assignee: Cisco
-    status: issued
-    date: 31 May 2005
+    vault_status: Expired - Lifetime
+    continuation: false
+    date: 2005-05-31
     year: 2005
     finish: gold
+    problem: "Point-to-point sessions shared the pipe, and the loud ones ruined it for everyone."
+    punch: Per-session QoS so each PPP session gets what it actually needs.
+    roast: "Fairness is a policy, not a prayer."
+    stuck: Made broadband feel less like a shouting match and more like a schedule.
 
-  - number: US 2014/0204763
-    url: https://patents.google.com/patent/US20140204763A1
-    title: Method and system for routing data
+  - id: US7068645B1
+    number: "US 7,068,645 B1"
+    url: https://patents.google.com/patent/US7068645B1/en
+    title: Providing different QOS to layer-3 datagrams when transported on tunnels
+    assignee: "Cisco Technology, Inc."
+    assignee_short: Cisco
+    inventors: "Amit Phadnis, Pankaj Vyas"
+    status: issued
+    vault_status: Expired - Fee Related
+    continuation: false
+    date: 2006-06-27
+    year: 2006
+    finish: brass
+    problem: "Tunnels were pipes, but every pipe was treated like it deserved the same pressure."
+    punch: Different service levels for flows inside tunnels—finally.
+    roast: Not every packet is going to the same party.
+    stuck: "Let tunnels carry voice, video, and email without pretending they're equal."
+
+  - id: US7107360B1
+    number: "US 7,107,360 B1"
+    url: https://patents.google.com/patent/US7107360B1/en
+    title: Network address translation in a gateway
+    assignee: "Cisco Technology, Inc."
+    assignee_short: Cisco
+    inventors: "Amit S. Phadnis, Anuradha Karuppiah"
+    status: issued
+    vault_status: Expired - Fee Related
+    continuation: false
+    date: 2006-09-12
+    year: 2006
+    finish: gold
+    problem: "Every private network wanted out, but the Internet wasn't ready for that many addresses."
+    punch: NAT hides the crowd behind one public face.
+    roast: Your home router's overachieving cousin.
+    stuck: Saved IPv4 exhaustion and became the quiet backbone of every home and office gateway.
+
+  - id: US7586940B1
+    number: "US 7,586,940 B1"
+    url: https://patents.google.com/patent/US7586940B1/en
+    title: Forwarding packets in a gateway performing network address translation (NAT)
+    assignee: "Cisco Technology, Inc."
+    assignee_short: Cisco
+    inventors: "Amit S. Phadnis, Anuradha Karuppiah"
+    status: issued
+    vault_status: Expired - Fee Related
+    continuation: false
+    date: 2009-09-08
+    year: 2009
+    finish: steel
+    problem: NAT works great—until you have to forward packets back through the gateway.
+    punch: Stateful forwarding rules so replies actually find their way home.
+    roast: Because "it worked in my lab" isn't a forwarding strategy.
+    stuck: "Made NAT stateful and reliable at scale, not just a one-way trick."
+
+  - id: US7986703B2
+    number: "US 7,986,703 B2"
+    url: https://patents.google.com/patent/US7986703B2/en
+    title: Forwarding packets in a gateway performing network address translation (NAT)
+    assignee: "Cisco Technology, Inc."
+    assignee_short: Cisco
+    inventors: "Amit S. Phadnis, Anuradha Karuppiah"
+    status: issued
+    vault_status: "Expired - Lifetime (continuation of US 7,586,940)"
+    continuation: true
+    date: 2011-07-26
+    year: 2011
+    finish: gold
+    problem: "One trick needed another trick, and then another, and the code started to show it."
+    punch: Refined the NAT continuation so the tricks could keep stacking cleanly.
+    roast: "The software equivalent of \"I'll fix it in the next commit, I swear.\""
+    stuck: Kept the house of NAT cards standing a little longer.
+
+  - id: US20140204763A1
+    number: US 2014/0204763 A1
+    url: https://patents.google.com/patent/US20140204763A1/en
+    title: Method and System for Routing Data
     assignee: Aruba Networks / HPE
-    status: application
-    date: 24 July 2014
+    assignee_short: Aruba/HPE
+    inventors: "Sandip Kumar Devnath, Rajneesh Bajpai"
+    status: abandoned
+    vault_status: Abandoned
+    continuation: false
+    date: 2014-07-24
+    filed: 2013-01-24
     year: 2014
     finish: application
+    problem: "Data knew where it wanted to go, but the network kept guessing the best route."
+    punch: Smarter routing decisions before the packets leave the building.
+    roast: Routing by vibes is not a product strategy.
+    stuck: "Application 2014, not issued — an idea that ran into the real world."
