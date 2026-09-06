@@ -4,13 +4,14 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 ## Public and private
 
-Logged-out visitors see the public home on `/` — a fluid story scroll: Half Dome hero, then full-width Travel, Bar, Cocktails, Patents, and Bucket list cards, and a visitor diary. Media, Notes, and Manya are not shown on the public home, even as locked tiles.
+Logged-out visitors see the public home on `/` — a fluid story scroll: Half Dome hero, then full-width Travel, Bar, Cocktails, Fermentation, Patents, and Bucket list cards, and a visitor diary. Media, Notes, and Manya are not shown on the public home, even as locked tiles.
 
 These pages are public and read-only for guests (Sign in stays in the header; private nav stays hidden):
 
 - [Travel](/travel/) — cockpit globe and visited countries from `_data/travel.yml` (baked from vault `20-Personal/Travel/Countries Visited.md`); Seven Wonders live on the bucket list
 - [Bar](/bar/) — four-tab bar (Whiskey / Wine / Beer / Tequila) with Premium / Core / Everyday shelves from `_data/whiskey.yml`, `_data/wine.yml`, `_data/beer.yml`, and `_data/tequila.yml`; search, hover lift, pour, and tasting notes. Star ratings stay signed-in only. `/whiskey/` redirects to `/bar/?tab=whiskey`
 - [Cocktails](/cocktails/) — vault recipes from `_data/cocktails.yml` (`30-Knowledge/Recipes/`); search and Stirred / Shaken / Built filters; short-pour video when present; visitor notes stay in localStorage
+- [Fermentation](/fermentation/) — vault set from `_data/fermentation.yml` (kombucha, salgam, sourdough starter, sourdough bread); search and All / Drinks / Bread / Logs; short video when present
 - [Patents](/patents/) — plaque wall of issued patents and one abandoned application; Summit / Atlas / Cadence restyle the wall and metal
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)
 

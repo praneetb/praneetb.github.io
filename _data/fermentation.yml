@@ -1,0 +1,95 @@
+# From the vault: 30-Knowledge/Recipes/
+# Only these four. Do not invent other ferments or recipe steps.
+# video / poster are optional. Empty video shows “Video coming soon”.
+# Drop files under assets/fermentation/ and set the paths here.
+
+filters:
+  - id: all
+    name: All
+  - id: drinks
+    name: Drinks
+  - id: bread
+    name: Bread
+  - id: logs
+    name: Logs
+
+items:
+  - id: kombucha
+    name: Kombucha
+    kind: drinks
+    subtitle: weekly brew · SCOBY
+    meta: Brewed at home
+    source: 30-Knowledge/Recipes/Kombucha & Salgam.md
+    video:
+    poster:
+    video_tag:
+    ingredients:
+      - amount: 1 gallon
+        name: Water
+        icon: water
+      - amount: 18 g
+        name: Black tea
+        icon: leaf
+      - amount: 1 cup
+        name: Sugar
+        icon: cube
+      - amount: 2 cups
+        name: SCOBY
+        icon: scoby
+    log:
+      date: 2026-08-14
+      text: bottled, ginger flavor; salgam finished ~18 days.
+    note: Introduced by Aniket Gawade · Source Obsidian Recipes
+
+  - id: salgam
+    name: Salgam
+    kind: drinks
+    subtitle: Turkish turnip/carrot ferment
+    meta: Turkish turnip/carrot drink
+    source: 30-Knowledge/Recipes/Kombucha & Salgam.md
+    video:
+    poster:
+    video_tag:
+    lede: Turkish turnip/carrot drink. Same vault note as kombucha.
+    log:
+      date: 2026-08-14
+      text: bottled, ginger flavor; salgam finished ~18 days.
+    note: Introduced by Aniket Gawade · Source Obsidian Recipes
+
+  - id: sourdough-starter
+    name: Sourdough Starter
+    kind: bread
+    subtitle: feed schedule
+    meta: Day 1–7 start · weekly feeding
+    source: 30-Knowledge/Recipes/
+    video:
+    poster:
+    video_tag:
+    lede: Day 1–7 start and weekly feeding, from the vault note.
+    schedule: []
+    note: Source Obsidian Recipes
+
+  - id: sourdough-bread
+    name: Sourdough Bread
+    kind: bread
+    subtitle: Dutch oven loaf
+    meta: Dutch oven loaf
+    source: 30-Knowledge/Recipes/
+    video:
+    poster:
+    video_tag:
+    ingredients:
+      - amount: 600 g
+        name: Bread flour
+      - amount: 150 g
+        name: Wheat
+      - amount: 15 g
+        name: Salt
+      - amount: 150 g
+        name: Starter
+      - amount: 500 g
+        name: Water
+    tools: []
+    # Method steps stay empty until the vault note is pasted — do not invent a bake.
+    steps: []
+    note: Source Obsidian Recipes
