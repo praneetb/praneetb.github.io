@@ -4,7 +4,7 @@ title: Travel
 nav: travel
 private: true
 hide_footer: true
-description: A private 3D globe and visited places. The committed country list stays empty.
+description: A private 3D globe and visited places from the vault list.
 extra_css:
   - /assets/css/travel.css
 extra_js:
@@ -58,7 +58,6 @@ extra_js:
           <p class="travel-menu-label">Sort</p>
           <button type="button" class="travel-menu-item is-active" data-sort="name">Name A–Z</button>
           <button type="button" class="travel-menu-item" data-sort="recent">Newest first</button>
-          <button type="button" id="travel-backup-open" class="travel-menu-item travel-menu-admin" hidden>Backup this browser…</button>
         </div>
       </div>
     </header>
@@ -76,82 +75,5 @@ extra_js:
 
     <div id="travel-country-list" class="travel-country-list"></div>
     <p id="travel-country-empty" class="travel-empty">Nothing recorded yet.</p>
-
-    <form id="travel-add-form" class="travel-add-bar" hidden>
-      <label for="travel-add-select">Add country</label>
-      <div class="travel-add-row">
-        <select id="travel-add-select" autocomplete="off">
-          <option value="">Select a country...</option>
-        </select>
-        <button type="submit" class="travel-btn">Add</button>
-      </div>
-    </form>
   </aside>
 </div>
-
-<dialog id="travel-editor" class="travel-dialog">
-  <form id="travel-editor-form">
-    <h3 id="travel-editor-title">Edit country</h3>
-    <input id="travel-edit-id" type="hidden">
-    <input id="travel-name" type="hidden">
-    <input id="travel-code" type="hidden">
-    <p class="travel-edit-name" id="travel-edit-name"></p>
-    <div class="travel-edit-date">
-      <label>
-        Month
-        <select id="travel-month" name="month">
-          <option value="">—</option>
-          <option value="1">Jan</option>
-          <option value="2">Feb</option>
-          <option value="3">Mar</option>
-          <option value="4">Apr</option>
-          <option value="5">May</option>
-          <option value="6">Jun</option>
-          <option value="7">Jul</option>
-          <option value="8">Aug</option>
-          <option value="9">Sep</option>
-          <option value="10">Oct</option>
-          <option value="11">Nov</option>
-          <option value="12">Dec</option>
-        </select>
-      </label>
-      <label>
-        Year
-        <input id="travel-year" name="year" type="text" inputmode="numeric" maxlength="4" autocomplete="off">
-      </label>
-    </div>
-    <label>
-      Notes
-      <input id="travel-notes" name="notes" type="text" autocomplete="off">
-    </label>
-    <p id="travel-editor-status" class="travel-status" hidden></p>
-    <div class="travel-form-actions">
-      <button id="travel-save" type="submit" class="travel-btn">Save</button>
-      <button id="travel-cancel-edit" type="button" class="travel-btn travel-btn-quiet">Cancel</button>
-    </div>
-  </form>
-</dialog>
-
-<dialog id="travel-backup" class="travel-dialog">
-  <form method="dialog" class="travel-backup-form">
-    <h3>Backup this browser list</h3>
-    <p class="empty-note">Export or import JSON for this browser. Nothing here is published to the site.</p>
-    <label class="travel-export-label" for="travel-export">Current JSON</label>
-    <textarea id="travel-export" class="travel-json" readonly rows="7" spellcheck="false"></textarea>
-    <div class="travel-form-actions">
-      <button id="travel-download" type="button" class="travel-btn travel-btn-quiet">Download JSON</button>
-    </div>
-    <label class="travel-export-label" for="travel-import">Import JSON</label>
-    <textarea id="travel-import" class="travel-json" rows="5" spellcheck="false"></textarea>
-    <div class="travel-form-actions">
-      <button id="travel-import-btn" type="button" class="travel-btn travel-btn-quiet">Import pasted JSON</button>
-      <label class="travel-file-label">
-        Import file
-        <input id="travel-import-file" type="file" accept="application/json,.json">
-      </label>
-    </div>
-    <div class="travel-form-actions">
-      <button type="submit" class="travel-btn travel-btn-quiet">Close</button>
-    </div>
-  </form>
-</dialog>

@@ -9,7 +9,7 @@ Logged-out visitors see a quiet calling card on `/` — name, role, a short bio,
 Sign in (username + password) unlocks a site-wide session. After a successful login, the header gains private navigation and `/space/` becomes the private landing:
 
 - [Your space](/space/)
-- [Travel](/travel/) — cockpit globe and visited countries in this browser; Seven Wonders live on the bucket list
+- [Travel](/travel/) — cockpit globe and visited countries from `_data/travel.yml` (baked from vault `20-Personal/Travel/Countries Visited.md`); Seven Wonders live on the bucket list
 - [Bar](/bar/) — private four-tab bar (Whiskey / Wine / Beer / Tequila) with Premium / Core / Everyday shelves from `_data/whiskey.yml`, `_data/wine.yml`, `_data/beer.yml`, and `_data/tequila.yml`; search the active tab, hover lift, pour into the matching glass, tasting notes, and star ratings in this browser. `/whiskey/` redirects to `/bar/?tab=whiskey`
 - [Patents](/patents/) — private plaque wall of issued patents and one abandoned application; Summit / Atlas / Cadence restyle the wall and metal
 - [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
@@ -17,7 +17,7 @@ Sign in (username + password) unlocks a site-wide session. After a successful lo
 - [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
 - [Manya](/manya/) — private family hub; [School](/manya/school/), [report cards](/manya/school/reports/) (age-cartoon cards; PDFs open in a page viewer from an encrypted pack keyed by Drive file ids in `_data/manya_reports.yml`), and [SAT / PSAT](/manya/school/sat-psat/) (titles and dates; same on-page viewer from `sat-psat.enc.json`; no scores listed)
 
-Direct URLs to those private pages show a sign-in prompt when locked. Public visitors never see another browser’s local travel data.
+Direct URLs to those private pages show a sign-in prompt when locked. The visited-country list is site data, not a per-browser stash.
 
 Resume stays public.
 
@@ -25,7 +25,7 @@ Resume stays public.
 
 The gate is client-side for static GitHub Pages. `assets/js/site-admin.js` verifies a salted PBKDF2-SHA256 username digest and decrypts `assets/notes.enc.json` with PBKDF2-SHA256 / AES-GCM. The same password also decrypts `assets/manya/reports.enc.json` and `assets/manya/sat-psat.enc.json` (no `user` verifier on those envelopes). Notes stay in `sessionStorage` / `localStorage`; report PDFs are stored only in IndexedDB (keyed by Drive file id) and are cleared on sign-out. The repo stores ciphertext — not a username, password, plaintext notes, or raw PDFs. One successful login unlocks admin, private nav, Notes, and the report viewers.
 
-Travel ships an empty visited-country list; visit flags stay in the browser. Bucket-list items carry a `category` (`wonders` or `heights`) and a `completed` flag in `_data/bucket.yml`. The page splits those into Collected / Still ahead bands and renders Done/Open seals as non-interactive marks — do not toggle them on the site. Do not commit a private travel list or a plaintext vault.
+Travel reads the visited set from `_data/travel.yml` — the same 18 names as the vault note, with ISO codes. Do not invent countries or restore an on-site add-country control. Bucket-list items carry a `category` (`wonders` or `heights`) and a `completed` flag in `_data/bucket.yml`. The page splits those into Collected / Still ahead bands and renders Done/Open seals as non-interactive marks — do not toggle them on the site. Do not commit a plaintext vault.
 
 ## Publishing notes
 
