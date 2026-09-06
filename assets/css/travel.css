@@ -674,35 +674,10 @@ body.theme-travel .page-gate {
 }
 
 .travel-empty[hidden],
-.travel-status[hidden],
-.travel-add-bar[hidden],
-.travel-menu-admin[hidden] {
+.travel-status[hidden] {
   display: none;
 }
 
-.travel-add-bar {
-  flex: 0 0 auto;
-  margin-top: 0.7rem;
-  padding-top: 0.7rem;
-  border-top: 1px solid var(--rule);
-}
-
-.travel-add-bar > label {
-  display: block;
-  margin-bottom: 0.35rem;
-  color: var(--ink);
-  font-family: var(--font-ui);
-  font-size: 0.78rem;
-  font-weight: 650;
-}
-
-.travel-add-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.45rem;
-}
-
-.travel-add-row select,
 .travel-dialog select,
 .travel-dialog input[type="text"] {
   width: 100%;

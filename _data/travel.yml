@@ -1,6 +1,59 @@
-# Public travel data. Keep this list empty.
-# Do not invent entries. Do not commit a private visited-country list here.
-# Public /travel/ reads this file only, so the globe stays empty until a real public list exists.
-# Visited countries live in the signed-in browser's localStorage.
+# Visited countries for /travel/.
+# Source of truth: Drive obsidian-vault/20-Personal/Travel/Countries Visited.md
+# Baked from the vault ## Visited bullets. Do not invent countries.
 
-countries: []
+countries:
+  - id: in
+    name: India
+    code: IN
+  - id: us
+    name: United States of America
+    code: US
+  - id: mx
+    name: Mexico
+    code: MX
+  - id: ca
+    name: Canada
+    code: CA
+  - id: se
+    name: Sweden
+    code: SE
+  - id: dk
+    name: Denmark
+    code: DK
+  - id: it
+    name: Italy
+    code: IT
+  - id: nl
+    name: Netherlands
+    code: NL
+  - id: ch
+    name: Switzerland
+    code: CH
+  - id: va
+    name: Vatican City
+    code: VA
+  - id: lk
+    name: Sri Lanka
+    code: LK
+  - id: do
+    name: Dominican Republic
+    code: DO
+  - id: fr
+    name: France
+    code: FR
+  - id: ae
+    name: United Arab Emirates
+    code: AE
+  - id: th
+    name: Thailand
+    code: TH
+  - id: cr
+    name: Costa Rica
+    code: CR
+  - id: es
+    name: Spain
+    code: ES
+  - id: id
+    name: Indonesia
+    code: ID

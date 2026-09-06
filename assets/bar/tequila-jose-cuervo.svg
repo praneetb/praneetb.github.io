@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 240" width="80" height="240">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".2"/>
+      <stop offset=".4" stop-color="#c9a227"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".28"/>
+    </linearGradient>
+  </defs>
+  <path d="M31 14h18c2 0 3 2 3 4v20c0 4 3 8 6 13 4 7 6 16 6 24v141c0 7-4 10-12 10H28c-8 0-12-3-12-10V75c0-8 2-17 6-24 3-5 6-9 6-13V18c0-2 1-4 3-4z" fill="url(#g)"/>
+  <rect x="30" y="8" width="20" height="12" rx="2" fill="#1a120c"/>
+  <rect x="20" y="112" width="40" height="56" rx="2" fill="#f4ead8"/>
+  <text x="40" y="134" text-anchor="middle" font-family="Georgia,serif" font-size="5.2" fill="#5a3a10">Jose Cuervo</text>
+</svg>

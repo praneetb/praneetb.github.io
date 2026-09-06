@@ -4,7 +4,7 @@
   // Display names for ISO codes. This is a catalog, not a visited list.
   global.ISO_COUNTRY_NAMES = {
     AD: "Andorra",
-    AE: "UAE",
+    AE: "United Arab Emirates",
     AF: "Afghanistan",
     AG: "Antigua and Barbuda",
     AL: "Albania",
@@ -187,7 +187,7 @@
     TZ: "Tanzania",
     UA: "Ukraine",
     UG: "Uganda",
-    US: "USA",
+    US: "United States of America",
     UY: "Uruguay",
     UZ: "Uzbekistan",
     VA: "Vatican City",
