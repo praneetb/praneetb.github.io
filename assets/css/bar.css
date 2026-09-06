@@ -69,6 +69,7 @@ body:has(.page-bar) .welcome-strip {
 
 .bar-tabs {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 0.45rem;
 }
@@ -414,9 +415,22 @@ body:has(.page-bar) .welcome-strip {
   height: 7.8rem;
 }
 
-.bar-glass-stage.is-docked {
+.bar-glass-stage[data-glass="caballito"] {
+  width: 3.2rem;
+  height: 6.4rem;
+}
+
+.bar-glass-stage.is-docked,
+.bar-glass-stage.is-home {
   opacity: 1;
   visibility: visible;
+}
+
+.bar-glass-stage.is-home {
+  right: 1.6rem;
+  bottom: 1.8rem;
+  left: auto;
+  top: auto;
 }
 
 .bar-glass-stage::before {
@@ -477,6 +491,11 @@ body:has(.page-bar) .welcome-strip {
   height: 6.1rem;
 }
 
+.bar-glass-caballito {
+  width: 1.72rem;
+  height: 4.55rem;
+}
+
 .bar-glass::before {
   content: "";
   position: absolute;
@@ -521,6 +540,12 @@ body:has(.page-bar) .welcome-strip {
   clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
 }
 
+.bar-glass-caballito::before {
+  border-radius: 0.08rem 0.08rem 0.55rem 0.55rem;
+  border-bottom-width: 7px;
+  clip-path: polygon(22% 0, 78% 0, 100% 100%, 0 100%);
+}
+
 .bar-glass-fill {
   position: absolute;
   left: 16%;
@@ -538,6 +563,10 @@ body:has(.page-bar) .welcome-strip {
 
 .bar-glass-stage[data-pour="gold"] .bar-glass-fill {
   background: linear-gradient(180deg, #f0c35a 0%, #c48a20 100%);
+}
+
+.bar-glass-stage[data-pour="agave"] .bar-glass-fill {
+  background: linear-gradient(180deg, #f6edc4 0%, #d4b24a 55%, #c49a38 100%);
 }
 
 .bar-glass-stage.is-pouring .bar-glass.is-on .bar-glass-fill,
@@ -566,6 +595,11 @@ body:has(.page-bar) .welcome-strip {
 
 #bar-room[data-pour="gold"] .bar-stage-stream {
   background: linear-gradient(180deg, #f4d078 0%, #c48a20 100%);
+}
+
+#bar-room[data-pour="agave"] .bar-stage-stream {
+  background: linear-gradient(180deg, #f7efc8 0%, #d2ae46 100%);
+  box-shadow: 0 0 8px rgba(212, 178, 74, 0.5);
 }
 
 .bar-stage-stream.is-on {
@@ -615,6 +649,10 @@ body:has(.page-bar) .welcome-strip {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   opacity: 0;
+}
+
+.bar-glass-stage.is-home .bar-glass-caption {
+  opacity: 1;
 }
 
 .bar-empty {

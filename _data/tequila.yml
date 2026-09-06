@@ -1,0 +1,4 @@
+# Tequila catalog for /bar/?tab=tequila.
+# Empty on purpose — do not invent bottles.
+
+bottles: []

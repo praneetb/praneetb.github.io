@@ -1,255 +1,67 @@
 # Wine catalog for /bar/?tab=wine.
-# Source of truth: Drive obsidian-vault/30-Knowledge/Interests/Wine/{Premium,Core,Everyday}/
-# Images are labeled SVG silhouettes in assets/bar/.
-# Tasting notes are short public paraphrases from typical profiles — vault stubs still say (stub — edit).
+# Four bottles from Praneet’s table / shop photos — do not invent a cellar.
 
 bottles:
-  - id: krug-grande-cuvee
-    name: Krug Grande Cuvée
-    brand: Krug
+  - id: tardieu-laurent-2001-cotes-du-rhone-vieilles-vignes
+    name: Tardieu-Laurent 2001 Côtes-du-Rhône Vieilles Vignes
+    brand: Tardieu-Laurent
+    producer: Tardieu-Laurent
     shelf: premium
-    region: Champagne
-    type: Champagne
-    abv: 12
-    tags: [champagne, toast, citrus, mineral]
-    nose: Brioche, lemon zest, and toasted hazelnut.
-    palate: Fine mousse, orchard fruit, and chalk.
-    finish: Long, saline, and layered.
-    image: /assets/bar/wine-krug-grande-cuvee.svg
-    color: "#c9b37a"
-  - id: caymus-special-selection
-    name: Caymus Special Selection
-    brand: Caymus
-    shelf: premium
-    region: Napa Valley
-    type: Cabernet Sauvignon
-    abv: 14.5
-    tags: [napa, cabernet, oak, cocoa]
-    nose: Ripe blackberry, cocoa, and vanilla oak.
-    palate: Plush fruit, soft tannin, and warm spice.
-    finish: Long, polished, and dark.
-    image: /assets/bar/wine-caymus-special-selection.svg
-    color: "#4a1024"
-  - id: dom-perignon
-    name: Dom Pérignon
-    brand: Dom Pérignon
-    shelf: premium
-    region: Champagne
-    type: Champagne
-    abv: 12.5
-    tags: [champagne, toast, citrus, prestige]
-    nose: Toast, citrus oil, and white flowers.
-    palate: Precise, creamy mid, green apple, and chalk.
-    finish: Long, clean, and mineral.
-    image: /assets/bar/wine-dom-perignon.svg
-    color: "#d4c6a0"
-  - id: penfolds-grange
-    name: Penfolds Grange
-    brand: Penfolds
-    shelf: premium
-    region: South Australia
-    type: Shiraz
-    abv: 14.5
-    tags: [shiraz, australia, spice, dark-fruit]
-    nose: Dark berry, licorice, and polished oak.
-    palate: Dense fruit, pepper, and chocolate oak.
-    finish: Long, powerful, and spicy.
-    image: /assets/bar/wine-penfolds-grange.svg
-    color: "#5a1220"
-  - id: chateau-margaux
-    name: Château Margaux
-    brand: Château Margaux
-    shelf: premium
-    region: Bordeaux
-    type: Bordeaux blend
-    abv: 13.5
-    tags: [bordeaux, first-growth, cassis, cedar]
-    nose: Blackcurrant, cedar, and violet.
-    palate: Silk and structure — cassis, graphite, and oak.
-    finish: Very long, noble, and precise.
-    image: /assets/bar/wine-chateau-margaux.svg
-    color: "#6b1630"
-  - id: opus-one
-    name: Opus One
-    brand: Opus One
-    shelf: premium
-    region: Napa Valley
-    type: Bordeaux blend
-    abv: 14
-    tags: [napa, bordeaux-blend, cassis, oak]
-    nose: Cassis, cedar, and a floral lift.
-    palate: Layered dark fruit, cocoa, and fine tannin.
-    finish: Long and polished.
-    image: /assets/bar/wine-opus-one.svg
-    color: "#3a1018"
+    region: Côtes-du-Rhône / Rhône
+    type: Red · Vieilles Vignes
+    vintage: 2001
+    tags: [cotes-du-rhone, rhone, red, vieilles-vignes, 2001]
+    nose: Ripe red berry, garrigue, and a hint of leather. (stub)
+    palate: Dark cherry, cracked pepper, and dried herb. (stub)
+    finish: Warm, savory, and lingering. (stub)
+    image: /assets/bar/tardieu-laurent-2001-cotes-du-rhone-vieilles-vignes.jpg
+    color: "#4a1824"
+    image_note: Cropped from Praneet’s table photo of this bottle.
 
-  - id: caymus-cabernet
-    name: Caymus Cabernet
-    brand: Caymus
-    shelf: core
-    region: Napa Valley
+  - id: evidence-wines-2016-mt-veeder-cabernet
+    name: Evidence Wines of the matter 2016 Mt. Veeder Cabernet Sauvignon
+    brand: Evidence Wines
+    producer: Evidence Wines
+    shelf: premium
+    region: Mt. Veeder / Napa Valley
     type: Cabernet Sauvignon
-    abv: 14.5
-    tags: [napa, cabernet, berry, oak]
-    nose: Ripe berry, vanilla, and soft oak.
-    palate: Round, approachable, and fruit-forward.
-    finish: Medium-long and friendly.
-    image: /assets/bar/wine-caymus-cabernet.svg
-    color: "#5a1828"
-  - id: stags-leap-artemis
-    name: Stags Leap Artemis
-    brand: Stag's Leap
-    shelf: core
-    region: Napa Valley
-    type: Cabernet Sauvignon
-    abv: 14.5
-    tags: [napa, cabernet, cherry, herb]
-    nose: Black cherry, dried herb, and oak spice.
-    palate: Structured fruit with a savory edge.
-    finish: Firm and lingering.
-    image: /assets/bar/wine-stags-leap-artemis.svg
-    color: "#4e1828"
-  - id: veuve-clicquot-yellow-label
-    name: Veuve Clicquot Yellow Label
-    brand: Veuve Clicquot
-    shelf: core
-    region: Champagne
-    type: Champagne
-    abv: 12
-    tags: [champagne, apple, toast, citrus]
-    nose: Apple, brioche, and citrus peel.
-    palate: Crisp mousse and a soft toast note.
-    finish: Clean and festive.
-    image: /assets/bar/wine-veuve-clicquot-yellow-label.svg
-    color: "#e6b422"
-  - id: louis-jadot-beaujolais
-    name: Louis Jadot Beaujolais
-    brand: Louis Jadot
-    shelf: core
-    region: Beaujolais
-    type: Gamay
-    abv: 12.5
-    tags: [beaujolais, gamay, cherry, light]
-    nose: Fresh cherry and a hint of banana.
-    palate: Light, juicy, and chillable.
-    finish: Short and bright.
-    image: /assets/bar/wine-louis-jadot-beaujolais.svg
-    color: "#8a2a3a"
-  - id: meiomi-pinot-noir
-    name: Meiomi Pinot Noir
-    brand: Meiomi
-    shelf: core
-    region: California
-    type: Pinot Noir
-    abv: 13.5
-    tags: [pinot-noir, berry, soft, california]
-    nose: Dark berry, cola, and a soft oak.
-    palate: Round and easy, with a silky mid.
-    finish: Medium and friendly.
-    image: /assets/bar/wine-meiomi-pinot-noir.svg
-    color: "#7a2048"
-  - id: duckhorn-merlot
-    name: Duckhorn Merlot
+    vintage: 2016
+    tags: [napa, mt-veeder, cabernet, bruadair, 2016]
+    nose: Dark berry, cedar, and mountain herb. (stub)
+    palate: Black currant, cocoa, and firm tannin. (stub)
+    finish: Long and structured. (stub)
+    image: /assets/bar/evidence-wines-2016-mt-veeder-cabernet.jpg
+    color: "#1a1410"
+    image_note: Cropped from Praneet’s table photo. Bruadair Vineyard per public listings.
+
+  - id: duckhorn-cabernet-napa-2018
+    name: Duckhorn Cabernet Napa 2018
     brand: Duckhorn
+    producer: Duckhorn
     shelf: core
     region: Napa Valley
-    type: Merlot
-    abv: 14
-    tags: [merlot, napa, plum, cocoa]
-    nose: Plum, cocoa, and soft herb.
-    palate: Round tannin and dark fruit.
-    finish: Medium and polished.
-    image: /assets/bar/wine-duckhorn-merlot.svg
-    color: "#6a2430"
-  - id: cloudy-bay-sauvignon-blanc
-    name: Cloudy Bay Sauvignon Blanc
-    brand: Cloudy Bay
-    shelf: core
-    region: Marlborough NZ
-    type: Sauvignon Blanc
-    abv: 13
-    tags: [sauvignon-blanc, citrus, passionfruit, mineral]
-    nose: Passionfruit, grapefruit, and cut grass.
-    palate: Crisp acid and tropical zip.
-    finish: Bright and clean.
-    image: /assets/bar/wine-cloudy-bay-sauvignon-blanc.svg
-    color: "#e6d9a8"
-
-  - id: la-crema-sonoma-coast-pinot
-    name: La Crema Sonoma Coast Pinot
-    brand: La Crema
-    shelf: everyday
-    region: Sonoma Coast
-    type: Pinot Noir
-    abv: 13.5
-    tags: [pinot-noir, cherry, soft, sonoma]
-    nose: Red cherry and a light spice.
-    palate: Soft, food-friendly, weeknight-ready.
-    finish: Short and clean.
-    image: /assets/bar/wine-la-crema-sonoma-coast-pinot.svg
-    color: "#7b1e2e"
-  - id: kim-crawford-sauvignon-blanc
-    name: Kim Crawford Sauvignon Blanc
-    brand: Kim Crawford
-    shelf: everyday
-    region: Marlborough NZ
-    type: Sauvignon Blanc
-    abv: 12.5
-    tags: [sauvignon-blanc, citrus, tropical, easy]
-    nose: Gooseberry, lime, and passionfruit.
-    palate: Zesty and unfussy.
-    finish: Crisp and short.
-    image: /assets/bar/wine-kim-crawford-sauvignon-blanc.svg
-    color: "#efe6c4"
-  - id: yellow-tail
-    name: Yellow Tail
-    brand: Yellow Tail
-    shelf: everyday
-    region: Australia
-    type: Red blend
-    abv: 13
-    tags: [australia, berry, soft, entry]
-    nose: Soft berry and a hint of vanilla.
-    palate: Round, low-tannin, easy.
-    finish: Short and clean.
-    image: /assets/bar/wine-yellow-tail.svg
-    color: "#c9a227"
-  - id: josh-cellars-cabernet
-    name: Josh Cellars Cabernet
-    brand: Josh Cellars
-    shelf: everyday
-    region: California
     type: Cabernet Sauvignon
-    abv: 13.5
-    tags: [cabernet, california, berry, soft]
-    nose: Blackberry and a little oak.
-    palate: Soft tannin and ripe fruit.
-    finish: Medium and friendly.
-    image: /assets/bar/wine-josh-cellars-cabernet.svg
-    color: "#5a2028"
-  - id: barefoot
-    name: Barefoot
-    brand: Barefoot
+    vintage: 2018
+    tags: [napa, cabernet, duckhorn, 2018]
+    nose: Blackberry, plum, roasted nut, and chocolate. (stub)
+    palate: Ripe black fruit, toffee, and toasted oak. (stub)
+    finish: Lush and lingering. (stub)
+    image: /assets/bar/duckhorn-cabernet-napa-2018.jpg
+    color: "#5a1828"
+    image_note: Cropped from Praneet’s product-page photo of this bottle.
+
+  - id: smith-hook-reserve-2019-paso-robles-cabernet
+    name: Smith & Hook Reserve 2019 Paso Robles Cabernet Sauvignon
+    brand: Smith & Hook
+    producer: Smith & Hook
     shelf: everyday
-    region: California
-    type: White blend
-    abv: 12.5
-    tags: [california, apple, citrus, entry]
-    nose: Apple and lemon.
-    palate: Crisp and unfussy.
-    finish: Clean.
-    image: /assets/bar/wine-barefoot.svg
-    color: "#f3ecc0"
-  - id: apothic-red
-    name: Apothic Red
-    brand: Apothic
-    shelf: everyday
-    region: California
-    type: Red blend
-    abv: 13.5
-    tags: [red-blend, berry, sweet, california]
-    nose: Dark berry and a soft sweetness.
-    palate: Smooth, slightly sweet, weeknight-ready.
-    finish: Short and round.
-    image: /assets/bar/wine-apothic-red.svg
-    color: "#6e1c2c"
+    region: Paso Robles
+    type: Cabernet Sauvignon
+    vintage: 2019
+    tags: [paso-robles, cabernet, reserve, 2019]
+    nose: Ripe blackberry and a little oak. (stub)
+    palate: Soft cabernet fruit, Paso warmth. (stub)
+    finish: Medium and friendly. (stub)
+    image: /assets/bar/smith-hook-reserve-2019-paso-robles-cabernet.jpg
+    color: "#1a1a14"
+    image_note: Cropped from Praneet’s shop photo of this bottle.

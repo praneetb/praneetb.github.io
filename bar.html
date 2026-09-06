@@ -7,7 +7,7 @@ private: true
 sitemap: false
 robots: noindex, nofollow
 hide_footer: true
-description: Private bar — whiskey, wine, and beer on three shelves.
+description: Private bar — whiskey, wine, beer, and tequila on three shelves.
 extra_css:
   - /assets/css/bar.css
 extra_js:
@@ -21,7 +21,8 @@ extra_js:
   "catalogs": {
     "whiskey": {{ site.data.whiskey.bottles | jsonify }},
     "wine": {{ site.data.wine.bottles | jsonify }},
-    "beer": {{ site.data.beer.bottles | jsonify }}
+    "beer": {{ site.data.beer.bottles | jsonify }},
+    "tequila": {{ site.data.tequila.bottles | jsonify }}
   }
 }
 </script>
@@ -61,13 +62,18 @@ extra_js:
     <span class="bar-stage-stream" id="bar-stage-stream" aria-hidden="true"></span>
     <div class="bar-panes" id="bar-panes">
       {% for tab in site.data.bar.tabs %}
-        {% if tab.id == "whiskey" %}
-          {% assign bottles = site.data.whiskey.bottles %}
-        {% elsif tab.id == "wine" %}
-          {% assign bottles = site.data.wine.bottles %}
-        {% else %}
-          {% assign bottles = site.data.beer.bottles %}
-        {% endif %}
+        {% case tab.id %}
+          {% when "whiskey" %}
+            {% assign bottles = site.data.whiskey.bottles %}
+          {% when "wine" %}
+            {% assign bottles = site.data.wine.bottles %}
+          {% when "beer" %}
+            {% assign bottles = site.data.beer.bottles %}
+          {% when "tequila" %}
+            {% assign bottles = site.data.tequila.bottles %}
+          {% else %}
+            {% assign bottles = nil %}
+        {% endcase %}
         <div class="bar-pane{% if tab.id == "whiskey" %} is-active{% endif %}" data-tab="{{ tab.id }}" {% unless tab.id == "whiskey" %}hidden{% endunless %}>
           {% for shelf in site.data.bar.shelves %}
             {% assign shelf_bottles = bottles | where: "shelf", shelf.id %}
@@ -83,7 +89,7 @@ extra_js:
               </header>
               <div class="bar-row" data-tab-row="{{ tab.id }}" data-shelf-row="{{ shelf.id }}">
                 {% for bottle in shelf_bottles %}
-                  <figure class="bar-slot" data-id="{{ bottle.id }}" data-tab="{{ tab.id }}" data-shelf="{{ bottle.shelf }}" data-search="{{ bottle.name }} {{ bottle.brand }} {{ bottle.region }} {{ bottle.type }} {{ bottle.occasion }} {{ bottle.tags | join: ' ' }}">
+                  <figure class="bar-slot" data-id="{{ bottle.id }}" data-tab="{{ tab.id }}" data-shelf="{{ bottle.shelf }}" data-search="{{ bottle.name }} {{ bottle.brand }} {{ bottle.producer }} {{ bottle.region }} {{ bottle.type }} {{ bottle.occasion }} {{ bottle.vintage }} {{ bottle.tags | join: ' ' }}">
                     <button type="button" class="bar-bottle" aria-expanded="false" aria-controls="bar-detail">
                       <img class="bar-bottle-img" src="{{ bottle.image | relative_url }}" alt="{{ bottle.name }}" width="80" height="240" loading="lazy">
                       {% if bottle.occasion %}
@@ -110,6 +116,9 @@ extra_js:
         <span class="bar-glass-fill"></span>
       </div>
       <div class="bar-glass bar-glass-pint" data-kind="pint">
+        <span class="bar-glass-fill"></span>
+      </div>
+      <div class="bar-glass bar-glass-caballito" data-kind="caballito">
         <span class="bar-glass-fill"></span>
       </div>
       <p class="bar-glass-caption" id="bar-glass-caption">Whiskey tumbler · click a bottle to pour</p>

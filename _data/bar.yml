@@ -1,5 +1,4 @@
-# Shared bar chrome. Bottle catalogs live in whiskey.yml, wine.yml, and beer.yml.
-# Wine and beer starter lists are placeholders for later Obsidian edits.
+# Shared bar chrome. Bottle catalogs live in whiskey.yml, wine.yml, beer.yml, and tequila.yml.
 
 shelves:
   - id: premium
@@ -40,3 +39,8 @@ tabs:
     glass: pint
     caption: Pint glass · click a bottle to pour
     pour: gold
+  - id: tequila
+    name: Tequila
+    glass: caballito
+    caption: Caballito · click a bottle to pour
+    pour: agave
