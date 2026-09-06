@@ -35,4 +35,4 @@ Bucket thumbs reuse existing site stills (places, not people):
   assets/images/bucket/great-wall.jpg
     Severin.stalder / Wikimedia Commons, CC BY-SA 3.0
 
-Do not use assets/images/violin/hero.jpg on the public home — that still shows a person playing.
+Do not use assets/images/violin/hero.png on the public home — keep the instrument-only Harnett still (piece.jpg). The foyer hero is a stylized illustration of a formal violinist, not a photograph of Praneet and not a stock person photo.

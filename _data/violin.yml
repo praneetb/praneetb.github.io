@@ -30,15 +30,15 @@ hero:
   title: Violin
   kicker: Learning in public.
   lede: A public record of learning violin with intention, patience, and a little music along the way.
-  image: /assets/images/violin/hero.jpg
-  image_alt: Close view of a violin being played, warm wood and bow in motion.
-  image_credit: Wikimedia Commons, public-domain / CC stills — see assets/images/violin/CREDITS.txt
+  image: /assets/images/violin/hero.png
+  image_alt: Stylized illustration of a violinist in a black tuxedo playing a brown violin on a white background. Not a photograph.
+  image_credit: Site illustration — see assets/images/violin/CREDITS.txt
 
 story:
   title: Violin — Learning in public
   lede: Daily practice. Small wins. Real progress.
   cta: Watch story
-  image: /assets/images/violin/hero.jpg
+  image: /assets/images/violin/hero.png
 
 # Derived only from practice_log[].date. Zero when the log is empty.
 streak_days: 0
