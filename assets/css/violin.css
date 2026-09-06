@@ -364,6 +364,11 @@ html[data-theme="summit"] .page-violin-piece {
   height: 1.2rem;
 }
 
+.violin-piece-detail[hidden],
+.violin-take[hidden] {
+  display: none !important;
+}
+
 .violin-piece-detail {
   display: grid;
   grid-template-columns: minmax(15rem, 0.85fr) minmax(0, 1.15fr);
@@ -502,8 +507,8 @@ html[data-theme="summit"] .page-violin-piece {
     radial-gradient(110% 80% at 84% 120%, color-mix(in srgb, var(--violin-gold) 28%, transparent) 42%, transparent 43%);
 }
 
-.page-violin-practice,
-.page-violin-recording {
+html.is-signed-in .page-violin-practice,
+html.is-signed-in .page-violin-recording {
   background: #12100e;
 }
 
