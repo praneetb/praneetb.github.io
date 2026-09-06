@@ -126,3 +126,22 @@ extra_css:
     <span class="space-arrow" aria-hidden="true">→</span>
   </a>
 </div>
+
+{% assign diary_entries = site.data.guestbook.entries %}
+<aside class="space-diary" aria-labelledby="space-diary-heading">
+  <h2 id="space-diary-heading">Diary</h2>
+  <p>Approve diary entries via Formspree inbox / ask Thekedaar to publish to <code>_data/guestbook.yml</code>.</p>
+  {% if diary_entries and diary_entries.size > 0 %}
+  <ol class="space-diary-list">
+    {% for entry in diary_entries %}
+    <li>
+      <strong>{{ entry.name | escape }}</strong>
+      <span>{{ entry.date | escape }}</span>
+      <p>{{ entry.message | escape }}</p>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p class="space-diary-empty">No published entries yet. Inbox notes stay private until they are merged into <code>guestbook.yml</code>.</p>
+  {% endif %}
+</aside>

@@ -3,13 +3,23 @@ layout: default
 title: Praneet Bachheti
 nav: home
 hide_footer: true
-description: Senior Principal Engineer in Fremont. Networking and security systems, patents, violin, and the outdoors.
+description: Explorer, inventor, builder of ideas. Collector of stories, perspectives, and a good pour.
 extra_css:
   - /assets/css/home.css
+extra_js:
+  - /assets/js/guestbook.js
 ---
 
-<article class="calling-card">
-  <figure class="calling-card-hero">
+{% assign country_count = site.data.travel.countries | size %}
+{% assign diary_entries = site.data.guestbook.entries %}
+{% assign diary_endpoint = site.guestbook_form_endpoint | default: "" | strip %}
+{% assign diary_configured = false %}
+{% if diary_endpoint != "" %}
+  {% assign diary_configured = true %}
+{% endif %}
+
+<section class="home-hero" aria-label="Introduction">
+  <figure class="home-hero-media">
     <img
       src="{{ '/assets/images/sunset-half-dome-lodge.jpg' | relative_url }}"
       alt="Half Dome at sunset, Yosemite Valley. Photograph by Av9, public domain."
@@ -17,22 +27,148 @@ extra_css:
       height="1920">
     <figcaption>Half Dome · Yosemite</figcaption>
   </figure>
-  <div class="calling-card-copy">
-    <p class="calling-card-kicker">
+  <div class="home-hero-copy">
+    <p class="home-hero-kicker">
       <span data-theme-line="summit">Climb. Explore. Create.</span>
       <span data-theme-line="atlas">Places, songs, and side quests.</span>
       <span data-theme-line="cadence">Life, tuned.</span>
     </p>
     <h1>Praneet Bachheti</h1>
-    <p class="calling-card-role">Senior Principal Engineer · Fremont, CA</p>
-    <p class="calling-card-bio">I build and scale networking and security systems that are reliable, observable, and built for change. I hold multiple patents in network security and traffic management. Outside of work, I play the violin and spend as much time as I can in the outdoors.</p>
-    <p class="calling-card-links">
-      <a href="{{ '/resume/' | relative_url }}">Resume</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://github.com/praneetb">GitHub</a>
-    </p>
-    <p class="calling-card-cta">
-      <button type="button" class="home-signin" data-open-signin>Sign in →</button>
+    <p class="home-hero-bio">
+      Explorer, inventor, builder of ideas.<br>
+      Collector of stories, perspectives, and<br>
+      a good pour.
     </p>
   </div>
-</article>
+</section>
+
+<section class="home-peek" aria-labelledby="peek-heading">
+  <div class="home-panel">
+    <h2 id="peek-heading">A peek at the space</h2>
+    <div class="peek-grid">
+      <a class="peek-tile" href="{{ '/travel/' | relative_url }}">
+        <p class="peek-label">1. Travel</p>
+        <div class="peek-visual peek-visual-travel">
+          <img src="{{ '/assets/images/world-map.svg' | relative_url }}" alt="" width="640" height="400">
+        </div>
+        <p class="peek-caption">{{ country_count }} countries</p>
+      </a>
+
+      <a class="peek-tile" href="{{ '/bar/' | relative_url }}">
+        <p class="peek-label">2. Bar</p>
+        <div class="peek-visual peek-visual-bar" aria-hidden="true">
+          <span class="peek-bottle peek-bottle-whiskey"></span>
+          <span class="peek-bottle peek-bottle-wine"></span>
+          <span class="peek-bottle peek-bottle-beer"></span>
+          <span class="peek-bottle peek-bottle-tequila"></span>
+        </div>
+        <p class="peek-caption">Whiskey · Wine · Beer · Tequila</p>
+      </a>
+
+      <a class="peek-tile" href="{{ '/patents/' | relative_url }}">
+        <p class="peek-label">3. Patents</p>
+        <div class="peek-visual peek-visual-patents" aria-hidden="true">
+          <span class="peek-plaque"></span>
+          <span class="peek-plaque"></span>
+          <span class="peek-plaque"></span>
+        </div>
+        <p class="peek-caption">Plaques on the wall</p>
+      </a>
+
+      <a class="peek-tile peek-tile-bucket" href="{{ '/bucket-list/' | relative_url }}">
+        <p class="peek-label">4. Bucket list</p>
+        <div class="peek-visual peek-visual-bucket">
+          <figure class="peek-polaroid peek-polaroid-a">
+            <img src="{{ '/assets/images/bucket/half-dome.jpg' | relative_url }}" alt="" width="400" height="300">
+            <figcaption>Half Dome</figcaption>
+          </figure>
+          <figure class="peek-polaroid peek-polaroid-b">
+            <img src="{{ '/assets/images/bucket/petra.jpg' | relative_url }}" alt="" width="400" height="300">
+            <figcaption>Petra</figcaption>
+          </figure>
+        </div>
+        <p class="peek-caption peek-caption-plain">Places. Experiences. Purpose.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="home-diary" aria-labelledby="diary-heading">
+  <div class="home-panel">
+    <div class="diary-book">
+      <header class="diary-head">
+        <p class="diary-kicker">Visitor diary</p>
+        <h2 id="diary-heading">Leave a note in the book</h2>
+        <p class="diary-lede">A quiet guestbook. Notes are read first, then published here.</p>
+      </header>
+
+      {% if diary_entries and diary_entries.size > 0 %}
+      <ol class="diary-list">
+        {% for entry in diary_entries %}
+        <li class="diary-entry">
+          <p class="diary-entry-name">{{ entry.name | escape }}</p>
+          <p class="diary-entry-message">{{ entry.message | escape }}</p>
+          <p class="diary-entry-date">{{ entry.date | escape }}</p>
+        </li>
+        {% endfor %}
+      </ol>
+      {% else %}
+      <p class="diary-empty">The book is open. No notes published yet — write one below, and it appears after Praneet reads it.</p>
+      {% endif %}
+
+      <aside class="diary-admin" aria-label="Diary publishing">
+        <p>Approve diary entries via Formspree inbox / ask Thekedaar to publish to <code>_data/guestbook.yml</code>.</p>
+        {% if diary_entries and diary_entries.size > 0 %}
+        <p class="diary-admin-count">{{ diary_entries.size }} published {% if diary_entries.size == 1 %}entry{% else %}entries{% endif %}.</p>
+        {% else %}
+        <p class="diary-admin-count">No published entries yet. Inbox notes are not public until they land in <code>guestbook.yml</code>.</p>
+        {% endif %}
+      </aside>
+
+      {% if diary_configured %}
+      <form id="diary-form" class="diary-form" action="{{ diary_endpoint }}" method="post">
+        <input type="hidden" name="_subject" value="Visitor diary — praneetb.github.io">
+        {% if site.guestbook_form_access_key and site.guestbook_form_access_key != "" %}
+        <input type="hidden" name="access_key" value="{{ site.guestbook_form_access_key }}">
+        {% endif %}
+        <label class="diary-honeypot" aria-hidden="true">
+          Company
+          <input type="text" name="website" tabindex="-1" autocomplete="off">
+        </label>
+        <label>
+          Name
+          <input id="diary-name" name="name" type="text" maxlength="80" required autocomplete="name">
+        </label>
+        <label>
+          Message
+          <textarea id="diary-message" name="message" rows="4" maxlength="500" required></textarea>
+        </label>
+        <p class="diary-note">Your note is emailed in. It will not show here until it is published.</p>
+        <p id="diary-form-status" class="diary-status" hidden></p>
+        <button type="submit" class="diary-submit">Leave a note</button>
+      </form>
+      {% else %}
+      <div class="diary-form diary-form-unconfigured">
+        <p class="diary-unconfigured" role="status">Diary intake not configured.</p>
+        <label>
+          Name
+          <input type="text" maxlength="80" disabled>
+        </label>
+        <label>
+          Message
+          <textarea rows="4" maxlength="500" disabled></textarea>
+        </label>
+        <p class="diary-note">The book is here. Intake needs a Formspree (or Web3Forms) endpoint in <code>_config.yml</code>.</p>
+        <button type="button" class="diary-submit" disabled>Leave a note</button>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="home-cta">
+  <div class="home-cta-inner">
+    <p>Want the full space? <button type="button" class="home-cta-link" data-open-signin>Sign in</button></p>
+    <button type="button" class="home-cta-btn" data-open-signin>Sign in</button>
+  </div>
+</section>

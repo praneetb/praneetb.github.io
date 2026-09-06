@@ -1,6 +1,9 @@
 (function () {
   "use strict";
 
+  // Signed-in header only. Travel, Bar, Patents, and Bucket list are public
+  // pages (no login wall). Media, Notes, Manya, and Space stay gated via
+  // page.private — unsigned visitors never see this nav.
   var PRIVATE_LINKS = [
     { path: "/space/", label: "Home", match: /\/space\/?$/ },
     { path: "/travel/", label: "Travel", match: /\/travel\/?$/ },

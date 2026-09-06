@@ -156,6 +156,62 @@ html[data-theme="cadence"] .space-title::after {
   }
 }
 
+.space-diary {
+  margin-top: 2.2rem;
+  padding: 1.15rem 1.2rem 1.2rem;
+  border: 1px dashed color-mix(in srgb, var(--accent) 45%, var(--rule));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--accent-wash) 68%, var(--surface));
+}
+
+.space-diary h2 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+}
+
+.space-diary p,
+.space-diary-empty {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+}
+
+.space-diary-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.space-diary-list li {
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.space-diary-list li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.space-diary-list strong {
+  font-family: var(--font-display);
+}
+
+.space-diary-list span {
+  margin-left: 0.45rem;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+}
+
+.space-diary-list p {
+  margin: 0.2rem 0 0;
+  color: var(--ink);
+}
+
 @media (max-width: 700px) {
   .space-grid {
     grid-template-columns: 1fr;

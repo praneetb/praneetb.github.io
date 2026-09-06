@@ -1,0 +1,9 @@
+# Moderated visitor diary. Source of truth for the public list.
+# Incoming notes arrive via Formspree / Web3Forms (see guestbook_form_endpoint).
+# Nothing is public until Praneet or Thekedaar adds it here:
+#   - id: short-slug
+#     name: Visitor name
+#     message: Their note
+#     date: YYYY-MM-DD
+
+entries: []
