@@ -38,7 +38,7 @@ items:
         icon: scoby
     log:
       date: 2026-08-14
-      text: bottled, ginger flavor; salgam finished ~18 days.
+      text: bottled, ginger flavor
     note: Introduced by Aniket Gawade · Source Obsidian Recipes
 
   - id: salgam
@@ -53,7 +53,7 @@ items:
     lede: Turkish turnip/carrot drink. Same vault note as kombucha.
     log:
       date: 2026-08-14
-      text: bottled, ginger flavor; salgam finished ~18 days.
+      text: finished ~18 days
     note: Introduced by Aniket Gawade · Source Obsidian Recipes
 
   - id: sourdough-starter
@@ -61,12 +61,37 @@ items:
     kind: bread
     subtitle: feed schedule
     meta: Day 1–7 start · weekly feeding
-    source: 30-Knowledge/Recipes/
+    source: 30-Knowledge/Recipes/Sourdough Starter.md
     video:
     poster:
     video_tag:
     lede: Day 1–7 start and weekly feeding, from the vault note.
-    schedule: []
+    tools:
+      - Starter kit — https://a.co/d/ioLKqOq
+      - Instant-read thermometer — https://a.co/d/4FbsGH2
+    # Page renders schedule as title + body. Weekly feeding is extra schedule rows
+    # (no unused weekly key — fermentation.js does not read one).
+    schedule:
+      - title: Day 1
+        body: "jar weight 343 g. 100 g flour, 150 ml water, 85°F. Date the starter bottle. Wait 24 hours."
+      - title: Day 2
+        body: "discard down to 70 g from previous day. Add 50 g stone-ground rye, 50 g unbleached all-purpose flour, 115 g water at 85°F. Stir, let sit 24 hours."
+      - title: Day 3
+        body: repeat day 2.
+      - title: Day 4
+        body: "same as day 3, except water is 100 g."
+      - title: Day 5
+        body: same as day 4.
+      - title: Day 6
+        body: "reduce starter to 50 g, rest same as day 5."
+      - title: Day 7
+        body: "reduce starter to 25 g, rest same as day 6."
+      - title: After day 7
+        body: "feed every 24 hours, forever."
+      - title: Weekly feeding
+        body: "25 g starter + 50 g wheat flour + 50 g all-purpose flour + 100 g water. Leave out 2 hours, then refrigerate. Do this every week."
+      - title: First few days
+        body: "feed every 8 hours — starter should double or triple each time."
     note: Source Obsidian Recipes
 
   - id: sourdough-bread
@@ -74,7 +99,7 @@ items:
     kind: bread
     subtitle: Dutch oven loaf
     meta: Dutch oven loaf
-    source: 30-Knowledge/Recipes/
+    source: 30-Knowledge/Recipes/Sourdough Bread (Recipe).md
     video:
     poster:
     video_tag:
@@ -89,7 +114,23 @@ items:
         name: Starter
       - amount: 500 g
         name: Water
-    tools: []
-    # Method steps stay empty until the vault note is pasted — do not invent a bake.
-    steps: []
+    tools:
+      - Banneton — https://a.co/d/eeeIe29
+      - Dutch oven — https://a.co/d/82MMCTr
+    steps:
+      - Mix flours and salt well.
+      - Add starter and water, mix until no dry flour remains.
+      - Cover and rest 1 hour.
+      - Stretch and fold every 30 minutes, 4 times. On the 4th time, pull the dough thin and push with a finger — it shouldn't break; if it does, fold again.
+      - Flatten the dough and let it rise until doubled — about 4–5 hours in summer, 13 hours in winter.
+      - Cut dough in half for 2 loaves. Shape per reference video.
+      - Scrape into banneton (rice flour dusted first).
+      - Put banneton in a plastic bag, tie a knot, refrigerate 12 hours.
+      - Preheat oven to 450°F with the Dutch oven inside for 20 minutes, then remove.
+      - Rest dough out of the fridge for 5 minutes, place on parchment paper, score with one confident cut.
+      - Bake in the Dutch oven, lid on, 25 minutes at 450°F.
+      - Remove lid, bake another 25 minutes.
+      - Remove bread, cool on a wire rack.
+      - Bake the second loaf the next day.
+      - Cool completely — 1–2 hours — before cutting.
     note: Source Obsidian Recipes
