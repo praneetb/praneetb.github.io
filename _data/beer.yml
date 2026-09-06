@@ -31,10 +31,10 @@ bottles:
     nose: Light malt and a familiar hop.
     palate: Clean lager, slightly bitter.
     finish: Short.
-    image: /assets/bar/beer-heineken.jpg
+    image: /assets/bar/beer-heineken.png
     color: "#1a7a3a"
     shape: bottle
-    image_note: Wikimedia Commons “Heineken Flasche 0.33.jpg” by Pansebert, CC BY-SA 3.0.
+    image_note: Wikimedia Commons “Heineken Flasche 0.33.jpg” by Pansebert, CC BY-SA 3.0. White studio backdrop removed for the shelf.
 
   - id: pacifico
     name: Pacifico
@@ -47,7 +47,7 @@ bottles:
     nose: Grain, sea air, and a little lime.
     palate: Dry, crisp, and easy.
     finish: Short and clean.
-    image: /assets/bar/beer-pacifico.jpg
+    image: /assets/bar/beer-pacifico.png
     color: "#1a4a8a"
     shape: bottle
-    image_note: Wikimedia Commons “Pacifico Clara.jpg” by FakirNL, CC BY-SA 3.0.
+    image_note: Wikimedia Commons “Pacifico Clara.jpg” by FakirNL, CC BY-SA 3.0. Light backdrop removed for the shelf.
