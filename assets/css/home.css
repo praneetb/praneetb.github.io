@@ -184,7 +184,7 @@ body.is-home .theme-switch button:hover {
 .peek-tile {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 22.5rem;
+  min-height: 23.5rem;
   overflow: hidden;
   padding: 0.95rem 0.95rem 0.85rem;
   border: 1px solid var(--rule);
@@ -213,25 +213,29 @@ body.is-home .theme-switch button:hover {
 .peek-visual {
   position: relative;
   overflow: hidden;
-  min-height: 14.5rem;
+  min-height: 16.2rem;
   border-radius: 0.65rem;
 }
 
 .peek-caption {
-  position: relative;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 1;
-  margin: -2.6rem 0 0;
-  padding: 2.7rem 0.15rem 0.15rem;
-  background: linear-gradient(180deg, transparent, rgba(18, 12, 8, 0.72) 58%);
+  margin: 0;
+  padding: 2.4rem 0.75rem 0.7rem;
+  background: linear-gradient(180deg, transparent, rgba(18, 12, 8, 0.78) 62%);
   color: #fff8f2;
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   font-weight: 600;
   line-height: 1.25;
 }
 
 .peek-caption-plain,
 .peek-tile-bucket .peek-caption {
+  position: static;
   margin-top: 0.85rem;
   padding: 0;
   background: none;
@@ -254,14 +258,18 @@ body.is-home .theme-switch button:hover {
 }
 
 .peek-visual-bar {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(224, 177, 90, 0.18), transparent 42%),
+    linear-gradient(180deg, #4a2e1b 0%, #1a100a 100%);
+}
+
+.peek-bottles {
   display: flex;
   align-items: flex-end;
   justify-content: center;
   gap: 0.7rem;
-  padding: 1.4rem 0.8rem 0;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(224, 177, 90, 0.18), transparent 42%),
-    linear-gradient(180deg, #4a2e1b 0%, #1a100a 100%);
+  height: 100%;
+  padding: 1.4rem 0.8rem 2.6rem;
 }
 
 .peek-bottle {
@@ -303,14 +311,18 @@ body.is-home .theme-switch button:hover {
 }
 
 .peek-visual-patents {
+  background:
+    linear-gradient(180deg, rgba(255, 250, 238, 0.35), transparent),
+    var(--plaque-wall, #f3ebe0);
+}
+
+.peek-plaques {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   gap: 0.45rem;
-  padding: 1.3rem 0.8rem;
-  background:
-    linear-gradient(180deg, rgba(255, 250, 238, 0.35), transparent),
-    var(--plaque-wall, #f3ebe0);
+  height: 100%;
+  padding: 1.3rem 0.8rem 2.6rem;
 }
 
 .peek-plaque {

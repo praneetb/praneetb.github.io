@@ -50,29 +50,33 @@ extra_js:
         <p class="peek-label">1. Travel</p>
         <div class="peek-visual peek-visual-travel">
           <img src="{{ '/assets/images/world-map.svg' | relative_url }}" alt="" width="640" height="400">
+          <p class="peek-caption">{{ country_count }} countries</p>
         </div>
-        <p class="peek-caption">{{ country_count }} countries</p>
       </a>
 
       <a class="peek-tile" href="{{ '/bar/' | relative_url }}">
         <p class="peek-label">2. Bar</p>
-        <div class="peek-visual peek-visual-bar" aria-hidden="true">
-          <span class="peek-bottle peek-bottle-whiskey"></span>
-          <span class="peek-bottle peek-bottle-wine"></span>
-          <span class="peek-bottle peek-bottle-beer"></span>
-          <span class="peek-bottle peek-bottle-tequila"></span>
+        <div class="peek-visual peek-visual-bar">
+          <span class="peek-bottles" aria-hidden="true">
+            <span class="peek-bottle peek-bottle-whiskey"></span>
+            <span class="peek-bottle peek-bottle-wine"></span>
+            <span class="peek-bottle peek-bottle-beer"></span>
+            <span class="peek-bottle peek-bottle-tequila"></span>
+          </span>
+          <p class="peek-caption">Whiskey · Wine · Beer · Tequila</p>
         </div>
-        <p class="peek-caption">Whiskey · Wine · Beer · Tequila</p>
       </a>
 
       <a class="peek-tile" href="{{ '/patents/' | relative_url }}">
         <p class="peek-label">3. Patents</p>
-        <div class="peek-visual peek-visual-patents" aria-hidden="true">
-          <span class="peek-plaque"></span>
-          <span class="peek-plaque"></span>
-          <span class="peek-plaque"></span>
+        <div class="peek-visual peek-visual-patents">
+          <span class="peek-plaques" aria-hidden="true">
+            <span class="peek-plaque"></span>
+            <span class="peek-plaque"></span>
+            <span class="peek-plaque"></span>
+          </span>
+          <p class="peek-caption">Plaques on the wall</p>
         </div>
-        <p class="peek-caption">Plaques on the wall</p>
       </a>
 
       <a class="peek-tile peek-tile-bucket" href="{{ '/bucket-list/' | relative_url }}">
