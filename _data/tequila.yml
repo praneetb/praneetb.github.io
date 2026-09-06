@@ -1,6 +1,6 @@
 # Tequila catalog for /bar/?tab=tequila.
 # Exact bottles only — do not invent brands.
-# Images are labeled SVG silhouettes in assets/bar/.
+# Images are photographic product shots in assets/bar/ (not SVG silhouettes).
 # Tasting notes are short public paraphrases from typical profiles.
 
 bottles:
@@ -15,9 +15,10 @@ bottles:
     nose: Roasted agave, vanilla, and warm baking spice.
     palate: Caramelized agave, nutmeg, and French oak.
     finish: Long, spicy, and a little smoky.
-    image: /assets/bar/tequila-the-bad-stuff.svg
+    image: /assets/bar/tequila-the-bad-stuff.png
     color: "#1a1410"
     shape: bottle
+    image_note: Official Extra Añejo pack shot from The Bad Stuff press kit (thebadstuff.com/press).
 
   - id: don-julio-1942
     name: Don Julio 1942
@@ -30,10 +31,11 @@ bottles:
     nose: Cooked agave, caramel, and toasted oak.
     palate: Sweet agave, vanilla, and a silky oak warmth.
     finish: Long, rounded, and lightly spicy.
-    image: /assets/bar/tequila-don-julio-1942.svg
+    image: /assets/bar/tequila-don-julio-1942.jpg
     color: "#8a5a20"
     shape: bottle
     note: Labeled Don Julio 1942 for the well-known “1942 tequila” product.
+    image_note: Official Don Julio 1942 product photograph from donjulio.com.
 
   - id: patron-silver
     name: Patrón Silver
@@ -46,9 +48,10 @@ bottles:
     nose: Fresh agave, citrus peel, and a little pepper.
     palate: Clean, bright, and lightly sweet.
     finish: Short, crisp, and peppery.
-    image: /assets/bar/tequila-patron-silver.svg
+    image: /assets/bar/tequila-patron-silver.png
     color: "#d8d4c8"
     shape: bottle
+    image_note: Official Patrón Silver bottle photograph from patrontequila.com.
 
   - id: casamigos-anejo
     name: Casamigos Añejo
@@ -61,9 +64,10 @@ bottles:
     nose: Caramel, vanilla, and soft oak.
     palate: Smooth, sweet, and easy.
     finish: Warm and lingering.
-    image: /assets/bar/tequila-casamigos-anejo.svg
+    image: /assets/bar/tequila-casamigos-anejo.jpg
     color: "#c47a28"
     shape: bottle
+    image_note: Official Casamigos Añejo product photograph from casamigos.com.
 
   - id: jose-cuervo
     name: José Cuervo
@@ -76,6 +80,7 @@ bottles:
     nose: Sweet agave and a little caramel.
     palate: Familiar gold tequila — easy and a bit sweet.
     finish: Short and warm.
-    image: /assets/bar/tequila-jose-cuervo.svg
+    image: /assets/bar/tequila-jose-cuervo.jpg
     color: "#c9a227"
     shape: bottle
+    image_note: Official José Cuervo Especial Gold product photograph from cuervo.com.
