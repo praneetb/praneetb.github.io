@@ -1,6 +1,6 @@
 # Beer catalog for /bar/?tab=beer.
 # Core only. Premium and Everyday stay empty.
-# Images are labeled SVG silhouettes in assets/bar/.
+# Images are photographic product shots in assets/bar/ (not SVG silhouettes).
 # Tasting notes are short public paraphrases from typical profiles.
 
 bottles:
@@ -15,9 +15,10 @@ bottles:
     nose: Light malt and a little citrus.
     palate: Easy, golden, and beach-cold.
     finish: Clean and short.
-    image: /assets/bar/beer-805.svg
+    image: /assets/bar/beer-805.png
     color: "#e8b84a"
     shape: can
+    image_note: Official Firestone Walker 805 Blonde Ale can photograph from 805beer.com.
 
   - id: heineken
     name: Heineken
@@ -30,9 +31,10 @@ bottles:
     nose: Light malt and a familiar hop.
     palate: Clean lager, slightly bitter.
     finish: Short.
-    image: /assets/bar/beer-heineken.svg
+    image: /assets/bar/beer-heineken.jpg
     color: "#1a7a3a"
     shape: bottle
+    image_note: Wikimedia Commons “Heineken Flasche 0.33.jpg” by Pansebert, CC BY-SA 3.0.
 
   - id: pacifico
     name: Pacifico
@@ -45,6 +47,7 @@ bottles:
     nose: Grain, sea air, and a little lime.
     palate: Dry, crisp, and easy.
     finish: Short and clean.
-    image: /assets/bar/beer-pacifico.svg
+    image: /assets/bar/beer-pacifico.jpg
     color: "#1a4a8a"
     shape: bottle
+    image_note: Wikimedia Commons “Pacifico Clara.jpg” by FakirNL, CC BY-SA 3.0.
