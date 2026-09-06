@@ -7,10 +7,5 @@
   } catch (err) {}
   var root = document.documentElement;
   root.classList.toggle("is-signed-in", signedIn);
-  var base = (root.getAttribute("data-baseurl") || "").replace(/\/$/, "");
-  var path = location.pathname.replace(/\/index\.html$/, "/");
-  if (signedIn && (path === base + "/" || path === base || path === "/")) {
-    location.replace(base + "/space/");
-  }
 })();
 </script>

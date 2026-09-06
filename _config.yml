@@ -10,6 +10,12 @@ theme: null
 sass:
   style: compressed
 
+# Visitor diary intake. Formspree form URL, e.g. https://formspree.io/f/xxxxxxxx
+# Leave blank until Praneet creates the form — the diary UI still renders.
+guestbook_form_endpoint: ""
+# Optional. Only for Web3Forms (https://api.web3forms.com/submit).
+guestbook_form_access_key: ""
+
 exclude:
   - Gemfile
   - Gemfile.lock

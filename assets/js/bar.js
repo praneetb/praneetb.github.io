@@ -310,9 +310,17 @@
     }
   }
 
+  function canRate() {
+    return document.documentElement.classList.contains("is-signed-in");
+  }
+
   function renderStars(id) {
     var wrap = $("bar-rate-stars");
     if (!wrap) {
+      return;
+    }
+    if (!canRate()) {
+      wrap.replaceChildren();
       return;
     }
     wrap.replaceChildren();

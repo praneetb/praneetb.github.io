@@ -21,6 +21,11 @@ body:has(.page-bar) .welcome-strip {
   display: none !important;
 }
 
+html:not(.is-signed-in) .bar-rate,
+html:not(.is-signed-in) .bar-stars {
+  display: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

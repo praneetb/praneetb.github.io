@@ -820,9 +820,7 @@
     var search = el("travel-search");
     var filterBtn = el("travel-filter-btn");
 
-    if (document.documentElement.classList.contains("is-signed-in")) {
-      startView();
-    }
+    startView();
 
     document.addEventListener("site:theme", function () {
       if (globe) {

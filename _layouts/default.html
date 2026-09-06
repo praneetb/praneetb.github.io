@@ -33,7 +33,7 @@
   {% endif %}
   {% include auth-boot.html %}
 </head>
-<body{% if page.nav == 'travel' %} class="theme-travel"{% endif %}{% if page.private %} data-private="true"{% endif %}>
+<body{% if page.nav == 'home' or page.nav == 'travel' %} class="{% if page.nav == 'home' %}is-home{% endif %}{% if page.nav == 'travel' %}theme-travel{% endif %}"{% endif %}{% if page.private %} data-private="true"{% endif %}>
   <a class="skip-link" href="#content">Skip to content</a>
   {% include nav.html %}
   <main id="content" class="page page-{{ page.nav }}">

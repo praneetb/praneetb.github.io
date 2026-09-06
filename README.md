@@ -4,22 +4,45 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 ## Public and private
 
-Logged-out visitors see a quiet calling card on `/` — name, role, a short bio, Half Dome, and links to [Resume](/resume/) and [GitHub](https://github.com/praneetb). There is no public navigation to Travel, Bar, Patents, Media, the bucket list, Notes, or Manya.
+Logged-out visitors see the public home on `/` — Half Dome hero, a four-tile peek (Travel, Bar, Patents, Bucket list), and a visitor diary. Media, Notes, and Manya are not shown on the public home, even as locked tiles.
 
-Sign in (username + password) unlocks a site-wide session. After a successful login, the header gains private navigation and `/space/` becomes the private landing:
+These four pages are public and read-only for guests (Sign in stays in the header; private nav stays hidden):
 
-- [Your space](/space/)
 - [Travel](/travel/) — cockpit globe and visited countries from `_data/travel.yml` (baked from vault `20-Personal/Travel/Countries Visited.md`); Seven Wonders live on the bucket list
-- [Bar](/bar/) — private four-tab bar (Whiskey / Wine / Beer / Tequila) with Premium / Core / Everyday shelves from `_data/whiskey.yml`, `_data/wine.yml`, `_data/beer.yml`, and `_data/tequila.yml`; search the active tab, hover lift, pour into the matching glass, tasting notes, and star ratings in this browser. `/whiskey/` redirects to `/bar/?tab=whiskey`
-- [Patents](/patents/) — private plaque wall of issued patents and one abandoned application; Summit / Atlas / Cadence restyle the wall and metal
-- [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
+- [Bar](/bar/) — four-tab bar (Whiskey / Wine / Beer / Tequila) with Premium / Core / Everyday shelves from `_data/whiskey.yml`, `_data/wine.yml`, `_data/beer.yml`, and `_data/tequila.yml`; search, hover lift, pour, and tasting notes. Star ratings stay signed-in only. `/whiskey/` redirects to `/bar/?tab=whiskey`
+- [Patents](/patents/) — plaque wall of issued patents and one abandoned application; Summit / Atlas / Cadence restyle the wall and metal
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)
+
+Sign in (username + password) unlocks a site-wide session. After a successful login from `/`, the browser goes to `/space/`. The wordmark then points at `/space/`; the public home can still be opened directly. Signed-in chrome adds private navigation:
+
+- [Your space](/space/) — hub for the four public rooms plus Media, Notes, and Manya
+- [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
 - [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
 - [Manya](/manya/) — private family hub; [School](/manya/school/), [report cards](/manya/school/reports/) (age-cartoon cards; PDFs open in a page viewer from an encrypted pack keyed by Drive file ids in `_data/manya_reports.yml`), and [SAT / PSAT](/manya/school/sat-psat/) (titles and dates; same on-page viewer from `sat-psat.enc.json`; no scores listed)
 
-Direct URLs to those private pages show a sign-in prompt when locked. The visited-country list is site data, not a per-browser stash.
+Direct URLs to Media, Notes, Manya, and Space show a sign-in prompt when locked. The visited-country list is site data, not a per-browser stash.
 
 Resume stays public.
+
+## Visitor diary
+
+The guestbook on `/` is moderated. The public list is only `_data/guestbook.yml` (`id`, `name`, `message`, `date`). Incoming notes never appear until someone merges an entry there.
+
+The form POSTs to `guestbook_form_endpoint` in `_config.yml` (Formspree URL, or Web3Forms with `guestbook_form_access_key`). If that value is empty, the diary UI still renders and shows **Diary intake not configured**.
+
+Moderation path:
+
+1. A visitor submits name + message (honeypot field is ignored).
+2. Formspree / Web3Forms emails Praneet.
+3. Praneet asks Thekedaar, or merges an entry into `_data/guestbook.yml` and publishes.
+
+Signed-in, `/space/` and the home diary show an admin strip: approve via the Formspree inbox / ask Thekedaar to publish. Local draft approvals are not enough — `guestbook.yml` is the source of truth.
+
+Set this when the Formspree form exists:
+
+```yaml
+guestbook_form_endpoint: https://formspree.io/f/xxxxxxxx
+```
 
 ## Auth
 
