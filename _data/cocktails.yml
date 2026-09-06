@@ -14,6 +14,25 @@ filters:
     name: Built
 
 items:
+  - id: rum-buck
+    name: Rum Buck
+    method: built
+    subtitle: ginger beer • built
+    glass: highball
+    source: Obsidian Recipes
+    video: /assets/cocktails/rum-buck-recipe.mp4
+    poster:
+    ingredients:
+      - amount: 1½ oz
+        name: Hamilton 86 Demerara
+      - amount: ½ oz
+        name: St. Elizabeth Allspice Dram (float)
+      - amount: ¼ oz
+        name: Lime
+      - amount: 4–5 oz
+        name: Bundaberg ginger beer
+    method_text: Build Hamilton 86 Demerara, lime, and Bundaberg ginger beer. Float ½ oz St. Elizabeth Allspice Dram. Garnish with a lime wheel.
+
   - id: old-fashioned
     name: Old Fashioned
     method: stirred
@@ -84,25 +103,6 @@ items:
       - amount: 1 oz
         name: Cola
     method_text: Build with ½ oz each vodka, rum, gin, tequila, and triple sec, then 1 oz sweet & sour and 1 oz cola. Garnish with lemon and mint.
-
-  - id: rum-buck
-    name: Rum Buck
-    method: built
-    subtitle: ginger beer • built
-    glass: highball
-    source: Obsidian Recipes
-    video:
-    poster:
-    ingredients:
-      - amount: 1½ oz
-        name: Hamilton 86 Demerara
-      - amount: ½ oz
-        name: St. Elizabeth Allspice Dram (float)
-      - amount: ¼ oz
-        name: Lime
-      - amount: 4–5 oz
-        name: Bundaberg ginger beer
-    method_text: Build Hamilton 86 Demerara, lime, and Bundaberg ginger beer. Float ½ oz St. Elizabeth Allspice Dram. Garnish with a lime wheel.
 
   - id: sloe-gin-fizz
     name: Sloe Gin Fizz
