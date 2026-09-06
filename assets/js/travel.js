@@ -15,10 +15,11 @@
   var EARTH_TEX = "https://cdn.jsdelivr.net/npm/three-globe@2.44.1/example/img/earth-blue-marble.jpg";
   var EARTH_BUMP = "https://cdn.jsdelivr.net/npm/three-globe@2.44.1/example/img/earth-topology.png";
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  var CRUISE_ALTITUDE = 1.55;
+  var CRUISE_ALTITUDE = 2.2;
   var FLY_ALTITUDE = 0.95;
   var FLY_MS = 1100;
   var LINGER_MS = 5000;
+  var GLOBE_VIEWPORT_RATIO = 0.7;
 
   function atmosphereColor() {
     var theme = document.documentElement.getAttribute("data-theme");
@@ -729,10 +730,13 @@
       box.textContent = "The globe could not load. Check the network and refresh.";
       return;
     }
+    var initial = globeFitSize(box);
     globe = Globe({
       animateIn: true,
       rendererConfig: { antialias: true, alpha: true }
     })(box)
+      .width(initial)
+      .height(initial)
       .globeImageUrl(EARTH_TEX)
       .bumpImageUrl(EARTH_BUMP)
       .backgroundColor("rgba(0,0,0,0)")
@@ -785,9 +789,27 @@
     resizeGlobe();
     if (typeof ResizeObserver === "function") {
       new ResizeObserver(resizeGlobe).observe(box);
+      var stage = box.closest(".travel-globe-stage");
+      if (stage && stage !== box) {
+        new ResizeObserver(resizeGlobe).observe(stage);
+      }
     }
     window.addEventListener("resize", resizeGlobe);
     updateGlobeMarkers();
+  }
+
+  function globeFitSize(box) {
+    var cap = Math.max(8, Math.round(window.innerHeight * GLOBE_VIEWPORT_RATIO));
+    var width = box.clientWidth;
+    var height = box.clientHeight;
+    var size = cap;
+    if (width >= 8) {
+      size = Math.min(size, width);
+    }
+    if (height >= 8) {
+      size = Math.min(size, height);
+    }
+    return size;
   }
 
   function resizeGlobe() {
@@ -798,13 +820,15 @@
     if (!box) {
       return;
     }
-    var width = box.clientWidth;
-    var height = box.clientHeight;
-    if (width < 8 || height < 8) {
+    var size = globeFitSize(box);
+    if (size < 8) {
       return;
     }
-    globe.width(width);
-    globe.height(height);
+    if (globe.width() === size && globe.height() === size) {
+      return;
+    }
+    globe.width(size);
+    globe.height(size);
   }
 
   function startView() {
