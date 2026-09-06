@@ -11,6 +11,7 @@ description: Private pulse scrapbook — recovery, strain, sleep, and workouts.
 extra_css:
   - /assets/css/health.css
 extra_js:
+  - /assets/js/health-data.js
   - /assets/js/health.js
 ---
 
@@ -27,7 +28,9 @@ extra_js:
     </div>
   </header>
 
-  <section class="health-cards" id="health-cards" aria-label="Today’s vitals"></section>
+  <section class="health-picker scrapbook-card" id="health-picker" aria-label="Day picker"></section>
+
+  <section class="health-cards" id="health-cards" aria-label="Selected day vitals"></section>
 
   <section class="health-row" aria-label="Workouts and trends">
     <div class="health-workouts" id="health-workouts"></div>
@@ -42,8 +45,11 @@ extra_js:
   <footer class="health-foot">
     <p class="health-mantra">track. reflect. fuel. repeat. <span aria-hidden="true">♡</span></p>
     <p class="health-note scrapbook-note">Your pulse, your scrapbook. Keep showing up for you.</p>
+    <p class="health-tz" id="health-tz"></p>
     <p class="health-sticky scrapbook-sticky" aria-hidden="true">Small choices. Big pulse.</p>
   </footer>
 
   <p class="health-status" id="health-status" hidden></p>
 </div>
+
+<dialog id="health-detail" class="health-detail" aria-labelledby="health-detail-title"></dialog>
