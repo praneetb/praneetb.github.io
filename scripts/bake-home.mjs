@@ -41,9 +41,9 @@ const TRAVEL_SHORT = {
 };
 
 const COCKTAIL_NOTES = [
+  ["Rum Buck", /rum\s*buck/i],
   ["Old Fashioned", /old\s*fashioned/i],
   ["Mai Tai", /mai\s*tai/i],
-  ["Rum Buck", /rum\s*buck/i],
   ["Long Island Iced Tea", /long\s*island/i],
   ["Sloe Gin Fizz", /sloe\s*gin\s*fizz/i]
 ];
