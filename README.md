@@ -4,9 +4,9 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 ## Public and private
 
-Logged-out visitors see the public home on `/` — a short Half Dome strip, a 2×3 tile grid for Travel, Bar, Cocktails, Fermentation, Patents, and Bucket list, and a slim visitor-diary footer with counts from site data. Violin, Media, Notes, and Manya are not shown on the public home, even as locked tiles.
+Logged-out visitors see the public home on `/` — a short Half Dome strip, a 2×3 tile grid for Travel, Bar, Cocktails, Fermentation, Patents, and Bucket list, and a slim visitor-diary footer with counts from site data. Violin is in the public header but not a home tile. Media, Notes, and Manya are not shown on the public home, even as locked tiles.
 
-Public panel links — Travel, Bar, Cocktails, Fermentation, Patents, Bucket — stay in the header for everyone, signed out or signed in. Media, Notes, Manya, and Space are gated extras that appear only after login; they never replace the public panels.
+Public panel links — Travel, Bar, Cocktails, Fermentation, Patents, Bucket, Violin — stay in the header for everyone, signed out or signed in. Media, Notes, Manya, and Space are gated extras that appear only after login; they never replace the public panels.
 
 These pages are public and read-only for guests (Sign in stays in the header):
 
@@ -16,7 +16,7 @@ These pages are public and read-only for guests (Sign in stays in the header):
 - [Fermentation](/fermentation/) — vault set from `_data/fermentation.yml` (kombucha, salgam, sourdough starter, sourdough bread); search and All / Drinks / Bread / Logs; short video when present
 - [Patents](/patents/) — plaque wall of issued patents and one abandoned application; Summit / Atlas / Cadence restyle the wall and metal
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)
-- [Violin](/violin/) — public foyer and piece detail from `_data/violin.yml`, baked from the daily sync path `30-Knowledge/Interests/Violin/` (`Violin MOC.md`, `Pieces`, `Practice-Log`, `Recordings`, `Teacher-Notes`). Pieces, logs, recordings, and teacher notes stay empty while that tree is stubs only. Not a home tile — open `/violin/` or Your space after sign-in.
+- [Violin](/violin/) — public foyer and piece detail from `_data/violin.yml`, baked from the daily sync path `30-Knowledge/Interests/Violin/` (`Violin MOC.md`, `Pieces`, `Practice-Log`, `Recordings`, `Teacher-Notes`). Pieces, logs, recordings, and teacher notes stay empty while that tree is stubs only. Not a home tile — open `/violin/` from the header or Your space after sign-in.
 
 Sign in (username + password) unlocks a site-wide session. After a successful login from `/`, the browser goes to `/space/`. The wordmark then points at `/space/`; the public home can still be opened directly. Signed-in chrome keeps those public panels and adds private navigation:
 
