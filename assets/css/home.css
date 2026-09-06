@@ -490,8 +490,11 @@ body.is-home .page-home {
 }
 
 .home-scrap-photo {
-  height: 5.6rem;
-  margin-bottom: 0.2rem;
+  height: 7.2rem;
+  margin-bottom: 0.25rem;
+  object-fit: cover;
+  object-position: 50% 6%;
+  background: #f3ead6;
 }
 
 .home-patent-marks {
