@@ -4,7 +4,7 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 ## Public and private
 
-Logged-out visitors see the public home on `/` — a short Half Dome strip, a 2×3 tile grid for Travel, Bar, Cocktails, Fermentation, Patents, and Bucket list, and a slim visitor-diary footer with counts from site data. Violin is in the public header but not a home tile. Media, Notes, and Manya are not shown on the public home, even as locked tiles.
+Logged-out visitors see the public home on `/` — the full uncropped Half Dome photograph (letterboxed if needed), a compact 2×3 tile grid for Travel, Bar, Cocktails, Fermentation, Patents, and Bucket, and a slim visitor-diary footer. Tile peeks are vault-backed via `_data/home.yml` (`scripts/bake-home.mjs`). Violin is in the public header but not a home tile. Media, Notes, and Manya are not shown on the public home, even as locked tiles.
 
 Public panel links — Travel, Bar, Cocktails, Fermentation, Patents, Bucket, Violin — stay in the header for everyone, signed out or signed in. Media, Notes, Manya, and Space are gated extras that appear only after login; they never replace the public panels.
 
@@ -74,6 +74,23 @@ node scripts/bake-violin.mjs /path/to/vault
 ```
 
 That writes `_data/violin.yml` from `30-Knowledge/Interests/Violin/` (`Violin MOC.md` plus the four folders). Empty folders and stub notes bake to `[]`. Streak and weeks are derived only from Practice-Log dates. Do not invent repertoire or sessions. Do not change `assets/notes.enc.json` for this bake.
+
+Home tile peeks are a separate bake. Vault notes win when present; otherwise the live site `_data` files are used. Do not invent countries, recipes, patents, or bucket items.
+
+```bash
+node scripts/bake-home.mjs /path/to/vault
+node scripts/bake-home.mjs --from-site
+```
+
+That writes `_data/home.yml` from:
+
+- `20-Personal/Travel/Countries Visited.md`
+- `30-Knowledge/Recipes/` (named cocktail notes)
+- `30-Knowledge/Recipes/Kombucha & Salgam.md`
+- `10-Work/Reference/Patents.md`
+- `20-Personal/Bucket List.md`
+
+Missing vault notes fall back to `_data/travel.yml`, `cocktails.yml`, `fermentation.yml`, `plaques.yml`, and `bucket.yml`. Bar peek stays the existing bottle strip. Do not change `assets/notes.enc.json` for this bake.
 
 ## Publishing Manya report cards
 
