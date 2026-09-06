@@ -5,6 +5,7 @@
 # Bake (does not invent patents; does not touch notes.enc.json):
 #   node scripts/bake-patents.mjs /path/to/obsidian-vault
 #
+# LOCKED: same six live /patents/ plaques. Do not add or invent.
 # Formal titles / numbers / dates / assignees / status come from the
 # vault note. Editorial problem / punch / stuck lines are keyed by
 # patent id in scripts/bake-patents.mjs.

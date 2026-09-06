@@ -9,9 +9,11 @@
  * Reads (daily sync path, sibling of bake-violin):
  *   10-Work/Reference/Patents.md
  *
- * Formal titles, numbers, dates, assignees, and status come only from that
- * note. Do not invent patents. Editorial problem / punch / stuck lines are
- * keyed by patent id and applied only when that id is already in the vault.
+ * LOCKED list (same six as live /patents/ plaques): five Cisco issued +
+ * one abandoned Aruba/HPE. Do not add or invent patents. Formal titles,
+ * numbers, dates, assignees, and status come only from that note.
+ * Editorial problem / punch / stuck lines are keyed by patent id and
+ * applied only when that id is already in the locked set.
  *
  * Writes:
  *   _data/plaques.yml   (/patents/ cards + home tile)
@@ -277,6 +279,7 @@ function renderPlaques(items) {
   lines.push("# Bake (does not invent patents; does not touch notes.enc.json):");
   lines.push("#   node scripts/bake-patents.mjs /path/to/obsidian-vault");
   lines.push("#");
+  lines.push("# LOCKED: same six live /patents/ plaques. Do not add or invent.");
   lines.push("# Formal titles / numbers / dates / assignees / status come from the");
   lines.push("# vault note. Editorial problem / punch / stuck lines are keyed by");
   lines.push("# patent id in scripts/bake-patents.mjs.");
@@ -364,6 +367,7 @@ export async function bake(vaultDir) {
   if (!rows.length) {
     throw new Error("No patents parsed from " + found.rel);
   }
+  assertVaultSet(rows);
   return {
     note: found.rel,
     items: rows,
@@ -386,6 +390,7 @@ async function writeYaml(data) {
   await fs.writeFile(OUT.issued, renderIssued(data.items));
 }
 
+// Locked against live /patents/ plaques + vault 10-Work/Reference/Patents.md.
 const EXPECTED_IDS = [
   "US6901079B1",
   "US7068645B1",
