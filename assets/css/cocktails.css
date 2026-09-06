@@ -269,6 +269,11 @@ body:has(.page-cocktails) .welcome-strip {
     #1a100a;
 }
 
+.cocktails-video video[hidden],
+.cocktails-video img[hidden] {
+  display: none !important;
+}
+
 .cocktails-video video,
 .cocktails-video img {
   display: block;

@@ -309,6 +309,11 @@ html[data-theme="cadence"] .ferm-page {
     var(--paper-deep);
 }
 
+.ferm-video video[hidden],
+.ferm-video img[hidden] {
+  display: none !important;
+}
+
 .ferm-video video,
 .ferm-video img {
   display: block;
