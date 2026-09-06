@@ -41,7 +41,7 @@ body.is-home .page-home {
   flex: 1 1 auto;
   gap: 0.35rem;
   min-height: 0;
-  max-width: 74rem;
+  max-width: 78rem;
   width: 100%;
   margin: 0 auto;
   padding: 0.35rem 1.15rem 0.9rem;
@@ -170,27 +170,36 @@ body.is-home .page-home {
 }
 
 .home-doodle-arrow {
-  right: 11%;
-  bottom: 7.4rem;
+  right: 18%;
+  bottom: 2.4rem;
   width: 4.6rem;
   color: var(--scrap-ink);
   fill: none;
 }
 
 .home-doodle-star-c {
-  left: 36%;
-  bottom: 8.2rem;
+  left: 42%;
+  bottom: 3.2rem;
   width: 0.82rem;
+}
+
+.home-tape-hello {
+  top: 0.15rem;
+  left: auto;
+  right: 5.6rem;
+  z-index: 1;
+  width: 3.8rem;
+  transform: rotate(18deg);
 }
 
 .home-spread {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) minmax(0, 0.92fr);
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1.12fr) minmax(0, 0.92fr) minmax(0, 0.86fr) minmax(0, 0.78fr);
   grid-template-areas:
-    "violin travel notes"
-    "chips chips chips";
-  gap: 0.35rem 0.2rem;
+    "violin travel food bar patents"
+    "bucket bucket bucket vault vault";
+  gap: 0.55rem 0.45rem;
   align-items: start;
   padding: 0.2rem 0 0.4rem;
 }
@@ -206,21 +215,21 @@ body.is-home .page-home {
 .home-polaroid.is-violin {
   grid-area: violin;
   justify-self: end;
-  margin: 0.6rem 0.2rem 0 auto;
+  margin: 0.35rem 0.1rem 0 auto;
   transform: rotate(-4.5deg);
 }
 
 .home-polaroid.is-travel {
   grid-area: travel;
   justify-self: start;
-  width: min(100%, 24rem);
-  margin: 1.3rem 0 0 -1.6rem;
+  width: min(100%, 23rem);
+  margin: 0.85rem 0 0 -0.4rem;
   transform: rotate(3.4deg);
 }
 
 .home-polaroid figure {
   margin: 0;
-  padding: 0.62rem 0.62rem 0.5rem;
+  padding: 0.55rem 0.55rem 0.45rem;
   background: var(--polaroid);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.8) inset,
@@ -230,28 +239,40 @@ body.is-home .page-home {
 .home-polaroid img {
   display: block;
   width: 100%;
-  height: 13.4rem;
+  height: 11.6rem;
   object-fit: cover;
   background: #1a120c;
 }
 
 .home-polaroid.is-travel img {
-  height: 14.6rem;
+  height: 12.4rem;
 }
 
 .home-polaroid figcaption {
-  margin: 0.55rem 0.1rem 0.15rem;
+  display: grid;
+  gap: 0.12rem;
+  margin: 0.5rem 0.1rem 0.1rem;
   color: var(--scrap-ink);
   font-family: var(--font-note);
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   letter-spacing: 0.01em;
-  line-height: 1.25;
+  line-height: 1.22;
 }
 
-.home-polaroid-total {
+.home-polaroid-kicker {
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+}
+
+.home-polaroid-line,
+.home-polaroid-sub {
   display: block;
+}
+
+.home-polaroid-sub,
+.home-polaroid-total {
   color: var(--scrap-muted);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 .home-polaroid:hover,
@@ -261,8 +282,11 @@ body.is-home .page-home {
 
 .home-polaroid:focus-visible,
 .home-scrap:focus-visible,
+.home-peek:focus-visible,
+.home-peek-link:focus-visible,
 .home-scrap-link:focus-visible,
-.home-scrap-inline:focus-visible {
+.home-scrap-inline:focus-visible,
+.home-bucket:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -309,15 +333,9 @@ body.is-home .page-home {
   transform: translateX(-50%) rotate(6deg);
 }
 
-.home-note-stack {
-  grid-area: notes;
-  display: grid;
-  gap: 0.85rem;
-  justify-items: end;
-  padding: 0.2rem 0.2rem 0 0;
-}
-
-.home-scrap {
+.home-scrap,
+.home-peek,
+.home-bucket {
   position: relative;
   display: grid;
   gap: 0.18rem;
@@ -328,7 +346,9 @@ body.is-home .page-home {
   filter: drop-shadow(0 10px 14px rgba(62, 38, 18, 0.12));
 }
 
-.home-scrap::before {
+.home-scrap::before,
+.home-peek::before,
+.home-bucket::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -345,20 +365,26 @@ body.is-home .page-home {
 }
 
 .home-scrap-link,
-.home-scrap-inline {
+.home-scrap-inline,
+.home-peek-link {
   color: inherit;
   text-decoration: none;
 }
 
-.home-scrap-link {
+.home-scrap-link,
+.home-peek-link {
   display: grid;
-  gap: 0.2rem;
+  gap: 0.35rem;
 }
 
 .home-scrap:hover,
 .home-scrap:focus-visible,
+.home-peek:hover,
+.home-peek:focus-visible,
+.home-peek-link:hover,
 .home-scrap-link:hover,
-.home-scrap-inline:hover {
+.home-scrap-inline:hover,
+.home-bucket:hover {
   color: inherit;
 }
 
@@ -419,53 +445,139 @@ body.is-home .page-home {
   color: #3d5a3a;
 }
 
-.home-scrap.is-food {
+.home-peek img,
+.home-scrap-photo {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  background: #1a120c;
+}
+
+.home-peek.is-food {
   --scrap-paper: #f3e2c4;
-  width: min(100%, 18.5rem);
+  grid-area: food;
+  width: min(100%, 16.5rem);
+  margin-top: 0.15rem;
+  padding: 0.55rem 0.6rem 0.7rem;
   transform: rotate(2.2deg);
+}
+
+.home-peek.is-food img {
+  height: 10.6rem;
+}
+
+.home-peek.is-bar {
+  --scrap-paper: #efe6cf;
+  grid-area: bar;
+  width: min(100%, 15.5rem);
+  margin-top: 0.7rem;
+  padding: 0.55rem 0.6rem 0.7rem;
+  transform: rotate(-2.6deg);
+}
+
+.home-peek.is-bar img {
+  height: 8.4rem;
 }
 
 .home-scrap.is-patents {
   --scrap-paper: #efe4cf;
-  width: min(100%, 12.8rem);
-  margin-right: 0.4rem;
+  grid-area: patents;
+  width: min(100%, 13.4rem);
+  justify-self: end;
+  margin: 0.2rem 0.1rem 0 0;
+  padding: 0.55rem 0.7rem 0.75rem;
   transform: rotate(-3.5deg);
 }
 
-.home-chip-row {
-  grid-area: chips;
+.home-scrap-photo {
+  height: 5.6rem;
+  margin-bottom: 0.2rem;
+}
+
+.home-patent-marks {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 0.55rem 0.7rem;
-  margin-top: 0.35rem;
-  padding: 0.15rem 0.2rem 0;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+  color: var(--scrap-ink);
+  opacity: 0.72;
 }
 
-.home-scrap.is-bucket {
-  --scrap-paper: #d7e4f0;
-  width: 10.6rem;
-  transform: rotate(-2.4deg);
+.home-patent-seal {
+  width: 1.45rem;
+  height: 1.45rem;
 }
 
-.home-scrap.is-bar {
-  --scrap-paper: #dce8c8;
-  width: 12.4rem;
-  margin-top: 0.45rem;
-  transform: rotate(2.8deg);
+.home-patent-net {
+  width: 2.3rem;
+  height: 1.25rem;
 }
 
-.home-scrap.is-practice {
-  --scrap-paper: #f6e7a8;
-  width: 13.2rem;
-  transform: rotate(-1.8deg);
+.home-bucket {
+  --scrap-paper: #c9dced;
+  grid-area: bucket;
+  width: min(34rem, 100%);
+  margin-top: 0.15rem;
+  padding: 0.7rem 0.95rem 0.75rem;
+  transform: rotate(-1.6deg);
+}
+
+.home-bucket-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.4rem;
+  font-family: var(--font-note);
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.home-bucket-kicker svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.home-bucket-thumbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-bucket-thumbs li {
+  display: grid;
+  gap: 0.28rem;
+}
+
+.home-bucket-thumbs img {
+  display: block;
+  width: 100%;
+  height: 5.4rem;
+  object-fit: cover;
+  background: #1a120c;
+  box-shadow: 0 4px 10px rgba(40, 24, 10, 0.16);
+}
+
+.home-bucket-thumbs span {
+  font-family: var(--font-note);
+  font-size: 0.98rem;
+}
+
+.home-bucket-thumbs .is-done span {
+  color: #3d5a3a;
 }
 
 .home-scrap.is-vault {
   --scrap-paper: #f7ebcf;
-  width: min(22rem, 100%);
-  margin-top: 0.85rem;
+  grid-area: vault;
+  width: min(18rem, 100%);
+  justify-self: end;
+  align-self: center;
+  margin-top: 0.35rem;
   padding: 0.7rem 1.1rem;
   font-family: var(--font-hand);
   font-size: 1.35rem;
@@ -742,42 +854,36 @@ html[data-theme="cadence"] .diary-submit {
 @media (prefers-reduced-motion: reduce) {
   .home-polaroid,
   .home-scrap,
+  .home-peek,
+  .home-bucket,
   .home-stamp {
     transform: none;
   }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1100px) {
   .home-spread {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-      "violin travel"
-      "notes notes"
-      "chips chips";
-    gap: 0.8rem 0.4rem;
+      "violin travel food"
+      "bar patents patents"
+      "bucket bucket vault";
+    gap: 0.8rem 0.55rem;
   }
 
   .home-polaroid.is-violin,
-  .home-polaroid.is-travel {
-    width: 100%;
-    margin: 0.4rem auto 0;
-    justify-self: center;
-  }
-
-  .home-note-stack {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    justify-items: stretch;
-    align-items: start;
-  }
-
-  .home-scrap.is-food,
+  .home-polaroid.is-travel,
+  .home-peek.is-food,
+  .home-peek.is-bar,
   .home-scrap.is-patents {
     width: 100%;
-    margin: 0;
+    margin: 0.2rem 0 0;
+    justify-self: stretch;
   }
 
-  .home-chip-row {
-    justify-content: center;
+  .home-scrap.is-patents {
+    max-width: 16rem;
+    justify-self: start;
   }
 }
 
@@ -801,7 +907,8 @@ html[data-theme="cadence"] .diary-submit {
 
   .home-doodle-heart,
   .home-doodle-arrow,
-  .home-doodle-star-c {
+  .home-doodle-star-c,
+  .home-tape-hello {
     display: none;
   }
 
@@ -811,19 +918,12 @@ html[data-theme="cadence"] .diary-submit {
     gap: 0.85rem;
   }
 
-  .home-chip-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.65rem;
-  }
-
   .home-polaroid.is-violin,
   .home-polaroid.is-travel,
-  .home-scrap.is-food,
+  .home-peek.is-food,
+  .home-peek.is-bar,
   .home-scrap.is-patents,
-  .home-scrap.is-bucket,
-  .home-scrap.is-bar,
-  .home-scrap.is-practice,
+  .home-bucket,
   .home-scrap.is-vault {
     width: 100%;
     max-width: none;
@@ -832,20 +932,12 @@ html[data-theme="cadence"] .diary-submit {
     transform: none;
   }
 
-  .home-scrap.is-vault {
-    grid-column: 1 / -1;
-  }
-
   .home-polaroid.is-violin {
     transform: rotate(-2deg);
   }
 
   .home-polaroid.is-travel {
     transform: rotate(2deg);
-  }
-
-  .home-note-stack {
-    display: contents;
   }
 
   .home-polaroid img,

@@ -4,11 +4,35 @@ travel-venice.jpg
   Wikimedia Commons / Panoramio, CC BY-SA 3.0
   https://commons.wikimedia.org/wiki/File:Chiesa_Santa_Maria_della_Salute_at_Sunset_-_panoramio.jpg
 
+cocktail-sidecar.jpg
+  A sidecar cocktail in a sugar-rimmed glass, with lemon.
+  Photograph by Melissa Doroquez, 15 January 2007; cropped by User:McLeod.
+  Wikimedia Commons / Flickr, CC BY-SA 2.0
+  https://commons.wikimedia.org/wiki/File:Sidecar_cocktail.jpg
+
+bar-bottles.jpg
+  A collection of Master of Malt whiskies (single cask). Four bottles, no people.
+  Photograph by Benellefsen, 8 August 2009.
+  Wikimedia Commons, public domain
+  https://commons.wikimedia.org/wiki/File:Master_of_Malt_Bottles.jpg
+
+patents-edison.jpg
+  Thomas A. Edison, Electric-Lamp, U.S. Patent 223,898 (27 January 1880).
+  Photolithography reproduction of the patent drawing.
+  Wikimedia Commons, public domain (U.S. government work / expired copyright)
+  https://commons.wikimedia.org/wiki/File:Light_bulb_Edison_2.jpg
+
 Violin Polaroid on the public home uses the existing site still:
   assets/images/violin/piece.jpg
   William Michael Harnett, The Old Violin, 1886.
   National Gallery of Art, Washington.
   Wikimedia Commons, CC0
   https://commons.wikimedia.org/wiki/File:William_Michael_Harnett,_The_Old_Violin,_1886,_NGA_79531.jpg
+
+Bucket thumbs reuse existing site stills (places, not people):
+  assets/images/bucket/half-dome.jpg
+    Av9 / Wikimedia Commons, public domain
+  assets/images/bucket/great-wall.jpg
+    Severin.stalder / Wikimedia Commons, CC BY-SA 3.0
 
 Do not use assets/images/violin/hero.jpg on the public home — that still shows a person playing.
