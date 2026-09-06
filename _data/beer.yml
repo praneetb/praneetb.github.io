@@ -5,7 +5,7 @@
 
 bottles:
   - id: firestone-805
-    name: 805
+    name: "805"
     brand: Firestone Walker
     shelf: core
     region: California
