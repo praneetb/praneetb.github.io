@@ -39,12 +39,8 @@ body.theme-travel .welcome-strip {
   display: none !important;
 }
 
-body.theme-travel .theme-switch-label {
-  display: none;
-}
-
-body.theme-travel .theme-switch button {
-  padding: 0.28rem;
+body.theme-travel .theme-switch-toggle {
+  height: 26px;
 }
 
 html[data-theme="cadence"] .travel-rail,

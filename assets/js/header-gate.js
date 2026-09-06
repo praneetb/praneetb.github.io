@@ -1,20 +1,14 @@
 (function () {
   "use strict";
 
-  // Signed-in header only. Travel, Bar, Cocktails, Fermentation, Patents, and
-  // Bucket list are public pages (no login wall). Media, Notes, Manya, and
-  // Space stay gated via page.private — unsigned visitors never see this nav.
+  // Public panels live in the header partial and stay visible for everyone.
+  // Signed-in chrome only adds the gated extras — it must not replace Travel,
+  // Bar, Cocktails, Fermentation, Patents, or Bucket.
   var PRIVATE_LINKS = [
-    { path: "/space/", label: "Home", match: /\/space\/?$/ },
-    { path: "/travel/", label: "Travel", match: /\/travel\/?$/ },
-    { path: "/bar/", label: "Bar", match: /\/(bar|whiskey)\/?$/ },
-    { path: "/cocktails/", label: "Cocktails", match: /\/cocktails\/?$/ },
-    { path: "/fermentation/", label: "Fermentation", match: /\/fermentation\/?$/ },
-    { path: "/patents/", label: "Patents", match: /\/patents\/?$/ },
-    { path: "/media/", label: "Media", match: /\/media\/?$/ },
-    { path: "/bucket-list/", label: "Bucket list", match: /\/bucket(-list)?\/?$/ },
+    { path: "/space/", label: "Space", match: /\/space\/?$/ },
     { path: "/notes/", label: "Notes", match: /\/notes\/?$/ },
-    { path: "/manya/", label: "Manya", match: /\/manya(\/|$)/ }
+    { path: "/manya/", label: "Manya", match: /\/manya(\/|$)/ },
+    { path: "/media/", label: "Media", match: /\/media\/?$/ }
   ];
 
   function el(id) {
