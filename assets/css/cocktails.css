@@ -1,0 +1,473 @@
+.page-cocktails {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 2.4rem;
+}
+
+body:has(.page-cocktails) {
+  background-color: var(--whiskey-room);
+  background-image:
+    radial-gradient(ellipse 50% 28% at 50% 0%, var(--whiskey-spot), transparent 70%),
+    var(--whiskey-grain);
+}
+
+body:has(.page-cocktails) .site-header {
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+body:has(.page-cocktails) .welcome-strip {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cocktails-page {
+  max-width: 86rem;
+  margin: 0 auto;
+  padding: 1.05rem 1.4rem 0;
+  color: var(--whiskey-ink);
+}
+
+.cocktails-heading {
+  margin: 0 0 1rem;
+}
+
+.cocktails-kicker {
+  margin: 0 0 0.2rem;
+  color: var(--whiskey-gold);
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.cocktails-heading h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.cocktails-shell {
+  display: grid;
+  grid-template-columns: minmax(18rem, 22.5rem) minmax(0, 1fr);
+  min-height: 36rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--whiskey-gold) 22%, transparent);
+  border-radius: 1.15rem;
+  background: color-mix(in srgb, var(--whiskey-panel) 88%, #120c08);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.32);
+}
+
+.cocktails-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.05rem 1rem 1.2rem;
+  border-right: 1px solid color-mix(in srgb, var(--whiskey-gold) 16%, transparent);
+  background: color-mix(in srgb, #120c08 42%, transparent);
+}
+
+.cocktails-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.7rem;
+  background: color-mix(in srgb, #120c08 70%, transparent);
+  color: var(--whiskey-ink);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--whiskey-gold) 18%, transparent);
+}
+
+.cocktails-search svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: 0 0 auto;
+  opacity: 0.7;
+}
+
+.cocktails-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.cocktails-search-key {
+  flex: 0 0 auto;
+  padding: 0.12rem 0.38rem;
+  border-radius: 0.28rem;
+  background: color-mix(in srgb, var(--whiskey-gold) 16%, transparent);
+  color: color-mix(in srgb, var(--whiskey-gold) 80%, #fff8f2);
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 650;
+}
+
+.cocktails-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cocktails-chip {
+  padding: 0.38rem 0.78rem;
+  border: 1px solid color-mix(in srgb, var(--whiskey-gold) 28%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--whiskey-ink);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.cocktails-chip.is-active {
+  background: var(--whiskey-gold);
+  border-color: var(--whiskey-gold);
+  color: var(--whiskey-gold-ink);
+}
+
+.cocktails-list {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cocktails-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.65rem 0.7rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, #120c08 28%, transparent);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cocktails-item:hover {
+  background: color-mix(in srgb, var(--whiskey-gold) 10%, transparent);
+}
+
+.cocktails-item.is-active {
+  border-color: var(--whiskey-gold);
+  background: color-mix(in srgb, var(--whiskey-gold) 14%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--whiskey-gold) 35%, transparent);
+}
+
+.cocktails-thumb {
+  position: relative;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 0.55rem;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 248, 242, 0.22), transparent 36%),
+    #3a2416;
+}
+
+.cocktails-thumb::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.28rem;
+  width: 1.05rem;
+  height: 1.45rem;
+  border-radius: 0.18rem 0.18rem 0.12rem 0.12rem;
+  background: var(--drink, #c47a2a);
+  box-shadow: inset 0 0 0 1px rgba(255, 248, 242, 0.18);
+  transform: translateX(-50%);
+}
+
+.cocktails-thumb.glass-highball::after {
+  width: 0.78rem;
+  height: 1.6rem;
+}
+
+.cocktails-thumb[data-drink="old-fashioned"] { --drink: #c47a2a; }
+.cocktails-thumb[data-drink="mai-tai"] { --drink: #d45c28; }
+.cocktails-thumb[data-drink="long-island"] { --drink: #6a3a22; }
+.cocktails-thumb[data-drink="rum-buck"] { --drink: #e0b15a; }
+.cocktails-thumb[data-drink="sloe-gin-fizz"] { --drink: #a42a48; }
+
+.cocktails-item-copy {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.cocktails-item-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.cocktails-item-meta,
+.cocktails-item-facts {
+  color: color-mix(in srgb, var(--whiskey-ink) 68%, transparent);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.cocktails-item-facts {
+  display: flex;
+  gap: 0.7rem;
+  text-transform: capitalize;
+}
+
+.cocktails-item-go {
+  color: var(--whiskey-gold);
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.cocktails-empty {
+  margin: 0.4rem 0.2rem 0;
+  color: color-mix(in srgb, var(--whiskey-ink) 70%, transparent);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+}
+
+.cocktails-detail {
+  display: grid;
+  align-content: start;
+  gap: 1.15rem;
+  padding: 1.1rem 1.2rem 1.3rem;
+}
+
+.cocktails-video {
+  position: relative;
+  overflow: hidden;
+  min-height: 14.5rem;
+  border-radius: 0.85rem;
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(224, 177, 90, 0.16), transparent 46%),
+    #1a100a;
+}
+
+.cocktails-video video,
+.cocktails-video img {
+  display: block;
+  width: 100%;
+  height: 16.5rem;
+  object-fit: cover;
+}
+
+.cocktails-video-empty {
+  display: grid;
+  place-items: center;
+  min-height: 14.5rem;
+  color: color-mix(in srgb, var(--whiskey-ink) 78%, transparent);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.cocktails-video[data-empty="false"] .cocktails-video-empty {
+  display: none;
+}
+
+.cocktails-video-tag {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.75rem;
+  padding: 0.22rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(18, 12, 8, 0.62);
+  color: #fff8f2;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cocktails-detail-head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.cocktails-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.45rem 0 0;
+  color: color-mix(in srgb, var(--whiskey-ink) 78%, var(--whiskey-gold));
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  text-transform: lowercase;
+}
+
+.cocktails-glass svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.cocktails-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem 1.4rem;
+}
+
+.cocktails-block h3 {
+  margin: 0 0 0.45rem;
+  color: var(--whiskey-gold);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cocktails-ingredients,
+.cocktails-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cocktails-ingredients li,
+.cocktails-steps li,
+.cocktails-block p {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.cocktails-ingredients span {
+  display: inline-block;
+  min-width: 3.6rem;
+  margin-right: 0.35rem;
+  color: var(--whiskey-gold);
+  font-variant-numeric: tabular-nums;
+}
+
+.cocktails-steps {
+  counter-reset: step;
+}
+
+.cocktails-steps li {
+  padding-left: 1.4rem;
+}
+
+.cocktails-steps li::before {
+  counter-increment: step;
+  content: counter(step) ".";
+  display: inline-block;
+  width: 1.2rem;
+  margin-left: -1.4rem;
+  color: var(--whiskey-gold);
+  font-weight: 650;
+}
+
+.cocktails-notes {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.cocktails-notes-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--whiskey-gold);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cocktails-notes-label svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.cocktails-notes textarea {
+  width: 100%;
+  min-height: 6.2rem;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--whiskey-gold) 22%, transparent);
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, #120c08 55%, transparent);
+  color: var(--whiskey-ink);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+.cocktails-notes textarea:focus {
+  outline: 2px solid var(--whiskey-gold);
+  outline-offset: 2px;
+}
+
+html[data-theme="atlas"] .cocktails-heading h1,
+html[data-theme="atlas"] .cocktails-item-name,
+html[data-theme="atlas"] .cocktails-detail-head h2 {
+  font-weight: 800;
+}
+
+html[data-theme="cadence"] .cocktails-shell {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent),
+    0 22px 48px rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="cadence"] .cocktails-chip.is-active,
+html[data-theme="cadence"] .cocktails-item.is-active {
+  box-shadow: 0 0 0 1px var(--accent), 0 0 18px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+@media (max-width: 900px) {
+  .cocktails-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .cocktails-rail {
+    border-right: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--whiskey-gold) 16%, transparent);
+  }
+
+  .cocktails-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .cocktails-page {
+    padding: 0.75rem 0.85rem 0;
+  }
+
+  .cocktails-detail,
+  .cocktails-rail {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+}

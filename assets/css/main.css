@@ -42,6 +42,9 @@ html[data-theme="summit"] {
   --tile-whiskey-bg: #3d2914;
   --tile-whiskey-ink: #f7e7c3;
   --tile-whiskey-muted: rgba(247, 231, 195, 0.78);
+  --tile-cocktails-bg: #6b3a1c;
+  --tile-cocktails-ink: #f7e7c3;
+  --tile-cocktails-muted: rgba(247, 231, 195, 0.78);
   --tile-patents-bg: #5c4033;
   --tile-patents-ink: #f7f1e8;
   --tile-patents-muted: rgba(247, 241, 232, 0.78);
@@ -140,6 +143,9 @@ html[data-theme="atlas"] {
   --tile-whiskey-bg: #8a4b08;
   --tile-whiskey-ink: #fff8ef;
   --tile-whiskey-muted: rgba(255, 248, 239, 0.78);
+  --tile-cocktails-bg: #c47c08;
+  --tile-cocktails-ink: #fff8ef;
+  --tile-cocktails-muted: rgba(255, 248, 239, 0.78);
   --tile-patents-bg: #6d7b88;
   --tile-patents-ink: #ffffff;
   --tile-patents-muted: rgba(255, 255, 255, 0.78);
@@ -236,6 +242,9 @@ html[data-theme="cadence"] {
   --tile-whiskey-bg: #f4a261;
   --tile-whiskey-ink: #0b0a1f;
   --tile-whiskey-muted: rgba(11, 10, 31, 0.7);
+  --tile-cocktails-bg: #f4a261;
+  --tile-cocktails-ink: #0b0a1f;
+  --tile-cocktails-muted: rgba(11, 10, 31, 0.7);
   --tile-patents-bg: #c9a227;
   --tile-patents-ink: #0b0a1f;
   --tile-patents-muted: rgba(11, 10, 31, 0.7);
@@ -629,6 +638,7 @@ html[data-theme="cadence"] .theme-switch {
 .page-patents,
 .page-whiskey,
 .page-bar,
+.page-cocktails,
 .page-admin {
   max-width: calc(var(--wide) + 3rem);
 }
