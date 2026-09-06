@@ -3,7 +3,7 @@
 
   var RATE_KEY = "site.bar.ratings";
   var LEGACY_RATE_KEY = "site.whiskey.ratings";
-  var TAB_IDS = { whiskey: true, wine: true, beer: true };
+  var TAB_IDS = { whiskey: true, wine: true, beer: true, tequila: true };
   var TRANSITION_MS = 520;
   var POUR_MS = 1450;
 
@@ -98,7 +98,7 @@
     if (!q) {
       return true;
     }
-    var hay = [bottle.name, bottle.brand, bottle.producer, bottle.brewery, bottle.region, bottle.type, bottle.style, bottle.occasion]
+    var hay = [bottle.name, bottle.brand, bottle.producer, bottle.brewery, bottle.region, bottle.type, bottle.style, bottle.occasion, bottle.vintage]
       .concat(bottle.tags || [])
       .join(" ")
       .toLowerCase();
@@ -139,11 +139,11 @@
           shown += 1;
         }
       });
-      section.hidden = visible === 0;
+      section.hidden = q ? visible === 0 : false;
     });
     var empty = $("bar-empty");
     if (empty) {
-      empty.hidden = shown !== 0;
+      empty.hidden = shown !== 0 || !q;
     }
   }
 
@@ -188,6 +188,24 @@
       caption.textContent = meta.caption || "";
     }
     resetStream();
+    showHomeGlass(tab);
+  }
+
+  function showHomeGlass(tab) {
+    var stage = homeGlass();
+    if (!stage) {
+      return;
+    }
+    var empty = bottlesFor(tab).length === 0;
+    stage.classList.toggle("is-home", empty);
+    if (empty) {
+      stage.classList.remove("is-docked", "is-pouring", "is-filled");
+      stage.style.left = "";
+      stage.style.top = "";
+      stage.setAttribute("aria-hidden", "false");
+    } else if (!stage.classList.contains("is-docked")) {
+      stage.setAttribute("aria-hidden", "true");
+    }
   }
 
   function clearPourSides(slot) {
@@ -335,6 +353,9 @@
     var bits = [];
     if (bottle.region) {
       bits.push(bottle.region);
+    }
+    if (bottle.vintage) {
+      bits.push(String(bottle.vintage));
     }
     if (bottle.type || bottle.style) {
       bits.push(bottle.type || bottle.style);
