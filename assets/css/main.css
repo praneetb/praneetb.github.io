@@ -902,6 +902,13 @@ html.is-signed-in #page-gate {
   font-size: 1.2rem;
 }
 
+.privacy-updated {
+  margin: -0.35rem 0 0;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+}
+
 .home-title {
   margin-bottom: 0.35rem;
 }
