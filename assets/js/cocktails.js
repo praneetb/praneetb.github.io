@@ -99,7 +99,7 @@
     if (!query) {
       return true;
     }
-    var hay = [drink.name, drink.method, drink.glass, drink.garnish, drink.serve]
+    var hay = [drink.name, drink.method, drink.subtitle, drink.glass, drink.method_text, drink.source]
       .concat(drink.tags || [])
       .concat((drink.ingredients || []).map(function (line) {
         return (line.amount || "") + " " + (line.name || "");
@@ -175,6 +175,7 @@
     var poster = $("cocktails-poster");
     var empty = $("cocktails-video-empty");
     var tag = $("cocktails-video-tag");
+    var play = $("cocktails-play");
     var sources = videoSources(drink);
     var posterSrc = drink.poster ? withBase(String(drink.poster).trim()) : "";
 
@@ -192,7 +193,7 @@
       empty.hidden = true;
     }
     if (tag) {
-      tag.hidden = true;
+      tag.hidden = false;
     }
     if (frame) {
       frame.setAttribute("data-empty", sources.length ? "false" : "true");
@@ -211,10 +212,10 @@
         player.removeAttribute("poster");
       }
       player.hidden = false;
-      if (tag) {
-        tag.hidden = false;
-      }
       player.load();
+      if (play) {
+        play.disabled = false;
+      }
       return;
     }
 
@@ -226,6 +227,9 @@
     if (empty) {
       empty.hidden = false;
     }
+    if (play) {
+      play.disabled = true;
+    }
   }
 
   function renderDetail(drink) {
@@ -234,18 +238,12 @@
     }
     setText("cocktails-name", drink.name);
     setText("cocktails-glass-text", drink.glass);
-    setText("cocktails-garnish", drink.garnish);
-    setText("cocktails-serve", drink.serve);
+    setText("cocktails-method", drink.method_text || (drink.steps || []).join(" "));
+    setText("cocktails-source-text", drink.source || "Obsidian Recipes");
     fillList(
       "cocktails-ingredients",
       (drink.ingredients || []).map(function (line) {
         return "<li><span>" + escapeHtml(line.amount || "") + "</span> " + escapeHtml(line.name || "") + "</li>";
-      }).join("")
-    );
-    fillList(
-      "cocktails-steps",
-      (drink.steps || []).map(function (step) {
-        return "<li>" + escapeHtml(step) + "</li>";
       }).join("")
     );
     renderMedia(drink);
@@ -357,6 +355,18 @@
         if (activeId) {
           writeNote(activeId, notes.value.trim());
         }
+      });
+    }
+
+    var play = $("cocktails-play");
+    var player = $("cocktails-player");
+    if (play && player) {
+      play.addEventListener("click", function () {
+        if (play.disabled) {
+          return;
+        }
+        player.hidden = false;
+        player.play();
       });
     }
 
