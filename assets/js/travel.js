@@ -15,7 +15,7 @@
   var EARTH_TEX = "https://cdn.jsdelivr.net/npm/three-globe@2.44.1/example/img/earth-blue-marble.jpg";
   var EARTH_BUMP = "https://cdn.jsdelivr.net/npm/three-globe@2.44.1/example/img/earth-topology.png";
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  var CRUISE_ALTITUDE = 1.55;
+  var CRUISE_ALTITUDE = 2.2;
   var FLY_ALTITUDE = 0.95;
   var FLY_MS = 1100;
   var LINGER_MS = 5000;
