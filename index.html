@@ -72,6 +72,7 @@ extra_js:
     <svg class="home-doodle home-doodle-star-a" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4 13.6 9 20 10.2 13.6 11.4 12 18 10.4 11.4 4 10.2 10.4 9Z"/></svg>
     <svg class="home-doodle home-doodle-star-b" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 13.2 9 19 10.2 13.2 11.4 12 17.2 10.8 11.4 5 10.2 10.8 9Z"/></svg>
     <svg class="home-doodle home-doodle-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.2-4.4-9-9.2C1.6 7.4 4 4.8 7 5.4c1.6.3 2.8 1.5 5 3.6 2.2-2.1 3.4-3.3 5-3.6 3-.6 5.4 2 4 5.4C19.2 15.6 12 20 12 20z"/></svg>
+    <span class="home-tape home-tape-lilac home-tape-hello" aria-hidden="true"></span>
   </header>
 
   <div class="home-spread" aria-label="Public rooms">
@@ -83,7 +84,11 @@ extra_js:
           alt="A violin and bow hanging on a dark wooden door, from William Michael Harnett’s The Old Violin, 1886. No person in the frame."
           width="900"
           height="1200">
-        <figcaption>VIOLIN THERAPY <span aria-hidden="true">♡</span> notes, not noise.</figcaption>
+        <figcaption>
+          <span class="home-polaroid-kicker">VIOLIN THERAPY <span aria-hidden="true">♡</span></span>
+          <span class="home-polaroid-line">notes, not noise.</span>
+          <span class="home-polaroid-sub">practice room / vault log</span>
+        </figcaption>
       </figure>
     </a>
 
@@ -96,75 +101,99 @@ extra_js:
           width="1267"
           height="950">
         <figcaption>
-          TRAVEL TALES <span aria-hidden="true">✈</span>
-          {% for name in travel_peek %}{% if name.name %}{% if name.code == "US" %}USA{% else %}{{ name.name }}{% endif %}{% else %}{{ name }}{% endif %}{% unless forloop.last %} · {% endunless %}{% endfor %}
-          <span class="home-polaroid-total">({{ travel_total }} countries)</span>
+          <span class="home-polaroid-kicker">TRAVEL TALES <span aria-hidden="true">✈</span></span>
+          <span class="home-polaroid-line">{% for name in travel_peek %}{% if name.name %}{% if name.code == "US" %}USA{% else %}{{ name.name }}{% endif %}{% else %}{{ name }}{% endif %}{% unless forloop.last %} • {% endunless %}{% endfor %}</span>
+          <span class="home-polaroid-total">(+{{ travel_total }} countries)</span>
         </figcaption>
       </figure>
     </a>
 
-    <div class="home-note-stack">
-      <article class="home-scrap is-food">
-        <span class="home-tape home-tape-lilac" aria-hidden="true"></span>
-        <a class="home-scrap-link" href="{{ '/cocktails/' | relative_url }}">
-          <span class="home-scrap-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M8 3v8.2c0 1.4-.8 2.2-2 2.6V21h2.4v-7.2c-1.2-.4-2-1.2-2-2.6V5.2h1.6V3H8zm8.4 0-.8 4.4c-.2 1.2.4 2.2 1.6 2.8V21H20V10.2c1.2-.6 1.8-1.6 1.6-2.8L20.8 3h-4.4zM5.2 3 4 11.2c-.2 1.5.7 2.5 2.2 2.8V21H8.6v-7c1.5-.3 2.4-1.3 2.2-2.8L9.6 3H5.2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-          </span>
-          <p class="home-scrap-list">{% for drink in cocktail_peek %}{% assign drink_name = drink.name | default: drink %}{% if drink_name == "Long Island Iced Tea" %}{% assign drink_name = "LIIT" %}{% endif %}{{ drink_name }}{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
-        </a>
-        <p class="home-scrap-rule" aria-hidden="true"></p>
-        <p class="home-scrap-meta">
-          <a class="home-scrap-inline" href="{{ '/fermentation/' | relative_url }}">{% if ferment.title %}{{ ferment.title | downcase }}{% else %}kombucha{% endif %} brewing weekly</a>
-          <span aria-hidden="true">🍶 ♡</span>
-        </p>
-      </article>
-
-      <a class="home-scrap is-patents" href="{{ '/patents/' | relative_url }}">
-        <span class="home-tape home-tape-grid-grey" aria-hidden="true"></span>
-        <span class="home-scrap-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 3.4c2.4 0 4.4 2 4.4 4.6 0 1.7-.9 3.1-2.2 3.9v2.3H9.8v-2.3A4.5 4.5 0 0 1 7.6 8c0-2.6 2-4.6 4.4-4.6ZM9.6 16.4h4.8M10.2 19h3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </span>
-        <p class="home-scrap-kicker">Patents</p>
-        <p class="home-scrap-list">{{ patent_issued_n }} issued · {{ patent_app_n }} app</p>
-        <p class="home-scrap-meta">NAT / QoS / routing</p>
+    <article class="home-peek is-food">
+      <span class="home-tape home-tape-lilac" aria-hidden="true"></span>
+      <a class="home-peek-link" href="{{ '/cocktails/' | relative_url }}">
+        <img
+          src="{{ '/assets/images/home/cocktail-sidecar.jpg' | relative_url }}"
+          alt="A sidecar cocktail in a sugar-rimmed coupe with a citrus garnish, warm bar light. No person in the frame."
+          width="771"
+          height="954">
+        <p class="home-scrap-list">{% for drink in cocktail_peek %}{% assign drink_name = drink.name | default: drink %}{% if drink_name == "Long Island Iced Tea" %}{% assign drink_name = "LIIT" %}{% endif %}{{ drink_name }}{% unless forloop.last %} • {% endunless %}{% endfor %}</p>
       </a>
-    </div>
+      <p class="home-scrap-rule" aria-hidden="true"></p>
+      <p class="home-scrap-meta">
+        <a class="home-scrap-inline" href="{{ '/fermentation/' | relative_url }}">{% if ferment.title %}{{ ferment.title | downcase }}{% else %}kombucha{% endif %} brewing weekly</a>
+        <span aria-hidden="true">🍶 ♡</span>
+      </p>
+    </article>
 
-    <div class="home-chip-row">
-    <a class="home-scrap is-bucket" href="{{ '/bucket-list/' | relative_url }}">
+    <a class="home-peek is-bar" href="{{ '/bar/' | relative_url }}">
+      <span class="home-tape home-tape-gold" aria-hidden="true"></span>
+      <img
+        src="{{ '/assets/images/home/bar-bottles.jpg' | relative_url }}"
+        alt="Four whiskey bottles lined up on a pale shelf. No person in the frame."
+        width="800"
+        height="838">
+      <p class="home-scrap-kicker">Bar <span aria-hidden="true">🍸</span></p>
+      {% if home.bar.peek and home.bar.peek.size > 0 %}
+      <p class="home-scrap-list">{% for name in home.bar.peek %}{{ name }}{% unless forloop.last %}{% assign bar_mod = forloop.index | modulo: 2 %}{% if bar_mod == 0 %}<br>{% else %} • {% endif %}{% endunless %}{% endfor %}</p>
+      {% else %}
+      <p class="home-scrap-list">Whiskey • Wine<br>Beer • Tequila</p>
+      {% endif %}
+    </a>
+
+    <a class="home-scrap is-patents" href="{{ '/patents/' | relative_url }}">
+      <span class="home-tape home-tape-grid-grey" aria-hidden="true"></span>
+      <img
+        class="home-scrap-photo"
+        src="{{ '/assets/images/home/patents-edison.jpg' | relative_url }}"
+        alt="Public-domain drawing from Edison’s 1880 electric-lamp patent. Document and diagram only, no person."
+        width="720"
+        height="1056">
       <span class="home-scrap-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="m3.6 17.6 5-8.2 3.2 4.4L15 8.4l5.4 9.2H3.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 3.4c2.4 0 4.4 2 4.4 4.6 0 1.7-.9 3.1-2.2 3.9v2.3H9.8v-2.3A4.5 4.5 0 0 1 7.6 8c0-2.6 2-4.6 4.4-4.6ZM9.6 16.4h4.8M10.2 19h3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </span>
-      <p class="home-scrap-kicker">Bucket</p>
-      <ul class="home-check">
+      <p class="home-scrap-kicker">Patents</p>
+      <p class="home-scrap-list">{{ patent_issued_n }} issued • {{ patent_app_n }} app</p>
+      <p class="home-scrap-meta">(NAT / QoS / routing)</p>
+      <span class="home-patent-marks" aria-hidden="true">
+        <svg class="home-patent-seal" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10.2" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="16" cy="16" r="6.2" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M16 8.2v15.6M8.2 16h15.6" stroke="currentColor" stroke-width="1"/></svg>
+        <svg class="home-patent-net" viewBox="0 0 36 20"><circle cx="6" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="18" cy="4.4" r="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="18" cy="15.6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="30" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 10h8M18 6.6v6.8M20 4.8 28 9.2M20 15.2 28 10.8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+      </span>
+    </a>
+
+    <a class="home-bucket" href="{{ '/bucket-list/' | relative_url }}">
+      <p class="home-bucket-kicker">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.6 17.6 5-8.2 3.2 4.4L15 8.4l5.4 9.2H3.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        Bucket
+      </p>
+      <ul class="home-bucket-thumbs">
         {% if peek_done %}
-        <li class="is-done"><span aria-hidden="true">✓</span> {{ peek_done.title }}</li>
+        <li class="is-done">
+          <img
+            src="{{ peek_done.photo | default: '/assets/images/bucket/half-dome.jpg' | relative_url }}"
+            alt="{{ peek_done.caption | default: peek_done.title }}. Place photograph, no people in the frame."
+            width="640"
+            height="400">
+          <span><span aria-hidden="true">✓</span> {{ peek_done.title }}</span>
+        </li>
         {% endif %}
         {% if peek_todo %}
-        <li><span aria-hidden="true">○</span> {% assign wall = peek_todo.title | replace: " of China", "" %}{{ wall }}</li>
+        <li>
+          {% assign wall = peek_todo.title | replace: " of China", "" %}
+          <img
+            src="{{ peek_todo.photo | default: '/assets/images/bucket/great-wall.jpg' | relative_url }}"
+            alt="{{ peek_todo.caption | default: peek_todo.title }}. Place photograph, no people in the frame."
+            width="640"
+            height="400">
+          <span><span aria-hidden="true">○</span> {{ wall }}</span>
+        </li>
         {% endif %}
       </ul>
-    </a>
-
-    <a class="home-scrap is-bar" href="{{ '/bar/' | relative_url }}">
-      <span class="home-scrap-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M6 5h12l-6 7.8V19h3v1.4H9V19h3v-6.2L6 5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-      </span>
-      <p class="home-scrap-kicker">Bar</p>
-      <p class="home-scrap-list">{% if home.bar.peek %}{{ home.bar.peek | join: " · " }}{% else %}Whiskey · Wine · Beer · Tequila{% endif %}</p>
-    </a>
-
-    <a class="home-scrap is-practice" href="{{ '/violin/' | relative_url }}">
-      <span class="home-scrap-icon" aria-hidden="true">♫</span>
-      <p class="home-scrap-kicker">Violin</p>
-      <p class="home-scrap-list">practice room / vault log</p>
     </a>
 
     <p class="home-scrap is-vault">
       curated <span>peeks</span> into the <span>vault</span>
       <span class="home-scrap-heart" aria-hidden="true">♡</span>
     </p>
-    </div>
 
     <svg class="home-doodle home-doodle-arrow" viewBox="0 0 80 28" aria-hidden="true">
       <path d="M4 16c18-10 38-12 64-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>

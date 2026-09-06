@@ -4,7 +4,7 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 ## Public and private
 
-Logged-out visitors see the public home on `/` — a cream-paper scrapbook spread (handwritten greeting, overlapping Polaroids, torn notes) with vault-backed peeks for Travel, Cocktails, Fermentation, Patents, Bucket, Bar, and Violin. There is no Half Dome hero banner and no people photos. Tile peeks stay vault-backed via `_data/home.yml` (`scripts/bake-home.mjs`). Travel uses a credited Venice sunset still; the violin Polaroid is an instrument-only painting (fiddle + bow, no person). Media, Notes, and Manya are not shown on the public home, even as locked tiles.
+Logged-out visitors see the public home on `/` — a cream-paper scrapbook spread (handwritten greeting, overlapping Polaroids, pictured peeks, torn notes) with vault-backed peeks for Travel, Cocktails, Fermentation, Patents, Bucket, Bar, and Violin. There is no Half Dome hero banner and no people photos. Tile peeks stay vault-backed via `_data/home.yml` (`scripts/bake-home.mjs`). Travel uses a credited Venice sunset still; the one violin Polaroid is an instrument-only painting (fiddle + bow, no person) with the practice-room / vault-log line on the caption. Cocktails, Bar, Patents, and Bucket carry credited stills (no faces). Media, Notes, and Manya are not shown on the public home, even as locked tiles.
 
 Public panel links — Travel, Bar, Cocktails, Fermentation, Patents, Bucket, Violin — stay in the header for everyone, signed out or signed in. Media, Notes, Manya, and Space are gated extras that appear only after login; they never replace the public panels.
 
@@ -16,7 +16,7 @@ These pages are public and read-only for guests (Sign in stays in the header):
 - [Fermentation](/fermentation/) — vault set from `_data/fermentation.yml` (kombucha, salgam, sourdough starter, sourdough bread); search and All / Drinks / Bread / Logs; short video when present
 - [Patents](/patents/) — spicy Problem → punch → why it stuck cards from `_data/plaques.yml`, baked from vault `10-Work/Reference/Patents.md` (five Cisco grants and one abandoned Aruba/HPE application). Formal titles stay in the fine print. Summit / Atlas / Cadence restyle the lab-notebook page.
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)
-- [Violin](/violin/) — public foyer and piece detail from `_data/violin.yml`, baked from the daily sync path `30-Knowledge/Interests/Violin/` (`Violin MOC.md`, `Pieces`, `Practice-Log`, `Recordings`, `Teacher-Notes`). Pieces, logs, recordings, and teacher notes stay empty while that tree is stubs only. The public home links the Polaroid and practice scrap here; it does not invent practice counts.
+- [Violin](/violin/) — public foyer and piece detail from `_data/violin.yml`, baked from the daily sync path `30-Knowledge/Interests/Violin/` (`Violin MOC.md`, `Pieces`, `Practice-Log`, `Recordings`, `Teacher-Notes`). Pieces, logs, recordings, and teacher notes stay empty while that tree is stubs only. The public home links one Polaroid here (practice room / vault log lives on the caption); it does not invent practice counts.
 
 Sign in (username + password) unlocks a site-wide session. After a successful login from `/`, the browser goes to `/space/`. The wordmark then points at `/space/`; the public home can still be opened directly. Signed-in chrome keeps those public panels and adds private navigation:
 
@@ -90,7 +90,7 @@ That writes `_data/home.yml` from:
 - `10-Work/Reference/Patents.md`
 - `20-Personal/Bucket List.md`
 
-Missing vault notes fall back to `_data/travel.yml`, `cocktails.yml`, `fermentation.yml`, `plaques.yml`, and `bucket.yml`. Bar peek stays the existing bottle strip. Do not change `assets/notes.enc.json` for this bake.
+Missing vault notes fall back to `_data/travel.yml`, `cocktails.yml`, `fermentation.yml`, `plaques.yml`, and `bucket.yml`. Bar peek stays Whiskey · Wine · Beer · Tequila, now with a credited bottle-shelf still on the public home. Do not change `assets/notes.enc.json` for this bake.
 
 Patents page data is a separate bake from the same vault export. The list is locked: the same six live `/patents/` plaques (five Cisco issued + one abandoned Aruba/HPE). Do not add or invent patents.
 
