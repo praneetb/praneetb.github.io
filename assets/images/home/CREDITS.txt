@@ -22,6 +22,12 @@ patents-edison.jpg
   Wikimedia Commons, public domain (U.S. government work / expired copyright)
   https://commons.wikimedia.org/wiki/File:Light_bulb_Edison_2.jpg
 
+health-paddle.jpg
+  A pickleball paddle with one blue indoor ball and one yellow outdoor ball.
+  Photograph by OvertAnalyzer, 13 March 2022.
+  Wikimedia Commons, CC BY-SA 4.0
+  https://commons.wikimedia.org/wiki/File:A_pickleball_paddle_with_two_pickleballs.jpg
+
 Violin Polaroid on the public home uses the existing site still:
   assets/images/violin/piece.jpg
   William Michael Harnett, The Old Violin, 1886.

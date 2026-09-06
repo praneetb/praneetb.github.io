@@ -17,6 +17,8 @@
  * Otherwise the matching live site _data file is used.
  * Never invents countries, recipes, patents, or bucket items.
  * Does not write assets/notes.enc.json.
+ * Health Polaroid on `/` stays static in index.html (movement names only).
+ * Do not bake Whoop Recovery / Strain / Sleep / HRV onto the public home.
  */
 
 import { promises as fs } from "node:fs";
@@ -470,6 +472,8 @@ function render(data) {
   lines.push("#   node scripts/bake-home.mjs --list /path/to/obsidian-vault");
   lines.push("#");
   lines.push("# Does not write assets/notes.enc.json.");
+  lines.push("# Health Polaroid on `/` is static in index.html (Pickleball · Running · Walking).");
+  lines.push("# Do not bake Whoop Recovery / Strain / Sleep / HRV onto the public home.");
   lines.push("");
   lines.push("vault:");
   lines.push("  travel: " + PATHS.travel);
