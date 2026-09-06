@@ -1,5 +1,6 @@
 # Visited countries for /travel/.
 # Source of truth: Drive obsidian-vault/20-Personal/Travel/Countries Visited.md
+# Home peek bake: node scripts/bake-home.mjs /path/to/obsidian-vault
 # Baked from the vault ## Visited bullets. Do not invent countries.
 
 countries:

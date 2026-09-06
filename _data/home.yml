@@ -1,0 +1,91 @@
+# Public home peeks. Baked by scripts/bake-home.mjs.
+# Vault is source of truth when the note exists. Otherwise the live site
+# _data files below. Do not invent countries, recipes, patents, or bucket items.
+#
+# Daily sync:
+#   node scripts/bake-home.mjs /path/to/obsidian-vault
+#   node scripts/bake-home.mjs --from-site
+#   node scripts/bake-home.mjs --list /path/to/obsidian-vault
+#
+# Does not write assets/notes.enc.json.
+
+vault:
+  travel: 20-Personal/Travel/Countries Visited.md
+  recipes: 30-Knowledge/Recipes
+  fermentation: 30-Knowledge/Recipes/Kombucha & Salgam.md
+  patents: 10-Work/Reference/Patents.md
+  bucket: 20-Personal/Bucket List.md
+
+baked_from: vault
+baked_note: Vault notes used where present; missing notes fell back to live site _data.
+
+sources:
+  travel: vault
+  bar: site
+  cocktails: vault
+  fermentation: vault
+  patents: vault
+  bucket: vault
+
+travel:
+  peek:
+    - India
+    - USA
+    - Italy
+    - Thailand
+    - Indonesia
+  count: 18
+
+bar:
+  peek:
+    - Whiskey
+    - Wine
+    - Beer
+    - Tequila
+
+cocktails:
+  peek:
+    - Old Fashioned
+    - Mai Tai
+    - Rum Buck
+    - Long Island Iced Tea
+    - Sloe Gin Fizz
+
+fermentation:
+  title: Kombucha
+  peek: Weekly brew · SCOBY
+  recipe:
+    - 1 gallon water
+    - 18 g black tea
+    - 1 cup sugar
+    - 2 cups SCOBY
+  note: Introduced by Aniket Gawade
+
+patents:
+  issued: 5
+  applications: 1
+  items:
+    - number: "US 6,901,079"
+      status: issued
+    - number: "US 7,068,645"
+      status: issued
+    - number: "US 7,107,360"
+      status: issued
+    - number: "US 7,586,940"
+      status: issued
+    - number: "US 7,986,703"
+      status: issued
+    - number: US 2014/0204763
+      status: application
+
+bucket:
+  done:
+    id: half-dome
+    title: Half Dome
+    caption: Half Dome · Yosemite
+    photo: /assets/images/bucket/half-dome.jpg
+  todo:
+    id: great-wall
+    title: Great Wall of China
+    caption: Great Wall of China
+    photo: /assets/images/bucket/great-wall.jpg

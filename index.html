@@ -28,13 +28,32 @@ extra_js:
 {% if diary_endpoint != "" %}
   {% assign diary_configured = true %}
 {% endif %}
-{% assign tile_plaque = issued_plaques | first %}
-{% assign tile_polaroid = nil %}
-{% for item in site.data.bucket.items %}
-  {% if item.id == "half-dome" %}
-    {% assign tile_polaroid = item %}
-  {% endif %}
-{% endfor %}
+{% assign home = site.data.home %}
+{% assign travel_peek = home.travel.peek %}
+{% assign travel_total = home.travel.count | default: country_count %}
+{% assign cocktail_peek = home.cocktails.peek %}
+{% if cocktail_peek == nil or cocktail_peek.size == 0 %}
+  {% assign cocktail_peek = site.data.cocktails.items %}
+{% endif %}
+{% assign ferment = home.fermentation %}
+{% assign patent_peek = home.patents.items %}
+{% if patent_peek == nil or patent_peek.size == 0 %}
+  {% assign patent_peek = site.data.plaques.items %}
+{% endif %}
+{% assign patent_issued_n = home.patents.issued | default: patent_count %}
+{% assign patent_app_n = home.patents.applications | default: 1 %}
+{% assign bucket_done = home.bucket.done %}
+{% assign bucket_todo = home.bucket.todo %}
+{% if bucket_done == nil or bucket_todo == nil %}
+  {% for item in site.data.bucket.items %}
+    {% if item.id == "half-dome" and bucket_done == nil %}
+      {% assign bucket_done = item %}
+    {% endif %}
+    {% if item.id == "great-wall" and bucket_todo == nil %}
+      {% assign bucket_todo = item %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 <div class="home-shell">
   <section class="home-hero" aria-label="Half Dome">
@@ -67,7 +86,8 @@ extra_js:
           </svg>
           Travel
         </h2>
-        <p>Places, journeys &amp; quiet observations.</p>
+        <p class="home-tile-peek">{% for name in travel_peek %}{% if name.name %}{% if name.code == "US" %}USA{% else %}{{ name.name }}{% endif %}{% else %}{{ name }}{% endif %}{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
+        <p class="home-tile-meta">{{ travel_total }} countries</p>
       </div>
     </a>
 
@@ -91,7 +111,8 @@ extra_js:
           </svg>
           Bar
         </h2>
-        <p>Good company, better spirits.</p>
+        <p class="home-tile-peek">{% if home.bar.peek %}{{ home.bar.peek | join: " · " }}{% else %}Whiskey · Wine · Beer · Tequila{% endif %}</p>
+        <p class="home-tile-meta">{{ bar_count }} bottles</p>
       </div>
     </a>
 
@@ -114,7 +135,7 @@ extra_js:
           </svg>
           Cocktails
         </h2>
-        <p>Recipes, rituals &amp; ratios.</p>
+        <p class="home-tile-peek">{% for drink in cocktail_peek %}{% if drink.name %}{{ drink.name }}{% else %}{{ drink }}{% endif %}{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
       </div>
     </a>
 
@@ -139,21 +160,20 @@ extra_js:
           </svg>
           Fermentation
         </h2>
-        <p>Experiments in live culture.</p>
+        <p class="home-tile-peek">{% if ferment.peek %}{{ ferment.peek }}{% else %}Weekly brew · SCOBY{% endif %}</p>
+        {% if ferment.recipe and ferment.recipe.size > 0 %}
+        <p class="home-tile-meta">{{ ferment.recipe | join: " · " }}</p>
+        {% endif %}
       </div>
     </a>
 
     <a class="home-tile home-tile-patents" href="{{ '/patents/' | relative_url }}">
       <div class="home-tile-media home-plaque-stage" aria-hidden="true">
-        {% if tile_plaque %}
-        <figure class="home-plaque finish-{{ tile_plaque.finish | default: 'gold' }}">
-          <div class="home-plaque-plate">
-            <p class="home-plaque-mark">U.S. Patent</p>
-            <p class="home-plaque-number">{{ tile_plaque.number }}</p>
-            <p class="home-plaque-year">{{ tile_plaque.year }}</p>
-          </div>
-        </figure>
-        {% endif %}
+        <ol class="home-patent-list">
+          {% for plaque in patent_peek %}
+          <li class="finish-{{ plaque.status | default: 'issued' }}">{{ plaque.number }}</li>
+          {% endfor %}
+        </ol>
       </div>
       <div class="home-tile-copy">
         <h2>
@@ -163,19 +183,37 @@ extra_js:
           </svg>
           Patents
         </h2>
-        <p>Ideas, filings &amp; intellectual property.</p>
+        <p class="home-tile-meta">{{ patent_issued_n }} issued · {{ patent_app_n }} application</p>
       </div>
     </a>
 
     <a class="home-tile home-tile-bucket" href="{{ '/bucket-list/' | relative_url }}">
-      <div class="home-tile-media" aria-hidden="true">
-        {% if tile_polaroid %}
-        <img
-          class="home-tile-photo"
-          src="{{ tile_polaroid.photo | relative_url }}"
-          alt=""
-          width="400"
-          height="300">
+      <div class="home-tile-media home-polaroid-stage">
+        {% if bucket_done %}
+        <figure class="home-polaroid is-done">
+          <img
+            src="{{ bucket_done.photo | relative_url }}"
+            alt=""
+            width="400"
+            height="300">
+          <figcaption>
+            <span class="home-polaroid-mark" aria-hidden="true"></span>
+            {{ bucket_done.caption | default: bucket_done.title }}
+          </figcaption>
+        </figure>
+        {% endif %}
+        {% if bucket_todo %}
+        <figure class="home-polaroid is-open">
+          <img
+            src="{{ bucket_todo.photo | relative_url }}"
+            alt=""
+            width="400"
+            height="300">
+          <figcaption>
+            <span class="home-polaroid-mark" aria-hidden="true"></span>
+            {{ bucket_todo.caption | default: bucket_todo.title }}
+          </figcaption>
+        </figure>
         {% endif %}
       </div>
       <div class="home-tile-copy">
@@ -186,7 +224,7 @@ extra_js:
           </svg>
           Bucket
         </h2>
-        <p>Lists, someday-mays &amp; wild plans.</p>
+        <p class="home-tile-peek">Done {{ bucket_done.title | default: "Half Dome" }} · To-do {{ bucket_todo.title | default: "Great Wall of China" }}</p>
       </div>
     </a>
   </nav>
