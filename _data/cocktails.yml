@@ -39,7 +39,7 @@ items:
     subtitle: Jamaican rum • stirred
     glass: rocks
     source: Obsidian Recipes
-    video:
+    video: /assets/cocktails/old-fashioned-recipe.mp4
     poster:
     ingredients:
       - amount: ¼ oz
