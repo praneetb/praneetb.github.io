@@ -6,6 +6,7 @@
   // Bar, Cocktails, Fermentation, Patents, Bucket, or Violin.
   var PRIVATE_LINKS = [
     { path: "/space/", label: "Space", match: /\/space\/?$/ },
+    { path: "/health/", label: "Health", match: /\/health\/?$/ },
     { path: "/notes/", label: "Notes", match: /\/notes\/?$/ },
     { path: "/manya/", label: "Manya", match: /\/manya(\/|$)/ },
     { path: "/media/", label: "Media", match: /\/media\/?$/ }

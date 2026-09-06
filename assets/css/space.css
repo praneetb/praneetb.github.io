@@ -93,6 +93,11 @@
   color: var(--tile-bucket-ink);
 }
 
+.space-tile[data-tile="health"] {
+  background: var(--tile-health-bg);
+  color: var(--tile-health-ink);
+}
+
 .space-tile[data-tile="notes"] {
   background: var(--tile-notes-bg);
   color: var(--tile-notes-ink);

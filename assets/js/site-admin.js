@@ -3,6 +3,7 @@
 
   const ADMIN_KEY = "site.admin";
   const NOTES_KEY = "site.notes";
+  const HEALTH_KEY = "site.health";
   const REPORTS_READY_KEY = "site.manyaReports";
   const REPORTS_DB_NAME = "site.manyaReports";
   const REPORTS_STORE = "pdfs";
@@ -14,6 +15,7 @@
   var notesEnvelopePromise = null;
   var reportsEnvelopePromise = null;
   var satPsatEnvelopePromise = null;
+  var healthEnvelopePromise = null;
   var signInHandler = null;
   var reportsIndex = {};
   var reportsBlobs = {};
@@ -109,6 +111,21 @@
       );
     }
     return satPsatEnvelopePromise;
+  }
+
+  function loadHealthEnvelope() {
+    if (!healthEnvelopePromise) {
+      healthEnvelopePromise = loadJson(assetUrl("health/snapshot.enc.json")).then(
+        function (envelope) {
+          return envelope;
+        },
+        function () {
+          healthEnvelopePromise = Promise.resolve(null);
+          return null;
+        }
+      );
+    }
+    return healthEnvelopePromise;
   }
 
   async function deriveAesKey(password, envelope) {
@@ -216,6 +233,18 @@
     return decryptReportPack(password, await loadSatPsatEnvelope());
   }
 
+  async function decryptHealth(password) {
+    var envelope = await loadHealthEnvelope();
+    if (!envelope) {
+      return null;
+    }
+    var pack = await decryptEnvelope(password, envelope);
+    if (!pack || pack.kind !== "health-snapshot" || !pack.snapshot) {
+      return null;
+    }
+    return pack.snapshot;
+  }
+
   function storageGet(key) {
     try {
       return sessionStorage.getItem(key) || localStorage.getItem(key);
@@ -260,6 +289,48 @@
       return emptyNotes();
     }
   }
+
+  function getHealth() {
+    var raw = storageGet(HEALTH_KEY);
+    if (!raw) {
+      return null;
+    }
+    try {
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === "object" ? parsed : null;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function persistHealth(snapshot, persist) {
+    if (!snapshot) {
+      storageRemove(sessionStorage, HEALTH_KEY);
+      storageRemove(localStorage, HEALTH_KEY);
+      return;
+    }
+    var payload = JSON.stringify(snapshot);
+    try {
+      storageSet(sessionStorage, HEALTH_KEY, payload);
+    } catch (err) {
+      // Session may still have notes unlock without health cache.
+    }
+    if (persist) {
+      try {
+        storageSet(localStorage, HEALTH_KEY, payload);
+      } catch (err) {
+        // Persistent storage optional for health.
+      }
+    } else {
+      storageRemove(localStorage, HEALTH_KEY);
+    }
+  }
+
+  function clearHealth() {
+    storageRemove(sessionStorage, HEALTH_KEY);
+    storageRemove(localStorage, HEALTH_KEY);
+  }
+
 
   function revokeReportUrls() {
     Object.keys(reportsUrls).forEach(function (id) {
@@ -595,7 +666,7 @@
     return reportsUrls[key];
   }
 
-  function persistUnlock(notes, persist) {
+  function persistUnlock(notes, persist, health) {
     var notesPayload = JSON.stringify(notes || emptyNotes());
     try {
       storageSet(sessionStorage, ADMIN_KEY, ADMIN_KEY);
@@ -621,6 +692,7 @@
       storageRemove(localStorage, NOTES_KEY);
       clearLegacyRose(localStorage);
     }
+    persistHealth(health || null, persist);
     persistReportsReady(persist);
     try {
       document.documentElement.classList.add("is-signed-in");
@@ -637,6 +709,7 @@
     storageRemove(localStorage, ADMIN_KEY);
     storageRemove(localStorage, NOTES_KEY);
     clearLegacyRose(localStorage);
+    clearHealth();
     clearReportsReady();
     resetReportsMemory();
     reportsHydratePromise = null;
@@ -653,6 +726,7 @@
     notesEnvelopePromise = null;
     reportsEnvelopePromise = null;
     satPsatEnvelopePromise = null;
+    healthEnvelopePromise = null;
   }
 
   function isUnconfiguredError(err) {
@@ -689,8 +763,14 @@
       }
       await cacheManyaReports(password);
       reportsHydratePromise = Promise.resolve();
-      persistUnlock(notes, persist);
-      return { ok: true, notes: notes };
+      var health = null;
+      try {
+        health = await decryptHealth(password);
+      } catch (err) {
+        health = null;
+      }
+      persistUnlock(notes, persist, health);
+      return { ok: true, notes: notes, health: health };
     } catch (err) {
       forgetNotesEnvelope();
       if (isUnconfiguredError(err)) {
@@ -727,6 +807,7 @@
     },
     isUnlocked: isUnlocked,
     getNotes: getNotes,
+    getHealth: getHealth,
     lock: lock,
     tryUnlock: tryUnlock,
     onChange: onChange,
