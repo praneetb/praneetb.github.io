@@ -28,7 +28,7 @@ Sign in (username + password) unlocks a site-wide session. After a successful lo
 
 Direct URLs to Media, Notes, Manya, and Space show a sign-in prompt when locked. The visited-country list is site data, not a per-browser stash.
 
-Resume stays public.
+Resume stays public. [Privacy](/privacy/) is public too — how this personal site uses data, including Whoop and similar integrations.
 
 ## Visitor diary
 
