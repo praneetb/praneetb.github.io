@@ -1,0 +1,34 @@
+{% assign item = include.item %}
+{% assign abandoned = false %}
+{% if item.status == "abandoned" or item.status == "application" %}
+  {% assign abandoned = true %}
+{% endif %}
+<article class="patent-card{% if abandoned %} is-abandoned{% endif %}">
+  <div class="patent-card-grid">
+    <section class="patent-col">
+      <h2>Problem</h2>
+      <p>{{ item.problem }}</p>
+    </section>
+    <section class="patent-col patent-col-punch">
+      <h2>Punch</h2>
+      <p>{{ item.punch }}</p>
+      {% if item.roast != "" %}
+      <p class="patent-roast">{{ item.roast }}</p>
+      {% endif %}
+    </section>
+    <section class="patent-col">
+      <h2>Why it stuck</h2>
+      <p>{{ item.stuck }}</p>
+    </section>
+  </div>
+  <footer class="patent-real">
+    <span class="patent-real-label">Real title</span>
+    <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
+      {{ item.number }} — {{ item.title }}{% if item.continuation %}, continuation{% endif %}
+      ({% if item.assignee_short %}{{ item.assignee_short }}{% else %}{{ item.assignee }}{% endif %}{% if item.date %}, {{ item.date }}{% elsif item.year %}, {{ item.year }}{% endif %})
+    </a>
+  </footer>
+  {% if abandoned %}
+  <p class="patent-abandoned-stamp" aria-label="Application abandoned">Application abandoned</p>
+  {% endif %}
+</article>

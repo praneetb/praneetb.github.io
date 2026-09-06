@@ -5,31 +5,58 @@ nav: patents
 permalink: /patents/
 private: false
 hide_footer: true
-description: Issued patents and one abandoned application, hung as plaques.
+description: Problem, punch, and why it stuck — six patents from the vault, with opinions.
 extra_css:
   - /assets/css/patents.css
 ---
 
-<header class="patents-hero">
-  <p class="patents-kicker">
-    <span data-theme-line="summit">Praneet Bachheti · Inventor</span>
-    <span data-theme-line="atlas">Issued patents and pending application</span>
-    <span data-theme-line="cadence">Innovation. Engineered. Recognized.</span>
-  </p>
-  <h1>
-    <span data-theme-line="summit">Patents</span>
-    <span data-theme-line="atlas">Patents</span>
-    <span data-theme-line="cadence">Patents</span>
-  </h1>
-  <p class="patents-lede">
-    <span data-theme-line="summit">Five grants and one application, hung as plaques.</span>
-    <span data-theme-line="atlas">Cisco and Aruba work, mounted on a steel wall.</span>
-    <span data-theme-line="cadence">The record, in metal.</span>
-  </p>
-</header>
+<div class="patents-sheet">
+  <span class="patents-binder" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+  </span>
 
-<ul class="plaque-wall">
-  {% for plaque in site.data.plaques.items %}
-    {% include plaque.html plaque=plaque %}
-  {% endfor %}
-</ul>
+  <header class="patents-hero">
+    <p class="patents-stamp patents-stamp-spicy" aria-hidden="true">
+      Spicy patents · Problem → punch → stuck
+    </p>
+    <div class="patents-hero-copy">
+      <p class="patents-kicker">
+        <span data-theme-line="summit">Lab notebook · with opinions</span>
+        <span data-theme-line="atlas">Vault record · with opinions</span>
+        <span data-theme-line="cadence">Filed. Roasted. Remembered.</span>
+      </p>
+      <h1>
+        <span data-theme-line="summit">Patents • with opinions</span>
+        <span data-theme-line="atlas">Patents • with opinions</span>
+        <span data-theme-line="cadence">Patents • with opinions</span>
+      </h1>
+      <p class="patents-lede">
+        <span data-theme-line="summit">Problem → punch → why it stuck.</span>
+        <span data-theme-line="atlas">Problem → punch → why it stuck.</span>
+        <span data-theme-line="cadence">Problem → punch → why it stuck.</span>
+      </p>
+      <p class="patents-fine">Formal titles in the fine print. Facts from the public record.</p>
+    </div>
+    <aside class="patents-postmark" aria-hidden="true">
+      <p class="patents-postmark-kicker">Lab note</p>
+      <p class="patents-postmark-src">Vault SoT</p>
+      <p class="patents-postmark-path">10-Work/Reference/Patents.md</p>
+    </aside>
+  </header>
+
+  <ol class="patent-list">
+    {% for item in site.data.plaques.items %}
+    <li>
+      {% include patent-card.html item=item %}
+    </li>
+    {% endfor %}
+  </ol>
+
+  <footer class="patents-colophon">
+    <p class="patents-sot">
+      <span aria-hidden="true">✎</span>
+      Vault SoT • {{ site.data.plaques.vault.note | default: "10-Work/Reference/Patents.md" }}
+    </p>
+    <p>Opinions are {{ site.data.plaques.inventor }}’s. Facts are from the public record. For research &amp; reference only.</p>
+  </footer>
+</div>

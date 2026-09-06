@@ -14,7 +14,7 @@ These pages are public and read-only for guests (Sign in stays in the header):
 - [Bar](/bar/) — four-tab bar (Whiskey / Wine / Beer / Tequila) with Premium / Core / Everyday shelves from `_data/whiskey.yml`, `_data/wine.yml`, `_data/beer.yml`, and `_data/tequila.yml`; search, hover lift, pour, and tasting notes. Star ratings stay signed-in only. `/whiskey/` redirects to `/bar/?tab=whiskey`
 - [Cocktails](/cocktails/) — vault recipes from `_data/cocktails.yml` (`30-Knowledge/Recipes/`); search and Stirred / Shaken / Built filters; short-pour video when present; visitor notes stay in localStorage
 - [Fermentation](/fermentation/) — vault set from `_data/fermentation.yml` (kombucha, salgam, sourdough starter, sourdough bread); search and All / Drinks / Bread / Logs; short video when present
-- [Patents](/patents/) — plaque wall of issued patents and one abandoned application; Summit / Atlas / Cadence restyle the wall and metal
+- [Patents](/patents/) — spicy Problem → punch → why it stuck cards from `_data/plaques.yml`, baked from vault `10-Work/Reference/Patents.md` (five Cisco grants and one abandoned Aruba/HPE application). Formal titles stay in the fine print. Summit / Atlas / Cadence restyle the lab-notebook page.
 - [Bucket list](/bucket-list/) — Polaroid wall split into Collected and Still ahead; each band groups Seven Wonders and Heights from `_data/bucket.yml` (read-only completion)
 - [Violin](/violin/) — public foyer and piece detail from `_data/violin.yml`, baked from the daily sync path `30-Knowledge/Interests/Violin/` (`Violin MOC.md`, `Pieces`, `Practice-Log`, `Recordings`, `Teacher-Notes`). Pieces, logs, recordings, and teacher notes stay empty while that tree is stubs only. Not a home tile — open `/violin/` from the header or Your space after sign-in.
 
@@ -91,6 +91,24 @@ That writes `_data/home.yml` from:
 - `20-Personal/Bucket List.md`
 
 Missing vault notes fall back to `_data/travel.yml`, `cocktails.yml`, `fermentation.yml`, `plaques.yml`, and `bucket.yml`. Bar peek stays the existing bottle strip. Do not change `assets/notes.enc.json` for this bake.
+
+Patents page data is a separate bake from the same vault export. The list is locked: the same six live `/patents/` plaques (five Cisco issued + one abandoned Aruba/HPE). Do not add or invent patents.
+
+```bash
+node scripts/bake-patents.mjs /path/to/vault
+node scripts/bake-patents.mjs --list /path/to/vault
+node scripts/bake-patents.mjs --check
+```
+
+That reads `10-Work/Reference/Patents.md` only and writes `_data/plaques.yml`, `_data/patents.yml`, and `_data/issued.yml`. Formal titles, numbers, dates, assignees, and status come only from that note. Editorial problem / punch / stuck lines live in `scripts/bake-patents.mjs`, keyed by patent id, and are applied only when that id is already in the locked set. Bucket list is a different vault note (`20-Personal/Bucket List.md`) and is not a patents source. Do not change `assets/notes.enc.json` for this bake.
+
+Daily sync path (same vault root as violin / home peeks):
+
+```bash
+node scripts/bake-violin.mjs /path/to/vault
+node scripts/bake-home.mjs /path/to/vault
+node scripts/bake-patents.mjs /path/to/vault
+```
 
 ## Publishing Manya report cards
 
