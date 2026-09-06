@@ -1,0 +1,49 @@
+---
+layout: default
+title: Health
+nav: health
+permalink: /health/
+private: true
+sitemap: false
+robots: noindex, nofollow
+hide_footer: true
+description: Private pulse scrapbook — recovery, strain, sleep, and workouts.
+extra_css:
+  - /assets/css/health.css
+extra_js:
+  - /assets/js/health.js
+---
+
+<div class="health-app" id="health-app">
+  <header class="health-hero">
+    <p class="health-kicker">Pulse scrapbook</p>
+    <h1 class="health-title">hey, your body today<span class="health-title-dot">.</span></h1>
+    <p class="health-asof" id="health-asof"></p>
+    <div class="health-doodles" aria-hidden="true">
+      <span class="health-heart">♡</span>
+      <span class="health-star">✦</span>
+      <span class="health-heart health-heart-2">♡</span>
+      <span class="health-star health-star-2">✧</span>
+    </div>
+  </header>
+
+  <section class="health-cards" id="health-cards" aria-label="Today’s vitals"></section>
+
+  <section class="health-row" aria-label="Workouts and trends">
+    <div class="health-workouts" id="health-workouts"></div>
+    <aside class="health-trends scrapbook-card" id="health-trends">
+      <div class="washi washi-grid" aria-hidden="true"></div>
+      <h2>14–30 day trends</h2>
+      <p class="health-trends-sub">Light sparkline view</p>
+      <div id="health-sparklines"></div>
+    </aside>
+  </section>
+
+  <footer class="health-foot">
+    <p class="health-mantra">track. reflect. fuel. repeat. <span aria-hidden="true">♡</span></p>
+    <p class="health-note scrapbook-note">Your pulse, your scrapbook. Keep showing up for you.</p>
+    <p class="health-sticky scrapbook-sticky" aria-hidden="true">Small choices. Big pulse.</p>
+  </footer>
+
+  <p class="health-status" id="health-status" hidden></p>
+</div>

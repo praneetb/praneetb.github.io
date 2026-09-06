@@ -1,0 +1,430 @@
+/* H1 Pulse Scrapbook — cream washi private health dashboard */
+
+.page-health {
+  max-width: 68rem;
+  padding-bottom: 3rem;
+}
+
+.health-app {
+  position: relative;
+  margin: 0.25rem 0 1.5rem;
+  padding: 1.25rem 1.1rem 2rem;
+  border-radius: 1.4rem;
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(232, 160, 176, 0.14), transparent 42%),
+    radial-gradient(ellipse at 88% 18%, rgba(196, 214, 176, 0.18), transparent 40%),
+    linear-gradient(180deg, #faf4ea 0%, #f3eadc 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset, 0 18px 40px rgba(28, 25, 23, 0.06);
+  overflow: hidden;
+}
+
+.health-app::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+.health-hero {
+  position: relative;
+  text-align: center;
+  padding: 0.4rem 0.5rem 1.2rem;
+}
+
+.health-kicker {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.health-title {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 5vw, 3.35rem);
+  line-height: 1.05;
+  color: #2a241f;
+  text-decoration: underline;
+  text-decoration-color: #8b6bb5;
+  text-decoration-thickness: 0.12rem;
+  text-underline-offset: 0.22em;
+}
+
+.health-title-dot {
+  color: #8b6bb5;
+}
+
+.health-asof {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-note);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+
+.health-doodles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.health-heart,
+.health-star {
+  position: absolute;
+  font-size: 1.15rem;
+  opacity: 0.75;
+}
+
+.health-heart {
+  top: 12%;
+  left: 8%;
+  color: #e08aa0;
+  transform: rotate(-12deg);
+}
+
+.health-heart-2 {
+  top: 28%;
+  right: 10%;
+  left: auto;
+  transform: rotate(8deg);
+}
+
+.health-star {
+  top: 8%;
+  right: 22%;
+  color: #d4a84b;
+}
+
+.health-star-2 {
+  top: 42%;
+  left: 16%;
+  right: auto;
+  color: #6bb3b0;
+  font-size: 0.95rem;
+}
+
+.health-cards {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 0.4rem 0 1.15rem;
+}
+
+.scrapbook-card {
+  position: relative;
+  padding: 1rem 0.95rem 0.95rem;
+  border-radius: 1.05rem;
+  background: #fffdf8;
+  border: 1px solid rgba(80, 60, 40, 0.08);
+  box-shadow: 0 10px 24px rgba(40, 30, 20, 0.07);
+}
+
+.washi {
+  position: absolute;
+  top: -0.42rem;
+  left: 50%;
+  width: 3.4rem;
+  height: 0.78rem;
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 0.12rem;
+  opacity: 0.92;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.washi-dots {
+  background:
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.55) 0 0.12rem, transparent 0.14rem),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.55) 0 0.12rem, transparent 0.14rem),
+    radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.55) 0 0.12rem, transparent 0.14rem),
+    #7eb89a;
+}
+
+.washi-stripe {
+  background: repeating-linear-gradient(
+    115deg,
+    #e8a070 0 0.28rem,
+    #f0c4a0 0.28rem 0.55rem
+  );
+}
+
+.washi-lilac {
+  background: repeating-linear-gradient(
+    -18deg,
+    #b8a0d4 0 0.22rem,
+    #d8c8ea 0.22rem 0.44rem
+  );
+}
+
+.washi-grid {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+    #7aa7c9;
+  background-size: 0.35rem 0.35rem, 0.35rem 0.35rem, auto;
+}
+
+.vital-card {
+  min-height: 8.5rem;
+}
+
+.vital-card[data-kind="recovery"] {
+  background: linear-gradient(165deg, #eef7e8, #e4f0dc);
+}
+
+.vital-card[data-kind="strain"] {
+  background: linear-gradient(165deg, #fff1e4, #f7e2d0);
+}
+
+.vital-card[data-kind="sleep"] {
+  background: linear-gradient(165deg, #f0e8f8, #e6dcf2);
+}
+
+.vital-card[data-kind="hr"] {
+  background: linear-gradient(165deg, #ece8f6, #e3dff0);
+}
+
+.vital-label {
+  margin: 0.35rem 0 0.15rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #4a4540;
+}
+
+.vital-value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3vw, 2.35rem);
+  font-weight: 600;
+  line-height: 1.05;
+  color: #1f1b18;
+}
+
+.vital-value small {
+  font-size: 0.55em;
+  font-weight: 500;
+  color: #5c5752;
+}
+
+.vital-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.45rem 0 0;
+  font-family: var(--font-note);
+  font-size: 1rem;
+  color: #4f4a45;
+}
+
+.vital-dot {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.vital-icon {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.75rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  opacity: 0.55;
+  color: #3d3833;
+}
+
+.health-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.health-workouts {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.workout-chip {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.workout-chip[data-sport="pickleball"] {
+  background: linear-gradient(160deg, #e7f5e4, #d8ecd4);
+}
+
+.workout-chip[data-sport="strength-trainer"],
+.workout-chip[data-sport="weightlifting"] {
+  background: linear-gradient(160deg, #efe8f7, #e4daf1);
+}
+
+.workout-chip[data-sport="walking"],
+.workout-chip[data-sport="activity"] {
+  background: linear-gradient(160deg, #eef4f8, #e2ebf2);
+}
+
+.workout-chip h3 {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #2a241f;
+}
+
+.workout-meta {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: #514c47;
+}
+
+.workout-strain {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-note);
+  font-size: 1.05rem;
+  color: #3f3a36;
+}
+
+.workout-empty,
+.health-status {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-note);
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+}
+
+.health-trends h2 {
+  margin: 0.35rem 0 0.1rem;
+  font-family: var(--font-hand);
+  font-size: 1.55rem;
+}
+
+.health-trends-sub {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.spark-block {
+  margin: 0 0 0.85rem;
+}
+
+.spark-block:last-child {
+  margin-bottom: 0;
+}
+
+.spark-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0 0 0.25rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4a4540;
+}
+
+.spark-label span:last-child {
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.spark-svg {
+  display: block;
+  width: 100%;
+  height: 3.1rem;
+}
+
+.health-foot {
+  position: relative;
+  margin-top: 1.4rem;
+  padding-top: 0.4rem;
+  display: grid;
+  gap: 0.65rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.health-mantra {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  color: #5a4338;
+}
+
+.scrapbook-note {
+  margin: 0;
+  max-width: 28rem;
+  padding: 0.7rem 1rem;
+  border: 1.5px dashed rgba(90, 70, 50, 0.28);
+  border-radius: 0.85rem;
+  font-family: var(--font-note);
+  font-size: 1.05rem;
+  color: #4a4038;
+  background: rgba(255, 253, 248, 0.7);
+}
+
+.scrapbook-sticky {
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.2rem;
+  margin: 0;
+  max-width: 8.5rem;
+  padding: 0.55rem 0.6rem;
+  background: #fff7c8;
+  box-shadow: 0 6px 14px rgba(40, 30, 20, 0.1);
+  transform: rotate(3deg);
+  font-family: var(--font-note);
+  font-size: 0.95rem;
+  color: #4a4030;
+}
+
+.scrapbook-sticky::before {
+  content: "";
+  position: absolute;
+  top: -0.35rem;
+  left: 50%;
+  width: 2.4rem;
+  height: 0.55rem;
+  transform: translateX(-50%) rotate(-4deg);
+  background: repeating-linear-gradient(
+    90deg,
+    #6a9ec9 0 0.28rem,
+    #dce8f2 0.28rem 0.55rem
+  );
+}
+
+@media (max-width: 960px) {
+  .health-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .health-row {
+    grid-template-columns: 1fr;
+  }
+
+  .scrapbook-sticky {
+    position: static;
+    transform: rotate(1deg);
+  }
+}
+
+@media (max-width: 560px) {
+  .health-app {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+
+  .health-cards {
+    grid-template-columns: 1fr;
+  }
+}

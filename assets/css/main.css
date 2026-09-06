@@ -41,6 +41,9 @@ html[data-theme="summit"] {
   --tile-notes-bg: #e8dfd2;
   --tile-notes-ink: #1c1917;
   --tile-notes-muted: #5c5a56;
+  --tile-health-bg: #d9e8d4;
+  --tile-health-ink: #1c1917;
+  --tile-health-muted: #3e4a3c;
   --tile-manya-bg: #c5d5c0;
   --tile-manya-ink: #1c1917;
   --tile-manya-muted: #3e4a3c;
@@ -150,6 +153,9 @@ html[data-theme="atlas"] {
   --tile-notes-bg: #023047;
   --tile-notes-ink: #ffffff;
   --tile-notes-muted: rgba(255, 255, 255, 0.72);
+  --tile-health-bg: #1d3557;
+  --tile-health-ink: #e8f5e9;
+  --tile-health-muted: rgba(232, 245, 233, 0.75);
   --tile-manya-bg: #023047;
   --tile-manya-ink: #ffffff;
   --tile-manya-muted: rgba(255, 255, 255, 0.72);
@@ -257,6 +263,9 @@ html[data-theme="cadence"] {
   --tile-notes-bg: #1b1464;
   --tile-notes-ink: #f4f1fa;
   --tile-notes-muted: #cdb4db;
+  --tile-health-bg: #2d6a4f;
+  --tile-health-ink: #f1faee;
+  --tile-health-muted: rgba(241, 250, 238, 0.78);
   --tile-manya-bg: #cdb4db;
   --tile-manya-ink: #1b1464;
   --tile-manya-muted: rgba(27, 20, 100, 0.72);
