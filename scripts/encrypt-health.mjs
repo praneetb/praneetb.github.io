@@ -23,7 +23,10 @@ const DEFAULT_OUT = path.join(ROOT, "assets", "health", "snapshot.enc.json");
 const ITER = 600000;
 const KEY_LEN = 32;
 const IV_LEN = 12;
-const SCHEMA = "thekedaar_health_snapshot_v1";
+const ALLOWED_SCHEMAS = new Set([
+  "thekedaar_health_snapshot_v1",
+  "thekedaar_health_snapshot_v1_1"
+]);
 
 function usage() {
   console.error(
@@ -73,8 +76,14 @@ async function loadSnapshot(infile) {
   if (!raw || typeof raw !== "object") {
     throw new Error("Snapshot is not a JSON object");
   }
-  if (raw.schema && raw.schema !== SCHEMA) {
-    throw new Error("Unexpected schema " + raw.schema + " (want " + SCHEMA + ")");
+  if (raw.schema && !ALLOWED_SCHEMAS.has(raw.schema)) {
+    throw new Error(
+      "Unexpected schema " +
+        raw.schema +
+        " (want one of " +
+        Array.from(ALLOWED_SCHEMAS).join(", ") +
+        ")"
+    );
   }
   if (!raw.as_of || !Array.isArray(raw.days)) {
     throw new Error("Snapshot missing as_of / days");
