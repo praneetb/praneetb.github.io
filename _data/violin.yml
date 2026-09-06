@@ -1,0 +1,107 @@
+# Violin section — baked site data.
+# Source of truth: Obsidian vault path
+#   30-Knowledge/Interests/Violin/
+#     Violin.md              (MOC)
+#     Pieces/                (public piece notes)
+#     Practice-Log/          (private sessions)
+#     Recordings/            (private audio + take notes)
+#     Teacher-Notes/         (private teacher feedback)
+#
+# Bake (does not invent logs, recordings, or teacher notes):
+#   node scripts/bake-violin.mjs /path/to/obsidian-vault
+#
+# When those vault folders are empty, practice_log / recordings /
+# teacher_notes stay []. Streak and weeks are derived only from
+# Practice-Log dates. Piece names may be 2–3 placeholders, marked
+# placeholder: true, until real Pieces notes exist.
+#
+# Do not invent practice sessions, recordings, or teacher notes.
+
+vault:
+  root: 30-Knowledge/Interests/Violin
+  moc: 30-Knowledge/Interests/Violin/Violin.md
+  pieces: 30-Knowledge/Interests/Violin/Pieces
+  practice_log: 30-Knowledge/Interests/Violin/Practice-Log
+  recordings: 30-Knowledge/Interests/Violin/Recordings
+  teacher_notes: 30-Knowledge/Interests/Violin/Teacher-Notes
+
+baked_from: empty-vault
+baked_note: >-
+  Vault folders were not present in this repo. Private lists are empty.
+  Three public piece names are placeholders until Pieces notes are baked.
+
+hero:
+  title: Violin
+  kicker: Learning in public.
+  lede: A public record of learning violin with intention, patience, and a little music along the way.
+  image: /assets/images/violin/hero.jpg
+  image_alt: Close view of a violin being played, warm wood and bow in motion.
+  image_credit: Wikimedia Commons, public-domain / CC stills — see assets/images/violin/CREDITS.txt
+
+story:
+  title: Violin — Learning in public
+  lede: Daily practice. Small wins. Real progress.
+  cta: Watch story
+  image: /assets/images/violin/hero.jpg
+
+# Derived only from practice_log[].date. Zero when the log is empty.
+streak_days: 0
+weeks: 0
+
+pieces:
+  - id: meditation
+    placeholder: true
+    title: Méditation
+    subtitle: Massenet
+    full_title: Méditation from Thaïs
+    composer: Jules Massenet
+    composer_short: Massenet
+    status: polishing
+    key: D-flat Major
+    difficulty: Level 6–7 (Advanced)
+    icon: fleur
+    why_i_like_it: >-
+      A serene, intimate monologue of a piece—lyrical, tender, and deeply
+      expressive. It invites both vulnerability and control, with every
+      phrase revealing something new.
+    image: /assets/images/violin/piece.jpg
+    vault_path: 30-Knowledge/Interests/Violin/Pieces/Meditation.md
+
+  - id: ave-maria
+    placeholder: true
+    title: Ave Maria
+    subtitle: Bach / Gounod
+    full_title: Ave Maria
+    composer: Bach / Gounod
+    composer_short: Bach / Gounod
+    status: learning
+    key: ""
+    difficulty: ""
+    icon: note
+    why_i_like_it: ""
+    image: /assets/images/violin/piece.jpg
+    vault_path: 30-Knowledge/Interests/Violin/Pieces/Ave-Maria.md
+
+  - id: simple-gifts
+    placeholder: true
+    title: Simple Gifts
+    subtitle: Trad. arr.
+    full_title: Simple Gifts
+    composer: Traditional, arranged
+    composer_short: Trad. arr.
+    status: ready
+    key: ""
+    difficulty: ""
+    icon: star
+    why_i_like_it: ""
+    image: /assets/images/violin/piece.jpg
+    vault_path: 30-Knowledge/Interests/Violin/Pieces/Simple-Gifts.md
+
+# Private. Empty until Practice-Log notes are baked from the vault.
+practice_log: []
+
+# Private. Empty until Recordings notes (and audio) are baked from the vault.
+recordings: []
+
+# Private. Empty until Teacher-Notes are baked from the vault.
+teacher_notes: []

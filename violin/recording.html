@@ -1,0 +1,120 @@
+---
+layout: default
+title: Practice recording
+nav: violin-recording
+permalink: /violin/practice/recording/
+private: true
+sitemap: false
+robots: noindex, nofollow
+hide_footer: true
+description: Private violin recording detail, gated behind sign-in.
+extra_css:
+  - /assets/css/violin.css
+extra_js:
+  - /assets/js/violin.js
+---
+
+{% assign recordings = site.data.violin.recordings %}
+{% include violin-data.html %}
+
+<div class="violin-studio" data-studio="recording">
+  <aside class="violin-sidebar">
+    <p class="violin-brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M8.2 14.8c1.6 1.6 4.2 1.4 5.6-.2l5.4-5.8c.8-.8.8-2.2 0-3l-1.4-1.4c-.8-.8-2.2-.8-3 0L9 10.2c-1.6 1.4-1.8 4-.2 5.6z"/>
+        <circle cx="8.6" cy="16.2" r="2.1"/>
+      </svg>
+      <span>
+        <strong>Private Practice ROOM</strong>
+        <em>Recordings</em>
+      </span>
+    </p>
+    <nav aria-label="Practice studio">
+      <a href="{{ '/violin/practice/' | relative_url }}">Practice room</a>
+      <a href="{{ '/violin/practice/' | relative_url }}#practice-log" aria-current="page">Practice Log</a>
+      <a href="{{ '/violin/practice/' | relative_url }}#recordings">Recordings</a>
+      <a href="{{ '/violin/' | relative_url }}">Pieces</a>
+      <a href="{{ '/violin/practice/' | relative_url }}#teacher-notes">Notes</a>
+    </nav>
+    <p class="violin-private-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+        <rect x="6" y="11" width="12" height="9" rx="1.6"/>
+        <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+      </svg>
+      Private &amp; Secure
+      <span>Only you can access this.</span>
+    </p>
+  </aside>
+
+  <div class="violin-studio-main">
+    <p class="violin-back violin-back-studio">
+      <a href="{{ '/violin/practice/' | relative_url }}">← Back to Practice room</a>
+    </p>
+
+    {% if recordings and recordings.size > 0 %}
+      {% for rec in recordings %}
+      <article class="violin-take" data-recording-id="{{ rec.id }}"{% unless forloop.first %} hidden{% endunless %}>
+        <header class="violin-studio-head">
+          <h1>Practice take · {{ rec.date | escape }}</h1>
+          <p class="violin-studio-lock">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <rect x="6" y="11" width="12" height="9" rx="1.6"/>
+              <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+            </svg>
+            Private recording
+          </p>
+        </header>
+        <section class="violin-card violin-player">
+          <header>
+            <h2>{{ rec.title | escape }}</h2>
+            <p>{% if rec.duration and rec.duration != "" %}1 clip · {{ rec.duration | escape }} duration{% else %}Vault take{% endif %}</p>
+          </header>
+          {% if rec.audio and rec.audio != "" %}
+          <audio controls preload="none" src="{{ rec.audio | relative_url }}"></audio>
+          {% else %}
+          <p class="violin-empty">No audio file is attached to this vault note yet.</p>
+          {% endif %}
+          <dl class="violin-take-grid">
+            <div>
+              <dt>Date</dt>
+              <dd>{{ rec.date | escape }}</dd>
+            </div>
+            <div>
+              <dt>Minutes practiced</dt>
+              <dd>{% if rec.minutes and rec.minutes != 0 %}{{ rec.minutes }} minutes{% else %}—{% endif %}</dd>
+            </div>
+            <div>
+              <dt>Piece</dt>
+              <dd>{{ rec.piece | default: rec.title | escape }}</dd>
+            </div>
+            <div>
+              <dt>Focus / what went well</dt>
+              <dd>{% if rec.focus and rec.focus != "" %}{{ rec.focus | escape }}{% else %}—{% endif %}</dd>
+            </div>
+          </dl>
+        </section>
+      </article>
+      {% endfor %}
+    {% else %}
+    <article class="violin-take">
+      <header class="violin-studio-head">
+        <h1>Practice take</h1>
+        <p class="violin-studio-lock">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <rect x="6" y="11" width="12" height="9" rx="1.6"/>
+            <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+          </svg>
+          Private recording
+        </p>
+      </header>
+      <section class="violin-card">
+        <p class="violin-empty">No recordings in the vault yet. This page stays empty until a take is baked from <code>30-Knowledge/Interests/Violin/Recordings</code>. Private audio is never shown on the public foyer.</p>
+      </section>
+    </article>
+    {% endif %}
+
+    <p class="violin-studio-actions">
+      <a class="violin-ghost-btn" href="{{ '/violin/practice/' | relative_url }}">← Back to Practice room</a>
+    </p>
+  </div>
+</div>

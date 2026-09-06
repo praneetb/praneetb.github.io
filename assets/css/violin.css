@@ -1,0 +1,841 @@
+.page-violin,
+.page-violin-piece,
+.page-violin-practice,
+.page-violin-recording {
+  max-width: none;
+  width: 100%;
+  padding: 0 0 3rem;
+}
+
+.violin-when-in {
+  display: none;
+}
+
+html.is-signed-in .violin-when-out {
+  display: none;
+}
+
+html.is-signed-in .violin-when-in {
+  display: inline;
+}
+
+.violin-shell {
+  --violin-cream: #fdf8f1;
+  --violin-brown: #4a2e19;
+  --violin-gold: #c4a46a;
+  --violin-tan: #e6d3b3;
+  --violin-ink: var(--ink);
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.4rem 1.4rem 2.4rem;
+}
+
+html[data-theme="summit"] .violin-shell,
+html[data-theme="summit"] .page-violin,
+html[data-theme="summit"] .page-violin-piece {
+  --violin-cream: #fdf8f1;
+  --violin-brown: #4a2e19;
+  --violin-gold: #c4a46a;
+}
+
+.violin-localbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.35rem 0 1.1rem;
+}
+
+.violin-local-kicker {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.violin-local-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.35rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.violin-local-nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.violin-local-nav a[aria-current="page"] {
+  box-shadow: inset 0 -2px 0 var(--violin-brown, var(--ink));
+}
+
+.violin-practice-cta {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 0.9rem;
+  border-radius: 999px;
+  background: var(--violin-brown, var(--ink));
+  color: #fff8f2;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.violin-practice-cta:hover {
+  color: #fff8f2;
+  filter: brightness(1.08);
+}
+
+.violin-practice-cta svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.violin-hero {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.9fr) minmax(0, 1.15fr);
+  min-height: 28rem;
+  overflow: hidden;
+  border-radius: 1.4rem;
+  background: color-mix(in srgb, var(--paper) 70%, #f6ecdc);
+}
+
+.violin-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.4rem 2.2rem 2.6rem;
+}
+
+.violin-hero h1 {
+  margin: 0;
+  color: var(--violin-brown, var(--ink));
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 8vw, 5.6rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+
+.violin-hero-kicker {
+  margin: 0.55rem 0 0;
+  color: #8a5a28;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  font-style: italic;
+}
+
+.violin-hero-lede {
+  margin: 1.15rem 0 0;
+  max-width: 28rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+.violin-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: max-content;
+  margin-top: 1.5rem;
+  padding: 0.72rem 1.15rem;
+  border-radius: 999px;
+  background: var(--violin-tan, var(--accent-wash));
+  color: var(--violin-brown, var(--ink));
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.violin-hero-btn:hover {
+  color: var(--violin-brown, var(--ink));
+}
+
+.violin-hero-media {
+  margin: 0;
+  min-height: 22rem;
+}
+
+.violin-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 28%;
+  filter: saturate(0.92) sepia(0.18);
+}
+
+.violin-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 11.5rem;
+  gap: 1.4rem;
+  align-items: start;
+  margin-top: 2.2rem;
+}
+
+.violin-pieces h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.violin-piece-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.violin-piece-card {
+  display: grid;
+  justify-items: start;
+  gap: 0.55rem;
+  min-height: 10.4rem;
+  padding: 1rem 1rem 0.95rem;
+  border: 1px solid var(--rule);
+  border-radius: 1rem;
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 10px 24px var(--shadow);
+}
+
+.violin-piece-card:hover {
+  color: inherit;
+  transform: translateY(-2px);
+}
+
+.violin-piece-icon {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  color: var(--violin-brown, var(--ink));
+}
+
+.violin-piece-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.violin-piece-title {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.violin-piece-sub {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.violin-placeholder-mark,
+.violin-placeholder-banner {
+  display: inline-block;
+  margin-top: 0.2rem;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.violin-placeholder-banner {
+  margin: 0.7rem 0 0;
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-wash) 70%, var(--surface));
+}
+
+.violin-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.violin-status i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #8a5a28;
+}
+
+.violin-status[data-status="polishing"] i,
+.violin-status-pill[data-status="polishing"] {
+  background: #c4a46a;
+}
+
+.violin-status[data-status="polishing"] i {
+  background: #c4a46a;
+}
+
+.violin-status[data-status="learning"] i {
+  background: #6b3a22;
+}
+
+.violin-status[data-status="ready"] i {
+  background: #5a7a4a;
+}
+
+.violin-stats {
+  display: grid;
+  justify-items: center;
+  gap: 0.7rem;
+  padding-top: 2.2rem;
+}
+
+.violin-weeks {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 8.6rem;
+  height: 8.6rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 58%, color-mix(in srgb, var(--violin-gold) 35%, transparent) 59% 62%, transparent 63%),
+    var(--surface);
+  box-shadow: 0 10px 24px var(--shadow);
+}
+
+.violin-weeks-burst {
+  position: absolute;
+  top: 1.15rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  background: conic-gradient(from 0deg, var(--violin-gold), transparent 40%, var(--violin-gold));
+  mask: radial-gradient(circle at 50% 50%, transparent 38%, #000 39%);
+}
+
+.violin-weeks-num {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 650;
+  line-height: 1;
+}
+
+.violin-weeks-label,
+.violin-streak,
+.violin-stats-empty {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.violin-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.violin-also {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 2.4rem 0 0;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+.violin-also svg {
+  width: 1.7rem;
+  height: 1.2rem;
+}
+
+.violin-piece-detail {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.85fr) minmax(0, 1.15fr);
+  gap: 1.6rem 2rem;
+  padding-top: 0.4rem;
+}
+
+.violin-piece-photo {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  aspect-ratio: 1;
+  background: #d8c4a4;
+}
+
+.violin-piece-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.35) saturate(0.7);
+}
+
+.violin-piece-main h1 {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.violin-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.9rem 0 0;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  background: #e8d4a8;
+  color: var(--violin-brown, var(--ink));
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.violin-why {
+  margin-top: 1.6rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--rule);
+}
+
+.violin-why h2 {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.violin-why p {
+  margin: 0;
+  max-width: 38rem;
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.violin-empty-copy {
+  color: var(--ink-soft);
+}
+
+.violin-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  grid-column: 1 / -1;
+  margin: 0.4rem 0 0;
+  padding: 1.1rem 0 0.2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.violin-meta div {
+  padding: 0 1rem;
+  border-left: 1px solid var(--rule);
+}
+
+.violin-meta div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.violin-meta dt {
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.violin-meta dd {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.4rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.violin-meta svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+}
+
+.violin-back {
+  margin: 1.8rem 0 0;
+}
+
+.violin-back a {
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.violin-mountains {
+  height: 4.6rem;
+  margin-top: 1.6rem;
+  background:
+    radial-gradient(120% 80% at 18% 120%, color-mix(in srgb, var(--violin-gold) 35%, transparent) 42%, transparent 43%),
+    radial-gradient(90% 70% at 52% 130%, color-mix(in srgb, var(--violin-brown) 22%, transparent) 40%, transparent 41%),
+    radial-gradient(110% 80% at 84% 120%, color-mix(in srgb, var(--violin-gold) 28%, transparent) 42%, transparent 43%);
+}
+
+.page-violin-practice,
+.page-violin-recording {
+  background: #12100e;
+}
+
+.violin-studio {
+  --studio-bg: #12100e;
+  --studio-ink: #f3e6c8;
+  --studio-muted: rgba(243, 230, 200, 0.62);
+  --studio-gold: #d4af37;
+  --studio-line: rgba(212, 175, 55, 0.28);
+  display: grid;
+  grid-template-columns: 15.5rem minmax(0, 1fr);
+  min-height: calc(100vh - 6rem);
+  color: var(--studio-ink);
+  background: var(--studio-bg);
+}
+
+html[data-theme="atlas"] .violin-studio {
+  --studio-bg: #071820;
+  --studio-gold: #ffb703;
+  --studio-ink: #fff8ef;
+}
+
+html[data-theme="cadence"] .violin-studio {
+  --studio-bg: #0b0a1f;
+  --studio-gold: #f4a261;
+  --studio-ink: #f4f1fa;
+}
+
+.violin-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 1.4rem 1.1rem 1.2rem;
+  border-right: 1px solid var(--studio-line);
+}
+
+.violin-brand {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0;
+  color: var(--studio-gold);
+}
+
+.violin-brand svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: 0 0 auto;
+}
+
+.violin-brand strong,
+.violin-brand em {
+  display: block;
+}
+
+.violin-brand strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.violin-brand em {
+  color: var(--studio-muted);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-style: normal;
+}
+
+.violin-sidebar nav {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.violin-sidebar nav a {
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.55rem;
+  color: var(--studio-ink);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.violin-sidebar nav a[aria-current="page"],
+.violin-sidebar nav a:hover {
+  background: color-mix(in srgb, var(--studio-gold) 16%, transparent);
+  color: var(--studio-ink);
+}
+
+.violin-private-card {
+  margin-top: auto;
+  padding: 0.8rem 0.75rem;
+  border: 1px solid var(--studio-line);
+  border-radius: 0.7rem;
+  color: var(--studio-muted);
+  font-size: 0.78rem;
+}
+
+.violin-private-card svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  margin-bottom: 0.35rem;
+  color: var(--studio-gold);
+}
+
+.violin-private-card span {
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.violin-studio-main {
+  padding: 1.5rem 1.5rem 2.2rem;
+}
+
+.violin-studio-head h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600;
+}
+
+.violin-studio-lock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.4rem 0 1.2rem;
+  color: var(--studio-gold);
+  font-size: 0.82rem;
+}
+
+.violin-studio-lock svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.violin-studio-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1rem;
+}
+
+.violin-card {
+  padding: 1.05rem 1.1rem 1.15rem;
+  border: 1px solid var(--studio-line);
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, #1a1612 86%, var(--studio-gold));
+}
+
+.violin-card-wide {
+  margin-top: 1rem;
+}
+
+.violin-card h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.violin-card header p,
+.violin-empty,
+.violin-card code {
+  color: var(--studio-muted);
+  font-size: 0.88rem;
+}
+
+.violin-empty {
+  margin: 0.85rem 0 0;
+}
+
+.violin-table-wrap {
+  overflow: auto;
+  margin-top: 0.8rem;
+}
+
+.violin-card table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.violin-card th {
+  color: var(--studio-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.violin-card td,
+.violin-card th {
+  padding: 0.45rem 0.4rem;
+  border-bottom: 1px solid var(--studio-line);
+}
+
+.violin-rec-list,
+.violin-note-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.violin-rec-list a {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+  gap: 0.25rem 0.7rem;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.violin-rec-date,
+.violin-note-date {
+  color: var(--studio-muted);
+  font-size: 0.78rem;
+}
+
+.violin-wave {
+  grid-column: 2 / -1;
+  height: 1.15rem;
+  background: repeating-linear-gradient(90deg, var(--studio-gold) 0 2px, transparent 2px 5px);
+  opacity: 0.55;
+  mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.violin-note-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+}
+
+.violin-note-mark {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--studio-gold) 22%, transparent);
+  color: var(--studio-gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.violin-player audio {
+  width: 100%;
+  margin-top: 0.8rem;
+}
+
+.violin-take-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1.2rem;
+  margin: 1rem 0 0;
+}
+
+.violin-take-grid dt {
+  color: var(--studio-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.violin-take-grid dd {
+  margin: 0.25rem 0 0;
+}
+
+.violin-ghost-btn,
+.violin-back-studio a {
+  color: var(--studio-gold);
+  text-decoration: none;
+}
+
+.violin-studio-actions {
+  margin-top: 1.2rem;
+}
+
+html[data-theme="atlas"] .violin-hero h1,
+html[data-theme="atlas"] .violin-piece-main h1 {
+  font-weight: 800;
+}
+
+html[data-theme="cadence"] .violin-hero {
+  background: color-mix(in srgb, var(--paper) 80%, #2a1840);
+}
+
+html[data-theme="cadence"] .violin-hero-kicker {
+  color: #f4a261;
+}
+
+html[data-theme="cadence"] .violin-practice-cta {
+  background: #f4a261;
+  color: #0b0a1f;
+}
+
+@media (max-width: 900px) {
+  .violin-hero,
+  .violin-board,
+  .violin-piece-detail,
+  .violin-studio,
+  .violin-studio-grid,
+  .violin-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .violin-localbar {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .violin-practice-cta {
+    justify-self: start;
+  }
+
+  .violin-piece-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .violin-stats {
+    padding-top: 0;
+    justify-items: start;
+  }
+
+  .violin-meta div {
+    padding: 0.6rem 0;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .violin-piece-card:hover {
+    transform: none;
+  }
+}

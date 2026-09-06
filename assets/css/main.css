@@ -30,6 +30,9 @@ html[data-theme="summit"] {
   --tile-media-bg: #efe6d8;
   --tile-media-ink: #1c1917;
   --tile-media-muted: #5c5a56;
+  --tile-violin-bg: #c9a36a;
+  --tile-violin-ink: #2a1a10;
+  --tile-violin-muted: rgba(42, 26, 16, 0.72);
   --tile-bucket-bg: #e07a5f;
   --tile-bucket-ink: #fff8f2;
   --tile-bucket-muted: rgba(255, 248, 242, 0.8);
@@ -134,6 +137,9 @@ html[data-theme="atlas"] {
   --tile-media-bg: #7b2cbf;
   --tile-media-ink: #ffffff;
   --tile-media-muted: rgba(255, 255, 255, 0.78);
+  --tile-violin-bg: #ffb703;
+  --tile-violin-ink: #023047;
+  --tile-violin-muted: rgba(2, 48, 71, 0.7);
   --tile-bucket-bg: #ffb703;
   --tile-bucket-ink: #023047;
   --tile-bucket-muted: rgba(2, 48, 71, 0.7);
@@ -236,6 +242,9 @@ html[data-theme="cadence"] {
   --tile-media-bg: #2ec4b6;
   --tile-media-ink: #0b0a1f;
   --tile-media-muted: rgba(11, 10, 31, 0.68);
+  --tile-violin-bg: #f4a261;
+  --tile-violin-ink: #0b0a1f;
+  --tile-violin-muted: rgba(11, 10, 31, 0.7);
   --tile-bucket-bg: #e63946;
   --tile-bucket-ink: #fff5f5;
   --tile-bucket-muted: rgba(255, 245, 245, 0.78);

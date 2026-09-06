@@ -11,6 +11,7 @@ extra_js:
 ---
 
 {% assign country_count = site.data.travel.countries | size %}
+{% assign violin_streak = site.data.violin.streak_days | default: 0 %}
 {% assign diary_entries = site.data.guestbook.entries %}
 {% assign diary_endpoint = site.guestbook_form_endpoint | default: "" | strip %}
 {% assign diary_configured = false %}
@@ -71,6 +72,27 @@ extra_js:
         </span>
         <span class="story-globe-stand"></span>
       </div>
+    </div>
+  </a>
+
+  <a class="story-card story-chapter story-violin" href="{{ '/violin/' | relative_url }}">
+    <div class="story-copy">
+      <h2>Violin</h2>
+      <p class="story-kicker">Learning in public</p>
+      <p class="story-violin-lede">Daily practice. Small wins. Real progress.</p>
+      {% if violin_streak > 0 %}
+      <p class="story-metric">
+        <span class="story-metric-num">{{ violin_streak }}</span>
+        <span class="story-metric-label">day streak</span>
+      </p>
+      {% endif %}
+    </div>
+    <div class="story-visual story-violin-photo" aria-hidden="true">
+      <img
+        src="{{ '/assets/images/violin/hero.jpg' | relative_url }}"
+        alt=""
+        width="1280"
+        height="1707">
     </div>
   </a>
 
