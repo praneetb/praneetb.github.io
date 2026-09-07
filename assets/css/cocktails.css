@@ -295,8 +295,81 @@ body:has(.page-cocktails) .welcome-strip {
   display: none;
 }
 
+.cocktails-video-recipe {
+  position: absolute;
+  z-index: 2;
+  top: 0.7rem;
+  left: 0.7rem;
+  bottom: 3.15rem;
+  width: min(17.5rem, 42%);
+  max-height: calc(100% - 3.85rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.7rem 0.75rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--whiskey-gold) 28%, transparent);
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, #120c08 80%, transparent);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--whiskey-ink);
+}
+
+.cocktails-video-recipe[hidden],
+.cocktails-video[data-empty="true"] .cocktails-video-recipe {
+  display: none !important;
+}
+
+.cocktails-video-recipe-kicker {
+  margin: 0 0 0.45rem;
+  color: var(--whiskey-gold);
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cocktails-video-recipe-ingredients {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cocktails-video-recipe-ingredients li {
+  margin: 0 0 0.28rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.cocktails-video-recipe-ingredients span {
+  color: var(--whiskey-gold);
+  font-variant-numeric: tabular-nums;
+}
+
+.cocktails-video-recipe-method {
+  margin: 0.5rem 0 0;
+  padding-top: 0.45rem;
+  border-top: 1px solid color-mix(in srgb, var(--whiskey-gold) 22%, transparent);
+  color: color-mix(in srgb, var(--whiskey-ink) 90%, transparent);
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.cocktails-video-recipe::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+.cocktails-video-recipe::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--whiskey-gold) 45%, transparent);
+  border-radius: 999px;
+}
+
 .cocktails-video-tag {
   position: absolute;
+  z-index: 3;
   top: 0.8rem;
   right: 0.85rem;
   display: inline-flex;
@@ -307,6 +380,7 @@ body:has(.page-cocktails) .welcome-strip {
   font-size: 0.72rem;
   font-weight: 650;
   letter-spacing: 0.04em;
+  pointer-events: none;
 }
 
 .cocktails-video-tag svg {
@@ -475,5 +549,15 @@ html[data-theme="cadence"] .cocktails-item.is-active {
   .cocktails-rail {
     padding-left: 0.85rem;
     padding-right: 0.85rem;
+  }
+
+  .cocktails-video-recipe {
+    top: auto;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 2.85rem;
+    width: auto;
+    max-height: 46%;
+    padding: 0.55rem 0.65rem;
   }
 }
