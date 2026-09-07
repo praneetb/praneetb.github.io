@@ -31,10 +31,8 @@ extra_js:
 {% assign home = site.data.home %}
 {% assign travel_peek = home.travel.peek %}
 {% assign travel_total = home.travel.count | default: country_count %}
-{% assign cocktail_peek = home.cocktails.peek %}
-{% if cocktail_peek == nil or cocktail_peek.size == 0 %}
-  {% assign cocktail_peek = site.data.cocktails.items %}
-{% endif %}
+{% assign food_places = site.data.food.restaurants | where: "favorite", true %}
+{% assign food_drinks = site.data.food.cocktails | where: "favorite", true %}
 {% assign ferment = home.fermentation %}
 {% assign patent_peek = home.patents.items %}
 {% if patent_peek == nil or patent_peek.size == 0 %}
@@ -126,13 +124,13 @@ extra_js:
 
     <article class="home-peek is-food">
       <span class="home-tape home-tape-lilac" aria-hidden="true"></span>
-      <a class="home-peek-link" href="{{ '/cocktails/' | relative_url }}">
+      <a class="home-peek-link" href="{{ '/food/' | relative_url }}">
         <img
-          src="{{ '/assets/images/home/cocktail-sidecar.jpg' | relative_url }}"
-          alt="A sidecar cocktail in a sugar-rimmed coupe with a citrus garnish, warm bar light. No person in the frame."
-          width="771"
-          height="954">
-        <p class="home-scrap-list">{% for drink in cocktail_peek %}{% assign drink_name = drink.name | default: drink %}{% if drink_name == "Long Island Iced Tea" %}{% assign drink_name = "LIIT" %}{% endif %}{{ drink_name }}{% unless forloop.last %} • {% endunless %}{% endfor %}</p>
+          src="{{ '/assets/images/food/khans-karahi.jpg' | relative_url }}"
+          alt="Bone-in mutton karahi in a metal pot. Food only, no person in the frame."
+          width="960"
+          height="1280">
+        <p class="home-scrap-list">{% for place in food_places %}{{ place.short | default: place.name }}{% unless forloop.last %} • {% endunless %}{% endfor %}{% if food_places.size > 0 and food_drinks.size > 0 %} • {% endif %}{% for drink in food_drinks %}{{ drink.short | default: drink.name }}{% unless forloop.last %} • {% endunless %}{% endfor %}</p>
       </a>
       <p class="home-scrap-rule" aria-hidden="true"></p>
       <p class="home-scrap-meta">

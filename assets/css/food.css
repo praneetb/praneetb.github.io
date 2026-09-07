@@ -1,0 +1,364 @@
+.page-food {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+}
+
+body.is-food {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background-color: #f4ead6;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 12% 0%, rgba(232, 196, 140, 0.28), transparent 52%),
+    radial-gradient(ellipse 60% 40% at 92% 8%, rgba(214, 168, 150, 0.18), transparent 46%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.085'/%3E%3C/svg%3E");
+}
+
+body.is-food .welcome-strip {
+  display: none;
+}
+
+body.is-food .page-food {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.food-shell {
+  --scrap-ink: #2a1c12;
+  --scrap-muted: #6a5340;
+  --scrap-red: #c43c3c;
+  --polaroid: #fffdf8;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  max-width: 68rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.55rem 1.15rem 2.4rem;
+}
+
+.food-hello {
+  position: relative;
+  padding: 0.45rem 0.2rem 0.1rem;
+}
+
+.food-hello h1 {
+  margin: 0;
+  color: var(--scrap-ink);
+  font-family: var(--font-hand);
+  font-size: clamp(2.35rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.94;
+}
+
+.food-hello-heart {
+  display: inline-block;
+  margin-left: 0.08em;
+  color: var(--scrap-red);
+  font-size: 0.42em;
+  vertical-align: 0.7em;
+}
+
+.food-doodle {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  fill: currentColor;
+  color: var(--scrap-ink);
+  opacity: 0.72;
+}
+
+.food-doodle-star-a {
+  top: 0.15rem;
+  left: 46%;
+  width: 1.05rem;
+}
+
+.food-doodle-star-b {
+  top: 2.6rem;
+  left: 72%;
+  width: 0.78rem;
+}
+
+.food-doodle-heart {
+  top: 0.2rem;
+  right: 8%;
+  width: 0.95rem;
+  color: var(--scrap-red);
+}
+
+.food-section-head h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  color: var(--scrap-ink);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.food-section-star {
+  color: var(--scrap-ink);
+  font-size: 0.72rem;
+}
+
+.food-rule {
+  height: 0;
+  margin: 0.55rem 0 1rem;
+  border: 0;
+  border-top: 1px dashed rgba(90, 60, 30, 0.38);
+}
+
+.food-spread {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.1rem 1.4rem;
+  margin: 0;
+  padding: 0.35rem 0.2rem 0.6rem;
+  list-style: none;
+}
+
+.food-spread-restaurants {
+  position: relative;
+  min-height: 18rem;
+  padding-bottom: 0.4rem;
+}
+
+.food-polaroid {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 20.5rem);
+}
+
+.food-polaroid.is-place {
+  width: min(100%, 23rem);
+  transform: rotate(-3.2deg);
+}
+
+.food-polaroid.is-dish {
+  width: min(100%, 17.2rem);
+  margin-top: 2.1rem;
+  margin-left: -0.85rem;
+  transform: rotate(4.1deg);
+}
+
+.food-polaroid.is-drink {
+  width: min(100%, 15.6rem);
+  transform: rotate(2.4deg);
+}
+
+.food-polaroid.is-drink:nth-child(2) {
+  margin-top: 0.7rem;
+  transform: rotate(-2.8deg);
+}
+
+.food-polaroid.is-pinned {
+  z-index: 3;
+  transform: rotate(-1.4deg);
+}
+
+.food-polaroid figure {
+  margin: 0;
+  padding: 0.55rem 0.55rem 0.5rem;
+  background: var(--polaroid);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 16px 28px rgba(62, 38, 18, 0.18);
+}
+
+.food-polaroid img {
+  display: block;
+  width: 100%;
+  height: 13.2rem;
+  object-fit: cover;
+  background: #1a120c;
+}
+
+.food-polaroid.is-place img {
+  height: 14.4rem;
+}
+
+.food-polaroid.is-dish img {
+  height: 11.4rem;
+}
+
+.food-polaroid.is-drink img {
+  height: 12.2rem;
+}
+
+.food-polaroid figcaption {
+  display: grid;
+  gap: 0.22rem;
+  margin: 0.55rem 0.12rem 0.15rem;
+  color: var(--scrap-ink);
+  font-family: var(--font-note);
+  letter-spacing: 0.01em;
+  line-height: 1.22;
+}
+
+.food-polaroid-title {
+  font-size: 1.12rem;
+}
+
+.food-polaroid-meta,
+.food-polaroid-address,
+.food-polaroid-starred,
+.food-polaroid-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.28rem;
+  max-width: 100%;
+  color: var(--scrap-muted);
+  font-size: 0.95rem;
+}
+
+.food-polaroid-address {
+  display: block;
+  font-size: 0.86rem;
+  line-height: 1.28;
+}
+
+.food-polaroid-meta svg,
+.food-reel {
+  flex: 0 0 auto;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin-top: 0.12rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+}
+
+.food-polaroid-starred {
+  color: var(--scrap-red);
+}
+
+.food-polaroid-starred em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.food-polaroid-kicker {
+  margin-top: 0.18rem;
+  color: var(--scrap-ink);
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.food-polaroid-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.food-polaroid-link:hover,
+.food-polaroid-link:focus-visible {
+  color: inherit;
+}
+
+.food-polaroid-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.food-pinned-mark {
+  color: var(--scrap-ink);
+}
+
+.food-tape {
+  position: absolute;
+  z-index: 4;
+  top: -0.55rem;
+  left: 50%;
+  width: 5.6rem;
+  height: 1.18rem;
+  transform: translateX(-50%) rotate(-2deg);
+  opacity: 0.9;
+  box-shadow: 0 3px 6px rgba(40, 24, 10, 0.16);
+}
+
+.food-tape-tan {
+  width: 6.8rem;
+  background: linear-gradient(180deg, #dfc07a, #b8893c);
+  transform: translateX(-50%) rotate(3deg);
+}
+
+.food-tape-check {
+  width: 5.4rem;
+  background-color: #7faf8e;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.45) 1px, transparent 1px);
+  background-size: 0.42rem 0.42rem;
+  transform: translateX(-50%) rotate(-7deg);
+}
+
+.food-tape-floral {
+  width: 5rem;
+  background-color: #c9a0b4;
+  background-image:
+    radial-gradient(circle at 20% 40%, #f4e4ec 0 0.12rem, transparent 0.13rem),
+    radial-gradient(circle at 62% 55%, #f7dce6 0 0.1rem, transparent 0.11rem),
+    radial-gradient(circle at 82% 30%, #efe0c8 0 0.08rem, transparent 0.09rem);
+  transform: translateX(-50%) rotate(6deg);
+}
+
+.food-pin {
+  position: absolute;
+  z-index: 5;
+  top: -0.85rem;
+  left: 50%;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 30%, #ff8a86, #c4232a 58%, #8a1218);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 6px 10px rgba(90, 16, 16, 0.28);
+  transform: translateX(-50%);
+}
+
+.food-pin::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0.95rem;
+  width: 0.16rem;
+  height: 0.85rem;
+  background: linear-gradient(180deg, #9aa3ad, #6b737c);
+  transform: translateX(-50%);
+}
+
+.food-vault-note {
+  margin: 0.4rem 0 0;
+  color: var(--scrap-muted);
+  font-family: var(--font-note);
+  font-size: 1.05rem;
+}
+
+@media (max-width: 720px) {
+  .food-polaroid,
+  .food-polaroid.is-place,
+  .food-polaroid.is-dish,
+  .food-polaroid.is-drink {
+    width: min(100%, 22rem);
+    margin-top: 0.4rem;
+    margin-left: 0;
+  }
+
+  .food-hello h1 {
+    padding-right: 1.5rem;
+  }
+}

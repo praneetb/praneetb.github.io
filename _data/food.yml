@@ -1,0 +1,56 @@
+# Public /food/ scrapbook. Favorites only.
+#
+# Vault SoT (Itihaskaar notes; not in this repo yet):
+#   Favorite Restaurants.md
+#   Favorite Cocktails.md
+# Seeded from those notes on 2026-09-07. Hardcoded here until a bake
+# script can read the vault the same way bake-home.mjs does.
+#
+# LOCKED list — do not invent or pad:
+#   Restaurant: Khan's Karahi Kabob
+#     address: 3915 Washington Blvd, Fremont, CA 94538
+#     starred dish: Goat Peshawari Namakmandi Karahi
+#   Cocktails: Rum Buck (pinned), Long Island Iced Tea
+#
+# Do NOT add:
+#   logged-meal fillers (Paper Plane, Liuyishou, or other dining logs)
+#   invented dishes (Mutton Biryani, Dahi Puri Chaat, …)
+#   non-favorite recipes (Old Fashioned, Mai Tai, Sloe Gin Fizz,
+#     unnamed pink drink)
+#   visit notes such as "Khan's Karahi Kabob - 2026-09-07"
+#
+# dishes stays empty until a vault favorite dish exists outside a restaurant.
+
+restaurants:
+  - id: khans-karahi-kabob
+    name: Khan's Karahi Kabob
+    short: Khan's
+    city: Fremont
+    address: 3915 Washington Blvd, Fremont, CA 94538
+    favorite: true
+    starred_dish: Goat Peshawari Namakmandi Karahi
+    photo: /assets/images/food/khans-karahi.jpg
+    photo_alt: Bone-in mutton karahi in a metal pot, cilantro on top. Food only, no person in the frame.
+    dish_photo: /assets/images/food/goat-karahi-naan.jpg
+    dish_photo_alt: Mutton curry with roti, sliced onion, and a lemon wedge on a plate. Food only, no person in the frame.
+
+dishes: []
+
+cocktails:
+  - id: rum-buck
+    name: Rum Buck
+    short: Rum Buck
+    favorite: true
+    pinned: true
+    href: /cocktails/?drink=rum-buck
+    photo: /assets/images/food/rum-buck.jpg
+    photo_alt: Copper mug with lime wheel and mint, condensation on the metal. Drink still, no person in the frame.
+
+  - id: long-island
+    name: Long Island Iced Tea
+    short: LIIT
+    favorite: true
+    pinned: false
+    href: /cocktails/?drink=long-island
+    photo: /assets/images/food/long-island.jpg
+    photo_alt: Tall glass of iced tea–colored cocktail with a lemon wedge and straw. Drink still, no person in the frame.

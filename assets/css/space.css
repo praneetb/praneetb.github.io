@@ -78,6 +78,11 @@
   color: var(--tile-cocktails-ink);
 }
 
+.space-tile[data-tile="food"] {
+  background: var(--tile-food-bg);
+  color: var(--tile-food-ink);
+}
+
 .space-tile[data-tile="fermentation"] {
   background: var(--tile-fermentation-bg);
   color: var(--tile-fermentation-ink);
