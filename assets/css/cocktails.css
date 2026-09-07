@@ -300,18 +300,22 @@ body:has(.page-cocktails) .welcome-strip {
   z-index: 2;
   top: 0.7rem;
   left: 0.7rem;
-  width: min(17.5rem, 42%);
+  width: min(18rem, 46%);
   max-height: calc(100% - 3.85rem);
-  overflow: auto;
-  overscroll-behavior: contain;
-  padding: 0.7rem 0.75rem 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--whiskey-gold) 28%, transparent);
-  border-radius: 0.65rem;
-  background: color-mix(in srgb, #120c08 80%, transparent);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   color: var(--whiskey-ink);
+  pointer-events: none;
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.95),
+    0 0 8px rgba(0, 0, 0, 0.82),
+    0 2px 14px rgba(0, 0, 0, 0.7);
 }
 
 .cocktails-video-recipe[hidden],
@@ -320,7 +324,7 @@ body:has(.page-cocktails) .welcome-strip {
 }
 
 .cocktails-video-recipe-kicker {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.4rem;
   color: var(--whiskey-gold);
   font-family: var(--font-ui);
   font-size: 0.62rem;
@@ -336,7 +340,7 @@ body:has(.page-cocktails) .welcome-strip {
 }
 
 .cocktails-video-recipe-ingredients li {
-  margin: 0 0 0.28rem;
+  margin: 0 0 0.26rem;
   font-family: var(--font-ui);
   font-size: 0.78rem;
   line-height: 1.35;
@@ -348,22 +352,13 @@ body:has(.page-cocktails) .welcome-strip {
 }
 
 .cocktails-video-recipe-method {
-  margin: 0.5rem 0 0;
-  padding-top: 0.45rem;
-  border-top: 1px solid color-mix(in srgb, var(--whiskey-gold) 22%, transparent);
-  color: color-mix(in srgb, var(--whiskey-ink) 90%, transparent);
+  margin: 0.45rem 0 0;
+  padding: 0;
+  border: 0;
+  color: var(--whiskey-ink);
   font-family: var(--font-ui);
   font-size: 0.74rem;
   line-height: 1.4;
-}
-
-.cocktails-video-recipe::-webkit-scrollbar {
-  width: 0.4rem;
-}
-
-.cocktails-video-recipe::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--whiskey-gold) 45%, transparent);
-  border-radius: 999px;
 }
 
 .cocktails-video-tag {
@@ -551,12 +546,20 @@ html[data-theme="cadence"] .cocktails-item.is-active {
   }
 
   .cocktails-video-recipe {
-    top: auto;
+    top: 0.5rem;
     left: 0.5rem;
-    right: 0.5rem;
-    bottom: 2.85rem;
-    width: auto;
-    max-height: 46%;
-    padding: 0.55rem 0.65rem;
+    right: auto;
+    bottom: auto;
+    width: min(16rem, 58%);
+    max-height: calc(100% - 3.2rem);
+    padding: 0;
+  }
+
+  .cocktails-video-recipe-ingredients li {
+    font-size: 0.7rem;
+  }
+
+  .cocktails-video-recipe-method {
+    font-size: 0.68rem;
   }
 }
