@@ -85,7 +85,7 @@ items:
     subtitle: built
     glass: highball
     source: Obsidian Recipes
-    video:
+    video: /assets/cocktails/long-island-recipe.mp4
     poster:
     ingredients:
       - amount: ½ oz
