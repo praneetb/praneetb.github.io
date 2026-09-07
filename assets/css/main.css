@@ -53,6 +53,9 @@ html[data-theme="summit"] {
   --tile-cocktails-bg: #6b3a1c;
   --tile-cocktails-ink: #f7e7c3;
   --tile-cocktails-muted: rgba(247, 231, 195, 0.78);
+  --tile-food-bg: #b4532a;
+  --tile-food-ink: #fff8f2;
+  --tile-food-muted: rgba(255, 248, 242, 0.8);
   --tile-fermentation-bg: #5c6b3d;
   --tile-fermentation-ink: #f7f1e8;
   --tile-fermentation-muted: rgba(247, 241, 232, 0.78);
@@ -165,6 +168,9 @@ html[data-theme="atlas"] {
   --tile-cocktails-bg: #c47c08;
   --tile-cocktails-ink: #fff8ef;
   --tile-cocktails-muted: rgba(255, 248, 239, 0.78);
+  --tile-food-bg: #fb8500;
+  --tile-food-ink: #023047;
+  --tile-food-muted: rgba(2, 48, 71, 0.72);
   --tile-fermentation-bg: #3d6b2c;
   --tile-fermentation-ink: #fff8ef;
   --tile-fermentation-muted: rgba(255, 248, 239, 0.78);
@@ -275,6 +281,9 @@ html[data-theme="cadence"] {
   --tile-cocktails-bg: #f4a261;
   --tile-cocktails-ink: #0b0a1f;
   --tile-cocktails-muted: rgba(11, 10, 31, 0.7);
+  --tile-food-bg: #e07a5f;
+  --tile-food-ink: #0b0a1f;
+  --tile-food-muted: rgba(11, 10, 31, 0.7);
   --tile-fermentation-bg: #c5d5c0;
   --tile-fermentation-ink: #1b1464;
   --tile-fermentation-muted: rgba(27, 20, 100, 0.72);

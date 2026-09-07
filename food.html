@@ -1,0 +1,160 @@
+---
+layout: default
+title: Food
+nav: food
+permalink: /food/
+private: false
+hide_footer: true
+description: Favorite bites only — Khan's Karahi Kabob in Fremont, plus Rum Buck and Long Island Iced Tea.
+extra_css:
+  - /assets/css/food.css
+---
+
+{% assign restaurants = site.data.food.restaurants | where: "favorite", true %}
+{% assign cocktails = site.data.food.cocktails | where: "favorite", true %}
+{% assign dishes = site.data.food.dishes | where: "favorite", true %}
+
+<div class="food-shell">
+  <header class="food-hello">
+    <h1>
+      hey, favorite bites.
+      <span class="food-hello-heart" aria-hidden="true">♡</span>
+    </h1>
+    <svg class="food-doodle food-doodle-star-a" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4 13.6 9 20 10.2 13.6 11.4 12 18 10.4 11.4 4 10.2 10.4 9Z"/></svg>
+    <svg class="food-doodle food-doodle-star-b" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 13.2 9 19 10.2 13.2 11.4 12 17.2 10.8 11.4 5 10.2 10.8 9Z"/></svg>
+    <svg class="food-doodle food-doodle-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.2-4.4-9-9.2C1.6 7.4 4 4.8 7 5.4c1.6.3 2.8 1.5 5 3.6 2.2-2.1 3.4-3.3 5-3.6 3-.6 5.4 2 4 5.4C19.2 15.6 12 20 12 20z"/></svg>
+  </header>
+
+  <section class="food-section" aria-labelledby="food-restaurants-title">
+    <header class="food-section-head">
+      <h2 id="food-restaurants-title">
+        <span class="food-section-star" aria-hidden="true">✦</span>
+        Favorite restaurants
+      </h2>
+    </header>
+    <p class="food-rule" aria-hidden="true"></p>
+
+    {% if restaurants.size > 0 %}
+    <ul class="food-spread food-spread-restaurants">
+      {% for place in restaurants %}
+      <li class="food-polaroid is-place">
+        <span class="food-tape food-tape-tan" aria-hidden="true"></span>
+        <figure>
+          <img
+            src="{{ place.photo | relative_url }}"
+            alt="{{ place.photo_alt }}"
+            width="960"
+            height="1280">
+          <figcaption>
+            <span class="food-polaroid-title">{{ place.name }}</span>
+            <span class="food-polaroid-meta">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.2A7 7 0 1 0 5 9.8C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg>
+              {{ place.city }}
+            </span>
+            {% if place.starred_dish %}
+            <span class="food-polaroid-starred">
+              <span aria-hidden="true">★</span>
+              starred dish <em>{{ place.starred_dish }}</em>
+            </span>
+            {% endif %}
+            <span class="food-polaroid-kicker">Only favorite <span aria-hidden="true">♡</span></span>
+          </figcaption>
+        </figure>
+      </li>
+      {% if place.dish_photo %}
+      <li class="food-polaroid is-dish">
+        <span class="food-tape food-tape-check" aria-hidden="true"></span>
+        <figure>
+          <img
+            src="{{ place.dish_photo | relative_url }}"
+            alt="{{ place.dish_photo_alt }}"
+            width="960"
+            height="720">
+          <figcaption>
+            <span class="food-polaroid-title">{{ place.starred_dish }}</span>
+            <span class="food-polaroid-meta">at {{ place.name }}</span>
+          </figcaption>
+        </figure>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  {% if dishes.size > 0 %}
+  <section class="food-section" aria-labelledby="food-dishes-title">
+    <header class="food-section-head">
+      <h2 id="food-dishes-title">
+        <span class="food-section-star" aria-hidden="true">✦</span>
+        Favorite dishes
+      </h2>
+    </header>
+    <p class="food-rule" aria-hidden="true"></p>
+    <ul class="food-spread">
+      {% for dish in dishes %}
+      <li class="food-polaroid is-dish">
+        <figure>
+          <img src="{{ dish.photo | relative_url }}" alt="{{ dish.photo_alt }}" width="960" height="720">
+          <figcaption>
+            <span class="food-polaroid-title">{{ dish.name }}</span>
+          </figcaption>
+        </figure>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <section class="food-section" aria-labelledby="food-cocktails-title">
+    <header class="food-section-head">
+      <h2 id="food-cocktails-title">
+        <span class="food-section-star" aria-hidden="true">✦</span>
+        Cocktails
+      </h2>
+    </header>
+    <p class="food-rule" aria-hidden="true"></p>
+
+    {% if cocktails.size > 0 %}
+    <ul class="food-spread food-spread-cocktails">
+      {% for drink in cocktails %}
+      <li class="food-polaroid is-drink{% if drink.pinned %} is-pinned{% endif %}">
+        {% if drink.pinned %}
+        <span class="food-pin" aria-hidden="true"></span>
+        {% else %}
+        <span class="food-tape food-tape-floral" aria-hidden="true"></span>
+        {% endif %}
+        <a class="food-polaroid-link" href="{{ drink.href | relative_url }}">
+          <figure>
+            <img
+              src="{{ drink.photo | relative_url }}"
+              alt="{{ drink.photo_alt }}"
+              width="960"
+              height="960">
+            <figcaption>
+              <span class="food-polaroid-title">{{ drink.name }}</span>
+              <span class="food-polaroid-meta">
+                <svg class="food-reel" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4" y="6" width="16" height="12" rx="1.6"/>
+                  <circle cx="8.2" cy="12" r="1.5"/>
+                  <circle cx="15.8" cy="12" r="1.5"/>
+                  <path d="M4 9h16M4 15h16"/>
+                </svg>
+                {% if drink.pinned %}
+                video on /cocktails/
+                <span class="food-pinned-mark">(pinned) <span aria-hidden="true">✦</span></span>
+                {% else %}
+                video on /cocktails/
+                {% endif %}
+              </span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  <p class="food-vault-note">favorites only · from the vault <span aria-hidden="true">♡</span></p>
+</div>
