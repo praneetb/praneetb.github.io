@@ -207,6 +207,7 @@ body.is-food .page-food {
 }
 
 .food-polaroid-meta,
+.food-polaroid-address,
 .food-polaroid-starred,
 .food-polaroid-kicker {
   display: inline-flex;
@@ -214,6 +215,10 @@ body.is-food .page-food {
   gap: 0.28rem;
   color: var(--scrap-muted);
   font-size: 0.95rem;
+}
+
+.food-polaroid-address {
+  font-size: 0.86rem;
 }
 
 .food-polaroid-meta svg,

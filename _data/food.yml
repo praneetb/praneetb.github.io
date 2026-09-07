@@ -25,6 +25,7 @@ restaurants:
     name: Khan's Karahi Kabob
     short: Khan's
     city: Fremont
+    address: 3915 Washington Blvd, Fremont, CA 94538
     favorite: true
     starred_dish: Goat Peshawari Namakmandi Karahi
     photo: /assets/images/food/khans-karahi.jpg
