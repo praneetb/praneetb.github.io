@@ -18,7 +18,7 @@ bottles:
     image: /assets/bar/tequila-the-bad-stuff.png
     color: "#1a1410"
     shape: bottle
-    image_note: Official Extra Añejo pack shot from The Bad Stuff press kit (thebadstuff.com/press).
+    image_note: Official Extra Añejo pack shot from The Bad Stuff press kit (thebadstuff.com/press). Background removed for the shelf.
 
   - id: don-julio-1942
     name: Don Julio 1942
@@ -31,11 +31,11 @@ bottles:
     nose: Cooked agave, caramel, and toasted oak.
     palate: Sweet agave, vanilla, and a silky oak warmth.
     finish: Long, rounded, and lightly spicy.
-    image: /assets/bar/tequila-don-julio-1942.jpg
+    image: /assets/bar/tequila-don-julio-1942.png
     color: "#8a5a20"
     shape: bottle
     note: Labeled Don Julio 1942 for the well-known “1942 tequila” product.
-    image_note: Official Don Julio 1942 product photograph from donjulio.com.
+    image_note: Official Don Julio 1942 product photograph from donjulio.com. Background removed for the shelf.
 
   - id: patron-silver
     name: Patrón Silver
@@ -51,7 +51,7 @@ bottles:
     image: /assets/bar/tequila-patron-silver.png
     color: "#d8d4c8"
     shape: bottle
-    image_note: Official Patrón Silver bottle photograph from patrontequila.com.
+    image_note: Official Patrón Silver bottle photograph from patrontequila.com. Background removed for the shelf.
 
   - id: casamigos-anejo
     name: Casamigos Añejo
@@ -64,10 +64,10 @@ bottles:
     nose: Caramel, vanilla, and soft oak.
     palate: Smooth, sweet, and easy.
     finish: Warm and lingering.
-    image: /assets/bar/tequila-casamigos-anejo.jpg
+    image: /assets/bar/tequila-casamigos-anejo.png
     color: "#c47a28"
     shape: bottle
-    image_note: Official Casamigos Añejo product photograph from casamigos.com.
+    image_note: Official Casamigos Añejo product photograph from casamigos.com. Background removed for the shelf.
 
   - id: jose-cuervo
     name: José Cuervo
@@ -80,7 +80,7 @@ bottles:
     nose: Sweet agave and a little caramel.
     palate: Familiar gold tequila — easy and a bit sweet.
     finish: Short and warm.
-    image: /assets/bar/tequila-jose-cuervo.jpg
+    image: /assets/bar/tequila-jose-cuervo.png
     color: "#c9a227"
     shape: bottle
-    image_note: Official José Cuervo Especial Gold product photograph from cuervo.com.
+    image_note: Official José Cuervo Especial Gold product photograph from cuervo.com. Background removed for the shelf.

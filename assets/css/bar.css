@@ -294,6 +294,7 @@ html:not(.is-signed-in) .bar-stars {
   flex: 0 0 auto;
   width: 5.8rem;
   margin: 0;
+  background: transparent;
   transition: opacity 0.28s ease, filter 0.28s ease;
 }
 
@@ -332,6 +333,10 @@ html:not(.is-signed-in) .bar-stars {
   width: auto;
   max-width: 5.1rem;
   object-fit: contain;
+  background: transparent;
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
   filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.45));
   transform-origin: 70% 18%;
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), filter 0.28s ease;

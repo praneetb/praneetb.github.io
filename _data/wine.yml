@@ -14,9 +14,9 @@ bottles:
     nose: Ripe red berry, garrigue, and a hint of leather. (stub)
     palate: Dark cherry, cracked pepper, and dried herb. (stub)
     finish: Warm, savory, and lingering. (stub)
-    image: /assets/bar/tardieu-laurent-2001-cotes-du-rhone-vieilles-vignes.jpg
+    image: /assets/bar/tardieu-laurent-2001-cotes-du-rhone-vieilles-vignes.png
     color: "#4a1824"
-    image_note: Cropped from Praneet’s table photo of this bottle.
+    image_note: Cropped from Praneet’s table photo of this bottle. Background removed for the shelf.
 
   - id: evidence-wines-2016-mt-veeder-cabernet
     name: Evidence Wines of the matter 2016 Mt. Veeder Cabernet Sauvignon
@@ -30,9 +30,9 @@ bottles:
     nose: Dark berry, cedar, and mountain herb. (stub)
     palate: Black currant, cocoa, and firm tannin. (stub)
     finish: Long and structured. (stub)
-    image: /assets/bar/evidence-wines-2016-mt-veeder-cabernet.jpg
+    image: /assets/bar/evidence-wines-2016-mt-veeder-cabernet.png
     color: "#1a1410"
-    image_note: Cropped from Praneet’s table photo. Bruadair Vineyard per public listings.
+    image_note: Cropped from Praneet’s table photo. Bruadair Vineyard per public listings. Background removed for the shelf.
 
   - id: duckhorn-cabernet-napa-2018
     name: Duckhorn Cabernet Napa 2018
@@ -46,9 +46,9 @@ bottles:
     nose: Blackberry, plum, roasted nut, and chocolate. (stub)
     palate: Ripe black fruit, toffee, and toasted oak. (stub)
     finish: Lush and lingering. (stub)
-    image: /assets/bar/duckhorn-cabernet-napa-2018.jpg
+    image: /assets/bar/duckhorn-cabernet-napa-2018.png
     color: "#5a1828"
-    image_note: Cropped from Praneet’s product-page photo of this bottle.
+    image_note: Cropped from Praneet’s product-page photo of this bottle. Background removed for the shelf.
 
   - id: smith-hook-reserve-2019-paso-robles-cabernet
     name: Smith & Hook Reserve 2019 Paso Robles Cabernet Sauvignon
@@ -62,6 +62,6 @@ bottles:
     nose: Ripe blackberry and a little oak. (stub)
     palate: Soft cabernet fruit, Paso warmth. (stub)
     finish: Medium and friendly. (stub)
-    image: /assets/bar/smith-hook-reserve-2019-paso-robles-cabernet.jpg
+    image: /assets/bar/smith-hook-reserve-2019-paso-robles-cabernet.png
     color: "#1a1a14"
-    image_note: Cropped from Praneet’s shop photo of this bottle.
+    image_note: Cropped from Praneet’s shop photo of this bottle. Background removed for the shelf.
