@@ -128,7 +128,9 @@ body.is-food .page-food {
 }
 
 .food-spread-restaurants {
+  position: relative;
   min-height: 18rem;
+  padding-bottom: 0.4rem;
 }
 
 .food-polaroid {
@@ -138,13 +140,14 @@ body.is-food .page-food {
 }
 
 .food-polaroid.is-place {
-  width: min(100%, 22.5rem);
+  width: min(100%, 23rem);
   transform: rotate(-3.2deg);
 }
 
 .food-polaroid.is-dish {
   width: min(100%, 17.2rem);
-  margin-top: 1.6rem;
+  margin-top: 2.1rem;
+  margin-left: -0.85rem;
   transform: rotate(4.1deg);
 }
 
@@ -210,15 +213,19 @@ body.is-food .page-food {
 .food-polaroid-address,
 .food-polaroid-starred,
 .food-polaroid-kicker {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   gap: 0.28rem;
+  max-width: 100%;
   color: var(--scrap-muted);
   font-size: 0.95rem;
 }
 
 .food-polaroid-address {
+  display: block;
   font-size: 0.86rem;
+  line-height: 1.28;
 }
 
 .food-polaroid-meta svg,
@@ -348,6 +355,7 @@ body.is-food .page-food {
   .food-polaroid.is-drink {
     width: min(100%, 22rem);
     margin-top: 0.4rem;
+    margin-left: 0;
   }
 
   .food-hello h1 {

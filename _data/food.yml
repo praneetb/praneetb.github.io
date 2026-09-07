@@ -7,7 +7,8 @@
 # script can read the vault the same way bake-home.mjs does.
 #
 # LOCKED list — do not invent or pad:
-#   Restaurant: Khan's Karahi Kabob (Fremont)
+#   Restaurant: Khan's Karahi Kabob
+#     address: 3915 Washington Blvd, Fremont, CA 94538
 #     starred dish: Goat Peshawari Namakmandi Karahi
 #   Cocktails: Rum Buck (pinned), Long Island Iced Tea
 #
