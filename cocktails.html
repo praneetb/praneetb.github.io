@@ -62,7 +62,7 @@ extra_js:
     </aside>
 
     <article class="cocktails-detail" id="cocktails-detail" aria-live="polite">
-      <div class="cocktails-video" id="cocktails-video" data-empty="true">
+      <div class="cocktails-video" id="cocktails-video" data-empty="{% if first.video %}false{% else %}true{% endif %}">
         <video id="cocktails-player" playsinline controls hidden></video>
         <img id="cocktails-poster" alt="" hidden>
         <div class="cocktails-video-empty" id="cocktails-video-empty">
@@ -74,6 +74,15 @@ extra_js:
           </button>
           <p>Video coming soon</p>
         </div>
+        <aside class="cocktails-video-recipe" id="cocktails-video-recipe"{% unless first.video %} hidden{% endunless %} aria-hidden="true">
+          <p class="cocktails-video-recipe-kicker">Recipe</p>
+          <ul class="cocktails-video-recipe-ingredients" id="cocktails-video-ingredients">
+            {% for line in first.ingredients %}
+            <li><span>{{ line.amount }}</span> {{ line.name }}</li>
+            {% endfor %}
+          </ul>
+          <p class="cocktails-video-recipe-method" id="cocktails-video-method">{{ first.method_text }}</p>
+        </aside>
         <span class="cocktails-video-tag" id="cocktails-video-tag">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
             <circle cx="12" cy="12" r="8.2"/>

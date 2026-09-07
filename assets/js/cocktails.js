@@ -169,6 +169,34 @@
     }
   }
 
+  function renderRecipeOverlay(drink, hasVideo) {
+    var overlay = $("cocktails-video-recipe");
+    var list = $("cocktails-video-ingredients");
+    var method = $("cocktails-video-method");
+    if (!overlay) {
+      return;
+    }
+    if (!hasVideo) {
+      overlay.hidden = true;
+      if (list) {
+        list.innerHTML = "";
+      }
+      if (method) {
+        method.textContent = "";
+      }
+      return;
+    }
+    if (list) {
+      list.innerHTML = (drink.ingredients || []).map(function (line) {
+        return "<li><span>" + escapeHtml(line.amount || "") + "</span> " + escapeHtml(line.name || "") + "</li>";
+      }).join("");
+    }
+    if (method) {
+      method.textContent = drink.method_text || (drink.steps || []).join(" ") || "";
+    }
+    overlay.hidden = false;
+  }
+
   function renderMedia(drink) {
     var frame = $("cocktails-video");
     var player = $("cocktails-player");
@@ -178,6 +206,7 @@
     var play = $("cocktails-play");
     var sources = videoSources(drink);
     var posterSrc = drink.poster ? withBase(String(drink.poster).trim()) : "";
+    renderRecipeOverlay(drink, sources.length > 0);
 
     if (player) {
       player.pause();
