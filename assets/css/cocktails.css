@@ -300,22 +300,25 @@ body:has(.page-cocktails) .welcome-strip {
   z-index: 2;
   top: 0.7rem;
   left: 0.7rem;
-  width: min(18rem, 46%);
+  width: max-content;
+  max-width: min(18rem, 46%);
   max-height: calc(100% - 3.85rem);
   overflow: hidden;
   padding: 0;
   border: 0;
   border-radius: 0;
-  background: none;
+  background: transparent;
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   color: var(--whiskey-ink);
   pointer-events: none;
   text-shadow:
-    0 1px 1px rgba(0, 0, 0, 0.95),
-    0 0 8px rgba(0, 0, 0, 0.82),
-    0 2px 14px rgba(0, 0, 0, 0.7);
+    -1px 0 0 rgba(0, 0, 0, 0.92),
+    1px 0 0 rgba(0, 0, 0, 0.92),
+    0 -1px 0 rgba(0, 0, 0, 0.92),
+    0 1px 0 rgba(0, 0, 0, 0.92),
+    0 2px 3px rgba(0, 0, 0, 0.88);
 }
 
 .cocktails-video-recipe[hidden],
@@ -550,7 +553,8 @@ html[data-theme="cadence"] .cocktails-item.is-active {
     left: 0.5rem;
     right: auto;
     bottom: auto;
-    width: min(16rem, 58%);
+    width: max-content;
+    max-width: min(16rem, 58%);
     max-height: calc(100% - 3.2rem);
     padding: 0;
   }
