@@ -277,8 +277,8 @@ body.is-food .page-food {
 }
 
 .food-tape-tan {
-  width: 6.4rem;
-  background: linear-gradient(180deg, #e8d2a4, #c9a66a);
+  width: 6.8rem;
+  background: linear-gradient(180deg, #dfc07a, #b8893c);
   transform: translateX(-50%) rotate(3deg);
 }
 
