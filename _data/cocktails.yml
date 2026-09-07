@@ -110,7 +110,7 @@ items:
     subtitle: shaken
     glass: highball
     source: Obsidian Recipes
-    video:
+    video: /assets/cocktails/sloe-gin-fizz-recipe.mp4
     poster:
     ingredients:
       - amount: 1½ oz
