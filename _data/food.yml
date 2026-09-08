@@ -19,6 +19,8 @@
 #       toppings: salami, pepperoni, mushrooms, black olives,
 #         green peppers, onions, linguica, sausage, beef, fresh garlic
 #       href: https://www.broncobillyspizzapalace.com/
+#     Nolas (Palo Alto)
+#       starred drink/dish: Hurricane
 #   Cocktails: Rum Buck (pinned), Long Island Iced Tea
 #
 # Do NOT add:
@@ -74,6 +76,21 @@ restaurants:
     dish_photo: /assets/images/food/chuck-wagon-pizza.jpg
     dish_photo_alt: Pan pizza with mushrooms, olives, peppers, onions, and sausage. Food only, no person in the frame.
 
+  - id: nolas
+    name: Nolas
+    short: Nolas
+    city: Palo Alto
+    favorite: true
+    starred_dish: Hurricane
+    starred_dishes:
+      - name: Hurricane
+        photo: /assets/images/food/hurricane-nolas-palo-alto.jpg
+        photo_alt: Amber Hurricane in a NOLA hurricane glass with pink and gold beads. Drink still, no person in the frame.
+    photo: /assets/images/food/hurricane-nolas-palo-alto.jpg
+    photo_alt: Amber Hurricane in a NOLA hurricane glass with pink and gold beads. Drink still, no person in the frame.
+    dish_photo: /assets/images/food/hurricane-nolas-palo-alto.jpg
+    dish_photo_alt: Amber Hurricane in a NOLA hurricane glass with pink and gold beads. Drink still, no person in the frame.
+
 dishes: []
 
 cocktails:
@@ -94,3 +111,4 @@ cocktails:
     href: /cocktails/?drink=long-island
     photo: /assets/images/food/long-island.jpg
     photo_alt: Tall glass of iced tea–colored cocktail with a lemon wedge and straw. Drink still, no person in the frame.
+
