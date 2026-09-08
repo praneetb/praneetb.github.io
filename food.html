@@ -5,7 +5,7 @@ nav: food
 permalink: /food/
 private: false
 hide_footer: true
-description: Favorite bites only — Khan's Karahi Kabob in Fremont, plus Rum Buck and Long Island Iced Tea.
+description: Favorite bites only — Khan's Karahi Kabob and Bronco Billy's Pizza Palace, plus Rum Buck and Long Island Iced Tea.
 extra_css:
   - /assets/css/food.css
 ---
@@ -37,8 +37,9 @@ extra_css:
     {% if restaurants.size > 0 %}
     <ul class="food-spread food-spread-restaurants">
       {% for place in restaurants %}
-      <li class="food-polaroid is-place">
-        <span class="food-tape food-tape-tan" aria-hidden="true"></span>
+      <li class="food-pair{% unless forloop.first %} is-later{% endunless %}">
+      <article class="food-polaroid is-place">
+        <span class="food-tape{% if forloop.first %} food-tape-tan{% else %} food-tape-rust{% endif %}" aria-hidden="true"></span>
         <figure>
           <img
             src="{{ place.photo | relative_url }}"
@@ -60,13 +61,16 @@ extra_css:
               starred dish <em>{{ place.starred_dish }}</em>
             </span>
             {% endif %}
+            {% if place.href %}
+            <a class="food-polaroid-href" href="{{ place.href }}" rel="noopener noreferrer">{{ place.href | remove_first: "https://" | remove_first: "www." | remove: "/" }}</a>
+            {% endif %}
             <span class="food-polaroid-kicker">Only favorite <span aria-hidden="true">♡</span></span>
           </figcaption>
         </figure>
-      </li>
+      </article>
       {% if place.dish_photo %}
-      <li class="food-polaroid is-dish">
-        <span class="food-tape food-tape-check" aria-hidden="true"></span>
+      <article class="food-polaroid is-dish">
+        <span class="food-tape{% if forloop.first %} food-tape-check{% else %} food-tape-stripe{% endif %}" aria-hidden="true"></span>
         <figure>
           <img
             src="{{ place.dish_photo | relative_url }}"
@@ -76,10 +80,14 @@ extra_css:
           <figcaption>
             <span class="food-polaroid-title">{{ place.starred_dish }}</span>
             <span class="food-polaroid-meta">at {{ place.name }}</span>
+            {% if place.toppings %}
+            <span class="food-polaroid-toppings">{{ place.toppings | join: ", " }}</span>
+            {% endif %}
           </figcaption>
         </figure>
-      </li>
+      </article>
       {% endif %}
+      </li>
       {% endfor %}
     </ul>
     {% endif %}

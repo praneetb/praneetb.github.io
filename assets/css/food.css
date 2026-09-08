@@ -35,7 +35,7 @@ body.is-food .page-food {
   display: flex;
   flex-direction: column;
   gap: 1.35rem;
-  max-width: 68rem;
+  max-width: 80rem;
   width: 100%;
   margin: 0 auto;
   padding: 0.55rem 1.15rem 2.4rem;
@@ -129,8 +129,20 @@ body.is-food .page-food {
 
 .food-spread-restaurants {
   position: relative;
+  align-items: flex-start;
+  gap: 1.8rem 2.1rem;
   min-height: 18rem;
   padding-bottom: 0.4rem;
+}
+
+.food-pair {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  flex: 1 1 34rem;
+  gap: 0 0.45rem;
+  width: min(100%, 39rem);
+  min-width: min(100%, 32rem);
 }
 
 .food-polaroid {
@@ -140,15 +152,27 @@ body.is-food .page-food {
 }
 
 .food-polaroid.is-place {
-  width: min(100%, 23rem);
+  flex: 0 0 auto;
+  width: min(100%, 21.4rem);
   transform: rotate(-3.2deg);
 }
 
 .food-polaroid.is-dish {
-  width: min(100%, 17.2rem);
+  flex: 0 0 auto;
+  width: min(100%, 16.2rem);
   margin-top: 2.1rem;
-  margin-left: -0.85rem;
+  margin-left: -0.7rem;
   transform: rotate(4.1deg);
+}
+
+.food-pair.is-later .food-polaroid.is-place {
+  transform: rotate(2.7deg);
+}
+
+.food-pair.is-later .food-polaroid.is-dish {
+  margin-top: 1.35rem;
+  margin-left: -0.35rem;
+  transform: rotate(-3.5deg);
 }
 
 .food-polaroid.is-drink {
@@ -212,6 +236,7 @@ body.is-food .page-food {
 .food-polaroid-meta,
 .food-polaroid-address,
 .food-polaroid-starred,
+.food-polaroid-toppings,
 .food-polaroid-kicker {
   display: flex;
   flex-wrap: wrap;
@@ -246,6 +271,32 @@ body.is-food .page-food {
 .food-polaroid-starred em {
   font-style: italic;
   font-weight: 500;
+}
+
+.food-polaroid-toppings {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.34;
+}
+
+.food-polaroid-href {
+  color: var(--scrap-ink);
+  font-family: var(--font-note);
+  font-size: 0.86rem;
+  line-height: 1.28;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.16em;
+}
+
+.food-polaroid-href:hover,
+.food-polaroid-href:focus-visible {
+  color: var(--scrap-red);
+}
+
+.food-polaroid-href:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .food-polaroid-kicker {
@@ -304,6 +355,23 @@ body.is-food .page-food {
   transform: translateX(-50%) rotate(-7deg);
 }
 
+.food-tape-rust {
+  width: 6.5rem;
+  background: linear-gradient(180deg, #e28a5c, #b4482a);
+  transform: translateX(-50%) rotate(-4deg);
+}
+
+.food-tape-stripe {
+  width: 5.2rem;
+  background-color: #d6b25a;
+  background-image: repeating-linear-gradient(
+    -32deg,
+    rgba(255, 255, 255, 0.38) 0 0.18rem,
+    transparent 0.18rem 0.4rem
+  );
+  transform: translateX(-50%) rotate(6deg);
+}
+
 .food-tape-floral {
   width: 5rem;
   background-color: #c9a0b4;
@@ -349,11 +417,22 @@ body.is-food .page-food {
 }
 
 @media (max-width: 720px) {
+  .food-pair {
+    flex-wrap: wrap;
+    min-width: 0;
+    width: min(100%, 22rem);
+  }
+
   .food-polaroid,
   .food-polaroid.is-place,
   .food-polaroid.is-dish,
   .food-polaroid.is-drink {
     width: min(100%, 22rem);
+    margin-top: 0.4rem;
+    margin-left: 0;
+  }
+
+  .food-pair.is-later .food-polaroid.is-dish {
     margin-top: 0.4rem;
     margin-left: 0;
   }

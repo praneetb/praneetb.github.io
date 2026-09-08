@@ -1,5 +1,6 @@
 People-free food and drink stills for the public /food/ scrapbook.
-These are credited stand-ins (not photographs from Khan's Karahi Kabob).
+These are credited stand-ins (not photographs from Khan's Karahi Kabob
+or Bronco Billy's Pizza Palace).
 Do not add photos that include people.
 
 khans-karahi.jpg
@@ -25,3 +26,17 @@ long-island.jpg
   Photograph by Caartic, 9 September 2011.
   Wikimedia Commons, CC BY-SA 3.0
   https://commons.wikimedia.org/wiki/File:Long_Island_Ice_Tea.jpg
+
+bronco-billys-pizza.jpg
+  Pepperoni, salami, and sausage pizza in a delivery box
+  (Chuck Wagon stand-in; not a Bronco Billy's photograph).
+  Photograph by Willis Lam, 15 January 2015.
+  Wikimedia Commons, CC BY-SA 2.0
+  https://commons.wikimedia.org/wiki/File:Pepperoni_Salami_%26_Sausage_Bacon_Pizza_(15864752153).jpg
+
+chuck-wagon-pizza.jpg
+  Super Supreme pan pizza with mushrooms, olives, peppers,
+  onions, and sausage (Chuck Wagon stand-in; not a Bronco Billy's photograph).
+  Photograph by JIP, 1 December 2019.
+  Wikimedia Commons, CC BY-SA 4.0
+  https://commons.wikimedia.org/wiki/File:Pizza_Hut_Super_Supreme_in_Tapiola.jpg
