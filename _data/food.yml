@@ -10,7 +10,9 @@
 #   Restaurants:
 #     Khan's Karahi Kabob
 #       address: 3915 Washington Blvd, Fremont, CA 94538
-#       starred dish: Goat Peshawari Namakmandi Karahi
+#       starred dishes:
+#         Goat Peshawari Namakmandi Karahi
+#         Chapli kabob
 #     Bronco Billy's Pizza Palace (Niles / Fremont)
 #       address: 37651 Niles Blvd, Fremont, CA 94536
 #       starred dish: Chuck Wagon (Chuckwagon Delight)
@@ -36,6 +38,13 @@ restaurants:
     address: 3915 Washington Blvd, Fremont, CA 94538
     favorite: true
     starred_dish: Goat Peshawari Namakmandi Karahi
+    starred_dishes:
+      - name: Goat Peshawari Namakmandi Karahi
+        photo: /assets/images/food/goat-karahi-naan.jpg
+        photo_alt: Mutton curry with roti, sliced onion, and a lemon wedge on a plate. Food only, no person in the frame.
+      - name: Chapli kabob
+        photo: /assets/images/food/chapli-kabob-khans.jpg
+        photo_alt: Two chapli kabobs on parchment with coriander seed and chili flake. Food only, no person in the frame.
     photo: /assets/images/food/khans-karahi.jpg
     photo_alt: Bone-in mutton karahi in a metal pot, cilantro on top. Food only, no person in the frame.
     dish_photo: /assets/images/food/goat-karahi-naan.jpg

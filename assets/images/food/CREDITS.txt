@@ -1,7 +1,7 @@
 People-free food and drink stills for the public /food/ scrapbook.
-These are credited stand-ins (not photographs from Khan's Karahi Kabob
-or Bronco Billy's Pizza Palace).
-Do not add photos that include people.
+Most are credited stand-ins (not photographs from Khan's Karahi Kabob
+or Bronco Billy's Pizza Palace), except where noted as a Praneet /
+site asset. Do not add photos that include people.
 
 khans-karahi.jpg
   Mutton Karai Traditional Dish.
@@ -14,6 +14,11 @@ goat-karahi-naan.jpg
   Photograph by Amol Sinha, 9 July 2017.
   Wikimedia Commons, CC BY-SA 4.0
   https://commons.wikimedia.org/wiki/File:Mutton_Curry_with_Roti.jpg
+
+chapli-kabob-khans.jpg
+  Chapli kabob from Khan's Karahi Kabob (Fremont).
+  Photograph by Praneet Bachheti.
+  Site asset for /food/ scrapbook.
 
 rum-buck.jpg
   Moscow Mule in a copper mug with mint (Rum Buck stand-in: rum + ginger beer + lime).
