@@ -37,9 +37,17 @@ extra_css:
     {% if restaurants.size > 0 %}
     <ul class="food-spread food-spread-restaurants">
       {% for place in restaurants %}
-      <li class="food-pair{% unless forloop.first %} is-later{% endunless %}">
+      {% assign place_dishes = place.starred_dishes %}
+      {% assign dish_count = 0 %}
+      {% if place_dishes and place_dishes.size > 0 %}
+        {% assign dish_count = place_dishes.size %}
+      {% elsif place.dish_photo %}
+        {% assign dish_count = 1 %}
+      {% endif %}
+      {% assign place_is_first = forloop.first %}
+      <li class="food-pair{% unless place_is_first %} is-later{% endunless %}{% if dish_count > 1 %} has-many{% endif %}">
       <article class="food-polaroid is-place">
-        <span class="food-tape{% if forloop.first %} food-tape-tan{% else %} food-tape-rust{% endif %}" aria-hidden="true"></span>
+        <span class="food-tape{% if place_is_first %} food-tape-tan{% else %} food-tape-rust{% endif %}" aria-hidden="true"></span>
         <figure>
           <img
             src="{{ place.photo | relative_url }}"
@@ -55,7 +63,14 @@ extra_css:
             {% if place.address %}
             <span class="food-polaroid-address">{{ place.address }}</span>
             {% endif %}
-            {% if place.starred_dish %}
+            {% if place_dishes and place_dishes.size > 0 %}
+            {% for dish in place_dishes %}
+            <span class="food-polaroid-starred">
+              <span aria-hidden="true">★</span>
+              starred dish <em>{{ dish.name }}</em>
+            </span>
+            {% endfor %}
+            {% elsif place.starred_dish %}
             <span class="food-polaroid-starred">
               <span aria-hidden="true">★</span>
               starred dish <em>{{ place.starred_dish }}</em>
@@ -68,9 +83,29 @@ extra_css:
           </figcaption>
         </figure>
       </article>
-      {% if place.dish_photo %}
+      {% if place_dishes and place_dishes.size > 0 %}
+      {% for dish in place_dishes %}
+      <article class="food-polaroid is-dish{% if forloop.index > 1 %} is-second{% endif %}">
+        <span class="food-tape{% if forloop.first %}{% if place_is_first %} food-tape-check{% else %} food-tape-stripe{% endif %}{% else %} food-tape-stripe{% endif %}" aria-hidden="true"></span>
+        <figure>
+          <img
+            src="{{ dish.photo | relative_url }}"
+            alt="{{ dish.photo_alt }}"
+            width="960"
+            height="720">
+          <figcaption>
+            <span class="food-polaroid-title">{{ dish.name }}</span>
+            <span class="food-polaroid-meta">at {{ place.name }}</span>
+            {% if place.toppings and forloop.first %}
+            <span class="food-polaroid-toppings">{{ place.toppings | join: ", " }}</span>
+            {% endif %}
+          </figcaption>
+        </figure>
+      </article>
+      {% endfor %}
+      {% elsif place.dish_photo %}
       <article class="food-polaroid is-dish">
-        <span class="food-tape{% if forloop.first %} food-tape-check{% else %} food-tape-stripe{% endif %}" aria-hidden="true"></span>
+        <span class="food-tape{% if place_is_first %} food-tape-check{% else %} food-tape-stripe{% endif %}" aria-hidden="true"></span>
         <figure>
           <img
             src="{{ place.dish_photo | relative_url }}"
