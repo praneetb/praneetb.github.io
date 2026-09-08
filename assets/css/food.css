@@ -416,6 +416,25 @@ body.is-food .page-food {
   font-size: 1.05rem;
 }
 
+
+.food-pair.has-many {
+  flex-wrap: wrap;
+  width: min(100%, 44rem);
+  max-width: 100%;
+}
+
+.food-polaroid.is-dish.is-second {
+  margin-top: 0.55rem;
+  margin-left: -1.05rem;
+  transform: rotate(-2.6deg);
+}
+
+.food-pair.is-later .food-polaroid.is-dish.is-second {
+  margin-top: 0.35rem;
+  margin-left: -0.55rem;
+  transform: rotate(3.2deg);
+}
+
 @media (max-width: 720px) {
   .food-pair {
     flex-wrap: wrap;
@@ -439,5 +458,19 @@ body.is-food .page-food {
 
   .food-hello h1 {
     padding-right: 1.5rem;
+  }
+
+  .food-pair.has-many {
+    width: min(100%, 22rem);
+  }
+
+  .food-polaroid.is-dish.is-second {
+    margin-top: 0.4rem;
+    margin-left: 0;
+  }
+
+  .food-pair.is-later .food-polaroid.is-dish.is-second {
+    margin-top: 0.4rem;
+    margin-left: 0;
   }
 }
