@@ -60,7 +60,7 @@ items:
     subtitle: rum • built
     glass: rocks
     source: Obsidian Recipes
-    video:
+    video: /assets/cocktails/mai-tai-recipe.mp4
     poster:
     ingredients:
       - amount: 1 oz
@@ -122,3 +122,5 @@ items:
       - amount: top
         name: Club soda
     method_text: Shake and strain. Top with club soda. Garnish with lemon and a cherry.
+
+
