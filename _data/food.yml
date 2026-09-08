@@ -19,7 +19,8 @@
 #       toppings: salami, pepperoni, mushrooms, black olives,
 #         green peppers, onions, linguica, sausage, beef, fresh garlic
 #       href: https://www.broncobillyspizzapalace.com/
-#     Nolas (Palo Alto)
+#     Nola (Palo Alto)
+#       address: 535 Ramona St, Palo Alto, CA 94301
 #       starred drink/dish: Hurricane
 #   Cocktails: Rum Buck (pinned), Long Island Iced Tea
 #
@@ -76,19 +77,20 @@ restaurants:
     dish_photo: /assets/images/food/chuck-wagon-pizza.jpg
     dish_photo_alt: Pan pizza with mushrooms, olives, peppers, onions, and sausage. Food only, no person in the frame.
 
-  - id: nolas
-    name: Nolas
-    short: Nolas
+  - id: nola
+    name: Nola
+    short: Nola
     city: Palo Alto
+    address: 535 Ramona St, Palo Alto, CA 94301
     favorite: true
     starred_dish: Hurricane
     starred_dishes:
       - name: Hurricane
-        photo: /assets/images/food/hurricane-nolas-palo-alto.jpg
+        photo: /assets/images/food/hurricane-nola-palo-alto.jpg
         photo_alt: Amber Hurricane in a NOLA hurricane glass with pink and gold beads. Drink still, no person in the frame.
-    photo: /assets/images/food/hurricane-nolas-palo-alto.jpg
+    photo: /assets/images/food/hurricane-nola-palo-alto.jpg
     photo_alt: Amber Hurricane in a NOLA hurricane glass with pink and gold beads. Drink still, no person in the frame.
-    dish_photo: /assets/images/food/hurricane-nolas-palo-alto.jpg
+    dish_photo: /assets/images/food/hurricane-nola-palo-alto.jpg
     dish_photo_alt: Amber Hurricane in a NOLA hurricane glass with pink and gold beads. Drink still, no person in the frame.
 
 dishes: []
