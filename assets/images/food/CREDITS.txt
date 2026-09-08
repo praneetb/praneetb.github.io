@@ -45,3 +45,8 @@ chuck-wagon-pizza.jpg
   Photograph by JIP, 1 December 2019.
   Wikimedia Commons, CC BY-SA 4.0
   https://commons.wikimedia.org/wiki/File:Pizza_Hut_Super_Supreme_in_Tapiola.jpg
+
+hurricane-nolas-palo-alto.jpg
+  Hurricane cocktail at Nolas (Palo Alto).
+  Photograph by Praneet Bachheti.
+  Site asset for /food/ scrapbook.
