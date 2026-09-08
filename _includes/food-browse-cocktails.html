@@ -1,0 +1,81 @@
+{% assign drinks = include.drinks %}
+{% assign haystack = include.haystack %}
+{% assign first_drink = drinks | first %}
+
+<article
+  class="food-place-card is-cocktails"
+  id="letter-C"
+  data-food-card
+  data-chip="cocktails"
+  data-letter="C"
+  data-search="{{ haystack | escape }}"
+  aria-labelledby="place-cocktails-title">
+  <span class="food-tape food-tape-floral" aria-hidden="true"></span>
+  <span class="food-place-letter" aria-hidden="true">C</span>
+  <header class="food-place-head">
+    {% if first_drink %}
+    <figure class="food-place-stamp">
+      <img
+        src="{{ first_drink.photo | relative_url }}"
+        alt="{{ first_drink.photo_alt }}"
+        width="320"
+        height="320">
+    </figure>
+    {% endif %}
+    <div class="food-place-copy">
+      <p class="food-place-kicker">
+        <span class="food-section-star" aria-hidden="true">✦</span>
+        Favorites
+      </p>
+      <h2 id="place-cocktails-title">Cocktails</h2>
+      <p class="food-place-meta">
+        <svg class="food-reel" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="4" y="6" width="16" height="12" rx="1.6"/>
+          <circle cx="8.2" cy="12" r="1.5"/>
+          <circle cx="15.8" cy="12" r="1.5"/>
+          <path d="M4 9h16M4 15h16"/>
+        </svg>
+        video on /cocktails/
+      </p>
+      <a class="food-polaroid-href" href="{{ '/cocktails/' | relative_url }}">cocktails</a>
+    </div>
+  </header>
+  <ul class="food-place-dishes">
+    {% for drink in drinks %}
+    <li class="food-polaroid is-drink{% if drink.pinned %} is-pinned{% endif %}">
+      {% if drink.pinned %}
+      <span class="food-pin" aria-hidden="true"></span>
+      {% else %}
+      <span class="food-tape food-tape-floral" aria-hidden="true"></span>
+      {% endif %}
+      <a class="food-polaroid-link" href="{{ drink.href | relative_url }}">
+        <figure>
+          <img
+            src="{{ drink.photo | relative_url }}"
+            alt="{{ drink.photo_alt }}"
+            width="960"
+            height="960">
+          <figcaption>
+            <span class="food-polaroid-title">{{ drink.name }}</span>
+            <span class="food-polaroid-meta">
+              <svg class="food-reel" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="6" width="16" height="12" rx="1.6"/>
+                <circle cx="8.2" cy="12" r="1.5"/>
+                <circle cx="15.8" cy="12" r="1.5"/>
+                <path d="M4 9h16M4 15h16"/>
+              </svg>
+              {% if drink.pinned %}
+              video on /cocktails/
+              <span class="food-pinned-mark">(pinned) <span aria-hidden="true">✦</span></span>
+              {% else %}
+              video on /cocktails/
+              {% endif %}
+            </span>
+          </figcaption>
+        </figure>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <p class="food-polaroid-kicker">Only favorite <span aria-hidden="true">♡</span></p>
+</article>

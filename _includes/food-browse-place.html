@@ -1,0 +1,111 @@
+{% assign place = include.place %}
+{% assign chip = include.chip %}
+{% assign letter = place.name | slice: 0 | upcase %}
+{% assign place_dishes = place.starred_dishes %}
+{% assign haystack = place.name | default: "" %}
+{% if place.short %}
+  {% assign haystack = haystack | append: " " | append: place.short %}
+{% endif %}
+{% if place.city %}
+  {% assign haystack = haystack | append: " " | append: place.city %}
+{% endif %}
+{% if place.address %}
+  {% assign haystack = haystack | append: " " | append: place.address %}
+{% endif %}
+{% if place_dishes and place_dishes.size > 0 %}
+  {% for dish in place_dishes %}
+    {% assign haystack = haystack | append: " " | append: dish.name %}
+  {% endfor %}
+{% elsif place.starred_dish %}
+  {% assign haystack = haystack | append: " " | append: place.starred_dish %}
+{% endif %}
+{% if place.toppings %}
+  {% assign topping_text = place.toppings | join: " " %}
+  {% assign haystack = haystack | append: " " | append: topping_text %}
+{% endif %}
+{% assign tape_class = "food-tape-tan" %}
+{% if chip == "pizza" %}
+  {% assign tape_class = "food-tape-rust" %}
+{% elsif chip == "desi" %}
+  {% assign tape_class = "food-tape-tan" %}
+{% endif %}
+
+<article
+  class="food-place-card"
+  id="letter-{{ letter }}"
+  data-food-card
+  data-chip="{{ chip }}"
+  data-letter="{{ letter }}"
+  data-search="{{ haystack | escape }}"
+  aria-labelledby="place-{{ place.id }}-title">
+  <span class="food-tape {{ tape_class }}" aria-hidden="true"></span>
+  <span class="food-place-letter" aria-hidden="true">{{ letter }}</span>
+  <header class="food-place-head">
+    <figure class="food-place-stamp">
+      <img
+        src="{{ place.photo | relative_url }}"
+        alt="{{ place.photo_alt }}"
+        width="320"
+        height="320">
+    </figure>
+    <div class="food-place-copy">
+      <p class="food-place-kicker">
+        <span class="food-section-star" aria-hidden="true">✦</span>
+        Restaurant
+      </p>
+      <h2 id="place-{{ place.id }}-title">{{ place.name }}</h2>
+      <p class="food-place-meta">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.2A7 7 0 1 0 5 9.8C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.6" r="2.2"/></svg>
+        {{ place.city }}
+      </p>
+      {% if place.address %}
+      <p class="food-place-address">{{ place.address }}</p>
+      {% endif %}
+      {% if place.href %}
+      <a class="food-polaroid-href" href="{{ place.href }}" rel="noopener noreferrer">{{ place.href | remove_first: "https://" | remove_first: "www." | remove: "/" }}</a>
+      {% endif %}
+    </div>
+  </header>
+  <ul class="food-place-dishes">
+    {% if place_dishes and place_dishes.size > 0 %}
+      {% for dish in place_dishes %}
+      <li class="food-polaroid is-dish{% if forloop.index == 2 %} is-second{% endif %}{% if forloop.index > 2 %} is-later-dish{% endif %}">
+        <span class="food-tape{% if forloop.first %} food-tape-check{% else %} food-tape-stripe{% endif %}" aria-hidden="true"></span>
+        <figure>
+          <img
+            src="{{ dish.photo | relative_url }}"
+            alt="{{ dish.photo_alt }}"
+            width="960"
+            height="720">
+          <figcaption>
+            <span class="food-polaroid-title">{{ dish.name }}</span>
+            <span class="food-polaroid-meta">at {{ place.name }}</span>
+            {% if place.toppings and forloop.first %}
+            <span class="food-polaroid-toppings">{{ place.toppings | join: ", " }}</span>
+            {% endif %}
+          </figcaption>
+        </figure>
+      </li>
+      {% endfor %}
+    {% elsif place.dish_photo %}
+      <li class="food-polaroid is-dish">
+        <span class="food-tape food-tape-stripe" aria-hidden="true"></span>
+        <figure>
+          <img
+            src="{{ place.dish_photo | relative_url }}"
+            alt="{{ place.dish_photo_alt }}"
+            width="960"
+            height="720">
+          <figcaption>
+            <span class="food-polaroid-title">{{ place.starred_dish }}</span>
+            <span class="food-polaroid-meta">at {{ place.name }}</span>
+            {% if place.toppings %}
+            <span class="food-polaroid-toppings">{{ place.toppings | join: ", " }}</span>
+            {% endif %}
+          </figcaption>
+        </figure>
+      </li>
+    {% endif %}
+  </ul>
+  <p class="food-polaroid-kicker">Only favorite <span aria-hidden="true">♡</span></p>
+</article>
