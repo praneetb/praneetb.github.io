@@ -7,9 +7,16 @@
 # script can read the vault the same way bake-home.mjs does.
 #
 # LOCKED list — do not invent or pad:
-#   Restaurant: Khan's Karahi Kabob
-#     address: 3915 Washington Blvd, Fremont, CA 94538
-#     starred dish: Goat Peshawari Namakmandi Karahi
+#   Restaurants:
+#     Khan's Karahi Kabob
+#       address: 3915 Washington Blvd, Fremont, CA 94538
+#       starred dish: Goat Peshawari Namakmandi Karahi
+#     Bronco Billy's Pizza Palace (Niles / Fremont)
+#       address: 37651 Niles Blvd, Fremont, CA 94536
+#       starred dish: Chuck Wagon (Chuckwagon Delight)
+#       toppings: salami, pepperoni, mushrooms, black olives,
+#         green peppers, onions, linguica, sausage, beef, fresh garlic
+#       href: https://www.broncobillyspizzapalace.com/
 #   Cocktails: Rum Buck (pinned), Long Island Iced Tea
 #
 # Do NOT add:
@@ -33,6 +40,30 @@ restaurants:
     photo_alt: Bone-in mutton karahi in a metal pot, cilantro on top. Food only, no person in the frame.
     dish_photo: /assets/images/food/goat-karahi-naan.jpg
     dish_photo_alt: Mutton curry with roti, sliced onion, and a lemon wedge on a plate. Food only, no person in the frame.
+
+  - id: bronco-billys-pizza-palace
+    name: Bronco Billy's Pizza Palace
+    short: Bronco Billy's
+    city: Niles / Fremont
+    address: 37651 Niles Blvd, Fremont, CA 94536
+    href: https://www.broncobillyspizzapalace.com/
+    favorite: true
+    starred_dish: Chuck Wagon (Chuckwagon Delight)
+    toppings:
+      - salami
+      - pepperoni
+      - mushrooms
+      - black olives
+      - green peppers
+      - onions
+      - linguica
+      - sausage
+      - beef
+      - fresh garlic
+    photo: /assets/images/food/bronco-billys-pizza.jpg
+    photo_alt: Loaded pepperoni, salami, and sausage pizza in an open box. Food only, no person in the frame.
+    dish_photo: /assets/images/food/chuck-wagon-pizza.jpg
+    dish_photo_alt: Pan pizza with mushrooms, olives, peppers, onions, and sausage. Food only, no person in the frame.
 
 dishes: []
 
