@@ -192,7 +192,8 @@ body:has(.page-food-browse) .page-food-browse {
   letter-spacing: 0.04em;
 }
 
-.food-az-link {
+.food-az-link,
+.food-browse-shell a.food-az-link {
   display: grid;
   place-items: center;
   width: 1.35rem;
@@ -201,13 +202,16 @@ body:has(.page-food-browse) .page-food-browse {
   text-decoration: none;
 }
 
-.food-az-link.is-live {
+.food-az-link.is-live,
+.food-browse-shell a.food-az-link.is-live {
   color: var(--scrap-ink);
   cursor: pointer;
 }
 
 .food-az-link.is-live:hover,
-.food-az-link.is-live:focus-visible {
+.food-az-link.is-live:focus-visible,
+.food-browse-shell a.food-az-link.is-live:hover,
+.food-browse-shell a.food-az-link.is-live:focus-visible {
   color: var(--scrap-red);
 }
 
