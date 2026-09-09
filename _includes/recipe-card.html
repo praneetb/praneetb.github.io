@@ -27,14 +27,6 @@
   <span class="food-tape food-tape-tan" aria-hidden="true"></span>
   <span class="food-place-letter" aria-hidden="true">{{ letter }}</span>
   <header class="food-place-head recipe-card-head">
-    <figure class="recipe-card-photo recipe-sticky">
-      <span class="food-tape food-tape-check" aria-hidden="true"></span>
-      <img
-        src="{{ recipe.photo | relative_url }}"
-        alt="{{ recipe.photo_alt }}"
-        width="499"
-        height="566">
-    </figure>
     <div class="food-place-copy">
       <p class="food-place-kicker">
         <span class="food-section-star" aria-hidden="true">✦</span>
@@ -42,6 +34,13 @@
       </p>
       <h2 id="recipe-{{ recipe.id }}-title">{{ recipe.title }}</h2>
     </div>
+    <figure class="recipe-card-photo">
+      <img
+        src="{{ recipe.photo | relative_url }}"
+        alt="{{ recipe.photo_alt }}"
+        width="960"
+        height="1280">
+    </figure>
   </header>
 
   <div class="recipe-card-body">
