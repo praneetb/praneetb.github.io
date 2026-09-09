@@ -37,23 +37,39 @@ body.is-recipes .page-recipes {
 
 .recipe-card-photo {
   position: relative;
-  flex: 0 1 16.5rem;
-  width: min(100%, 16.5rem);
-  margin: 0.35rem 0 0.15rem;
-  padding: 0.55rem 0.55rem 0.7rem;
-  background: var(--polaroid);
+  flex: 0 1 16.2rem;
+  width: min(100%, 16.2rem);
+  margin: 0.55rem 0.1rem 0.35rem;
+  padding: 0.42rem 0.42rem 0.7rem;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 196, 0.55), transparent 22%),
+    #ffe160;
+  border-radius: 0.04rem 0.04rem 0.22rem 0.1rem;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.8) inset,
-    0 16px 28px rgba(62, 38, 18, 0.18);
-  transform: rotate(-2.4deg);
+    0 1px 0 rgba(255, 252, 220, 0.7) inset,
+    0 1px 0 rgba(196, 150, 40, 0.18),
+    0 16px 28px rgba(62, 38, 18, 0.2);
+  transform: rotate(-3.4deg);
+}
+
+.recipe-card-photo::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  background: linear-gradient(135deg, transparent 48%, rgba(210, 168, 42, 0.38) 49%, #f3d056 100%);
+  pointer-events: none;
 }
 
 .recipe-card-photo img {
   display: block;
   width: 100%;
-  height: 18.4rem;
-  object-fit: cover;
-  background: #1a120c;
+  height: auto;
+  aspect-ratio: 499 / 566;
+  object-fit: contain;
+  background: #ffe160;
 }
 
 .recipe-card-body {
@@ -138,12 +154,8 @@ body.is-recipes .page-recipes {
   }
 
   .recipe-card-photo {
-    width: min(100%, 22rem);
-    flex-basis: min(100%, 22rem);
-    transform: rotate(-1.1deg);
-  }
-
-  .recipe-card-photo img {
-    height: 16.5rem;
+    width: min(100%, 20rem);
+    flex-basis: min(100%, 20rem);
+    transform: rotate(-1.6deg);
   }
 }
