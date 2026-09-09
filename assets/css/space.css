@@ -83,6 +83,11 @@
   color: var(--tile-food-ink);
 }
 
+.space-tile[data-tile="recipes"] {
+  background: var(--tile-recipes-bg);
+  color: var(--tile-recipes-ink);
+}
+
 .space-tile[data-tile="fermentation"] {
   background: var(--tile-fermentation-bg);
   color: var(--tile-fermentation-ink);
