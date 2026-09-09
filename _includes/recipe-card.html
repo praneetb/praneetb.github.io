@@ -1,0 +1,69 @@
+{% assign recipe = include.recipe %}
+{% assign chip = recipe.chip | default: "other" %}
+{% assign letter = recipe.title | slice: 0 | upcase %}
+{% assign haystack = recipe.title | default: "" %}
+{% if recipe.short %}
+  {% assign haystack = haystack | append: " " | append: recipe.short %}
+{% endif %}
+{% if recipe.meal %}
+  {% assign haystack = haystack | append: " " | append: recipe.meal %}
+{% endif %}
+{% for line in recipe.ingredients %}
+  {% assign haystack = haystack | append: " " | append: line.name %}
+  {% assign haystack = haystack | append: " " | append: line.prep %}
+{% endfor %}
+{% for step in recipe.steps %}
+  {% assign haystack = haystack | append: " " | append: step %}
+{% endfor %}
+
+<article
+  class="food-place-card recipe-card"
+  id="{{ recipe.id }}"
+  data-recipe-card
+  data-chip="{{ chip }}"
+  data-letter="{{ letter }}"
+  data-search="{{ haystack | escape }}"
+  aria-labelledby="recipe-{{ recipe.id }}-title">
+  <span class="food-tape food-tape-tan" aria-hidden="true"></span>
+  <span class="food-place-letter" aria-hidden="true">{{ letter }}</span>
+  <header class="food-place-head recipe-card-head">
+    <figure class="recipe-card-photo">
+      <span class="food-tape food-tape-check" aria-hidden="true"></span>
+      <img
+        src="{{ recipe.photo | relative_url }}"
+        alt="{{ recipe.photo_alt }}"
+        width="864"
+        height="1152">
+    </figure>
+    <div class="food-place-copy">
+      <p class="food-place-kicker">
+        <span class="food-section-star" aria-hidden="true">✦</span>
+        {{ recipe.meal | default: "Recipe" }}
+      </p>
+      <h2 id="recipe-{{ recipe.id }}-title">{{ recipe.title }}</h2>
+    </div>
+  </header>
+
+  <div class="recipe-card-body">
+    <section class="recipe-block" aria-labelledby="recipe-{{ recipe.id }}-ingredients">
+      <h3 id="recipe-{{ recipe.id }}-ingredients">Ingredients</h3>
+      <ul class="recipe-ingredients">
+        {% for line in recipe.ingredients %}
+        <li>
+          <span class="recipe-ing-name">{{ line.name }}</span>
+          <span class="recipe-ing-prep">{{ line.prep }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="recipe-block" aria-labelledby="recipe-{{ recipe.id }}-steps">
+      <h3 id="recipe-{{ recipe.id }}-steps">Steps</h3>
+      <ol class="recipe-steps">
+        {% for step in recipe.steps %}
+        <li>{{ step }}</li>
+        {% endfor %}
+      </ol>
+    </section>
+  </div>
+</article>

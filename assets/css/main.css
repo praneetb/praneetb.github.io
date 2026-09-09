@@ -56,6 +56,9 @@ html[data-theme="summit"] {
   --tile-food-bg: #b4532a;
   --tile-food-ink: #fff8f2;
   --tile-food-muted: rgba(255, 248, 242, 0.8);
+  --tile-recipes-bg: #c47c3a;
+  --tile-recipes-ink: #fff8f2;
+  --tile-recipes-muted: rgba(255, 248, 242, 0.8);
   --tile-fermentation-bg: #5c6b3d;
   --tile-fermentation-ink: #f7f1e8;
   --tile-fermentation-muted: rgba(247, 241, 232, 0.78);
@@ -171,6 +174,9 @@ html[data-theme="atlas"] {
   --tile-food-bg: #fb8500;
   --tile-food-ink: #023047;
   --tile-food-muted: rgba(2, 48, 71, 0.72);
+  --tile-recipes-bg: #e09f3e;
+  --tile-recipes-ink: #023047;
+  --tile-recipes-muted: rgba(2, 48, 71, 0.72);
   --tile-fermentation-bg: #3d6b2c;
   --tile-fermentation-ink: #fff8ef;
   --tile-fermentation-muted: rgba(255, 248, 239, 0.78);
@@ -284,6 +290,9 @@ html[data-theme="cadence"] {
   --tile-food-bg: #e07a5f;
   --tile-food-ink: #0b0a1f;
   --tile-food-muted: rgba(11, 10, 31, 0.7);
+  --tile-recipes-bg: #e9c46a;
+  --tile-recipes-ink: #0b0a1f;
+  --tile-recipes-muted: rgba(11, 10, 31, 0.7);
   --tile-fermentation-bg: #c5d5c0;
   --tile-fermentation-ink: #1b1464;
   --tile-fermentation-muted: rgba(27, 20, 100, 0.72);

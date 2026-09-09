@@ -1,0 +1,31 @@
+# Public /recipes/ scrapbook. Cook-at-home recipes only.
+# Separate from /food/ (restaurant favorites) and /cocktails/ (drink videos).
+# LOCKED list — do not invent recipes beyond this file.
+
+filters:
+  - id: all
+    name: All
+  - id: breakfast
+    name: Breakfast
+
+items:
+  - id: poblano-egg-bites
+    title: Gourmet Poblano Cream Corn & Sungold Tomato Egg Bites
+    short: Poblano egg bites
+    chip: breakfast
+    meal: Breakfast
+    photo: /assets/images/recipes/poblano-egg-bites.jpg
+    photo_alt: Laptop on a sunny patio showing the Gourmet Poblano Cream Corn and Sungold Tomato Egg Bites recipe. Photograph by Praneet Bachheti.
+    ingredients:
+      - name: Glaum Ranch Eggs
+        prep: 6 large eggs, whisked with 1/2 cup cottage cheese or heavy cream
+      - name: Poblano Cream Corn
+        prep: Char 1 poblano, dice; sauté with 1/2 cup fresh sweet corn + splash of cream
+      - name: Sungold Tomatoes
+        prep: 1/2 cup halved Sungold cherry tomatoes for tops
+      - name: Cheese & seasoning
+        prep: 1/2 cup Monterey Jack or Cotija; salt & pepper
+    steps:
+      - Blend eggs, cream, cheese, and seasoning.
+      - Assemble in a greased silicone muffin tray — corn base, egg mix about 3/4 full, 2–3 tomato halves face-up.
+      - Bake in a water bath at 300°F (150°C) for 25–30 minutes until set.
