@@ -493,3 +493,85 @@ html[data-theme="cadence"] .trip-ticket {
     transition: none;
   }
 }
+
+
+.trip-flight-thumbs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 0.95rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trip-flight-thumb figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: #fffdf8;
+  box-shadow: 0 8px 18px rgba(28, 25, 23, 0.08);
+}
+
+.trip-flight-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+.trip-flight-thumb figcaption {
+  margin: 0;
+  padding: 0.55rem 0.7rem 0.65rem;
+  color: #5c5a56;
+  font-family: var(--font-note);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.trip-gallery-item {
+  margin: 0;
+}
+
+.trip-polaroid.is-filled {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0.45rem 0.45rem 0.7rem;
+  background: #fffdf8;
+  transform: rotate(-1.4deg);
+}
+
+.trip-gallery-item:nth-child(even) .trip-polaroid.is-filled {
+  transform: rotate(1.2deg);
+}
+
+.trip-polaroid-photo {
+  display: block;
+  overflow: hidden;
+  border-radius: 0.12rem;
+  background: #efe6d8;
+}
+
+.trip-polaroid.is-filled img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.trip-polaroid.is-filled figcaption {
+  margin: 0.55rem 0.15rem 0;
+  color: var(--ink-soft);
+  font-family: var(--font-note);
+  font-size: 0.98rem;
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .trip-flight-thumbs {
+    grid-template-columns: 1fr;
+  }
+}
