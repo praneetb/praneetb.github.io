@@ -1,0 +1,25 @@
+{% assign trip = include.trip %}
+{% assign published = false %}
+{% if trip.public %}
+  {% assign published = true %}
+{% endif %}
+<article
+  class="trip-card{% unless published %} is-private{% endunless %}"
+  data-trip-card="{{ trip.id }}"
+  data-public="{% if published %}true{% else %}false{% endif %}">
+  <span class="trip-card-tape" aria-hidden="true"></span>
+  <p class="trip-card-stamp" aria-hidden="true">{{ trip.where }}</p>
+  <header class="trip-card-head">
+    <p class="trip-card-when">{{ trip.when }}</p>
+    <h2>
+      <a href="{{ '/trips/' | append: trip.slug | append: '/' | relative_url }}">{{ trip.title }}</a>
+    </h2>
+    {% if trip.blurb %}
+    <p class="trip-card-blurb">{{ trip.blurb }}</p>
+    {% endif %}
+  </header>
+  <p class="trip-card-badge" data-trip-badge>
+    {% if published %}Public{% else %}Private{% endif %}
+  </p>
+  {% include trip-privacy.html trip=trip %}
+</article>

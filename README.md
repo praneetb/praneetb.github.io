@@ -6,11 +6,12 @@ Personal site for [Praneet Bachheti](https://praneetb.github.io), served by GitH
 
 Logged-out visitors see the public home on `/` — a cream-paper scrapbook spread (handwritten greeting, overlapping Polaroids, pictured peeks, torn notes) with vault-backed peeks for Travel, Food, Cocktails, Fermentation, Patents, Bucket, Bar, and Violin, plus a static Health Polaroid (movement names only). There is no Half Dome hero banner and no people photos. Tile peeks stay vault-backed via `_data/home.yml` (`scripts/bake-home.mjs`) except Food, which reads locked favorites from `_data/food.yml`. Travel uses a credited Venice sunset still; the one violin Polaroid is an instrument-only painting (fiddle + bow, no person) with the practice-room / vault-log line on the caption. Health uses a credited pickleball-equipment still (no person) and lists Pickleball · Running · Walking — never Whoop Recovery, Strain, Sleep, or HRV numbers. The Food peek uses a credited karahi still and lists only vault favorites (Khan's · Bronco Billy's · Rum Buck · LIIT). Cocktails, Bar, Patents, and Bucket carry credited stills (no faces). Media, Notes, and Manya are not shown on the public home, even as locked tiles.
 
-Public panel links — Recipes, Travel, Bar, Cocktails, Food, Fermentation, Patents, Bucket, Violin, Health — stay in the header for everyone, signed out or signed in. Recipes leads the public nav (first after the wordmark). Health’s panel and Polaroid open `/health/`; the dashboard stays `private: true` and the page-gate handles guests. Media, Notes, Manya, and Space are gated extras that appear only after login; they never replace the public panels.
+Public panel links — Recipes, Travel, Trips, Bar, Cocktails, Food, Fermentation, Patents, Bucket, Violin, Health — stay in the header for everyone, signed out or signed in. Recipes leads the public nav (first after the wordmark). Health’s panel and Polaroid open `/health/`; the dashboard stays `private: true` and the page-gate handles guests. Media, Notes, Manya, and Space are gated extras that appear only after login; they never replace the public panels.
 
 These pages are public and read-only for guests (Sign in stays in the header):
 
 - [Travel](/travel/) — cockpit globe and visited countries from `_data/travel.yml` (baked from vault `20-Personal/Travel/Countries Visited.md`); Seven Wonders live on the bucket list
+- [Trips](/trips/) — public index of trip scrapbooks from `_data/trips.yml`. Each trip has its own `public: true|false` flag (not a site-wide gate). Guests see only public trips; private trips appear after the same `site.admin` sign-in. India 2026 starts `public: false` and is gated on `/trips/india-2026/` via `page-gate` + `site-admin.js`. Flip that trip’s flag and merge to share it. Distinct from the countries globe — do not invent itinerary.
 - [Bar](/bar/) — four-tab bar (Whiskey / Wine / Beer / Tequila) with Premium / Core / Everyday shelves from `_data/whiskey.yml`, `_data/wine.yml`, `_data/beer.yml`, and `_data/tequila.yml`; search, hover lift, pour, and tasting notes. Star ratings stay signed-in only. `/whiskey/` redirects to `/bar/?tab=whiskey`
 - [Cocktails](/cocktails/) — vault recipes from `_data/cocktails.yml` (`30-Knowledge/Recipes/`); search and Stirred / Shaken / Built filters; short-pour video when present; visitor notes stay in localStorage
 - [Food](/food/) — public browse of **favorites only** from `_data/food.yml` (seeded from vault `Favorite Restaurants.md` and `Favorite Cocktails.md`). Restaurant cards nest dish Polaroids; sticky All / Desi / Pizza / Cocktails chips, light search, and A–Z jumps. Khan's Karahi Kabob (Fremont) with starred Goat Peshawari Namakmandi Karahi and Chapli kabob, Bronco Billy's Pizza Palace (Niles / Fremont) with starred Chuck Wagon (Chuckwagon Delight), plus Rum Buck (pinned) and Long Island Iced Tea linking to `/cocktails/`. `/food-browse/` redirects here. No logged-meal fillers, no invented dishes, no non-favorite cocktails.
@@ -23,13 +24,13 @@ These pages are public and read-only for guests (Sign in stays in the header):
 
 Sign in (username + password) unlocks a site-wide session. After a successful login from `/`, the browser goes to `/space/`. The wordmark then points at `/space/`; the public home can still be opened directly. Signed-in chrome keeps those public panels and adds private navigation:
 
-- [Your space](/space/) — hub for the public rooms plus Media, Violin, Notes, and Manya
+- [Your space](/space/) — hub for the public rooms (including Trips) plus Media, Violin, Notes, and Manya
 - [Media](/media/) — private door to the Jellyfin library (opens in a new tab)
 - [Violin practice](/violin/practice/) — gated practice room and recording detail; Media stays, Violin is a sibling tile
 - [Notes](/notes/) — read-only vault reader (ciphertext only in the repo; no finance notes)
 - [Manya](/manya/) — private family hub; [School](/manya/school/), [report cards](/manya/school/reports/) (age-cartoon cards; PDFs open in a page viewer from an encrypted pack keyed by Drive file ids in `_data/manya_reports.yml`), and [SAT / PSAT](/manya/school/sat-psat/) (titles and dates; same on-page viewer from `sat-psat.enc.json`; no scores listed)
 
-Direct URLs to Health, Media, Notes, Manya, and Space show a sign-in prompt when locked. The visited-country list is site data, not a per-browser stash.
+Direct URLs to Health, Media, Notes, Manya, Space, and a private trip page show a sign-in prompt when locked. The visited-country list is site data, not a per-browser stash.
 
 Resume stays public. [Privacy](/privacy/) is public too — how this personal site uses data, including Whoop and similar integrations.
 

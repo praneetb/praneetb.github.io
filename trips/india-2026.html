@@ -1,0 +1,27 @@
+---
+layout: default
+title: India 2026
+nav: trips
+permalink: /trips/india-2026/
+trip_id: india-2026
+private: false
+sitemap: false
+hide_footer: true
+description: India 2026 trip scrapbook.
+extra_css:
+  - /assets/css/trips.css
+extra_js:
+  - /assets/js/trips.js
+---
+
+{% comment %}
+  Per-trip page. Guest gate follows public: false in _data/trips.yml
+  (page-gate + private-content). Do not invent itinerary beyond the flight seed.
+{% endcomment %}
+
+{% assign trip = site.data.trips.items | where: "id", page.trip_id | first %}
+{% if trip %}
+  {% include trip-detail.html trip=trip %}
+{% else %}
+  <p class="trip-empty">This trip is not in the scrapbook yet.</p>
+{% endif %}

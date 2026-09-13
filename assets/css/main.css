@@ -29,6 +29,9 @@ html[data-theme="summit"] {
   --tile-travel-bg: #7eb6d9;
   --tile-travel-ink: #1c1917;
   --tile-travel-muted: rgba(28, 25, 23, 0.68);
+  --tile-trips-bg: #c47a4a;
+  --tile-trips-ink: #fff8f2;
+  --tile-trips-muted: rgba(255, 248, 242, 0.8);
   --tile-media-bg: #efe6d8;
   --tile-media-ink: #1c1917;
   --tile-media-muted: #5c5a56;
@@ -147,6 +150,9 @@ html[data-theme="atlas"] {
   --tile-travel-bg: #00b4d8;
   --tile-travel-ink: #023047;
   --tile-travel-muted: rgba(2, 48, 71, 0.72);
+  --tile-trips-bg: #fb8500;
+  --tile-trips-ink: #023047;
+  --tile-trips-muted: rgba(2, 48, 71, 0.72);
   --tile-media-bg: #7b2cbf;
   --tile-media-ink: #ffffff;
   --tile-media-muted: rgba(255, 255, 255, 0.78);
@@ -263,6 +269,9 @@ html[data-theme="cadence"] {
   --tile-travel-bg: #f4a261;
   --tile-travel-ink: #0b0a1f;
   --tile-travel-muted: rgba(11, 10, 31, 0.68);
+  --tile-trips-bg: #e76f51;
+  --tile-trips-ink: #0b0a1f;
+  --tile-trips-muted: rgba(11, 10, 31, 0.7);
   --tile-media-bg: #2ec4b6;
   --tile-media-ink: #0b0a1f;
   --tile-media-muted: rgba(11, 10, 31, 0.68);

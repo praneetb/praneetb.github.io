@@ -1,0 +1,106 @@
+{% assign trip = include.trip %}
+{% assign published = false %}
+{% if trip.public %}
+  {% assign published = true %}
+{% endif %}
+
+{% unless published %}
+  {% include page-gate.html %}
+{% endunless %}
+
+<div
+  class="trip-detail{% unless published %} private-content{% endunless %}"
+  data-trip-id="{{ trip.id }}"
+  data-public="{% if published %}true{% else %}false{% endif %}">
+  <p class="trip-crumb">
+    <a href="{{ '/trips/' | relative_url }}">Trips</a>
+    <span aria-hidden="true">·</span>
+    {{ trip.title }}
+  </p>
+
+  <header class="trip-hero">
+    <p class="trip-kicker">Trip scrapbook</p>
+    <h1>{{ trip.title }}</h1>
+    <p class="trip-lede">{{ trip.when }}{% if trip.where %} · {{ trip.where }}{% endif %}</p>
+    <p class="trip-hero-badge" data-trip-badge>{% if published %}Public{% else %}Private{% endif %}</p>
+    {% include trip-privacy.html trip=trip %}
+    <span class="trip-doodle trip-doodle-star" aria-hidden="true">✦</span>
+    <span class="trip-doodle trip-doodle-heart" aria-hidden="true">♡</span>
+  </header>
+
+  <section class="trip-section trip-flight scrapbook-card" id="flight" aria-labelledby="trip-flight-heading">
+    <header class="trip-section-head">
+      <h2 id="trip-flight-heading">Flight</h2>
+    </header>
+    {% if trip.flights and trip.flights.size > 0 %}
+      {% for flight in trip.flights %}
+      <article class="trip-ticket">
+        <span class="trip-ticket-stub" aria-hidden="true"></span>
+        <div class="trip-ticket-main">
+          <p class="trip-ticket-airline">{{ flight.airline }}</p>
+          <p class="trip-ticket-number">{{ flight.number }}</p>
+          <div class="trip-ticket-route">
+            <span>{{ flight.from }}</span>
+            <span class="trip-ticket-arrow" aria-hidden="true">→</span>
+            <span>{{ flight.to }}</span>
+          </div>
+          <dl class="trip-ticket-meta">
+            <div>
+              <dt>Depart</dt>
+              <dd>{{ flight.depart_day }} {{ flight.depart_time }}{% if flight.terminal %} · Terminal {{ flight.terminal }}{% endif %}</dd>
+            </div>
+            <div>
+              <dt>Arrive</dt>
+              <dd>{{ flight.arrive_day }} {{ flight.arrive_time }}{% if flight.arrive_airport %} · {{ flight.arrive_airport }}{% endif %}</dd>
+            </div>
+            <div>
+              <dt>PNR</dt>
+              <dd>{{ flight.pnr }}</dd>
+            </div>
+            {% if trip.travelers and trip.travelers.size > 0 %}
+            <div>
+              <dt>Travelers</dt>
+              <dd>{{ trip.travelers | join: " + " }}</dd>
+            </div>
+            {% endif %}
+          </dl>
+        </div>
+        <aside class="trip-ticket-side" aria-hidden="true">
+          <p>{{ flight.number }}</p>
+          <p>{{ flight.from }} {{ flight.to }}</p>
+          <span class="trip-ticket-bars"></span>
+        </aside>
+      </article>
+      {% endfor %}
+    {% else %}
+      <p class="trip-empty">Nothing pinned yet.</p>
+    {% endif %}
+  </section>
+
+  {% include trip-section.html anchor="places" title="Places visited" items=trip.places %}
+  {% include trip-section.html anchor="restaurants" title="Restaurants" items=trip.restaurants %}
+  {% include trip-section.html anchor="stays" title="Stays" items=trip.stays %}
+  {% include trip-section.html anchor="drives" title="Drives" items=trip.drives %}
+
+  <section class="trip-section scrapbook-card" id="gallery">
+    <header class="trip-section-head">
+      <h2>Photos / videos</h2>
+    </header>
+    {% if trip.media and trip.media.size > 0 %}
+      <ul class="trip-gallery">
+        {% for item in trip.media %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="trip-gallery is-empty" aria-hidden="true">
+        <span class="trip-polaroid"></span>
+        <span class="trip-polaroid"></span>
+        <span class="trip-polaroid"></span>
+      </div>
+      <p class="trip-empty">Nothing pinned yet.</p>
+    {% endif %}
+  </section>
+
+  {% include trip-section.html anchor="notes" title="Notes" items=trip.notes %}
+</div>

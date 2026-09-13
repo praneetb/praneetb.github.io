@@ -1,0 +1,34 @@
+# Per-trip scrapbook for /trips/. Distinct from /travel/ countries globe.
+# public: true|false is published visibility for guests (not a site-wide gate).
+# Private trips appear on the index only after site.admin unlock.
+# Flip public: true on a trip and merge to share that trip. Do not invent itinerary.
+
+items:
+  - id: india-2026
+    slug: india-2026
+    title: India 2026
+    public: false
+    when: September 2026
+    where: India
+    blurb: SFO → DEL
+    travelers:
+      - Praneet
+      - Uma Prasad
+    flights:
+      - airline: Air India
+        number: AI 4174
+        from: SFO
+        to: DEL
+        depart_day: Sun Sep 13
+        depart_time: 10:55a PT
+        terminal: I
+        arrive_day: Mon Sep 14
+        arrive_time: 7:55p IST
+        arrive_airport: DEL
+        pnr: 8SOF2E
+    places: []
+    restaurants: []
+    stays: []
+    drives: []
+    media: []
+    notes: []

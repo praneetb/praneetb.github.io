@@ -57,6 +57,11 @@
   color: var(--tile-travel-ink);
 }
 
+.space-tile[data-tile="trips"] {
+  background: var(--tile-trips-bg);
+  color: var(--tile-trips-ink);
+}
+
 .space-tile[data-tile="media"] {
   background: var(--tile-media-bg);
   color: var(--tile-media-ink);
