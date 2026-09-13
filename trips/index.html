@@ -1,0 +1,48 @@
+---
+layout: default
+title: Trips
+nav: trips
+permalink: /trips/
+private: false
+hide_footer: true
+description: Trip scrapbooks — boarding passes, places, and notes. Separate from the countries globe.
+extra_css:
+  - /assets/css/trips.css
+extra_js:
+  - /assets/js/trips.js
+---
+
+{% comment %}
+  Public /trips/ index. Guests see only trips with public: true.
+  Private trips appear after site.admin unlock. Do not invent itinerary.
+{% endcomment %}
+
+{% assign trips = site.data.trips.items %}
+{% assign public_count = 0 %}
+{% for trip in trips %}
+  {% if trip.public %}
+    {% assign public_count = public_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+<script type="application/json" id="trips-data">
+{{ site.data.trips | jsonify }}
+</script>
+
+<div class="trips-shell" id="trips-index">
+  <header class="trips-hero">
+    <p class="trip-kicker">Scrapbook</p>
+    <h1>Trips</h1>
+    <p class="trips-lede">Boarding passes and days on the ground. Not the countries globe.</p>
+    <span class="trip-doodle trip-doodle-star" aria-hidden="true">✦</span>
+    <span class="trip-doodle trip-doodle-heart" aria-hidden="true">♡</span>
+  </header>
+
+  <div class="trips-list" id="trips-list">
+    {% for trip in trips %}
+      {% include trip-card.html trip=trip %}
+    {% endfor %}
+  </div>
+
+  <p id="trips-empty" class="trips-empty"{% if public_count > 0 %} hidden{% endif %}>No public trips in the scrapbook yet.</p>
+</div>

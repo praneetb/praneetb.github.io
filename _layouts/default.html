@@ -19,8 +19,14 @@
   </script>
   <title>{% if page.title and page.nav != 'home' %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
+  {% assign trip_record = nil %}
+  {% if page.trip_id %}
+    {% assign trip_record = site.data.trips.items | where: "id", page.trip_id | first %}
+  {% endif %}
   {% if page.robots %}
   <meta name="robots" content="{{ page.robots }}">
+  {% elsif trip_record and trip_record.public != true %}
+  <meta name="robots" content="noindex, nofollow">
   {% endif %}
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
   <meta name="theme-color" content="#F7F1E8">
@@ -33,7 +39,7 @@
   {% endif %}
   {% include auth-boot.html %}
 </head>
-<body{% if page.nav == 'home' or page.nav == 'travel' or page.nav == 'food' or page.nav == 'recipes' %} class="{% if page.nav == 'home' %}is-home{% endif %}{% if page.nav == 'food' %}is-food{% endif %}{% if page.nav == 'recipes' %}is-recipes{% endif %}{% if page.nav == 'travel' %}theme-travel{% endif %}"{% endif %}{% if page.private %} data-private="true"{% endif %}>
+<body{% if page.nav == 'home' or page.nav == 'travel' or page.nav == 'food' or page.nav == 'recipes' or page.nav == 'trips' %} class="{% if page.nav == 'home' %}is-home{% endif %}{% if page.nav == 'food' %}is-food{% endif %}{% if page.nav == 'recipes' %}is-recipes{% endif %}{% if page.nav == 'trips' %}is-trips{% endif %}{% if page.nav == 'travel' %}theme-travel{% endif %}"{% endif %}{% if page.private %} data-private="true"{% endif %}>
   <a class="skip-link" href="#content">Skip to content</a>
   {% include nav.html %}
   <main id="content" class="page page-{{ page.nav }}">

@@ -1,0 +1,14 @@
+<section class="trip-section scrapbook-card" id="{{ include.anchor }}">
+  <header class="trip-section-head">
+    <h2>{{ include.title }}</h2>
+  </header>
+  {% if include.items and include.items.size > 0 %}
+    <ul class="trip-section-list">
+      {% for item in include.items %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="trip-empty">Nothing pinned yet.</p>
+  {% endif %}
+</section>

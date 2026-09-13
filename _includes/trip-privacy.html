@@ -1,0 +1,32 @@
+{% comment %}
+  Signed-in per-trip visibility control. Guest visibility is `public` in
+  _data/trips.yml. The switch is a local preview until that flag is merged.
+{% endcomment %}
+<div
+  class="trip-privacy"
+  data-trip-privacy="{{ include.trip.id }}"
+  data-published="{% if include.trip.public %}true{% else %}false{% endif %}"
+  hidden>
+  <p class="trip-privacy-kicker">This trip</p>
+  <div class="trip-privacy-row">
+    <span class="trip-privacy-side">Private</span>
+    <button
+      type="button"
+      class="trip-privacy-switch"
+      role="switch"
+      aria-checked="{% if include.trip.public %}true{% else %}false{% endif %}"
+      data-trip-toggle="{{ include.trip.id }}"
+      aria-label="Preview public listing for {{ include.trip.title | escape }}">
+      <span class="trip-privacy-knob" aria-hidden="true"></span>
+    </button>
+    <span class="trip-privacy-side">Public</span>
+  </div>
+  <p class="trip-privacy-live">
+    Guests see this trip:
+    <strong data-trip-live>{% if include.trip.public %}yes{% else %}no{% endif %}</strong>
+  </p>
+  <p class="trip-privacy-help">
+    Published flag is <code>public</code> in <code>_data/trips.yml</code>.
+    Flip it and merge to share. This switch is a signed-in preview only.
+  </p>
+</div>
