@@ -1,0 +1,10 @@
+Private India 2026 trip cabin photos. Trip stays public: false in
+_data/trips.yml — do not surface these on the public home or /food/.
+
+flight-cabin-aisle.jpg
+  Cabin aisle / suite pod on Air India AI 4174 (SFO → DEL).
+  Photograph by Praneet Bachheti.
+
+flight-cabin-suite.jpg
+  Suite seat on Air India AI 4174 (SFO → DEL).
+  Photograph by Praneet Bachheti.
