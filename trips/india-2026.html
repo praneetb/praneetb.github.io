@@ -20,9 +20,6 @@ extra_js:
 {% endcomment %}
 
 {% assign trip = site.data.trips.items | where: "id", page.trip_id | first %}
-<script type="application/json" id="trips-data">
-{{ site.data.trips | jsonify }}
-</script>
 {% if trip %}
   {% include trip-detail.html trip=trip %}
 {% else %}
