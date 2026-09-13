@@ -15,8 +15,8 @@ extra_js:
 ---
 
 {% comment %}
-  Per-trip page. Guest gate follows public: false in _data/trips.yml
-  (page-gate + private-content). Do not invent itinerary beyond the flight seed.
+  Per-trip page. Guest gate follows public in _data/trips.yml
+  (page-gate + private-content when public: false). Do not invent itinerary.
 {% endcomment %}
 
 {% assign trip = site.data.trips.items | where: "id", page.trip_id | first %}
