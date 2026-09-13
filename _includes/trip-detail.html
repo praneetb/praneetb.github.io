@@ -75,6 +75,29 @@
     {% else %}
       <p class="trip-empty">Nothing pinned yet.</p>
     {% endif %}
+    {% assign flight_media = trip.media | where: "section", "flight" %}
+    {% if flight_media and flight_media.size > 0 %}
+      <ul class="trip-flight-thumbs">
+        {% for item in flight_media %}
+          <li class="trip-flight-thumb">
+            <figure>
+              <a href="{{ item.src | relative_url }}" target="_blank" rel="noopener noreferrer">
+                <img
+                  src="{{ item.src | relative_url }}"
+                  alt="{{ item.alt | default: item.caption | escape }}"
+                  {% if item.width %}width="{{ item.width }}"{% endif %}
+                  {% if item.height %}height="{{ item.height }}"{% endif %}
+                  loading="lazy"
+                  decoding="async">
+              </a>
+              {% if item.caption %}
+              <figcaption>{{ item.caption }}</figcaption>
+              {% endif %}
+            </figure>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
   </section>
 
   {% include trip-section.html anchor="places" title="Places visited" items=trip.places %}
@@ -89,7 +112,22 @@
     {% if trip.media and trip.media.size > 0 %}
       <ul class="trip-gallery">
         {% for item in trip.media %}
-          <li>{{ item }}</li>
+          <li class="trip-gallery-item">
+            <figure class="trip-polaroid is-filled">
+              <a class="trip-polaroid-photo" href="{{ item.src | relative_url }}" target="_blank" rel="noopener noreferrer">
+                <img
+                  src="{{ item.src | relative_url }}"
+                  alt="{{ item.alt | default: item.caption | escape }}"
+                  {% if item.width %}width="{{ item.width }}"{% endif %}
+                  {% if item.height %}height="{{ item.height }}"{% endif %}
+                  loading="lazy"
+                  decoding="async">
+              </a>
+              {% if item.caption %}
+              <figcaption>{{ item.caption }}</figcaption>
+              {% endif %}
+            </figure>
+          </li>
         {% endfor %}
       </ul>
     {% else %}
