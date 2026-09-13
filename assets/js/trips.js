@@ -84,8 +84,15 @@
       var root = panel.closest("[data-trip-card], .trip-detail");
       var badge = root ? root.querySelector("[data-trip-badge]") : null;
       if (badge) {
-        badge.textContent = previewPublic ? "Public (preview)" : published ? "Public" : "Private";
-        badge.classList.toggle("is-private", !previewPublic && !published);
+        var previewing = unlocked && previewPublic !== published;
+        badge.textContent = previewing
+          ? previewPublic
+            ? "Public (preview)"
+            : "Private (preview)"
+          : published
+            ? "Public"
+            : "Private";
+        badge.classList.toggle("is-private", !(previewing ? previewPublic : published));
       }
       if (root && root.hasAttribute("data-trip-card")) {
         root.classList.toggle("is-private", !previewPublic && !published);
