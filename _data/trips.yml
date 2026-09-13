@@ -30,5 +30,17 @@ items:
     restaurants: []
     stays: []
     drives: []
-    media: []
+    media:
+      - src: /assets/images/trips/india-2026/flight-cabin-aisle.jpg
+        caption: Cabin · AI 4174 · Praneet + Uma Prasad
+        alt: Praneet and Uma Prasad in the AI 4174 cabin aisle
+        section: flight
+        width: 1280
+        height: 960
+      - src: /assets/images/trips/india-2026/flight-cabin-suite.jpg
+        caption: Cabin · AI 4174 · Uma Prasad
+        alt: Uma Prasad in the AI 4174 suite seat
+        section: flight
+        width: 960
+        height: 1280
     notes: []
