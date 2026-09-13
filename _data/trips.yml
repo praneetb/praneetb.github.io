@@ -7,7 +7,7 @@ items:
   - id: india-2026
     slug: india-2026
     title: India 2026
-    public: false
+    public: true
     when: September 2026
     where: India
     blurb: SFO → DEL

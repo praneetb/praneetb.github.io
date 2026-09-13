@@ -1,5 +1,5 @@
-Private India 2026 trip cabin photos. Trip stays public: false in
-_data/trips.yml — do not surface these on the public home or /food/.
+India 2026 trip cabin photos. Guest visibility follows public in
+_data/trips.yml. Do not surface these on the public home or /food/.
 
 flight-cabin-aisle.jpg
   Cabin aisle / suite pod on Air India AI 4174 (SFO → DEL).
