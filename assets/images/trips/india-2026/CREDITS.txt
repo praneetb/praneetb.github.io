@@ -8,3 +8,7 @@ flight-cabin-aisle.jpg
 flight-cabin-suite.jpg
   Suite seat on Air India AI 4174 (SFO → DEL).
   Photograph by Praneet Bachheti.
+
+flight-cabin-meal.jpg
+  Cabin meal in suite on Air India AI 4174 (SFO → DEL).
+  Photograph by Praneet Bachheti.
