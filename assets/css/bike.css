@@ -215,10 +215,19 @@ html[data-theme="cadence"] .bike-shell {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3;
   object-fit: contain;
   object-position: center;
   background: #fff;
+}
+
+.bike-outing-card img {
+  aspect-ratio: 4 / 3;
+}
+
+.bike-outing-video {
+  /* Portrait clips (e.g. 720×1280) use width/height attrs; contain, no crop */
+  aspect-ratio: auto;
+  max-height: 40rem;
 }
 
 .bike-outing-card figcaption {
