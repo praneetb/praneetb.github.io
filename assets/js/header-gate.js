@@ -3,7 +3,7 @@
 
   // Public panels live in the header partial and stay visible for everyone.
   // Signed-in chrome only adds the gated extras — it must not replace Recipes,
-  // Travel, Trips, Bar, Cocktails, Food, Fermentation, Patents, Bucket, Violin, or Health.
+  // Travel, Trips, Bar, Cocktails, Food, Fermentation, Patents, Bucket, Violin, Bike, or Health.
   var PRIVATE_LINKS = [
     { path: "/space/", label: "Space", match: /\/space\/?$/ },
     { path: "/notes/", label: "Notes", match: /\/notes\/?$/ },

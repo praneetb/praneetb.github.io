@@ -1,0 +1,82 @@
+---
+layout: default
+title: Bike
+nav: bike
+permalink: /bike/
+private: false
+hide_footer: true
+description: Harley-Davidson Softail Slim — a public scrapbook of outings.
+extra_css:
+  - /assets/css/bike.css
+---
+
+{% assign b = site.data.bike %}
+{% assign media = b.media %}
+
+<div class="bike-shell bike-foyer">
+  <div class="bike-localbar">
+    <p class="bike-local-kicker">{{ b.hero.kicker }}</p>
+    <nav class="bike-local-nav" aria-label="Bike">
+      <a href="{{ '/bike/' | relative_url }}" aria-current="page">Bike</a>
+      <a href="#bike-outings">Outings</a>
+      <a href="#bike-about">About</a>
+    </nav>
+    <p class="bike-local-mark">{{ b.bike.make }}</p>
+  </div>
+
+  <section class="bike-hero" aria-labelledby="bike-about">
+    <div class="bike-hero-copy">
+      <h1 id="bike-about">{{ b.hero.title }}</h1>
+      <p class="bike-hero-kicker">{{ b.hero.kicker }}</p>
+      <p class="bike-hero-lede">{{ b.hero.lede }}</p>
+      <p class="bike-hero-meta">{{ b.bike.year }} · {{ b.bike.make }} {{ b.bike.name }}</p>
+    </div>
+    <figure class="bike-hero-media">
+      <img
+        src="{{ b.hero.image | relative_url }}"
+        alt="{{ b.hero.image_alt }}"
+        width="1488"
+        height="1490">
+    </figure>
+  </section>
+
+  <section class="bike-outings" aria-labelledby="bike-outings">
+    <header class="bike-outings-head">
+      <p class="bike-outings-eyebrow">Scrapbook</p>
+      <h2 id="bike-outings">Outings</h2>
+    </header>
+    <ul class="bike-outing-strip">
+      {% for item in media %}
+        {% assign src = item.src | default: "" | strip %}
+        {% if src != "" %}
+        <li class="bike-outing-card" data-media-id="{{ item.id }}" data-media-type="{{ item.type }}">
+          <figure>
+            {% if item.type == "video" %}
+            <video
+              class="bike-outing-video"
+              controls
+              playsinline
+              preload="metadata"
+              width="{{ item.width | default: 1280 }}"
+              height="{{ item.height | default: 720 }}"
+              src="{{ src | relative_url }}">
+              Your browser does not support the video tag.
+            </video>
+            {% else %}
+            <img
+              src="{{ src | relative_url }}"
+              alt="{{ item.alt }}"
+              width="{{ item.width | default: 1200 }}"
+              height="{{ item.height | default: 900 }}">
+            {% endif %}
+            {% if item.caption and item.caption != "" %}
+            <figcaption>{{ item.caption }}</figcaption>
+            {% endif %}
+          </figure>
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <p class="bike-outings-note">More outing photos and clips as they land.</p>
+  </section>
+</div>
