@@ -17,6 +17,7 @@
  * Practice-Log dates.
  *
  * Does not write assets/notes.enc.json.
+ * Preserves site-owned featured_video: from an existing _data/violin.yml.
  *
  * Sibling bake from the same daily vault export:
  *   node scripts/bake-patents.mjs /path/to/obsidian-vault
@@ -292,6 +293,40 @@ export function deriveProgress(logs) {
   return { streak_days: streak, weeks: weeks };
 }
 
+
+async function loadPreservedFeaturedVideo() {
+  try {
+    const raw = await fs.readFile(OUT, "utf8");
+    const match = raw.match(/^featured_video:\s*\n((?:[ \t]+.+\n?)+)/m);
+    if (!match) {
+      return null;
+    }
+    const block = { label: "", src: "", width: "", height: "" };
+    match[1].split(/\n/).forEach(function (line) {
+      const m = line.match(/^\s+([a-z_]+):\s*(.*)$/);
+      if (!m) {
+        return;
+      }
+      let value = m[2].trim();
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+      if (Object.prototype.hasOwnProperty.call(block, m[1])) {
+        block[m[1]] = value;
+      }
+    });
+    if (!block.src) {
+      return null;
+    }
+    return block;
+  } catch (err) {
+    if (err && err.code === "ENOENT") {
+      return null;
+    }
+    throw err;
+  }
+}
+
 function renderYaml(data) {
   const lines = [];
   lines.push("# Violin section — baked site data.");
@@ -335,6 +370,20 @@ function renderYaml(data) {
   lines.push("  cta: Watch story");
   lines.push("  image: /assets/images/violin/hero.png");
   lines.push("");
+  if (data.featured_video && data.featured_video.src) {
+    lines.push("# Public featured recording on /violin/ (site-owned; bake must preserve).");
+    lines.push("# Not vault-derived. Daily sync must not wipe this key.");
+    lines.push("featured_video:");
+    lines.push("  label: " + yamlQuote(data.featured_video.label || "First recording"));
+    lines.push("  src: " + yamlQuote(data.featured_video.src));
+    if (data.featured_video.width) {
+      lines.push("  width: " + data.featured_video.width);
+    }
+    if (data.featured_video.height) {
+      lines.push("  height: " + data.featured_video.height);
+    }
+    lines.push("");
+  }
   lines.push("# Derived only from practice_log[].date. Zero when the log is empty.");
   lines.push("streak_days: " + data.streak_days);
   lines.push("weeks: " + data.weeks);
@@ -509,6 +558,10 @@ async function main() {
   if (listOnly) {
     console.log(JSON.stringify({ vault: PATHS, counts: data.counts, progress: { streak_days: data.streak_days, weeks: data.weeks } }, null, 2));
     return;
+  }
+  const preserved = await loadPreservedFeaturedVideo();
+  if (preserved) {
+    data.featured_video = preserved;
   }
   await fs.mkdir(path.dirname(OUT), { recursive: true });
   await fs.writeFile(OUT, renderYaml(data));

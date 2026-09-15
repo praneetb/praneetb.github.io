@@ -24,6 +24,7 @@ extra_js:
     <nav class="violin-local-nav" aria-label="Violin">
       <a href="{{ '/violin/' | relative_url }}" aria-current="page">Violin</a>
       <a href="#also-guitar">Guitar</a>
+      <a href="#violin-featured-heading">First recording</a>
       <a href="#violin-about">About</a>
     </nav>
     <a class="violin-practice-cta" href="{{ '/violin/practice/' | relative_url }}">
@@ -55,6 +56,29 @@ extra_js:
         height="1152">
     </figure>
   </section>
+
+  {% if v.featured_video and v.featured_video.src %}
+  <section class="violin-featured" aria-labelledby="violin-featured-heading">
+    <div class="violin-featured-card">
+      <header class="violin-featured-head">
+        <p class="violin-featured-eyebrow">Scrapbook</p>
+        <h2 id="violin-featured-heading">{{ v.featured_video.label | default: "First recording" }}</h2>
+      </header>
+      <figure class="violin-featured-media">
+        <video
+          class="violin-featured-video"
+          controls
+          playsinline
+          preload="metadata"
+          width="{{ v.featured_video.width | default: 244 }}"
+          height="{{ v.featured_video.height | default: 432 }}"
+          src="{{ v.featured_video.src | relative_url }}">
+          Your browser does not support the video tag.
+        </video>
+      </figure>
+    </div>
+  </section>
+  {% endif %}
 
   <section class="violin-board" aria-labelledby="violin-pieces-heading">
     <div class="violin-pieces">

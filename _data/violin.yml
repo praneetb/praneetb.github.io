@@ -40,6 +40,14 @@ story:
   cta: Watch story
   image: /assets/images/violin/hero.png
 
+# Public featured recording on /violin/ (site-owned; bake must preserve).
+# Not vault-derived. Daily sync must not wipe this key.
+featured_video:
+  label: First recording
+  src: /assets/violin/first-recording.mp4
+  width: 244
+  height: 432
+
 # Derived only from practice_log[].date. Zero when the log is empty.
 streak_days: 0
 weeks: 0
