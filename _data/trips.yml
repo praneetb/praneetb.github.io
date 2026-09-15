@@ -43,4 +43,10 @@ items:
         section: flight
         width: 960
         height: 1280
+      - src: /assets/images/trips/india-2026/flight-cabin-meal.jpg
+        caption: Cabin meal · AI 4174 · Uma Prasad
+        alt: Uma Prasad eating a cabin meal on AI 4174
+        section: flight
+        width: 960
+        height: 1280
     notes: []
