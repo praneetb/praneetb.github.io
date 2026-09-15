@@ -1,0 +1,54 @@
+# Public Softail Slim outing scrapbook for /bike/.
+# Add photos and videos by dropping files under assets/images/bike/
+# (or assets/bike/ for clips) and appending a media item below.
+# Empty src values are placeholders — they do not render.
+# Do not invent rides, routes, or captions beyond light outing labels.
+
+bike:
+  name: Softail Slim
+  make: Harley-Davidson
+  year: 2015
+
+hero:
+  title: Softail Slim
+  kicker: Outings in public.
+  lede: Harley-Davidson Softail Slim. A public scrapbook of outings — photos and clips as they land.
+  image: /assets/images/bike/softail-outing-hero.jpg
+  image_alt: Stylized illustration of a rider on a motorcycle, black line on a white ground. Not a stock motorcycle photograph.
+  image_credit: Praneet Bachheti — see assets/images/bike/CREDITS.txt
+
+# Data-driven outing list. First-cut items are the two launch stills.
+# Future outings: copy an item, set id / type / src / caption / alt.
+# type: image | video
+# role: hero | outing (hero still also appears in the foyer figure)
+media:
+  - id: outing-hero
+    type: image
+    role: hero
+    src: /assets/images/bike/softail-outing-hero.jpg
+    caption: Softail Slim · outing
+    alt: Stylized illustration of a rider on a motorcycle, black line on a white ground. Not a stock motorcycle photograph.
+    width: 1488
+    height: 1490
+  - id: outing-2
+    type: image
+    role: outing
+    src: /assets/images/bike/softail-outing-2.jpg
+    caption: Softail Slim · outing
+    alt: Simple outing doodle of a rider on a red motorcycle against green hills. Not a stock motorcycle photograph.
+    width: 1400
+    height: 1000
+  # Future still — leave src empty until a file is added.
+  - id: outing-next
+    type: image
+    role: outing
+    src: ""
+    caption: ""
+    alt: ""
+  # Future clip — leave src empty until a file is added.
+  - id: outing-clip
+    type: video
+    role: outing
+    src: ""
+    caption: ""
+    alt: ""
