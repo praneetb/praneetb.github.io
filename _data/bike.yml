@@ -37,6 +37,14 @@ media:
     alt: Softail Slim outing still by Praneet Bachheti.
     width: 1400
     height: 1000
+  - id: outing-friends
+    type: image
+    role: outing
+    src: /assets/images/bike/outing-friends.jpg
+    caption: Softail Slim · outing · friends
+    alt: Softail Slim outing with friends — Praneet Bachheti
+    width: 1280
+    height: 766
   # Future still — leave src empty until a file is added.
   - id: outing-next
     type: image
@@ -51,3 +59,4 @@ media:
     src: ""
     caption: ""
     alt: ""
+
