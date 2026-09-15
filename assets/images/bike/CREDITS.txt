@@ -13,5 +13,10 @@ outing-friends.jpg
   Public /bike/ outing strip.
   Not stock motorcycle imagery.
 
+bike-360.mp4 (assets/bike/)
+  Praneet Bachheti — Softail Slim solo Insta360 outing clip (his own).
+  Public /bike/ outing strip.
+  Not stock motorcycle imagery.
+
 Do not add stock motorcycle imagery to this folder.
 Credit Praneet Bachheti for his own outing stills.

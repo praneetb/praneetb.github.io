@@ -52,11 +52,12 @@ media:
     src: ""
     caption: ""
     alt: ""
-  # Future clip — leave src empty until a file is added.
-  - id: outing-clip
+  - id: outing-360
     type: video
     role: outing
-    src: ""
-    caption: ""
-    alt: ""
+    src: /assets/bike/bike-360.mp4
+    caption: Softail Slim · outing (light only)
+    alt: Softail Slim solo outing video — Praneet Bachheti
+    width: 720
+    height: 1280
 
