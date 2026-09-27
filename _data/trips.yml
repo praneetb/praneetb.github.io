@@ -31,6 +31,8 @@ items:
     sections:
       - id: pauri-garhwal
         title: Pauri Garhwal (Uttarakhand)
+      - id: maldevta
+        title: Maldevta (Dehradun, Uttarakhand)
     places: []
     # Trip-only restaurant cards (not /food/). id is the card anchor.
     # Keep to name / location / road / tags / photo; no invented details.
@@ -149,4 +151,29 @@ items:
         section: pauri-garhwal
         width: 360
         height: 640
+      - src: /assets/images/trips/india-2026/maldevta/maldevta-701787374.jpg
+        alt: Maldevta photo 1
+        section: maldevta
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/maldevta/maldevta-701787375.jpg
+        alt: Maldevta photo 2
+        section: maldevta
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/maldevta/maldevta-701787376.jpg
+        alt: Maldevta photo 3
+        section: maldevta
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/maldevta/maldevta-701787377.jpg
+        alt: Maldevta photo 4
+        section: maldevta
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/maldevta/maldevta-701787378.jpg
+        alt: Maldevta photo 5
+        section: maldevta
+        width: 1280
+        height: 960
     notes: []
