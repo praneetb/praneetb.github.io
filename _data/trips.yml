@@ -26,6 +26,11 @@ items:
         arrive_time: 7:55p IST
         arrive_airport: DEL
         pnr: 8SOF2E
+    # Photo/video sections rendered after the flight card, in this order.
+    # media items opt in with section: <id>. Title only; no invented details.
+    sections:
+      - id: pauri-garhwal
+        title: Pauri Garhwal (Uttarakhand)
     places: []
     restaurants: []
     stays: []
@@ -49,4 +54,84 @@ items:
         section: flight
         width: 960
         height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787357.jpg
+        alt: Pauri Garhwal photo 1
+        section: pauri-garhwal
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787358.jpg
+        alt: Pauri Garhwal photo 2
+        section: pauri-garhwal
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787359.jpg
+        alt: Pauri Garhwal photo 3
+        section: pauri-garhwal
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787360.jpg
+        alt: Pauri Garhwal photo 4
+        section: pauri-garhwal
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787361.jpg
+        alt: Pauri Garhwal photo 5
+        section: pauri-garhwal
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787362.jpg
+        alt: Pauri Garhwal photo 6
+        section: pauri-garhwal
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787363.mp4
+        type: video
+        poster: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787363-poster.jpg
+        alt: Pauri Garhwal video 1
+        section: pauri-garhwal
+        width: 360
+        height: 640
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787364.mp4
+        type: video
+        poster: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787364-poster.jpg
+        alt: Pauri Garhwal video 2
+        section: pauri-garhwal
+        width: 360
+        height: 640
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787365.jpg
+        alt: Pauri Garhwal photo 7
+        section: pauri-garhwal
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787366.jpg
+        alt: Pauri Garhwal photo 8
+        section: pauri-garhwal
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787367.jpg
+        alt: Pauri Garhwal photo 9
+        section: pauri-garhwal
+        width: 960
+        height: 1280
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787368.mp4
+        type: video
+        poster: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787368-poster.jpg
+        alt: Pauri Garhwal video 3
+        section: pauri-garhwal
+        width: 360
+        height: 640
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787369.mp4
+        type: video
+        poster: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787369-poster.jpg
+        alt: Pauri Garhwal video 4
+        section: pauri-garhwal
+        width: 360
+        height: 640
+      - src: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787370.mp4
+        type: video
+        poster: /assets/images/trips/india-2026/pauri-garhwal/pauri-701787370-poster.jpg
+        alt: Pauri Garhwal video 5
+        section: pauri-garhwal
+        width: 360
+        height: 640
     notes: []
