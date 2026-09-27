@@ -1,0 +1,52 @@
+{% comment %}
+  Trip-only restaurant cards. Each item: id (anchor), name, location, road,
+  tags, photo {src, alt, width, height}. Plain strings still render as a list.
+  Not linked to _data/food.yml. Do not invent details.
+{% endcomment %}
+<section class="trip-section scrapbook-card" id="restaurants">
+  <header class="trip-section-head">
+    <h2>Restaurants</h2>
+  </header>
+  {% if include.items and include.items.size > 0 %}
+    <ul class="trip-restaurants">
+      {% for place in include.items %}
+        {% if place.name %}
+        <li class="trip-restaurant"{% if place.id %} id="{{ place.id }}"{% endif %}>
+          {% if place.photo and place.photo.src %}
+          <figure class="trip-polaroid is-filled trip-restaurant-photo">
+            <a class="trip-polaroid-photo" href="{{ place.photo.src | relative_url }}" target="_blank" rel="noopener noreferrer">
+              <img
+                src="{{ place.photo.src | relative_url }}"
+                alt="{{ place.photo.alt | default: place.name | escape }}"
+                {% if place.photo.width %}width="{{ place.photo.width }}"{% endif %}
+                {% if place.photo.height %}height="{{ place.photo.height }}"{% endif %}
+                loading="lazy"
+                decoding="async">
+            </a>
+          </figure>
+          {% endif %}
+          <div class="trip-restaurant-body">
+            <h3 class="trip-restaurant-name">{{ place.name | escape }}</h3>
+            {% if place.location or place.road %}
+            <p class="trip-restaurant-where">
+              {{ place.location | escape }}{% if place.location and place.road %}<span aria-hidden="true"> · </span>{% endif %}{{ place.road | escape }}
+            </p>
+            {% endif %}
+            {% if place.tags and place.tags.size > 0 %}
+            <ul class="trip-restaurant-tags" aria-label="Tags">
+              {% for tag in place.tags %}
+              <li>{{ tag | escape }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        </li>
+        {% else %}
+        <li class="trip-restaurant is-plain">{{ place }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="trip-empty">Nothing pinned yet.</p>
+  {% endif %}
+</section>

@@ -594,3 +594,84 @@ html[data-theme="cadence"] .trip-ticket {
     grid-template-columns: 1fr;
   }
 }
+
+.trip-restaurants {
+  display: grid;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trip-restaurant {
+  display: grid;
+  grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+  gap: 1.3rem;
+  align-items: start;
+  margin: 0;
+  scroll-margin-top: 1.5rem;
+}
+
+.trip-restaurant.is-plain {
+  display: list-item;
+  margin-left: 1.1rem;
+  list-style: disc;
+}
+
+.trip-restaurant-photo.trip-polaroid.is-filled {
+  margin: 0;
+  padding-bottom: 0.45rem;
+}
+
+/* Show the whole storefront (no crop) so the signage stays intact. */
+.trip-restaurant-photo.trip-polaroid.is-filled img {
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.trip-restaurant-body {
+  padding-top: 0.35rem;
+}
+
+.trip-restaurant-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.trip-restaurant-where {
+  margin: 0.3rem 0 0;
+  color: var(--ink-soft);
+  font-family: var(--font-note);
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.trip-restaurant-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trip-restaurant-tags li {
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  background: var(--accent-wash);
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .trip-restaurant {
+    grid-template-columns: 1fr;
+  }
+}

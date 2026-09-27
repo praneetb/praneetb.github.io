@@ -150,7 +150,7 @@
   {% endif %}
 
   {% include trip-section.html anchor="places" title="Places visited" items=trip.places %}
-  {% include trip-section.html anchor="restaurants" title="Restaurants" items=trip.restaurants %}
+  {% include trip-restaurants.html items=trip.restaurants %}
   {% include trip-section.html anchor="stays" title="Stays" items=trip.stays %}
   {% include trip-section.html anchor="drives" title="Drives" items=trip.drives %}
 
