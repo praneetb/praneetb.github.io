@@ -32,7 +32,22 @@ items:
       - id: pauri-garhwal
         title: Pauri Garhwal (Uttarakhand)
     places: []
-    restaurants: []
+    # Trip-only restaurant cards (not /food/). id is the card anchor.
+    # Keep to name / location / road / tags / photo; no invented details.
+    restaurants:
+      - id: woodfire-cafe
+        name: Woodfire Cafe
+        location: Pauri, Uttarakhand
+        road: Kotdwar–Pauri road
+        tags:
+          - Pizza
+          - Pasta
+          - Burger
+        photo:
+          src: /assets/images/trips/india-2026/restaurants/woodfire-cafe-701787371.jpg
+          alt: Woodfire Cafe storefront
+          width: 960
+          height: 1280
     stays: []
     drives: []
     media:
