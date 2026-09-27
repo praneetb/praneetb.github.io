@@ -521,6 +521,16 @@ html[data-theme="cadence"] .trip-ticket {
   vertical-align: middle;
 }
 
+.trip-flight-thumb video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: #efe6d8;
+  vertical-align: middle;
+}
+
 .trip-flight-thumb figcaption {
   margin: 0;
   padding: 0.55rem 0.7rem 0.65rem;
@@ -560,6 +570,15 @@ html[data-theme="cadence"] .trip-ticket {
   height: auto;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+.trip-polaroid.is-filled video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: #efe6d8;
 }
 
 .trip-polaroid.is-filled figcaption {
