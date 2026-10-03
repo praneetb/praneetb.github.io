@@ -308,6 +308,65 @@ button.scrapbook-card {
   color: inherit;
 }
 
+.health-no-data-card {
+  grid-column: 1 / -1;
+  padding: 1.2rem 1.15rem 1.15rem;
+  background: linear-gradient(165deg, #f3f1ed, #ebe8e2);
+}
+
+.health-no-data-kicker,
+.health-no-data-label {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.health-no-data-title {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-hand);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: #332d28;
+}
+
+.health-no-data-copy {
+  margin: 0.2rem 0 0.85rem;
+  font-family: var(--font-note);
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+.health-no-data-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.health-no-data-metric {
+  padding: 0.65rem 0.7rem;
+  border: 1px dashed rgba(80, 70, 60, 0.22);
+  border-radius: 0.75rem;
+  background: rgba(255, 253, 248, 0.58);
+}
+
+.health-no-data-value {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #5b554f;
+}
+
+.health-no-data-note {
+  margin: 0.3rem 0 0;
+  font-family: var(--font-note);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
 .vital-card:hover,
 .workout-chip:hover {
   transform: translateY(-2px);
@@ -803,6 +862,10 @@ button.scrapbook-card {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .health-no-data-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .health-row {
     grid-template-columns: 1fr;
   }
@@ -824,6 +887,7 @@ button.scrapbook-card {
   }
 
   .health-cards,
+  .health-no-data-metrics,
   .activity-metrics,
   .detail-grid,
   .detail-split {

@@ -520,7 +520,25 @@
     if (!host) {
       return;
     }
-    var day = selectedDay() || {};
+    var day = selectedDay();
+    if (!day) {
+      host.innerHTML =
+        '<article class="scrapbook-card health-no-data-card" aria-live="polite">' +
+        '<div class="washi washi-grid" aria-hidden="true"></div>' +
+        '<p class="health-no-data-kicker">Whoop snapshot</p>' +
+        '<h2 class="health-no-data-title">No Whoop data for ' +
+        esc(H.formatPickerDate(state.selectedDate)) +
+        '</h2>' +
+        '<p class="health-no-data-copy">This day has no entry in the snapshot.</p>' +
+        '<div class="health-no-data-metrics">' +
+        '<div class="health-no-data-metric"><p class="health-no-data-label">Recovery</p><p class="health-no-data-value">—</p><p class="health-no-data-note">No data</p></div>' +
+        '<div class="health-no-data-metric"><p class="health-no-data-label">Strain</p><p class="health-no-data-value">—</p><p class="health-no-data-note">No data</p></div>' +
+        '<div class="health-no-data-metric"><p class="health-no-data-label">Sleep</p><p class="health-no-data-value">—</p><p class="health-no-data-note">No data</p></div>' +
+        '<div class="health-no-data-metric"><p class="health-no-data-label">HRV · RHR</p><p class="health-no-data-value">—</p><p class="health-no-data-note">No data</p></div>' +
+        '</div>' +
+        '</article>';
+      return;
+    }
     var summary = (state.snapshot && state.snapshot.summary) || {};
     var recovery = H.firstNumber(day.recovery || {}, ["recovery_score"]);
     if (recovery == null && (!day.date || day.date === (state.snapshot && state.snapshot.as_of))) {
@@ -626,8 +644,14 @@
       return;
     }
     var day = selectedDay();
-    var rows = day ? H.workoutsInRange([day]) : [];
     var title = "☆ Activity for " + H.formatPickerDate(state.selectedDate) + " ☆";
+    if (!day) {
+      host.innerHTML =
+        '<article class="scrapbook-card workout-chip"><h3>Workouts</h3>' +
+        '<p class="workout-empty">No Whoop data for this day.</p></article>';
+      return;
+    }
+    var rows = H.workoutsInRange([day]);
     if (!rows.length) {
       host.innerHTML =
         '<article class="scrapbook-card workout-chip"><h3>' +
