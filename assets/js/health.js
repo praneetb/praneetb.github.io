@@ -541,9 +541,6 @@
     }
     var summary = (state.snapshot && state.snapshot.summary) || {};
     var recovery = H.firstNumber(day.recovery || {}, ["recovery_score"]);
-    if (recovery == null && (!day.date || day.date === (state.snapshot && state.snapshot.as_of))) {
-      recovery = H.firstNumber((summary.latest_recovery || {}), ["recovery_score"]);
-    }
     var strain = day.cycle_strain ? H.firstNumber(day.cycle_strain, ["strain"]) : null;
     var sleep = day.sleep || {};
     var sleepPct = H.sleepPerformance(sleep);
