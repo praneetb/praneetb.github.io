@@ -465,25 +465,29 @@
         );
       })
       .join("");
+    var asOf = state.snapshot && state.snapshot.as_of;
     var dots = dates
       .map(function (ymd) {
         var day = H.dayByDate(state.snapshot, ymd);
         var available = !!day;
+        var pendingAsOf = !day && !!asOf && ymd === asOf;
+        var selectable = available || pendingAsOf;
         var score = day && day.recovery ? day.recovery.recovery_score : null;
         var selected = ymd === state.selectedDate;
         return (
           '<button type="button" class="scrub-dot' +
           (selected ? " is-selected" : "") +
-          (available ? "" : " is-empty") +
+          (selectable ? "" : " is-empty") +
+          (pendingAsOf ? " is-pending" : "") +
           '" data-picker-date="' +
           esc(ymd) +
           '"' +
-          (available ? "" : " disabled") +
+          (selectable ? "" : " disabled") +
           ' style="--dot:' +
           recoveryDotTone(score) +
           '" title="' +
           esc(H.formatPickerDate(ymd)) +
-          (available ? "" : " · no snapshot") +
+          (pendingAsOf ? " · waiting on score" : available ? "" : " · no snapshot") +
           '" aria-label="' +
           esc(H.formatPickerDate(ymd)) +
           '"' +
@@ -521,6 +525,17 @@
       return;
     }
     var day = selectedDay();
+    var asOf = state.snapshot && state.snapshot.as_of;
+    // as_of day not yet written by Whoop → pending score, not "no data"
+    if (!day && state.selectedDate && asOf && state.selectedDate === asOf) {
+      day = {
+        date: state.selectedDate,
+        recovery: null,
+        cycle_strain: null,
+        sleep: null,
+        workouts: []
+      };
+    }
     if (!day) {
       host.innerHTML =
         '<article class="scrapbook-card health-no-data-card" aria-live="polite">' +
