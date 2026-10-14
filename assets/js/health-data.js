@@ -124,11 +124,14 @@
     for (i = 0; i < window.length; i += 1) {
       inWindow[window[i]] = true;
     }
-    if (dayByDate(snapshot, today)) {
+    // Prefer calendar today / snapshot as_of even when Whoop has not
+    // written that day yet (pending score), so Pehelwan does not land
+    // on a prior scored day and look like it borrowed recovery.
+    if (inWindow[today]) {
       return today;
     }
     var asOf = snapshot && snapshot.as_of;
-    if (asOf && inWindow[asOf] && dayByDate(snapshot, asOf)) {
+    if (asOf && inWindow[asOf]) {
       return asOf;
     }
     var dates = availableDates(snapshot);
