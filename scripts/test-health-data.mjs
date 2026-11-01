@@ -153,6 +153,18 @@ const pendingPack = {
 };
 const pendingNow = new Date(2026, 8, 7);
 assert.equal(H.defaultSelectedDate(pendingPack, pendingNow), "2026-09-07");
+// trailing missing days up to as_of are pending; older gaps are not
+const trailingPack = {
+  schema: pack.schema,
+  as_of: "2026-09-07",
+  summary: pack.summary,
+  days: pack.days.filter(function (d) { return d.date !== "2026-09-07" && d.date !== "2026-09-06" && d.date !== "2026-09-01"; })
+};
+assert.equal(H.isPendingDate(trailingPack, "2026-09-06"), true);
+assert.equal(H.isPendingDate(trailingPack, "2026-09-07"), true);
+assert.equal(H.isPendingDate(trailingPack, "2026-09-08"), false);
+assert.equal(H.isPendingDate(trailingPack, "2026-09-01"), false);
+assert.equal(H.isPendingDate(trailingPack, "2026-09-05"), false);
 assert.equal(H.clampPickerDate("2026-01-01", now), "2026-08-08");
 assert.equal(H.rangeDates("2026-09-06", "day").length, 1);
 assert.equal(H.rangeDates("2026-09-06", "week").length, 7);
