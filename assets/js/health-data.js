@@ -143,6 +143,20 @@
     return asOf || today;
   }
 
+  // A day with no entry is "pending" (score not written yet) when it falls
+  // after the newest day entry and on/before as_of. Older gaps stay "no data".
+  function isPendingDate(snapshot, ymd) {
+    if (!snapshot || !ymd || !snapshot.as_of || dayByDate(snapshot, ymd)) {
+      return false;
+    }
+    if (ymd > snapshot.as_of) {
+      return false;
+    }
+    var dates = availableDates(snapshot);
+    var newest = dates.length ? dates[dates.length - 1] : "";
+    return ymd > newest;
+  }
+
   function clampPickerDate(ymd, now) {
     var window = pickerDates(now);
     if (!ymd) {
@@ -667,6 +681,7 @@
     indexDays: indexDays,
     availableDates: availableDates,
     dayByDate: dayByDate,
+    isPendingDate: isPendingDate,
     daysInRange: daysInRange,
     defaultSelectedDate: defaultSelectedDate,
     clampPickerDate: clampPickerDate,

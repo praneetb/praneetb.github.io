@@ -470,7 +470,7 @@
       .map(function (ymd) {
         var day = H.dayByDate(state.snapshot, ymd);
         var available = !!day;
-        var pendingAsOf = !day && !!asOf && ymd === asOf;
+        var pendingAsOf = !day && (ymd === asOf || H.isPendingDate(state.snapshot, ymd));
         var selectable = available || pendingAsOf;
         var score = day && day.recovery ? day.recovery.recovery_score : null;
         var selected = ymd === state.selectedDate;
@@ -526,8 +526,8 @@
     }
     var day = selectedDay();
     var asOf = state.snapshot && state.snapshot.as_of;
-    // as_of day not yet written by Whoop → pending score, not "no data"
-    if (!day && state.selectedDate && asOf && state.selectedDate === asOf) {
+    // as_of (or trailing day before it) not yet written by Whoop → pending score, not "no data"
+    if (!day && state.selectedDate && ((asOf && state.selectedDate === asOf) || H.isPendingDate(state.snapshot, state.selectedDate))) {
       day = {
         date: state.selectedDate,
         recovery: null,
